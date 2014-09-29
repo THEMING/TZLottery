@@ -1,0 +1,99 @@
+
+.center{text-align:center;}
+.right{text-align: right; width: 70px;}
+.text{border: 1px #D8D8D8 solid; height: 20px; width: 130px;}
+
+.login_frame {
+	width: 210px;
+	height: 190px;
+	float: left;
+	margin: 0px;
+	background-image: url(../images/loginbk.jpg);
+}
+
+.login_frame h1{font-size: 14px; line-height: 20px; margin-left: 10px;}
+
+.login_frame .right{text-align: right; width: 70px;}
+
+.login_frame .center{text-align:center;}
+.login_frame span{ margin-left:5px;}
+
+.login_frame .imgcode{ border: 1px #D8D8D8 solid; height: 20px; width: 60px;}
+.login_frame .text{border: 1px #D8D8D8 solid; height: 20px; width: 130px;}
+
+.login_box {
+	width: 986px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+}
+
+.login_box .imgcode{ border: 1px #D8D8D8 solid; height: 20px; width: 60px;}
+.login_box .text{border: 1px #D8D8D8 solid; height: 20px; width: 130px;}
+
+.login_table {
+	float:left;
+	width:450px;
+	border: 1px #FBCCA5 solid;
+	padding:10px;
+}
+
+.login_table td {
+	height:35px;
+}
+
+.login_reg {
+	width:450px;
+	height:225px;
+	float:left;
+	border: 1px #FBCCA5 solid;
+	margin-left: 15px;
+	padding:10px;
+}
+
+.register {
+	width: 986px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+}
+
+.register_logo {
+	float:left;
+	width:400px;
+	height:450px;
+	border: thin solid #FBCCA5;
+}
+
+.register_frame {
+	float:left;
+	width:570px;
+	height:450px;
+	margin-left: 10px;
+	padding-top:15px;
+	border: thin solid #FBCCA5;
+}
+
+.register_rule {
+	float:left;
+	margin-left:80px;
+	padding:10px;
+	width: 400px;
+	height:140px;
+	overflow-y:scroll;
+	border: thin solid #FBCCAA;
+}
+
+.findback_pwd_frame {
+	margin-left: 150px;
+	padding:10px;
+	float:left;
+	width:650px;
+	height:230px;
+	border: thin solid #FBCCA5;
+	background: #FFEEFF;
+}
+
+/*===========================tip-login.jsp  css start==============================*/

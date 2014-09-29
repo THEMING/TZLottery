@@ -1,0 +1,153 @@
+# ================================================
+# * ROOT Path
+# ================================================
+webRealpath=
+# ================================================
+# * fetch lottery result url
+# ================================================
+fetch_dlt = http\://kaijiang.500wan.com/shtml/dlt/{0}.shtml
+fetch_sd = http\://kaijiang.500wan.com/shtml/sd/{0}.shtml
+# ================================================
+# * builder static datafile path
+# ================================================
+staticMiss=/static/miss
+staticOpenResult=/static/openResult
+dltRedMissPath=/static/miss/dlt/hmyl_fore.xml
+dltBlueMissPath=/static/miss/dlt/hmyl_back.xml
+dltResultListPath=/static/openResult/dlt/list{0}.xml
+
+# ================================================
+#  dyj config
+# ================================================
+dyj.url=http://t.zc310.net:8089/bin/LotSaleHttp.dll
+#dyj.agent=3849
+dyj.agent=3885
+dyj.key=a8b8c8d8e8f8g8h8
+#dyj.url=http://i.zc310.net:8089/bin/LotSaleHttp.dll
+#dyj.agent=832728
+#dyj.key=123456789zxcv
+
+# ================================================
+#  wzl config
+# ================================================
+#wzl.url=http://116.213.75.179:8080/billservice/sltAPI
+#wzl.url=http://221.123.166.226:7070/billservice/sltAPI
+wzl.url=http://203.100.83.212:7070/billservice/sltAPI
+wzl.agentId=800128
+wzl.agentPwd=wzltest
+wzl.cardno=41108219890521001x
+wzl.cardtype=1
+wzl.email=mazhao89@163.com
+wzl.mobile=18810262984
+wzl.realName=touzhu
+wzl.username=deyingchuangzhi
+#wzl.url=http://116.213.75.179:8080/billservice/sltAPI
+#wzl.agentId=800130
+#wzl.agentPwd=dycz234qwe
+#wzl.cardno=130185198501040030
+#wzl.cardtype=1
+#wzl.email=admin@touzhu.cn
+#wzl.mobile=18610000184
+#wzl.realName=
+#wzl.username=deyingchuangzhi
+#
+# ================================================
+# * alipay config
+# ================================================
+alipay.url=https://www.alipay.com/cooperate/gateway.do?
+alipay.show_url=http://www.yicp.com
+alipay.partnerID=2088601303974720
+alipay.key=v7rrn0c4ocsoy4mvky53st6m65x8t95d
+alipay.sellerEmail=lyf@yicp.com
+alipay.CharSet=utf-8
+alipay.notify_query=http://notify.alipay.com/trade/notify_query.do
+
+# ================================================
+# mail config
+# ================================================
+mail.from=crm@yicp.com
+mail.password=gotone88
+mail.smtphost=smtp.exmail.qq.com
+
+# ================================================
+# download config
+# ================================================
+download.rootdir=D\:\\
+# Ntalker config
+# ================================================
+nTalker.url=http://adapi.ntalker.com/interface.php
+nTalker.key=560faeed92c4ee9def698e9ee3817e5a
+nTalker.adid=29
+nTalker.pid=19
+
+
+# ================================================
+# Kuaiqian config
+# ================================================
+kuaiqian.url=https://www.99bill.com/gateway/recvMerchantInfoAction.htm
+kuaiqian.key=ATSY8CNZ7E4AZRCB
+kuaiqian.merchantAcctId=1002136749701
+
+# ================================================
+# message config
+# ================================================
+message.userid=1238
+message.account=369cai
+message.password=369369
+message.url=http://116.213.132.8:8888/sms.aspx
+
+file.admin=800001
+file.key=12345
+
+# ==============================================
+#      xinguan.SH config
+#===============================================
+shxg.url=http://180.168.215.243:8080/gxcams/cpt.svc
+shxg.agent=8066
+shxg.md5key=1q2w3e4r56y
+shxg.idcard=522422198409090815
+shxg.realname=fabulous
+shxg.email=pengfangliang@caipiao.so
+# ==============================================
+#      JingCai config
+#===============================================
+jczq.before=25
+world.cup.before=5
+is.world.cup=1
+# ==============================================
+#      Emay config
+#===============================================
+#亿美短信网关相关配置
+
+#软件序列号
+softwareSerialNo=3SDK-EMY-0130-JFQLL
+#自定义key
+key=888888
+#软件序列号密码
+#password=234642
+password=130416
+newpassword=130416
+
+
+#eName 企业名称(最多60字节)
+eName=广东彩搜网络技术股份公司
+#linkMan 联系人姓名(最多20字节)
+linkMan=彭方良
+#phoneNum 联系电话(最多20字节)
+phoneNum=02062866286
+#mobile 联系手机(最多15字节)
+mobile=13632725483
+#email 电子邮件(最多60字节)
+email=pfl@yicp.com
+#fax 联系传真(最多20字节)
+fax=02037650806
+#address 公司地址(最多60字节)
+address=广州市天河区科新路18号骏盛轩B403
+#postcode 邮政编码(最多6字节)
+postcode=510665
+
+# ==============================================
+#      接口的IP限制
+#===============================================
+interface.ip=127.0.0.1,192.168.0.222
+app.download.url=http://m.yicp.com/openPrize/phoneSuit.php

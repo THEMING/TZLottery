@@ -1,0 +1,73 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+/*左栏*/
+.help_left { float:left; width:190px; height:auto; }
+
+/*帮助中心*/
+.helpcenter { width:188px; height:auto; border:1px #ffcc7f solid;}
+.helpcenter_titile { width:186px; height:29px; margin:1px; line-height:29px; text-align:center; background:url(../images/369caibg/helpcenter_03.gif) repeat-x; font-size:14px; font-weight:bold; color:#333;}
+/*菜单*/
+.helpcenter_menu { width:186px; height:auto; margin:1px;}
+/*主菜单*/
+.helpcenter_menu ul { height:auto; background:#fff;}
+.helpcenter_menu ul a { height:29px; line-height:29px; display:block;}
+/*主菜单项*/
+.helpcenter_menu ul li { font-size:14px; display:block;}
+/*主子菜单默认*/
+.helpcenter_menu_ul {  width:186px; background:#fff; border-bottom:1px #d7d9d9 solid; display:none;}
+/*主菜单项div*/
+.helpcenter_menu_libg {width:146px; height:28px; padding-left:40px; border-bottom:1px #d7d9d9 solid; line-height:29px; background-image:url(../images/369caibg/helpjia.gif); background-position:20px center; background-repeat:no-repeat;}
+/*展开后主菜单项（当前）*/
+.libg {background-image:url(../images/369caibg/helpjian.gif);}
+/*主菜单项*/
+.helpcenter_menu_li {width:186px; line-height:29px; background:#fff9df;}
+/*子菜单项*/
+.helpcenter_menu_li_sub {width:150px; height:29px; padding-left:36px; text-align:left; line-height:29px; background:#fff;cursor:pointer;}
+.helpcenter_menu_li_bg {color:#960000; display:block;background:#fdd;border-bottom:1px #ffcc7f solid}
+/*联系我们*/
+.us_email { width:146px; height:29px; padding-left:40px; line-height:29px; background:url(../images/369caibg/helpcenter_07.gif) 15px center no-repeat;}
+.us_online { width:146px; height:29px; padding-left:40px; line-height:29px; background:url(../images/369caibg/helpcenter_10.gif) 15px center no-repeat;}
+.us_kefu { width:146px; height:29px; padding-left:40px; line-height:29px; background:url(../images/369caibg/helpcenter_13.gif) 15px center no-repeat;}
+.us_kefu_phone { width:146px; height:20px; padding-left:40px; line-height:20px;}
+.us_address { width:146px; height:29px; padding-left:40px; line-height:29px; background:url(../images/369caibg/helpcenter_17.gif) 15px center no-repeat;}
+
+/*右栏*/
+.help_right { float:left; width:788px; height:auto; margin-left:18px; border:1px #ffcc7f solid; display:none;}
+.help_answer { width:773px; height:29px; padding-left:15px; line-height:29px; color:#0084ff; background:url(../images/369caibg/369cai_14.gif) repeat-x;}
+.help_con_titile { width:748px; height:60px; margin-left:20px; border-bottom:1px #ccc dashed;  line-height:60px; text-align:center; font-weight:bold; font-size:20px; color:#333;}
+.help_con { width:738px; height:auto; margin-top:20px; margin-left:25px; margin-bottom:25px; line-height:25px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

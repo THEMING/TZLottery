@@ -1,0 +1,47 @@
+lanternNavy.ddindex_content_lz {
+	FLOAT: left;  HEIGHT: 215px;
+}
+
+#lantern {
+	BORDER-RIGHT: #e3b771 1px solid; BORDER-TOP: #e3b771 1px solid; FONT-SIZE: 10.5pt; OVERFLOW: hidden; BORDER-LEFT: #e3b771 1px solid; WIDTH: 470px; CURSOR: pointer; LINE-HEIGHT: 23px; BORDER-BOTTOM: #e3b771 1px solid; HEIGHT: 220px
+}
+
+#lanternMain {
+	WIDTH: 470px; HEIGHT: 198px; BACKGROUND-COLOR: #ffffff
+}
+
+#lanternImg {
+	OVERFLOW: hidden;
+	WIDTH: 470px;
+	POSITION: relative;
+	HEIGHT: 198px;
+	top: 0px;
+	left: 0px;
+}
+
+#lanternNavy {
+	BORDER-TOP: #ffffff 1px solid; FONT-SIZE: 12px; FLOAT: left; OVERFLOW: hidden; WIDTH: 430px; COLOR: #853200; BORDER-BOTTOM: #ffffff 1px solid; HEIGHT: 22px; BACKGROUND-COLOR: #cccabe; TEXT-ALIGN: center
+}
+
+#lanternNavy .div_off1 {
+	FLOAT: left; BORDER-BOTTOM: #ffffff 1px solid; HEIGHT: 22px; BACKGROUND-COLOR: #cccabe; TEXT-ALIGN: center
+}
+#lanternNavy .div_on1 {
+	PADDING-RIGHT: 0px; BORDER-TOP: #cccabe 1px solid; PADDING-LEFT: 0px; FLOAT: left; OVERFLOW: hidden; BORDER-BOTTOM: #cccabe 1px solid; HEIGHT: 20px; BACKGROUND-COLOR: #f5f4f2; TEXT-ALIGN: center
+}
+#lanternNavy .div_off2 {
+	FLOAT: left; BORDER-BOTTOM: #ffffff 1px solid; HEIGHT: 22px; BACKGROUND-COLOR: #cccabe; TEXT-ALIGN: center
+}
+#lanternNavy .div_on2 {
+	PADDING-RIGHT: 0px; BORDER-TOP: #cccabe 1px solid; PADDING-LEFT: 0px; FLOAT: left; OVERFLOW: hidden; BORDER-BOTTOM: #cccabe 1px solid; HEIGHT: 20px; BACKGROUND-COLOR: #f5f4f2; TEXT-ALIGN: center
+}
+#lanternNavy .div_off3 {
+	FLOAT: left; BORDER-BOTTOM: #ffffff 1px solid; HEIGHT: 22px; BACKGROUND-COLOR: #cccabe; TEXT-ALIGN: center
+}
+#lanternNavy .div_on3 {
+	PADDING-RIGHT: 0px; BORDER-TOP: #cccabe 1px solid; PADDING-LEFT: 0px; FLOAT: left; OVERFLOW: hidden; BORDER-BOTTOM: #cccabe 1px solid; HEIGHT: 20px; BACKGROUND-COLOR: #f5f4f2; TEXT-ALIGN: center
+}
+
+.liclass {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 1px solid; MARGIN-TOP: 3px; FLOAT: left; MARGIN-LEFT: 6px; BORDER-LEFT: #ffffff 1px solid; WIDTH: 15px; COLOR: #ffffff; LINE-HEIGHT: 14px; MARGIN-RIGHT: 6px; BORDER-BOTTOM: #ffffff 1px solid; HEIGHT: 15px; BACKGROUND-COLOR: #cc3300; TEXT-ALIGN: center; _margin-left: 2.5px; _margin-right: 2.5px
+}

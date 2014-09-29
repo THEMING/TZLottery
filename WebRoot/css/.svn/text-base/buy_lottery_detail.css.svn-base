@@ -1,0 +1,66 @@
+/* CSS Document */
+
+.box {
+	width : 986px;
+	margin-left: auto;
+	margin-right: auto;
+	}
+
+
+.buy_lottery_table { 
+	border-collapse:collapse;
+	border:1px solid #999999;
+	width:100%;
+	background-color:#FFFFFF;
+}
+.buy_lottery_table caption{ 
+	line-height:75px;
+	height:75px;
+	border:1px solid #999999;
+}
+
+.buy_lottery_table tr th{background-color:#FFFF99; color:#000000;}
+.buy_lottery_table tr td{ text-indent:15px;}
+
+.buy_lottery_table_grid {
+	border:1px solid #999999 ;
+	line-height:35px;
+	font-weight:normal;
+	font-size:13px;
+}
+
+
+
+
+.plan_detail_title {
+	LINE-HEIGHT: 75px; BACKGROUND-color:#fdf9d6; HEIGHT: 75px;
+}
+.plan_detail_title H1 {
+	DISPLAY: inline-block; FLOAT: left; COLOR: #7f2d00; FONT-SIZE: 14px; FONT-WEIGHT: bold
+}
+.plan_detail_title .term {
+	COLOR: #333333; MARGIN-LEFT: 30px; FONT-SIZE: 14px; FONT-WEIGHT: bold; MARGIN-RIGHT: 10px
+}
+.plan_detail_title .red {
+	COLOR: #ff0000
+}
+
+
+.table_in_table {
+	border:1px solid #999999;
+}
+.xh_detail_tab {
+	TEXT-ALIGN: center; border-color:#FFFFFF;
+}
+ .xh_detail_tab .tit {
+	BACKGROUND:#74a8ed; COLOR: #ffffff
+}
+ .xh_detail_tab TR {
+	BACKGROUND: #e9e9e9;border-color:#FFFFFF
+}
+ .xh_detail_tab TD {
+	BORDER-BOTTOM: #ffffff 1px solid; BORDER-LEFT: #ffffff 1px solid;  BORDER-TOP: #ffffff 1px solid; BORDER-RIGHT: #ffffff 1px solid; margin-left:0; margin-right:0
+}
+ .xh_detail_tab TD.process {
+	TEXT-ALIGN: left; LINE-HEIGHT: 15px; PADDING-LEFT: 20px
+}

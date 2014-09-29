@@ -1,0 +1,51 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.Trend { float:left; display:inline; width:998px; height:auto;margin-top:10px;}
+.Trend_title_left { float:left; display:inline; width:550px; height:auto;  border:1px #fbcca5 solid; }
+.Trend_title_right { float:left; display:inline; width:428px; height:auto; margin-left:15px; border:1px #fbcca5 solid;}
+.Trend_online { float:left; display:inline; width:550px; height:29px; background:url(../images/369caibg/369cai_14.gif) repeat-x;}
+.Trend_online .Titile { float:left; display:inline; width:525px; height:29px;  padding-left:25px; line-height:29px; background:url(../images/369caibg/redstar.gif) 10px 10px no-repeat; color:#960000; font-size:14px; font-weight:bold;}
+.Trend_title_bg {float:left; width:550px; height:33px; background:url(../images/369caibg/369cai_51.gif) repeat-x;}
+.Trend_Current_bg {border-right:1px #fbcca5 solid;border-left:1px #d31f2b solid; background:url(../images/369caibg/369cai_49.gif) repeat-x;color:#960000; font-size:14px; font-weight:bold; display:block;}
+.Trend_Con { float:left; display:inline; width:549px; height:28px; background:#f7e1e4;color:#333;}
+.Trend_Con li { float:left; display:inline; margin-left:15px; line-height:28px;}
+.TC_li_Current { font-size:13px; color:#d81921; font-weight:bold;}
+.Trend_intro { float:left; display:inline; width:530px; height:auto; padding:10px; line-height:20px;}
+
+.Trend_soft {float:left; width:428px; height:29px; background:url(../images/369caibg/369cai_14.gif) repeat-x;}
+.Trend_soft .Titile { float:left; display:inline; width:400px; height:29px;  padding-left:25px; line-height:29px; background:url(../images/369caibg/redstar.gif) 10px 10px no-repeat; color:#960000; font-size:14px; font-weight:bold;}
+.T_softCon { float:left; display:inline; width:428px; height:100px; background:#fff; }
+.T_softPic { float:left; display:inline; width:61px; height:61px; margin-top:10px; margin-left:10px; border:1px #fefefe solid;}
+.T_softText { float:left; display:inline; width:330px; height:50px; margin-top:10px; margin-left:10px; line-height:20px; color:#333;}
+.T_softBtn { float:right; width:80px; height:30px; margin-top:10px; margin-right:15px;}
+
+
+.Trend_table { float:left; display:inline; width:996px; height:auto; border:2px #d31f2b solid; margin-top:10px;}
+.Trend_Session { float:left; display:inline; width:998px; height:25px; border-bottom:1px #be231b solid;}
+.Trend_Session li { float:left; display:inline; margin-left:15px; line-height:25px;}
+.Trend_table_con {float:left; display:inline; width:998px; height:auto; margin-top:2px; overflow:auto; border-top:1px #be231b solid; border-bottom:1px #be231b solid;}
+.T_Table_header { float:left; display:inline; width:996px; height:25px; background:url(../images/369caibg/biaoti_bg.gif) repeat-x;}
+.Trend_title_tr {  background:url(../images/369caibg/biaoti_bg.gif) repeat-x; border-bottom:2px #fbcca5 solid;}
+.Trend_title_qiHao { width:40px; height:27px;border-bottom:2px #fbcca5 solid; background:url(../images/369caibg/biaoti_bg.gif) repeat-x; text-align:center; line-height:27px; color:#d31e28;}
+.Trend_qiHao { width:40px; height:27px;border-bottom:1px #fbcca5 solid; border-right:1px #fbcca5 dashed; background:#fcf5e0; color:#d31e28;text-align:center; line-height:27px;}
+.Trend_title_td { width:19px; height:27px; text-align:center; line-height:27px; border-bottom:2px #fbcca5 solid;background:url(../images/369caibg/biaoti_bg.gif) repeat-x; color:#d31f2b; font-weight:bold;}
+.Trend_td_red {text-align:center; line-height:27px; border-bottom:1px #fbcca5 solid; color:#f5c7c5; font-size:11px;}
+.Trend_td_blue { width:19px; height:27px; text-align:center; line-height:27px; border-bottom:1px #fbcca5 solid; color:#b0d1eb; font-size:11px;}
+
+.Trend_ball_red { background:url(../images/369caibg/chartBall01.gif) center 6px no-repeat;text-align:center; line-height:27px; color:#fff; font-weight:bold; font-size:10px;}
+
+.Trend_ball_blue { background:url(../images/369caibg/chartBall02.gif) center 6px no-repeat;text-align:center; line-height:27px; color:#fff; font-weight:bold; font-size:10px;}
+
+.Trend_ball_green { background:url(../images/369caibg/chartBall03.gif) center 6px no-repeat;text-align:center; line-height:27px; color:#fff; font-weight:bold; font-size:10px;}
+
+.Trend_ball_orange { background:url(../images/369caibg/chartBall04.gif) center 6px no-repeat;text-align:center; line-height:27px; color:#fff; font-weight:bold; font-size:10px;}
+
+.Trend_ball_violet { background:url(../images/369caibg/chartBall05.gif) center 6px no-repeat;text-align:center; line-height:27px; color:#fff; font-weight:bold; font-size:10px;}
+
+.Trend_ball_brown { background:url(../images/369caibg/chartBall06.gif) center 6px no-repeat;text-align:center; line-height:27px; color:#fff; font-weight:bold; font-size:10px;}
+
+.Trend_border_h {border-bottom:2px #fbcca5 solid;}
+
+.Trend_border_z {border-right:1px #fbcca5 solid;}

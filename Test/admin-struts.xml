@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "struts-2.1.7.dtd">
+<struts>
+	<package name="adminstruts-default" extends="default">
+		<interceptors>
+			<interceptor name="adminUrlInteceptor"
+				class="com.xsc.lottery.admin.interceptor.AdminLoginInteceptor">
+			</interceptor>
+			<interceptor-stack name="adminStackInteceptor">
+				<interceptor-ref name="LotteryCompleteStack" />
+				<interceptor-ref name="adminUrlInteceptor" />
+			</interceptor-stack>
+		</interceptors>
+		<global-results>
+			<result name="admLogin" type="redirect">/oss/adminLogin.htm</result>
+			<result name="noquanxian" >/oss/success.jsp</result>
+		</global-results>
+	</package>
+	<package name="admin" extends="adminstruts-default">
+		<action name="adminTunnel" class="admChannel">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result >manage.jsp</result>
+			<result name="left">left.jsp</result>
+			<result name="head">head.jsp</result>
+		</action>
+		<action name="adminEditTunnel" class="adminEditTunnel">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="chnlist">channel/chn_list.jsp</result>
+			<result name="edit">channel/chn_edit.jsp</result>
+			<result name="vmode">channel/chn_mode_list.jsp</result>
+			<result name="emode">channel/chn_mode_edit.jsp</result>
+			<result name="rvmode" type="redirect">adminEditTunnel.aspx?action=modeview</result>
+		</action>
+		<action name="manageRole" class="manageRole">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="addrole">user/role_edit.jsp</result>
+			<result name="listrole">user/role_list.jsp</result>
+			<result name="purview">user/purview_page.jsp</result>
+		</action>
+		<action name="manageUser" class="admUser">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="list">user/adm_list.jsp</result>
+			<result name="edit">user/adm_edit.jsp</result>
+			<result name="cpwd">user/changePwd.jsp</result>
+			<result name="pass">success.jsp</result>
+		</action>
+		<action name="adminLogin" class="admLogin">
+			<result name="login">login.jsp</result>
+			<result name="succes" type="redirect">/oss/adminTunnel.aspx</result>
+			<result name="input">login.jsp</result>
+			<result name="revise">user/revisePassword.jsp</result>
+			<result name="pass">success.jsp</result>
+		</action>
+		<action name="adminUpload" class="admin.upload">
+		</action>
+	</package>
+	<!-- 期次管理 -->
+	<package name="admin_term" extends="adminstruts-default" namespace="/oss/term">
+		<action name="configTerm" class="Admin.termConfig">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>termConfig.jsp</result>
+		</action>
+		<action name="manageTerm" class="Admin.term">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="list">termManager.jsp</result>
+			<result name="detail">term_openwin_detail.jsp</result>
+			<result name="edit">term_edit_${strPath}.jsp</result>
+		</action>
+		<action name="manageJCZQTerm" class="Admin.JCZQ">
+			 <interceptor-ref name="adminStackInteceptor"></interceptor-ref> 
+			<result >term_edit_jczq.jsp</result>
+			<result name="list">term_edit_jczq.jsp</result>
+			<result name="edit">term_edit_jczq.jsp</result>
+		</action>
+		<action name="manageOpenPrize" class="Admin.openwin">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result >openwinTermList.jsp</result>
+		</action>
+		<action name="manageJCZQOpenPrize" class="OpenPrize.JCZQ">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+		</action>
+		<action name="manageDistributePrize" class="Admin.sendPrize">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>sendprizeTermList.jsp</result>
+		</action>
+		<action name="manageSendOrder" class="Admin.sendPrizeOrder">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>sendprizeOrderList.jsp</result>
+			<result name="list">jczqOrderList.jsp</result>
+		</action>
+	</package>
+ 	<!-- 客户中心 -->
+	<package name="admin_customer" extends="adminstruts-default" namespace="/oss/customer">
+		<action name="manageCustomer" class="Admin.customer">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="list">customerList.jsp</result>
+			<result name="view">customerView.jsp</result>
+		</action>
+		<action name="manageEditCustomer" class="Admin.editCustomer">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="rname">editCustomer/editName.jsp</result>
+			<result name="bank">editCustomer/editBank.jsp</result>
+			<result name="credentNo">editCustomer/editCredentNo.jsp</result>
+			<result name="email">editCustomer/editEmail.jsp</result>
+			<result name="password">editCustomer/editPassword.jsp</result>
+		</action>
+		<action name="manageTicket" class="Admin.ticketCx">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>tickettongji.jsp</result>
+		</action>
+		<action name="managePaymentReq" class="customer.paymentRequest">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="list">paymentRequestList.jsp</result>
+		</action>
+		<action name="manageHandAdd" class="Admin.handaddMoney">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="input" >addhandmoney.jsp</result>
+			<result name="ok" type="redirect">ok.jsp</result>
+		</action>
+		<action name="manageHandReduce" class="Admin.handreduceMoney">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="input" >reducemoney.jsp</result>
+		</action>
+		<action name="manageWithdrawMonney" class="customer.backMoneyRequest">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="list">backMoneyRequestList.jsp</result>
+		</action>
+		<action name="manageWithdrawMoneySuccess" class="customer.backMoneyRequestSuccess">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="list">backMoneyRequestSuccessList.jsp</result>
+		</action>
+		<action name="manageBuyLotteryQuery" class="Admin.goucaiCx">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="list">guocaitongji.jsp</result>
+			<result name="view">dg_detail.jsp</result>
+		</action>
+		<action name="manageGroupBuyQuery" class="Admin.hemaiCx">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="list">hemaitongji.jsp</result>
+			<result name="view">hm_detail.jsp</result>
+		</action>
+		<action name="manageJoinGroupBuyQuery" class="Admin.canyuHemaiCx">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="list">canyuHemaitongji.jsp</result>
+		</action>
+		<action name="manageChaseQuery" class="Admin.zhuihaoCx">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="list">zhuihaotongji.jsp</result>
+		</action>
+		<action name="manageFinanialQuery" class="Admin.financial">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="list">financialtongji.jsp</result>
+		</action>
+		<action name="manageChaseItemQuery" class="Admin.chaseItemCx">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>zhuihao_detail.jsp</result>
+			<result name="view">zhitem_detail.jsp</result>
+		</action>
+		
+		<action name="manageFinancialStatisticsQuery" class="customer.financialCollect">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>financialCollect.jsp</result>
+		</action>
+		
+		<action name="managePartner" class="Admin.partner">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="list">partnerManage.jsp</result>
+		</action>
+		
+		<action name="manageCusCommission" class="Admin.customerCommission">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>cusCommission.jsp</result>
+			<result name="amend">cusCommission.jsp</result>
+			<result name="ok">customerCommissionManage.jsp</result>
+			<result name="queryFinished">cusCommissionCalculate.jsp</result>
+		</action>
+		
+		<action name="listCusCommission" class="Admin.customerCommission" method="list">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="list">customerCommissionManage.jsp</result>
+		</action>
+			
+		<action name="calculateCusCommission" class="Admin.customerCommission" method="calculate">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="calculate">cusCommissionCalculate.jsp</result>
+		</action>
+		
+	</package>
+	
+	<package name="admin_football" extends="adminstruts-default" namespace="/oss/football">
+		<action name="sfcManager" class="Admin.football14">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>sfcEdit.jsp</result>
+		</action>
+		<action name="6cbManager" class="Admin.football6">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>6cbEdit.jsp</result>
+		</action>
+		<action name="4cjqManager" class="Admin.Admin4cjq">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>4cjqEdit.jsp</result>
+		</action>
+		<action name="jczqManager" class="Admin.JCZQ">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref> 
+			<result >jczqManager.jsp</result>
+			<result name="list">jczqManager.jsp</result>
+		</action>
+		<action name="manageJCZQOpenPrize" class="OpenPrize.JCZQ">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result >jczqOpenPrize.jsp</result>
+		</action>
+	</package>
+	
+	<package name="admin_user3" extends="adminstruts-default" namespace="/oss/userOrcl">
+		<action name="userOrclMng" class="Admin.userOracle">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>userOrclList.jsp</result>
+			<result name="view">userOrclView.jsp</result>
+		</action>
+	</package>
+	
+	<package name="admin_article" extends="adminstruts-default" namespace="/oss/article">
+		<action name="manageArticle" class="Admin.ArticleManagement">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>articleManage.jsp</result>
+		</action>
+		<action name="insertArticle" class="Admin.ArticleManagement">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>articleManage.jsp</result>
+		</action>
+		<action name="manageWinPrize" class="Admin.WinPrizeAction">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>winPrize.jsp</result>
+		</action>
+		<action name="manageOdd" class="oddaction">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>/oss/article/odd.jsp</result>
+		</action>
+	</package>
+	
+	<package name="admin_searchMatch" extends="adminstruts-default" namespace="/oss/search">
+		<action name="searchMatch" class="Admin.SearchMatch">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="list">matchMerge.jsp</result>
+			<result name="ok">matchMerge.jsp</result>
+			<result name="histroy">matchHistoryList.jsp</result>
+			<result name="teamMapping">teamMappingList.jsp</result>
+		</action>
+	</package>
+	
+</struts>

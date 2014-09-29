@@ -1,0 +1,258 @@
+/* CSS Document */
+
+.lottery_main { margin-left:auto; margin-right:auto; width:986px;}
+.top_box {width:984px; margin-left:1px; border-collapse:collapse;}
+.left_content_box { width: 760px; border:medium; border-color:#009900; float:left; }
+.right_bet_box { width: 220px; border: 1px solid #FF0000; float:right; margin-left:3px;}
+
+
+.top_box_menu_main_2{width:750px; float:left; margin-right:10px; position:relative;}
+.systemTime .toolTips{*vertical-align:3px;_vertical-align:2px;}
+.guide {
+	background:url(../images/lottery/xxxx.png) repeat-x;
+	height:27px;
+	line-height:27px;
+	padding-left:16px;
+	display:block;
+	color:#f00;
+}
+
+.menu_filter{background:#f6fbff; height:30px; padding:7px 10px 8px 20px; *padding:8px 10px 7px 20px;}
+.menu_filter label{margin-right:10px;}
+.menu_filter input{width:16px; height:16px; margin-right:3px; vertical-align:-4px; *vertical-align:0px;}
+
+.tournament_panel{width:100px; float:left;  position:relative;}
+.tournament_panel a.btn_Lblue_m,.tournament a.btn_Lblue_m:hover{_padding-top:5px; _height:17px;}
+.tournament_panel .btn_Lblue_m s{vertical-align:-1px; *vertical-align:-2px;_vertical-align:-1px;}
+
+.tournament_panel {
+	border:1px solid #79b3e1;
+	width:158px;
+	text-align:left;
+	padding:5px 10px 10px;
+	left:auto;
+	top:0px;
+	overflow: auto;
+	right: auto;
+	bottom: auto;
+	background-color: #FFFF99;
+}
+.tournament_panel ul li{width:78px; height:16px; padding:4px 0; float:left;}
+.tournament_panel .choose_all_op{ float:left; margin-left:15px; }
+
+a.choose_tournament_btn:hover{text-decoration:none;}
+.choose_tournament_btn{
+	background-image: url(../images/common/pull_down.png);
+	width:55px;
+	text-align:right;
+	color:#FF0000;
+	font-weight:700;
+	padding: 0px;
+	height: 30px;
+}
+.ls_h_btn{background-position:0 -45px;}
+
+/*********** tournament_table begin *************************/
+.tournament_table{
+ 	width:100%;
+	border:0px;
+	cellspacing:0px; 
+	cellpadding:0px;
+	border-collapse:separate;
+}
+.tournament_table tr{}
+.tournament_table th{background:#9ACD32; COLOR: #000; height:28px;  font-weight:normal; text-align:center; border-right:1px solid #fff; border-bottom:1px solid #fff;}
+.tournament_table .th_table_right_bet{background:#ccffcc; COLOR:#000000; height:28px;  font-weight:normal; text-align:center; border-right:1px solid #92c1e6; border-bottom:1px solid #2c6fa4;}
+.tournament_table .th_table_right_bet_title{background:#009900; COLOR:#FFFFFF; height:28px;  font-weight:normal; text-align:center; border-right:1px solid #92c1e6; border-bottom:1px solid #2c6fa4;}
+
+.tournament_table tr td .shijiancolor {color:#999}
+.tournament_table tr td .zhuduicolor {color:#36f;}
+.tournament_table th.last_th{border-right:none;}
+.tournament_table td{height:33px; line-height:14px; text-align:center; border-bottom:1px solid #E0E2E1; vertical-align:middle;}
+.tournament_table td.data_analy{border-right:1px solid #e0e2e1; cursor:pointer;text-align:left;padding-left:3px;border-right:medium; border-right-color:#FFFF00;}
+.tournament_table td.table_right_bet{background: #66CC66; border-right:1px solid #e0e2e1; cursor:pointer;text-align:left;padding-left:3px}
+.tournament_table td.tl{text-align:left;}
+.tournament_table td.tr{text-align:right;}
+
+.tournament_table .even {background:#f5f5f5;}
+.tournament_table .last_tr td{border-bottom:0;}
+.tournament_table .th_on td{background:#feffd1;}
+.tournament_table td.league,.tournament_table .even td.league,.tournament_table .th_on td.league,.tournament_table td.league a{color:#fff;}
+.tournament_table td.league2,.tournament_table .even td.league2,.tournament_table .th_on td.league2,.tournament_table td.league2 a{color:#fff;}
+.tournament_table td.league3,.tournament_table .even td.league3,.tournament_table .th_on td.league3,.tournament_table td.league3 a{color:#fff;}
+.tournament_table td.league4,.tournament_table .even td.league4,.tournament_table .th_on td.league4,.tournament_table td.league4 a{color:#fff;}
+.tournament_table td.label_cd{background:#ffdaa4;}
+.tournament_table .hide_b{border-bottom:0; padding:0;}
+/*********** tournament_table end *************************/
+
+.table_date_split{height:16px; background:#eceff5;  text-align:center; line-height:16px; padding:7px 0; }
+.table_date_split s.hide_up,.table_date_split s.hide_down{margin-left:3px; display:inline-block;width:0;height:0;font-size:0;line-height:0;border:4px solid #eceff5;border-bottom-color:#305e7d; vertical-align:2px; position:static;}
+.table_date_split s.c_down{border:4px solid #eceff5;border-top-color:#305e7d; vertical-align:-2px;}
+
+
+.sp_pm,.sp_dm,.sp_vs,.sp_w30,.sp_w32,.sp_w38,.sp_w45,.sp_xz,.sp_nxz,.sp_w40,.sp_w90,.sp_w70{display:inline-block; text-align:center;}
+.sp_w32{width:32px;}
+
+
+/******** smaill_bet_table begin ************/
+.smaill_bet_table{text-align:center; margin:0 auto;width:100%; border:0px; cellspacing:0px; cellpadding:0px; }
+.smaill_bet_table td.caption{background:#F5F5F5;font-weight:bold;}
+.smaill_bet_table th{background:#f1f1f1; border-bottom:1px solid #ececec; font-weight:normal; color:#999; height:24px; line-height:24px; border-top:1px solid #f6fbff;}
+.smaill_bet_table td{line-height:28px; height:28px; border-bottom:1px solid #ececec; background:#fff;}
+.smaill_bet_table .even td{background:#f5f5f5;}
+.smaill_bet_table .last_tr td{border-bottom:0;}
+.smaill_bet_table.marb{margin-bottom:10px;}
+.smaill_bet_table td.tl{padding-left:3px;}
+
+
+.sheng_ping_fu{background:#ffe0b2; border:1px solid #ffb74a; padding:0 2px; height:17px; line-height:17px; margin:3px 3px 3px 0; display:inline-block; cursor:pointer;}
+
+/******** smaill_bet_table ends ************/
+
+
+.title_guild{height:26px; line-height:26px; padding-left:5px; background:#C2C2C2; color: #fff; font-size:12px; color:#fff;}
+
+.step_2 { background:#fff;}
+.step_2 .one_or_mul_title .bgcolorstep2 {
+	height:31px;
+	width:221px;
+	margin:0 auto;
+}
+.step_2 .one_or_mul_title .title_old{ width:108px;text-align:center; float:left;background:url(../images/369caibg/369cai_14.gif); border-left:1px solid #fee0bf;border-right:1px solid #fee0bf; height:29px; line-height:27px; margin:0px 1px 3px 0; display:inline-block; cursor:pointer;}
+.step_2 .one_or_mul_title .title_cur{ width:109px;text-align:center; float:left;height:30px; line-height:27px; margin:0px 1px 3px 0; display:inline-block; cursor:pointer; background:#fff; border-bottom:1px solid #fff; font-size:13px; color:#333; font-weight:bold;}
+
+.chuan_chuan {margin-left:10px; width:150px; border:1px solid color:#000000}
+
+.btn_Dora_bs {overflow:hidden; text-align:center; display:inline-block; font-size:12px; text-decoration:none; cursor:pointer; border:0; vertical-align:middle; }
+.dc_qr{line-height:24px; padding:10px;}
+
+
+.betType_group_box {margin-top:10px; border-top:thin solid #99CCFF; border-bottom:thin solid #99CCFF; margin-bottom:10px}
+.betType_group_box ul {margin-top:5px}
+
+.ql_ziji{width:747px;height:24px;margin-left:0px;margin-top:0px; padding-top:20px; float:left; border:1px solid #ccc;}
+.ql_tz{width:280px;height:24px;float:left;padding-left:50px;}
+.ql_dgtz{width:87px;height:20px;float:left; font-size:15px;text-align:center;}
+.ql_ggtz{width:87px;height:20px;float:left; font-size:15px;text-align:center;}
+.ql_sshc{width:180px;height:20px;float:right;margin-left:15px;margin-top:3px;}
+.ql_ss{width:70px;height:20px;float:left;font-size:13px; line-height:15px;font-weight:bold;}
+.ql_select{width:80px;height:20px;float:left;}
+.ql_weizhi{width:500px;height:20px;font-size:12px;color:#999999;margin-top:1px;}
+.ql_xs{width:330px;height:14px;font-size:12px;color:#999999;float:right;margin-top:1px;}
+.ql_liebiao2{width:747px;height:25px; float:left;border:1px solid #ccc; border-top:0px; padding-top:5px;}
+.ql_liebiao{width:747px;height:auto;margin-left:0px;float:left; padding-top:7px; padding-bottom:10px;border:solid 1px #ccc; line-height:normal;background:#f5f5f5;}
+.ql_yiceng{width:550px;height:27px;margin-top:5px;margin-left:80px;clear:both;}
+.ql_show{width:75px;height:23px; padding-top:4px; background:url(/images/lottery/bbg2.jpg) no-repeat center;float:left;}
+.ql_showzi{width:50px;font-size:12px; height:18px; line-height:16px;margin-left:14px;}
+.ql_showzi a{color:#000000}
+.ql_hide{width:75px;height:23px; padding-top:4px; background:url(/images/lottery/bbg2.jpg) no-repeat center;float:left;margin-left:15px;}
+.ql_hidezi{width:50px;font-size:12px;height:18px; line-height:16px;margin-left:14px; color:#333;}
+.ql_hidezi a{color:#ffffff}
+.ql_xuan{width:360px;height:23px;float:right; display:inline;}
+.ql_rqiu{width:100px;height:21px;float:left;margin-left:120px; display:inline;}
+.ql_ck1{float:left; width:18px; height:18px; -margin-top:1px; line-height:normal; display:inline;}
+.ql_qz{width:55px;height:15px;  margin-left:5px; -margin-top:0px; +margin-top:3px; line-height: normal;font-size:12px;float:left; display:inline;}
+.ql_qz a{color:#ff0000;}
+.ql_frqiu{width:100px;height:21px;float:left;margin-left:13px; display:inline;}
+.ql_qz2{width:75px;height:15px;padding-top:7px;font-size:12px;float:left;}
+.ql_qz2 a{color:#ff0000;}
+.ql_check{width:670px;height:auto;margin-top:10px;margin-left:15px;clear:both}
+.ql_jingcai{width:130px;height:auto;margin-left:15px;margin-top:5px;clear:both; line-height:normal; float:left;}
+.ql_yinglun{width:720px;height:auto;margin-left:15px;margin-top:5px;clear:both; line-height:normal;}
+.ql_ck2{width:170px;height:21px;float:left;margin-top:7px; line-height:normal;}
+.ql_chbox{width:18px;height:15px; margin-top:6px;+margin-top:0px;float:left;}
+.ql_England{width:130px;height:14px; margin-top:4px; line-height:15px;font-size:12px;font-weight:bold;float:left;padding-top:0px;}
+.ql_ck3{width:120px;height:15px;float:left;margin-left:10px;}
+.ql_shouqi{width:45px;height:21px;float:right; margin-right:30px;}
+.ql_sq{width:700px;height:24px;margin:0 auto;margin-top:10px;}
+.only_show { padding:5px 0px 0px 14px;}
+.show_l_whole {padding:5px 0px 8px 14px;}
+
+
+
+.ql_ggtz1 {
+    width:85px;
+	height:22px;
+	color: #f60;
+	font-size:15px;
+	text-align:center;
+	font-weight:bold;
+	border:1px solid #ccc;
+	border-bottom:3px solid #fff;	
+}
+
+.ql_dgtz1{
+    width:85px;
+	height:22px;
+	color: #f60;
+	font-size:15px;
+	text-align:center;
+	font-weight:bold;
+	border:1px solid #ccc;
+	border-bottom:2px solid #fff;
+}
+.BGTOP-LEFT {
+	FLOAT:LEFT;
+	WIDTH:750PX;
+	HEIGHT:AUTO;
+	
+}
+.BGTOP-RIGHT {
+	float:right;
+	margin:0px 0px 10px 10px;
+	HEIGHT:auto;
+	WIDTH:222PX;
+	border: 1px solid #8B8682;
+}
+.bangzhu-cont{
+    height:120px;
+	padding:8px;
+}
+.bangzhu-cont ul {
+	line-height:2;
+}
+
+#goTopBtn {
+	POSITION: fixed; TEXT-ALIGN: center; LINE-HEIGHT: 30px; WIDTH: 30px; BOTTOM: 35px; HEIGHT: 33px; FONT-SIZE: 12px; CURSOR: pointer; RIGHT: 0px; _position: absolute; _right: auto
+}
+
+
+/*===================2011-12-18 buchong================*/
+.jczuqiuzhongleitab {
+	width:986px;
+	height:33px;
+	margin-top:20px;
+	margin-bottom:20px;
+	border-bottom:3px solid #f60;
+}
+.jczuqiuzhongleitab ul {
+	padding-left:80px;
+	height:33px;
+}
+.jczuqiuzhongleitab ul li {
+	float:left;
+	text-align:center;
+	width:75px;
+	height:20px;
+	display:block;
+	padding-top:13px;
+	cursor:pointer;
+	margin-left:8px;
+	background:url(../images/369caibg/369cai_80.gif) no-repeat center;
+	background-position:0px 6px;
+}
+.jczuqiuzhongleitab ul .sshover {
+	text-align:center;
+	padding:0px;
+	height:33px;
+	line-height:33px;
+	display:block;
+	width:100px;
+    background:url(../images/369caibg/369cai_09.gif) no-repeat center;
+	background-position:0px 2px;
+}
+.jczuqiuzhongleitab ul .nothing {
+	width:400px;
+	float:right;
+	background:none;
+}

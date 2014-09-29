@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "struts-2.1.7.dtd">
+
+<struts>
+	<package name="webstruts-default" extends="default">
+		<interceptors>
+			<interceptor name="loginInteceptor" class="com.xsc.lottery.web.interceptor.LoginInteceptor"></interceptor>
+		</interceptors>
+		<global-results>
+			<result name="login">/login/login.jsp</result>
+		</global-results>
+	</package>
+	
+	<package name="client_default" extends="webstruts-default">
+		<interceptors>
+			<interceptor-stack name="ajaxLoginCompleteStack">
+				<interceptor-ref name="LotteryCompleteStack" />
+				<interceptor-ref name="loginInteceptor">
+					<param name="isAjax">true</param>
+				</interceptor-ref>
+			</interceptor-stack>
+			<interceptor-stack name="LoginCompleteStack">
+				<interceptor-ref name="LotteryCompleteStack" />
+				<interceptor-ref name="loginInteceptor" />
+			</interceptor-stack>
+		</interceptors>
+	</package>
+	
+	<package name="公用包" extends="client_default">
+		<action name="index" class="indexAct" >
+			<param name="navIndex">1</param>
+			<result>/index.jsp</result>
+		</action>
+		<action name="login2" class="indexAct" >
+			<param name="navIndex">1</param>
+			<result>/login/login2.jsp</result>
+		</action>
+		<action name="fcindex" class="indexAct" >
+			<param name="navIndex">1</param>
+			<result>/fucaiindex.jsp</result>
+		</action>
+		<action name="login" class="customer.login">
+			<param name="navIndex">2</param>
+			<result name="indexLogout">/login/indexLogout.jsp</result>
+			<result name="indexLogin">/login/indexLogin.jsp</result>
+			<result name="login">/login/login.jsp</result>
+			<result name="logout" type="redirect">/</result>
+			<result type="redirect">/customer/</result>
+		</action>
+		<action name="qqlogin" class="customer.login" method="qqlogin">
+			<param name="navIndex">2</param>
+			<result name="qqlogin">/login/qqlogin.jsp</result>
+			<result name="indexLogout">/login/indexLogout.jsp</result>
+			<result name="indexLogin">/login/indexLogin.jsp</result>
+			<result name="login">/login/login.jsp</result>
+			<result name="logout" type="redirect">/</result>
+			<result name="customer">/customer/index.jsp</result>			
+		</action>
+		<action name="register" class="customer.register">
+			<param name="navIndex">2</param>
+			<result name="index">/login/register.jsp</result>
+			<result name="read">/login/agreement.jsp</result>
+			<result name="pwd">/login/findPwd.jsp</result>
+			<result name="ok" type="redirect">/customer/</result>
+		</action>
+		
+		<action name="qqzhuce" class="customer.register">
+		</action>
+		
+		<action name="qqbangding" class="customer.register">
+		</action>
+		
+		<action name="cusChasesaleinfo" class="customer.customerChaseItemSale">
+			<result>/common/chase_detail.jsp</result>
+			<result name="info">/common/chase_Item.jsp</result>
+		</action>
+		<action name="custogetherSaleinfo" class="customer.customerTogetherSale" method="info">
+			<result name="info">/common/group_plan_detail.jsp</result>
+		</action>
+		
+		<action name="ajaxfb" class="fb.football">
+		</action>
+		
+		<action name="download" class="customer.download">
+			<result type="stream" name="success">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">downloadFile</param>
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+	</package>
+	
+	<package name="lottery-bet" extends="client_default" namespace="/lottery">
+		<action name="index" class="lottery.indexAct">
+			<param name="navIndex">1</param>
+			<result name="ssq">/lottery/ssq.jsp</result>
+			<result name="3d">/lottery/fc3d.jsp</result>
+			<result name="pls">/lottery/pls.jsp</result>
+			<result name="plw">/lottery/plw.jsp</result>
+			<result name="dlt">/lottery/dlt.jsp</result>
+			<result name="qxc">/lottery/qxc.jsp</result>
+			<result name="qlc">/lottery/qlc.jsp</result>
+			<result name="14sfc">/lottery/14sfc.jsp</result>
+			<result name="r9">/lottery/r9.jsp</result>
+			<result name="4cjq">/lottery/4cjq.jsp</result>
+			<result name="6cb">/lottery/6cb.jsp</result>
+			<result name="read">/lottery/buyLotteryRule.jsp</result>
+			<result name="listAllMatchArrageForZCDZ">/common/zcdz.jsp</result>
+		</action>
+		<action name="JCZQIndex" class="fb.JCZQ">
+			<param name="navIndex">1</param>
+			<result>/lottery/guessFootball.jsp</result>
+		</action>
+		<action name="JCLQSFIndex" class="ba.JCLQ">
+			<param name="navIndex">1</param>
+			<result>/lottery/guessBasketball.jsp</result>
+		</action>
+		<action name="JCLQRFSFIndex" class="ba.JCLQ" method="indexRFSF">
+			<param name="navIndex">1</param>
+			<result>/lottery/guessBasketballRFSF.jsp</result>
+		</action>
+		<action name="JCLQSFCIndex" class="ba.JCLQ" method="indexSFC">
+			<param name="navIndex">1</param>
+			<result>/lottery/guessBasketballSFC.jsp</result>
+		</action>
+		<action name="JCLQDXFIndex" class="ba.JCLQ" method="indexDXF">
+			<param name="navIndex">1</param>
+			<result>/lottery/guessBasketballDXF.jsp</result>
+		</action>		
+		<action name="lqsshc" class="ba.JCLQ" method="getMatch">
+		    <param name="navIndex">1</param>
+			<result >/lottery/lqsshc.jsp</result>
+		</action>
+		
+		<action name="JCLQMatch" class="ba.JCLQ">
+			<!-- 此处为AjaxJson返回，不需要定义页面-->
+		</action>
+		
+		<action name="CBFIndex" class="fb.JCZQ">
+			<param name="navIndex">1</param>
+			<result>/lottery/cbf.jsp</result>
+		</action>
+		
+		<action name="ZJQSIndex" class="fb.JCZQ">
+			<param name="navIndex">1</param>
+			<result>/lottery/guessFootballZJQS.jsp</result>
+		</action>
+		
+		<action name="BQCIndex" class="fb.JCZQ">
+			<param name="navIndex">1</param>
+			<result>/lottery/guessFootballBQC.jsp</result>
+		</action>
+		
+		<action name="sshc" class="fb.JCZQ" method="getMatch">
+		    <param name="navIndex">1</param>
+			<result >/lottery/sshc.jsp</result>
+		</action>
+		<action name="JCZQMatch" class="fb.JCZQ">
+			<!-- 此处为AjaxJson返回，不需要定义页面-->
+		</action>
+		<action name="buyLottery" class="buyLottery.betIndeAct">
+			<interceptor-ref name="ajaxLoginCompleteStack" />
+			<!-- 此处为AjaxJson返回，不需要定义页面-->
+		</action>
+		<action name="lotteryterm" class="lotteryterm.TermIndeAct" >
+			<result name="todayhois">/lottery/${type}/hoistList.jsp</result>
+		</action>
+		<action name="joinGroupBuy" class="groupbuy.indexAct">
+			<result>/groupbuy/group_table.jsp</result>
+			<!-- <result name="result">/lottery/${lotteryType}/joinGroupBuy.jsp</result>
+			<result name="rmhm">/common/remenhemai.jsp</result>  -->
+		</action>
+		<action name="cusplan" class="buyLottery.betPlan">
+			<result name="result">${type}/plan.jsp</result>
+		</action>
+		<action name="suosui" class="customer.suosui">
+		    <result>/suosui/suosui.jsp</result>
+		    <result name="ss">/suosui/detail.jsp</result>
+		    <result name="suosui">/suosui/ss.jsp</result>
+		</action>
+	</package>
+	
+	<package name="用户中心" extends="client_default" namespace="/customer">
+		<default-interceptor-ref name="LoginCompleteStack" />
+		<action name="index" class="customer.indexAct">
+			<param name="navIndex">2</param>
+			<result>index.jsp</result>
+		</action>
+		<action name="MyBuyLotteryInfo" class="customer.customerLottery">
+			<result>cusLottery.jsp</result>
+			<result name="info">/common/buy_lottery_detail.jsp</result>
+		</action>
+		<action name="MyJoinGroupBuyInfo" class="customer.customerJoinSale">
+			<result name="result">cusJoinSale.jsp</result>
+		</action>
+		<action name="MyChaseInfo" class="customer.customerChaseSale">
+			<result>cusChaseSale.jsp</result>
+		</action>
+		<action name="MyGroupBuyInfo" class="customer.customerTogetherSale">
+			<result>cusTogetherSale.jsp</result>
+			<result name="info">/common/group_plan_detail.jsp</result>
+		</action>
+		<action name="MyWinPrizeQuery" class="customer.customerZhongJiang">
+			<result>customerWinHistory.jsp</result>
+		</action>
+		<action name="MyInfo" class="customer.customerMaterial">
+			<result >customerMaterial.jsp</result>
+			<result name="mmxg">customerMaterial.jsp</result>
+			<result name="bdyhk">bdyhk.jsp</result>
+			<result name="zlxg">customerMaterial.jsp</result>
+			<result name="sjyz">cusyz.jsp</result>
+			<result name="sjbd">cusyz.jsp</result>
+		</action>
+		<action name="MyFinancialInfo" class="customer.customerFinancial">
+			<result name="">customerFinancial.jsp</result>
+			<result name="zjmx">customerFinancial.jsp</result>
+			<result name="zhzl">customerFinancial.jsp</result>
+			<result name="payhome">customerFinancial.jsp</result>
+			<result name="zhtx">customerFinancial.jsp</result>
+			<result name="zhcz">customerFinancial.jsp</result>
+			<result name="redirect" type="redirect">cusmerMaterial.htm?comm=bdyhk
+			</result>
+			<result>zhtx.jsp</result>
+		</action>
+		<action name="MySoftware" class="customer.softwareRegister">
+			<result>cusSoftware.jsp</result>
+		</action>
+		<action name="MyRecommenders" class="customer.recommend">
+			<result>cusRecommender2.jsp</result>
+		</action>
+		<action name="youhuimaDH" class="customer.customerFinancial" method="duihuan">
+			<result type="redirect">/customer/MyFinancialInfo.htm?action=chongzhi</result>
+		</action>
+		
+		<action name="gljchongzhi" class="customer.customerFinancial" method="gljcz">
+			<result name="zhcz">customerFinancial.jsp</result>
+		</action>
+		
+	</package>
+	
+	<package name="合买中心" extends="client_default" namespace="/groupbuy">
+		<action name="index" class="groupbuy.indexAct">
+			<param name="navIndex">3</param>
+			<result>index.jsp</result>
+		</action>
+	</package>
+	
+
+	
+	<package name="软件中心" extends="client_default" namespace="/software">
+		<action name="rjxz" class="RuanJian.XZ">
+			<result >ruanjianxiazai.jsp</result>
+		</action>
+		<action name="index" class="software.indexAct">
+			<param name="navIndex">4</param>
+			<result>soft-index.jsp</result>
+			<result name="moreWin">moreWin.jsp</result>
+		</action>
+		<action name="*" class="software.indexAct">
+			<param name="navIndex">4</param>
+			<result>{1}.jsp</result>
+		</action>
+	</package>
+	
+	<package name="彩票资讯" extends="client_default" namespace="/lotteryInfo">
+		<action name="index" class="customer.lotteryInfoIndexAct">
+			<param name="navIndex">5</param>
+			<result>index.jsp</result>
+			<result name="detail">detail.jsp</result>
+		</action>
+	</package>
+	
+	<package name="开奖数据" extends="client_default" namespace="/prizedetail">
+		<action name="index" class="customer.prizeInfoIndexAct">
+			<param name="navIndex">6</param>
+			<result type="redirect">${type}_${termNo}.htm</result>
+		</action>
+		
+		<action name="*index" class="lotteryterm.TermIndeAct" method="getTermPageList">
+			<param name="navIndex">6</param>
+			<param name="type">{1}</param>
+			<result>{1}.jsp</result>
+		</action>
+		
+		<action name="*_*" class="lotteryterm.TermIndeAct" method="getTermInfo">
+			<param name="navIndex">6</param>
+			<param name="type">{1}</param>
+			<param name="term">{2}</param>
+			<result>{1}info.jsp</result>
+		</action>
+		
+	</package>
+	
+	
+	<package name="走势图" extends="client_default" namespace="/direction">
+		<action name="plt" class="chartaction1" method="plt">
+			<result >/chart/pltc.jsp</result>
+			<result name="chart">/chart/plt.jsp</result>
+			<result name="football">/chart/football.jsp</result>
+			<result name="footballq">/chart/footballplt.jsp</result>
+		</action>
+		<action name="zst" class="chartaction1" method="zst">
+			<result>/chart/zstc.jsp</result>
+			<result name="chart">/chart/zst.jsp</result>
+			<result name="chartc">/chart/zstq.jsp</result>
+			<result name="football">/chart/footballzst.jsp</result>
+			<result name="footballq">/chart/footballzstc.jsp</result>	
+		</action>
+		<action name="fbt" class="chartaction1" method="fbt">
+			<result name="ssq">/chart/ssqfbt.jsp</result>
+			<result name="3d">/chart/3dfbt.jsp</result>
+			<result name="dlt">/chart/dltfbt.jsp</result>
+			<result name="pls">/chart/plsfbt.jsp</result>
+			<result name="plw">/chart/plwfbt.jsp</result>
+			<result name="qxc">/chart/qxcfbt.jsp</result>
+			<result name="qlc">/chart/qlcfbt.jsp</result>
+		</action>
+	</package>
+
+	
+	<package name="帮助中心" extends="client_default" namespace="/help">
+		<action name="index" class="customer.helpCenterIndexAct">
+			<param name="navIndex">7</param>
+			<result>index.jsp</result>
+		</action>
+		<action name="*" class="customer.helpCenterIndexAct">
+			<param name="navIndex">7</param>
+			<result>{1}.jsp</result>
+		</action>
+	</package>
+	
+	<package name="购彩大厅" extends="client_default" namespace="/lotteryHall">
+		<action name="index" class="lotteryHallAction">
+			<param name="navIndex">9</param>
+			<result>BUY-index.jsp</result>
+		</action>
+		<action name="*" class="customer.helpCenterIndexAct">
+			<param name="navIndex">7</param>
+			<result>{1}.jsp</result>
+		</action>
+	</package>
+	
+	<package name="关于我们" extends="client_default" namespace="/about-us">
+		<action name="index" class="customer.aboutIndexAct">
+			<param name="navIndex">8</param>
+			<result>index.jsp</result>
+		</action>
+	</package>
+	
+	<package name="数据详情" extends="client_default" namespace="/detail">
+		<action name="datadetail" class="detail.datedetail">
+			<result>/detail/odds-index.jsp</result>
+			<result name="odd">/detail/useableoupeiyapan.jsp</result>
+		</action>
+	</package>
+
+</struts>

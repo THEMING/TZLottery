@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.agreement_bg { float:left; width:898px; height:auto; margin-top:15px; margin-left:18px; border:1px #ffcc7f solid; display:none;}
+.agreement_answer { width:883px; height:29px; padding-left:15px; line-height:29px; color:#0084ff; background:url(../images/369caibg/369cai_14.gif) repeat-x;}
+.agreement_con_titile { width:858px; height:60px; margin-left:20px; border-bottom:1px #ccc dashed;  line-height:60px; text-align:center; font-weight:bold; font-size:20px; color:#333;}
+.agreement_con { width:850px; height:auto; margin-top:20px; margin-left:25px; margin-bottom:25px; line-height:25px; font-size:14px; color:#414141;}
+.agreement_con h3 { font-weight:bold; color:#414141;}
+.agreement_con p { text-indent:2em;}
+
+
+
+
+

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+"struts-2.1.7.dtd">
+<struts>
+    <package name="otherApi-default" extends="default" namespace="/customer">
+    	<interceptors>
+			<interceptor name="loginInteceptor" 
+				class="com.xsc.lottery.web.interceptor.LoginInteceptor"></interceptor>
+		</interceptors>
+    	<global-results>
+    		<result name="login">/login/login.jsp</result>
+    	</global-results>
+    	
+    	<!-- 支付宝 -->
+		<action name="alipayrequest" class="Alipay.RequestAct">
+			<interceptor-ref name="LotteryCompleteStack"/>
+			<interceptor-ref name="loginInteceptor"/>
+			<result name="input" type="redirect">/customer/index.htm?tabIndex=3</result>
+		</action>
+		<action name="alipayre369Response" class="Alipay.RequestAct" method="alipayResponse">
+			<result>cz_success.jsp</result>
+			<result name="error">/common/error.jsp</result>
+		</action>
+		<action name="alipaySsyn369Response" class="Alipay.RequestAct" method="alipayResponse"/>
+		
+		<!-- 快钱 -->
+		<action name="kuaiqianrequest" class="Kuaiqian.RequestAct">
+			<interceptor-ref name="LotteryCompleteStack"/>
+			<interceptor-ref name="loginInteceptor"/>
+			<result name="input" type="redirect">/customer/index.htm?tabIndex=3</result>
+		</action>
+		<action name="kuaiqianre369Response" class="Kuaiqian.RequestAct" method="kuaiqianResponse">
+			<result>cz_success.jsp</result>
+			<result name="error">/common/error.jsp</result>
+		</action>
+		
+		<!-- 银联语音支付 -->
+		<action name="yinlian" class="YinLian.RequestAct">
+			<interceptor-ref name="LotteryCompleteStack"/>			
+		</action>
+		<action name="tongzhi" class="YinLian.RequestAct" method="tongzhi">
+			<interceptor-ref name="LotteryCompleteStack"/>
+		</action>
+		<!-- 易宝 -->
+		<!-- 
+		<action name="yeepayrequest" class="Yeepay.RequestAct">
+			<interceptor-ref name="LotteryCompleteStack"/>
+			<interceptor-ref name="loginInteceptor"/>
+			<result name="input">zhcz.jsp</result>
+			<result name="redirect" type="redirect">${nodeAuthorizationURL}</result>
+		</action>
+		<action name="yeepayresponse" class="Yeepay.RequestAct" method="response">
+			<result name="success">czok.jsp</result>
+		</action>
+		 -->
+		<!-- 新生支付 -->	
+		<!-- 
+		<action name="allLifePay" class="AllLifePay.RequestAct">
+			<interceptor-ref name="LotteryCompleteStack"/>
+			<interceptor-ref name="loginInteceptor"/>
+			<result name="input">zhcz.jsp</result>
+			<result name="redirect">alllifeform.jsp</result>
+		</action>
+		<action name="allLifreponse" class="AllLifePay.RequestAct" method="allLifreponse">
+			<result name="success">zhcz_wait.jsp</result>
+		</action>
+		<action name="allLifSsynResponse" class="AllLifePay.RequestAct" method="allLifSsynreponse"/>
+		 -->
+	</package>
+	<!-- 
+	<package name="otherLogin" extends="default">
+		<global-results>
+			<result>/login/otherLogin.jsp</result>
+			<result name="input" type="redirect">/customer/MyFinancialInfo.htm</result>
+		</global-results>
+		<action name="tenPayLogin"  class="TenPay.LoginRequestAct"/>
+		<action name="alipayLogin"  class="Alipay.LoginRequestAct"/>
+	</package>
+	 -->
+	 
+	 <package name="ntalker" extends="default">
+		<action name="track" class="Other.trackAct">
+			<result type="redirect">${url}</result>
+		</action>
+		<action name="otherQuery" class="Other.queryAct">
+			<result>/common/otherQuery.jsp</result>
+		</action>
+	</package>
+</struts>

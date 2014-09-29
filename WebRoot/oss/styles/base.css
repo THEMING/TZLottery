@@ -1,0 +1,69 @@
+/* CSS Document */
+body,div,ul,li,dl,dt,dd,p,h1,h2,h3,h4,h5,h6,table,ol,li,textarea,img,fieldset,input,big,small,tr,td,th,form,label{
+	margin:0;
+	padding:0;
+	font-family: "宋体", Arial, sans-serif;
+}
+body,h1,h2,h3,h4,h5,h6,input,label,textarea{font-size:12px;}
+body{background-color:#fff;}
+fieldset,img{border:0;}
+input,select,img{ vertical-align:middle;}
+ul,ol,li{list-style:none;}
+.hand{ cursor:pointer;}
+		.tab{
+			width:1002px;
+			margin:0 auto;
+			padding:10px 0;
+			}
+		.tab_w{
+			width:600px;
+			margin:0 auto;
+			padding:10px 0 10px 0;
+			}
+		.tab table,.tab_w table{
+			border-collapse:collapse;
+			border-left:1px solid #ccc;
+			border-top:1px solid #ccc;
+			width:100%;
+			}
+		.tab table tr th,.tab table tr td,.tab_w table tr td,.tab_w table tr th{
+			border-right:1px solid #ccc;
+			border-bottom:1px solid #ccc;
+			line-height:30px;
+			height:30px;
+			padding:3px 0 3px 8px;
+			}
+		.tab table table{border:0;}
+		.tab table table tr th,.tab table table tr td{border:0;}
+		.tab table caption,.tab_w table caption{
+			border:1px solid #ccc;
+			border-bottom:0;
+			height:30px;
+			line-height:30px;
+			font-size:13px;
+		}
+		
+.add_act {width:600px;margin:0 auto;}
+.add_act ul{
+	border-left:1px solid #ccc;
+	border-top:1px solid #ccc;
+	margin-bottom:10px;
+	}
+.add_act ul li{
+	border-right:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	height:30px;
+	line-height:30px;
+	}
+.add_act ul li label{
+	border-right:1px solid #ccc;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	width:100px;
+	float:left;
+	display:inline;
+	margin-right:10px;
+	}
+.add_act h4{border:1px solid #ccc;border-bottom:0;line-height:25px;}
+p.list_p{height:35px;line-height:35px;text-align:right;}

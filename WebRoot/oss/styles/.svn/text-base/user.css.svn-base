@@ -1,0 +1,340 @@
+@charset "utf-8";
+/* CSS Document */
+body,div,ul,li,dl,dt,dd,p,h1,h2,h3,h4,h5,h6,table,ol,li,textarea,img,fieldset,input,big,small,tr,td,th,form,label{
+	margin:0;
+	padding:0;
+	font-family: "宋体", Arial, sans-serif; font-size:12px;
+}
+a { blr:expression(this.onFocus=this.blur()); } /* IE */
+a { outline:none; } /* firefox */
+a{color:#006699; text-decoration:none;}
+a:hover{color:#006699; text-decoration:underline;}
+.link_red{color:#f00;}
+.link_red:hover{color:#333;}
+.link_blue{color:#2073fc; text-decoration:none;}
+.link_blue:hover{color:#333; text-decoration:none;}
+.link_line{ text-decoration:underline;}
+.link_line:hover{ text-decoration:none;}
+.link_line{ text-decoration:underline;}
+.link_line_hover{ text-decoration:none;}
+.blue{color:#2073fc;}
+.betfont_red{color:#f00;}
+.betfont_blue{color:#2073fc;}
+.betfont_black{background-color:#000;color:#fff;}
+.bg_w{background:#fff;}
+.yelow{color:#ffe719;}
+.f_10{font-size:10px;}
+.user_sd h3{
+	background:url(../images/user/sd_t.png) no-repeat;
+	padding-left:10px;
+	line-height:27px;
+	color:#fff;
+	}
+.user_sd dl dt{
+	border-top:1px solid #fff;
+	border-bottom:1px solid #fff;
+	line-height:25px;
+	background:#e5e5e5 url(../images/user/san.png) no-repeat 8px center;
+	padding-left:20px;
+	}
+.user_sd dl dd{
+	border-bottom:1px solid #fff;
+	background-color:#f0f2f4;
+	line-height:25px;
+	padding-left:20px;
+	}
+.user_sd dl dd.hover{background-color:#959fb1;color:#fff;}
+.user_sd dl dd.hover a{color:#fff;}
+.user_sd dl dd.hover a:hover{ text-decoration:underline;}
+.user_bd{
+	border:1px solid #d1d1d1;
+	background-color:#e5e5e5;
+	padding:8px;
+	}
+.user_bd_bg{
+	background:url(../images/user/user_bg.png) repeat-y;
+	border-top:1px solid #c9c9c9;
+	border-bottom:1px solid #c9c9c9; 
+	}
+.user_sd{
+	width:153px;
+	float:left;
+	padding:1px;
+	margin-right:6px;
+	}
+.user_main{
+	width:960px;
+	padding-bottom:3px;
+	position:relative;
+	}
+.user_main h3{
+	background:url(../images/user/t_bg.png) no-repeat 361px;
+	height:41px;
+	padding-left:19px;
+	border-bottom:1px solid #ccc;
+	margin-bottom:3px;
+	color:#0d82f0;
+	font-size:14px;
+	}
+.user_main h3 strong{
+	height:41px;
+	line-height:41px;
+	background:url(../images/user/u_t_bg.png) no-repeat left;
+	padding-left:15px;
+	float:left;
+	}
+.user_bor{
+	width:960px;
+	margin:0 auto;
+	background-color:#e5e5e5;
+	padding:10px;
+	}
+.u_serch{
+	background:#fff;
+	line-height:22px;
+	padding:7px;
+
+	margin-bottom:10px;
+	}
+.user_title{
+	background:#fff;
+	line-height:18px;
+	padding:7px 10px 7px 26px;
+	margin-bottom:10px;
+	}
+.input_date{
+	border:1px solid #999;
+	background:url(../images/user/text_bg.png) no-repeat right center;
+	width:94px;
+	height:18px;
+	}
+
+.user_bor .bg_w{padding:5px;}
+.user_main table{
+	border-collapse:collapse;
+	width:100%;
+	text-align:center;
+	}
+.user_main table tr {line-height:26px;}
+.user_main table tr th{
+	background:#a6a6a6;
+	color:#fff;
+	font-weight:normal;
+	}
+.user_main table tr td{border-bottom:1px dashed #ccc;}
+.user_hm_t{
+	height:23px;
+	position:absolute;
+	left:119px;
+	top:19px;
+	}
+.user_hm_t h4{
+	float:left;
+	background:url(../images/user/hm_t.png) repeat-x;
+	height:21px;
+	text-align:center;
+	cursor:pointer;
+	color:#5c5c5c;
+	line-height:21px;
+	border:1px solid #ccc;
+	border-bottom:0;
+	padding:0 10px;
+	margin-right:5px;
+	font-weight:normal;
+	}
+.user_hm_t h4.hover{
+	color:#5c5c5c;
+	background:#fff url(../images/user/hm_t_bg.png) no-repeat left top;
+	line-height:22px;
+	height:22px;
+	}
+.user_form{
+	width:540px;
+	margin:0 auto;
+	padding:10px 0;
+	}
+.yhk_form{width:600px; position:relative;}
+.yhk_text{
+	position:absolute;
+	top:95px;
+	left:;
+	line-height:18px;
+}
+.user_form li{height:18px;padding:10px 0;}
+.user_form li label{
+	width:108px;
+	line-height:18px;
+	padding-right:10px;
+	float:left;
+	text-align:right;
+	}
+.user_form li .text_b{width:180px;}
+.user_form li p{display:inline;color:#8e8e8e;}
+.btn_qr{
+	background:url(../images/user/btn_ok_a.png) no-repeat;
+	border:0;
+	width:93px;
+	height:27px;
+	cursor:pointer;
+	color:#fff;
+	font-size:14px;
+	}
+.bg_w .f_c{padding:10px 0;height:27px;}
+
+/*账户充值 begin*/
+.user_rach{
+	width:738px;
+	margin:0 auto;
+	padding-top:12px;
+}
+.con_pay_write,.con_pay_select{
+			background:url(../images/user/con_pay_bg.png) repeat-y;
+			overflow:auto;
+			height:100%;
+			margin-bottom:10px;
+			}
+		.con_pay_write dt{
+			width:46px;
+			float:left;
+			text-align:center;
+			line-height:80px;
+			}
+		.con_pay_write dd{
+			width:691px;
+			float:right;
+			text-align:center;
+			line-height:80px;
+			border:1px solid #d6d6d6;
+			border-left:0;
+			
+		}
+		.con_pay_select dt{
+			width:46px;
+			margin-top:100px;
+			line-height:20px;
+			float:left;
+			text-align:center;
+			}
+		.con_pay_select dd{
+			width:643px;
+			float:right;
+			padding:24px;
+			border:1px solid #d6d6d6;
+			border-left:0;
+			}
+		.con_pay_select dd p{padding:5px 0;}
+		.con_pay_select dd p img{border:1px solid #cfcfcf;}
+		.con_pay_select dd p.p_img img{border:0;}
+/*账户充值  end*/
+/*奖金提现 begin*/
+.tx_t,.tx_b{
+	background:url(../images/user/tx_t.png) no-repeat;
+	height:11px;
+	}
+.tx_b{background-image:url(../images/user/tx_b.png);height:16px;}
+.tx_cont{width:732px;margin:0 auto 10px auto;}
+.tx_bor{
+	padding:10px 25px 0 25px;
+	}
+.tx_cont dl dt{
+	line-height:35px;
+	height:35px;
+	padding:0 10px;
+	text-align:right;
+	color:#fff;
+	background-color:#808080;
+}
+.tx_cont dl dt strong{float:left;font-weight:normal;}
+.tx_cont dl dd{
+	padding:15px 20px 15px 50px;
+	color:#666;
+	border:1px solid #ddd;
+	border-top:0;
+	position:relative;
+	}
+.tx_cont dl dd ul li{
+	width:250px;
+	height:25px;
+	line-height:25px;
+	float:left;
+	}
+.tx_cont dl dd ul li span{
+	width:75px;
+	padding-right:10px;
+	float:left;
+	text-align:right;
+}
+.tx_cont dl dd p{
+	line-height:19px;
+	padding:5px 0;
+}
+.tx_cont dl dd p label{
+	width:185px;
+	padding-right:10px;
+	float:left;
+	text-align:right;
+	color:#000;
+}
+.tx_info{
+	border:1px solid #f0e4c0;
+	background-color:#fff8d6;
+	padding:0 10px;
+	width:712px;
+	margin:0 auto;
+	}
+.tx_info p{
+	background:url(../images/user/tan.png) no-repeat left 15px;
+	padding:10px 0 10px 25px;
+	line-height:23px;
+	}
+.tx_bor_r{
+	border-right:1px solid #d6d6d6;
+	position:absolute;
+	top:0;
+	left:0;
+	width:40px;
+	text-align:center;
+	padding-top:44px;
+	height:64px;
+	}
+.tx_bor .tx_user{ position:relative;}
+.tx_bor .tx_user p label{width:100px;}
+.tx_user_text{
+	position:absolute;
+	top:72px;
+	left:440px;
+}
+/*奖金提现 end*/
+
+/* 20101126 wangli add admin right */
+.user_main1{
+	margin:0 auto;
+	margin-left:5px; margin-right:5px;
+	padding-bottom:3px;
+	}
+.user_bor1{
+	margin:0 auto;
+	margin-left:5px; margin-right:5px;
+	background-color:#e5e5e5;
+	padding:10px;
+	}
+.bg_w1 table{
+	border-collapse:collapse;
+	width:100%;
+	text-align:center;
+	background:#FFFFFF;
+	}
+.bg_w1 table tr {line-height:26px;}
+.bg_w1 table tr th{
+	background:#a6a6a6;
+	color:#fff;
+	font-weight:normal;
+	}
+.bg_w1 table tr td{border-bottom:1px dashed #ccc;}
+.select_size{ width:100px;}
+
+
+
+
+
+

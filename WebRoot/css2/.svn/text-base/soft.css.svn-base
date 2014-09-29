@@ -1,0 +1,63 @@
+.sfcontainer {
+	width: 1024px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+}
+
+.softlist {
+	width: 650px;
+	float: left;
+}
+
+.soft {
+	margin-top:20px;
+	width: 650px;
+}
+.soft_logo_download {
+	height: 300px;
+	width: 260px;
+	float: none;
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+}
+.soft_logo {
+	height: 230px;
+	width: 260px;
+}
+
+.soft_download {
+	height: 40px;
+	width: 150px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5px;
+	background-image: url(../images/freedown.JPG);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.soft_desc {
+	height: 300px;
+	width: 600px;
+	float: left;
+	margin-left: 5px;
+	border: thin solid #FFCCFF; 
+}
+.soft_general {
+	border: medium groove #FFCC66;
+}
+.zhongjiang {
+	width: 350px;
+	border: thick double #FF0000;
+	float: left;
+	overflow: hidden;
+}
+.zjtitle {
+	font-family: "ÐÂËÎÌå";
+	font-size: 14px;
+	text-decoration: underline;
+	color: #FF0000;
+}

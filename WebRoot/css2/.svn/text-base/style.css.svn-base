@@ -1,0 +1,137 @@
+*{
+	margin:0;
+	padding:0;
+}
+
+div.nifty {
+	margin: 0;
+	background:#fff;
+	margin-top:16px;
+}
+p {
+	padding:10px
+}
+
+div.rtop, div.rbottom{
+	display:block;
+	background: #FFF;
+}
+div.rtop div, div.rbottom div{
+	display:block;
+	height: 1px;
+	overflow: hidden;
+	background: #ccc
+}
+div.r1 {
+	margin: 0 5px
+}
+div.r2 {
+	margin: 0 3px
+}
+div.r3 {
+	margin: 0 2px
+}
+div.rtop div.r4, div.rbottom div.r4 {
+	margin: 0 1px;
+	height: 2px
+}
+.whole-box {
+	width:996px; 
+	height:auto;
+	margin:0 auto;
+}
+.shuangseqiusoft { 
+    width:994px;
+	height:auto;
+	border:1px solid #ccc;
+}
+.topTitle {
+	width:974px;
+	height:40px;
+	border-bottom:3px solid #8f0303;
+	background:#fae9d6;
+	padding-top:16px;
+	padding-left:20px;
+}
+.topTitle span {
+	padding:5px;
+	font-size:14px;
+	font-weight:bold;
+	color:white;
+	background:#900;
+	border:3px double #fff;
+}
+.gongju-name {
+	font-size:12px;
+	padding:8px 10px;
+}
+.gongjuinfo {
+	width:800px;
+	height:auto;
+	margin:0 auto;
+	margin-top:10px;
+	border:1px double #ccc;
+	font-size:12px;
+	line-height:1.6;
+}
+.area-of-use {
+	width:920px;
+	height:auto;
+	margin:0 auto;
+	margin-top:15px;
+	margin-bottom:10px;
+	border:1px #ccc solid;
+}
+.use-title {
+	width:905px;
+	height:30px;
+	border-bottom:1px solid #E1E1E1;
+	background:#FFC;
+	line-height:2;
+	font-size:14px;
+	font-weight:bold;
+	color:#F66;
+	padding-left:15px;
+}
+.use-title .select1 {
+	margin-left:10px;
+}
+.Notable { 
+    margin-top:15px;
+	font-size:13px;
+}
+
+.gongjubottom {
+	width:900px;
+	height:auto;
+	margin:0 auto;
+	margin-top:10px;
+	margin-bottom:10px;
+	font-size:12px;
+	line-height:2;
+}
+.gongjubottom .span {
+	margin-left:120px;
+	font-size:13px;
+}
+.gongjubottom .span a {
+	color:red;
+}
+.gongjubottom .span1 {
+	margin-left:120px;
+	background:#690;
+	padding:5px;
+	font-size:13px;
+	font-weight:bold;
+	color:white;
+	border:3px double #fff;
+}
+.gongjubottom .span2 {
+	margin-left:15px;
+	background:#36f;
+	padding:5px;
+	font-size:13px;
+	font-weight:bold;
+	color:white;
+	border:3px double #fff;
+}

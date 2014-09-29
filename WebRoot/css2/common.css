@@ -1,0 +1,153 @@
+@CHARSET "UTF-8"
+
+body{
+	margin:0;
+	padding:0;
+}
+
+/** �������߾� **/
+h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements �ṹԪ�� */
+dl, dt, dd, ul, ol, li, /* list elements �б�Ԫ�� */
+pre, /* text formatting elements �ı���ʽԪ�� */
+form, fieldset, legend, button, input, textarea, /* form elements �?Ԫ�� */
+th, td /* table elements ���Ԫ�� */ {
+	margin: 0;
+	padding: 0;
+}
+
+
+img, input, select {
+    vertical-align: middle;
+}
+
+/**/
+body, button, input, select, textarea /* for ie */ {
+	font: 12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+address, cite, dfn, em, var { font-style: normal; } /* ��б����� */
+code, kbd, pre, samp { font-family: courier new, courier, monospace; } /* ͳһ�ȿ����� */
+small { font-size: 12px; } /* С�� 12px �����ĺ����Ķc��� small ��
+
+/**/
+ul, ol { list-style: none; }
+
+.clear {clear: both;}
+.hidden {display: none;}
+
+/**/
+a:link ,a:visited, a:hover, a:active { 
+	text-decoration: none; 
+} 
+
+/*通用颜色设置*/
+.red{color:red;}
+.blue{color:blue;}
+.green{color:green;}
+.gray {color:gray;}
+
+.container {
+	width: 986px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+	text-align:center;
+}
+
+/* head */
+.header {
+	width: 986px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+}
+
+.header .header_top {
+	padding: 0px;
+	height: 20px;
+	margin-top:10px;
+	width: 986px;
+}
+
+.header .header_logo{
+	width:986px;
+	margin:10px 0;
+}
+
+.header .header_logo .logo{
+	float:left;
+	width: 150px;
+	height:120px;
+	border: thin solid #FFCCFF;
+}
+
+.header .header_logo .logo-banner{
+	height: 136px;
+	float:left;
+	background-image: url(../images/index/logo-banner.jpg);
+	width: 986px;
+}
+
+.header .menu {
+	float: left;
+	height: 38px;
+	margin-top: 10px;
+	overflow: hidden;
+	width: 986px;
+	background-repeat:no-repeat;
+	background-attachment: scroll;
+	background-position: 0 0;
+	font-size:14px;
+	margin-bottom: 10px;
+	background-color: #FFCCFF;
+	background-image: url(../images/index/main_menu_bk.jpg);
+}
+
+.header .menu ul li {
+    float: left;
+    line-height: 36px;
+    text-align: center;
+    width: 85px;
+	background-repeat:no-repeat;
+	
+}
+
+.header .menu ul li a{
+	color:#FFFFFF;
+}
+
+.header .menu ul li a:hover{
+	color:#000EEE;
+}
+
+
+
+
+.start-groupBUY {
+	width:790px;
+	_width:790px;
+	height:auto;
+	_height:auto;
+	border:2px solid #F90;
+	_border:2px solid #F90;
+	margin-bottom:10px;
+	background:#F0F0EC;
+	line-height:3;
+	padding:20px 0px 20px 0px;
+}
+.start-groupBUY p {
+	padding-left:30px;
+}
+.start-groupBUY span {
+	width:100px;
+	_width:100px;
+	margin-left:10px;
+	padding:2px 10px 2px 10px;
+	line-height:27px;
+	background:#390;
+	font-size:14px;
+	color:white;
+}

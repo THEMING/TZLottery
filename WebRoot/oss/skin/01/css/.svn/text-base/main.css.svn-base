@@ -1,0 +1,118 @@
+HTML {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 12px;PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 100%; PADDING-TOP: 0px;  font-family:Arial; HEIGHT: 100%; BACKGROUND-COLOR: #fff;line-height:18px; color:585858; }
+
+BODY {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 12px;  PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 100%; PADDING-TOP: 0px;  font-family:Arial; HEIGHT: 100%; BACKGROUND-COLOR: #fff; line-height:18px;color:585858; font-family:"宋体";}
+
+form,ul,ol,dl,dd,h1,h2,h3,h4,h5,h6 {padding:0;margin:0; font-size:12px;font-weight:normal;}
+ul,ol,dl,li {list-style:none;}
+td,select,button,input,textarea {font-size:12px;}
+
+
+.hidden {display:none;}
+img {border:0;}
+a {color:#444444;text-decoration:none;}
+a:hover {color:#BA1313;text-decoration:underline;}
+
+p { margin:1em 0;}
+
+/* 登陆界面 Begin */
+
+#login {
+	width: 736px;
+	height: 338px;
+	background:url(../images/bg_logo.gif) no-repeat;
+	margin:100px auto 0 auto;
+}
+#login .logo {
+background:url(../images/loginbg.jpg) no-repeat;
+ height:736px; 
+ padding:30px 20px 15px 34px;
+}
+#login .dd { float:left; padding-top:245px; padding-left:55px;}
+.hover {font-size:12px;background:#FFF url(../images/textfield.gif) top repeat-x;border:1px solid #EF8510;padding:2px 1px;}
+.focus {font-size:12px;background:#FFF url(../images/textfield.gif) top repeat-x;border:1px solid #FEC501;padding:2px 1px;}
+
+/* 登陆界面 End */
+
+/* 系统管理头部 Begin */
+#header  { height:102px; width:100%; background-image:url(../images/top_x.gif); background-position:bottom; background-repeat:repeat-x;}
+#logo { left: 10px; position: absolute; top:7px;}
+#quickBt { right: 50px; position: absolute; top:15px;}
+#topmenu {left: 100px; position: absolute; top:72px;}
+#topmenu ul { list-style-type:none;}
+#topmenu li { float:left;MARGIN-RIGHT: 1px}
+#topmenu a {width:88px;height:22px; padding-top:4px;text-align:center; float:left; color: #444444;	background-image: url(../images/but_h.jpg);	background-repeat: no-repeat;vertical-align: bottom;}
+#topmenu a:hover { color:#BA1313;}
+#topmenu A.current {width:88px;height:22px; padding-top:4px;text-align:center; float:left; color: #FFF;background-image: url(../images/but_a.jpg);	background-repeat: no-repeat;vertical-align: bottom;}
+
+/* 系统管理头部 End */
+
+/* 系统管理左侧导航 Begin */
+.blockBav {
+padding:10px 0 15px 22px; color:#6C6C6C;width:177;height:18px;background-image:url(../images/left_bg.gif);background-repeat:no-repeat;height:18px;font-size:14px;font-weight:bold;background-position: left;
+}
+.navTitle { padding:0 0 0 22px; color:#6C6C6C;width:177;height:18px;background-image:url(../images/left_bg.gif);background-repeat:no-repeat;height:18px;font-size:14px;font-weight:bold;background-position: left;
+}
+.navLeft { no-repeat left top;left: 0px; position: absolute; top:17px; width:159px;}
+
+.menu{ background-position:top; width:159px;clear:both; padding:10px 0 0 20px;}
+.menu ul {}
+.menu li { display:table;line-height:26px;}
+
+/* 系统管理左侧导航 End */
+
+/* 系统管理右侧操作区 Begin */
+
+#edit {overflow: scroll;width:100%;height:100%;position:fixed;background:url(../images/tableBg_left.gif) no-repeat left top;}
+#edit .table_all{ width:94%;}
+.table_all tr td{height:22px;line-height:22px;}
+#edit .table_all_lable{ width:96%;}
+#edit .table_all_lable_padding0{ width:100%;}
+#edit .title{background-position:left; font-size:14px; font-weight:bold; padding-left:7px; }
+#edit .operation { background-image:url(../images/icon2.gif); background-repeat:no-repeat; background-position:left 17px; padding:15px 10px 3px 16px;}
+#edit .red_xx{ background-image:url(../images/red_xx.gif); background-repeat:repeat-x; background-position:bottom; height:34px;}
+#edit .red_footx{ background-image:url(../images/red_xx.gif); background-repeat:repeat-x; background-position:top; height:34px;}
+#edit .search{ background-color:#f5f5f5; height:26px;}
+#edit .table {background:#D5D5D5;color:#585858;}
+#edit .redbold { color:#CC0000; font-weight:bold;height:28px; text-align:center; background-image:url(../images/title_bg.gif); background-repeat:repeat-x;}
+#edit .table th { font-size:12px; font-weight:bold; padding:3px;}
+#edit .table td  { height:22px; padding:3px; }
+#edit .table00 td  { height:22px; padding:0px; }
+#edit .td_bg { background:#fff;}
+#edit .button{height:21px;color:#FFFFFF;text-align:center;font-weight:bold;	background-image: url(../images/butbg.png);background-repeat: no-repeat;width: 60px;padding-top:4px;padding-bottom: 1px;	border-top-style: none;	border-right-style: none;border-bottom-style: none;	border-left-style: none;border-top-width: 0px;	border-right-width: 0px;border-bottom-width: 0px;	border-left-width: 0px;}
+#edit .button1{height:21px;color:#FFFFFF;text-align:center;font-weight:bold;	background-image: url(../images/butbg1.png);background-repeat: no-repeat;width: 60px;padding-top:4px;padding-bottom: 1px;	border-top-style: none;	border-right-style: none;border-bottom-style: none;	border-left-style: none;border-top-width: 0px;	border-right-width: 0px;border-bottom-width: 0px;	border-left-width: 0px;}
+#edit .hui { color:#363636;}
+#edit .red { color:#A10000;}
+#edit .red a { color:#A10000;}
+#edit .red a:hover { color:#585858;}
+#edit .green { color:#009900;}
+#edit .green a { color:#009900;}
+#edit .green a:hover { color:#00cc00;}
+
+#edit .blue { color:#00309D;}
+#edit .blue a { color:#00309D;}
+#edit .blue a:hover { color:#585858;}
+
+.ss {
+	color: #BA1313;
+	background: #FFEEC1;
+}
+/* 系统管理右侧操作区 End */
+
+
+.input_search_bt{border: 0px solid;background:url(../images/search.gif);width:34px; height:20px;}
+.input_page_bt{border: 0px solid;background:url(../images/pagebt.gif);width:52px; height:20px;}
+.input_date{font-size:12px;background:url(../images/textfield_date.gif) top no-repeat;border:1px solid #A6A6A6;padding:2px 1px;}
+
+/*排序 Begin*/
+.input_px {border:0; text-align:center;font-size:12px;}
+.hover_px {font-size:12px;text-align:center;background:#FFF url(../images/textfield.gif) top repeat-x;border:1px solid #EF8510;padding:2px 1px;}
+.focus_px {font-size:12px;text-align:center;background:#FFF url(../images/textfield.gif) top repeat-x;border:1px solid #FEC501;padding:2px 1px;}
+/*排序 End*/
+/*头像 begin*/
+.face_list_img ul{clear:both;width:450px;margin:0 auto;}
+.face_list_img ul li{float:left;width:80px;margin:0 6px;text-align:center;}
+.face_list_img ul li img{width:80px;height:80px;padding:1px;border:1px solid #ccc;}
+.face_list_img ul li a{line-height:20px;}
+/*头像 end*/

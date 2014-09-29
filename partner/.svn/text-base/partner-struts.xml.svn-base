@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "struts-2.1.7.dtd">
+<struts>
+	<package name="partnerstruts-default" extends="default">
+		<interceptors>
+			<interceptor name="partnerLoginInteceptor"
+				class="com.xsc.lottery.interceptor.partner.PartnerLoginInterceptor">
+			</interceptor>
+			<interceptor-stack name="partnerStackInteceptor">
+				<interceptor-ref name="LotteryCompleteStack"/>
+				<interceptor-ref name="partnerLoginInteceptor"/>
+			</interceptor-stack>
+		</interceptors>
+		<global-results>
+			<result name="login">login.jsp</result>
+		</global-results>
+	</package>
+	<package name="partner" extends="partnerstruts-default" namespace="/partner">
+		<action name="index" class="partnerLoginAct">
+			<result>manage.jsp</result>
+		</action>
+		<action name="login" class="partnerLoginAct">
+			<result type="redirect">/partner</result>
+			<result name="password">password.jsp</result>
+		</action>
+		<action name="buyLotteryQuery" class="partnerManageAct">
+			<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result>query.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,216 @@
+@CHARSET "UTF-8"
+
+ul, ol { list-style: none; }
+
+ul li{
+	float:left;
+}
+
+.lottery_main {
+	width: 986px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+}
+
+.left_box {
+	width: 700px;
+	float:left;
+}
+
+.right_box {
+	width: 250px;
+	height: 600px;
+	margin-left: 10px;
+	border: thin solid #FFCCFF;
+	float:left;
+}
+
+.left_box .left_top_box {
+	height: 150px;
+	border: thin solid #FFCCFF;
+}	
+
+.left_box .left_bottom_box {
+	border: thin solid #FFCCFF;
+	margin-top: 10px;
+	text-align: center;
+}
+
+.lot_box {
+	float: left; 
+	margin: 0px; 
+	width: 678px;
+	display: inline;
+	margin-left:10px;
+}
+
+.lot_box .lot_top ul li{
+	float: left; 
+	background: url(../images/lhc_allbg.gif) -338px -197px no-repeat; 
+	width: 68px; 
+	height: 26px; 
+	margin-right: 2px; 
+	text-align: center; 
+	line-height: 26px; 
+	color: #7F2D00; 
+	cursor: pointer;  
+	position: relative; 
+	top: 1px;
+}
+
+.lot_box .lot_top ul li.on {
+	font-weight: bold; 
+	background:url(../images/lhc_allbg.gif) -261px -197px no-repeat; 
+	height: 27px; 
+}
+
+.lot_box .lot_main {
+	border: 1px #FFCCFF solid;
+	background: #FFFFFF; 
+	padding: 10px; 
+}
+
+.lot_box .lot_main ul {
+	 padding: 0px; 
+	 margin: 10px;
+}
+/* */
+
+.red_ball_true,
+.blue_ball_false, 
+.blue_ball_true, 
+.red_ball_false, 
+.org_ball {
+	width:35px;
+	height:35px;
+	text-align:center;
+	font:14px/35px Arial;
+	cursor:pointer;
+	color:#fff;
+	background:url(../images/lottery/ball.png) no-repeat 0 0;
+}
+
+.blue_ball_true {background-position:0 -91px;}
+
+.red_ball_false, 
+.blue_ball_false {
+	color:#757575;
+	background-position:0 -46px;
+}
+
+.org_ball{background-position:0 -160px;}
+
+.standard_red_area_top {
+	width:410px;
+	float:left;
+	color: #FF0000;
+	text-align: center;
+	height: 20px;
+}
+
+.standard_blue_area_top {
+	width:235px;
+	float:left;
+	margin-left: 10px;
+	color: #0000FF;
+	text-align: center;
+	height: 20px;
+}
+
+.standard_red_area {
+	width:375px;
+	float:left;
+}
+
+.watchout {
+	width:650px;
+	float:left;
+	text-align: center;
+	margin_top: 20px;
+	margin_bottom: 20px;
+}
+.machine_help {
+	margin-top: 40px;
+}
+
+.standard_blue_area {
+	width:235px;
+	float:left;
+	margin-left: 10px;
+}
+
+.list_box {
+	margin-bottom: 15px;
+}
+
+.lottery_list {
+	width:450px;
+	height:90px;
+	overflow-y:scroll;
+	padding:2px;
+	background: #fffffe url(../images/text_bg.png) repeat-x bottom fixed;
+	border:1px solid #aeb1b6;
+	margin-bottom:6px;
+	float: left;
+}
+
+.betfont_red{color:#f00;}
+.betfont_blue{color:#2073fc;}
+
+.betfont_black{
+	background-color:#FFFFFF;
+	color:#0099FF;
+}
+
+.lottery_list ul li {
+		
+	line-height:20px;
+	border-bottom:1px dashed #c2c2c2;
+}
+
+.lottery_list ul li span {
+	margin: 0 10px;
+	cursor: pointer;
+}
+
+.uploadfile_box {
+	
+}
+.lot_bet_type_box {
+	margin-top:5px;
+	margin-bottom:5px;
+	padding:10px;
+	height: 150px;
+	border: thin solid #FFCCFF;
+	text-align: left;
+	background-color:#FFEEFF;
+}
+.chase_table_box {
+	width:640px;
+	height:120px;
+	overflow-y:scroll;
+	padding:2px;
+	border:1px solid #aeb1b6;
+	margin-bottom:10px;
+	margin-top:10px;
+	float: left;
+}
+.lauch_table {
+	width: 100%;
+}
+
+.lauch_table td {
+	border-bottom: 1px #CCCCFF solid;
+}
+
+.lauch_table .right {
+	text-align: right;
+}
+.select-list {
+	height:132px;
+	width: 400px;
+}
+/* CSS Document */
+

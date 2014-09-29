@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,td,img,div,th{
+	border:0;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0; 	
+	margin-left: 0px;
+	padding: 0; 
+	float: none;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif, 'Microsoft Sans Serif';
+}
+
+.* { margin:0px; padding:0px;}
+ul,ol{
+	font-size: 12px;
+	list-style-type: none;
+	color:#666;
+	
+}
+
+li {list-style-type:none;}
+h1 {text-align:left; font-family:"Trebuchet MS", Arial, Helvetica, sans-serif, 'Microsoft Sans Serif';color:#960000; font-size:14px; font-weight:bold;}
+h2 { font-family:"Trebuchet MS", Arial, Helvetica, sans-serif, 'Microsoft Sans Serif'; color:#960000; font-size:14px; font-weight:bold;}	
+
+.spanlan { color:#36c;}
+
+body {
+	font-size:12px;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif, 'Microsoft Sans Serif';
+	background:#fff;
+}
+
+.red{color:red;}
+.blue{color:blue;}
+.green{color:green;}
+.gray {color:gray;}
+.lightgray {color:#eeeeee;}
+
+A:link { COLOR:#666; TEXT-DECORATION: none; }
+A:visited { COLOR:#666; TEXT-DECORATION: none; }
+A:active { COLOR:#f30; TEXT-DECORATION: none; }
+A:hover { color:#f30; TEXT-DECORATION: underline; }
+
+.clear { clear:both; _height: 0px; +height: 0px; _overflow: hidden; height:0px; margin:0; padding:0; width:0; border:none; }
+
+.shortenTitle {    
+	width:200px;    
+	white-space:nowrap;    
+	word-break:keep-all;    
+	overflow:hidden;    
+	text-overflow:ellipsis;   
+} 

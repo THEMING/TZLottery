@@ -1,0 +1,63 @@
+@CHARSET "UTF-8"
+
+body{
+	margin:0;
+	padding:0;
+}
+
+/** �������߾� **/
+h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements �ṹԪ�� */
+ul, ol, li, /* list elements �б�Ԫ�� */
+pre, /* text formatting elements �ı���ʽԪ�� */
+form, fieldset, legend, button, input, textarea, /* form elements �?Ԫ�� */
+th, td /* table elements ���Ԫ�� */ {
+	margin: 0;
+	padding: 0;
+	font-weight:100;
+}
+table { 
+table-layout: fixed;
+word-wrap:break-word;
+}
+
+img, input, select {
+    vertical-align: middle;
+}
+
+/**/
+body, button, input, select, textarea /* for ie */ {
+	font: 12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+address, cite, dfn, em, var { font-style: normal; } /* ��б����� */
+code, kbd, pre, samp { font-family: courier new, courier, monospace; } /* ͳһ�ȿ����� */
+small { font-size: 12px; } /* С�� 12px �����ĺ����Ķc��� small ��
+
+/**/
+ul, ol { list-style: none; }
+
+.clear {clear: both;}
+.hidden {display: none;}
+
+/**/
+a:link ,a:visited, a:hover, a:active { 
+	text-decoration: none; 
+} 
+
+/*通用颜色设置*/
+.red{color:red;}
+.blue{color:blue;}
+.green{color:green;}
+.gray {color:gray;}
+
+.container {
+	width: 986px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+}
+
+
+

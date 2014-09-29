@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="TZLottery">
+        <wb-resource deploy-path="/" source-path="/WebRoot"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/core"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/client"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/otherAPI"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/admin"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/Test"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/partner"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/activity"/>
+        <property name="context-root" value="/"/>
+        <property name="java-output-path" value="/TZLottery/WebRoot/WEB-INF/classes"/>
+    </wb-module>
+</project-modules>

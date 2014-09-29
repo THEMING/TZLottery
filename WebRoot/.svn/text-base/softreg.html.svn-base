@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>软件注册协议-一彩票</title>
+	<link href="./css/default.css" type="text/css" rel="stylesheet" />
+	<link href="./css/css.css" type="text/css" rel="stylesheet" />
+	<link href="./css/agreement.css" type="text/css" rel="stylesheet" />
+    <link rel="shortcut icon" href="chart/favicon.ico" /> 
+</head>
+<body>
+
+<!-- Web Top  start-->
+<div class="topBg">
+	<div class="outer">
+		<div class="Welcome">
+			<ul>
+				<li>您好，欢迎来到一彩票票网！</li>
+				<li><a href="/customer/" >请登录</a></li>
+				<li><a href="/register.htm" >免费注册</a></li>
+			</ul>
+		</div>
+		<div class="WebFunction">
+			<ul>
+				<li><a href="/help/">帮助中心</a></li>
+				<li><a href="#" style="cursor: pointer" onclick="window.external.AddFavorite('www.369cai.com','')">加入收藏</a>&nbsp;|</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!--Web Top end-->
+<div class="clear"></div>
+<!--Web Header start-->
+<div class="outer">
+	<div class="headerLogo"><img src="/images/img/headerLogo.png" alt="369Logo" /></div>
+	<div class="headerAdd"><img src="/images/img/headeradd.jpg" width="800" height="47" /></div>
+</div>
+<!--Web Header end-->
+<div class="clear"></div>
+<!--Web Nav start-->
+<div class="navBg">
+	<div class="outer">
+		<ul id="ul">
+			<li ><a href="/">首页</a></li>
+			<li ><a href="/customer/">用户中心</a></li>
+			<li ><a href="/groupbuy/">合买中心</a></li>
+			<li class="navCurrentBg" ><a href="/software/">缩水软件</a></li>
+			<li ><a href="/lotteryInfo/">彩票资讯</a></li>
+			<li ><a href="/prizedetail/">开奖数据</a></li>
+			<li ><a href="/help/">帮助中心</a></li>
+            <li ><a href="/about-us/">关于我们</a></li>
+		</ul>
+	</div>
+</div>
+<!--Web Nav end-->
+
+<div class="clear"></div>
+<!--Web Body start-->
+<div class="outer">
+  	<!--新手入门一 start-->
+  <div class="agreement_bg" style="display:block; margin-left:50px; margin-top:0px">
+    	<div class="agreement_answer"></div>
+    	<div class="agreement_con_titile">软件注册方法</div>
+        <div class="agreement_con">
+			<p>软件无须注册即可使用基本功能，如需使用高级功能则需注册，只需注册一彩票账号并充值50元彩金即可免费获得注册码，您充值的50元彩金可用来购买等值彩票。。</p>
+			<br />
+			<p>注册一彩票网站账号后并充值50元彩金，进入用户中心后，进入软件注册菜单，输入机器码并选择相应软件种类即可免费获得注册码。</p>
+			<br />
+			<p>原玩玩软件老用户可免费升级，具体可联系QQ 2432882152，并提供原机器码注册码即可。</p>
+			<br />
+			<br />
+			<br />
+			<p style="text-align:right;">北京比特太奇科技有限公司</p>
+        </div>
+    </div>
+  	<!--新手入门一 end-->
+</div>
+<!--Web Body end-->
+<div class="clear"></div>
+<div class="foot_box">
+		<div class="foot_partner_box">
+			<div></div>	      
+	    	<span class="partner"><img src="/images/yidong.gif" width="111" height="50" /></span>
+	    	<span class="partner"><img src="/images/55tuan.JPG" width="109" height="50" /></span>
+      		<span class="partner"><img src="/images/dianxin.gif" width="111" height="50" /></span>
+	  		<span class="partner"><img src="/images/jianshe.JPG" width="111" height="50" /></span>
+		  	<span class="partner"><img src="/images/zhifubao.gif" width="111" height="50" /></span>
+	  		<span class="partner"><img src="/images/kuaiqian.JPG" width="111" height="51" /></span>
+	    </div>
+        <div class="clear"></div>
+	  	<div class="foot_copyright_box">
+        <div class="clear"></div>
+	  		<p>COPYRIGHT 2010-2011 一彩票 ALL RIGHT RESERVED</p>
+            <div class="clear"></div>
+	  		<p>客服电话 010-56203469 客服QQ1 2432882152 QQ2 939366394 客服邮箱 support@369cai.com ICP许可：京ICP 备05022195号</p>
+          <div class="clear"></div>
+	  		<p>郑重提示：彩票有风险，投资需谨慎，不向未满18周岁的青少年出售彩票</p>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+@CHARSET "UTF-8";
+
+ .choose_lotterys {
+	Z-INDEX: 1000; POSITION: relative; FLOAT: left;
+}
+ .choose_lotterys .choose_lottery_btn {
+	COLOR: #7f2d00;
+	CURSOR: pointer; BACKGROUND: url(/img/header_bg.gif) no-repeat -198px -38px; 
+}
+
+.choose_lotterys .choose_lottery_btn .num {
+	COLOR:#ffffff; FONT-SIZE: 12px
+}
+.choose_lotterys .btn_index {
+	BACKGROUND: url(/img/header_bg.gif) no-repeat 0px -38px
+}
+.choose_lotterys .lottery_panel {
+	Z-INDEX: 999; BORDER-BOTTOM: #c40e09 1px solid; POSITION: absolute; BORDER-LEFT: #c40e09 1px solid; WIDTH: 194px; BACKGROUND: #fff6ee; BORDER-TOP: #c40e09 1px; TOP: 36px; BORDER-RIGHT: #c40e09 1px solid; LEFT: 0px
+}
+
+.lottery_panel	{
+	BORDER-BOTTOM: #0000FF 1px solid; PADDING-BOTTOM: 5px; MARGIN-TOP: 7px;
+		
+}
+
+.lottery_panel ul li a{
+	color:#000000;
+}
+.lottery_panel LI.last {
+	BORDER-BOTTOM-STYLE: none
+}
+.lottery_panel .lot_left {
+	TEXT-ALIGN: center; WIDTH: 45px; DISPLAY: inline; FLOAT: left; COLOR: #7f2d00; FONT-WEIGHT: bold; PADDING-TOP: 27px
+}
+.lottery_panel .lot_logo_1 {
+	BACKGROUND: url(/img/lottery_logo_bg.gif) no-repeat
+}
+.lottery_panel .lot_logo_2 {
+	BACKGROUND: url(/img/lottery_logo_bg.gif) no-repeat
+}
+.lottery_panel .lot_logo_3 {
+	BACKGROUND: url(/img/lottery_logo_bg.gif) no-repeat
+}
+.lottery_panel .lot_logo_4 {
+	BACKGROUND: url(/img/lottery_logo_bg.gif) no-repeat
+}
+.lottery_panel .lot_logo_5 {
+	BACKGROUND: url(/img/lottery_logo_bg.gif) no-repeat
+}
+.lottery_panel .lot_logo_6 {
+	BACKGROUND: url(/img/lottery_logo_bg.gif) no-repeat
+}
+.lottery_panel .lot_logo_1 {
+	BACKGROUND-POSITION: 10px 4px
+}
+.lottery_panel .lot_logo_2 {
+	BACKGROUND-POSITION: 10px -48px
+}
+.lottery_panel .lot_logo_3 {
+	BACKGROUND-POSITION: 10px -100px
+}
+.lottery_panel .lot_logo_4 {
+	BACKGROUND-POSITION: 10px -152px
+}
+.lottery_panel .lot_logo_5 {
+	BACKGROUND-POSITION: 7px -206px
+}
+.lottery_panel .lot_logo_6 {
+	BACKGROUND-POSITION: 7px -270px
+}
+.lottery_panel .lot_right {
+	PADDING-LEFT: 5px; WIDTH: 140px; FLOAT: left
+}
+.lottery_panel .lot_right SPAN {
+	TEXT-ALIGN: left; LINE-HEIGHT: 18px; WIDTH: 70px; DISPLAY: inline; FLOAT: left
+}
+.lottery_panel .lot_right SPAN A {
+	FONT: 12px/1.5 ����, sans-serif; COLOR: #7f2d00
+}
+.lottery_panel .lot_right SPAN A.label {
+	TEXT-ALIGN: center; PADDING-LEFT: 5px; WIDTH: 27px; DISPLAY: inline-block; BACKGROUND: url(/img/label.gif) no-repeat 1px 2px; COLOR: #fff; TEXT-DECORATION: none
+}
+.lottery_panel .lot_right SPAN A.small_label {
+	TEXT-ALIGN: center; PADDING-LEFT: 5px; WIDTH: 14px; DISPLAY: inline-block; BACKGROUND: url(/img/small_label.gif) no-repeat 1px 2px; COLOR: #fff; TEXT-DECORATION: none
+}
+
+
+
+
+
+
+
+
+
+/* lottery_navigate begin */
+
+.choose_lottery_panel {
+	PADDING-BOTTOM: 10px; PADDING-LEFT: 0px; WIDTH: 183px; PADDING-RIGHT: 0px; BACKGROUND:#FFFFFF; PADDING-TOP: 10px; border:2px solid #FF0000;}
+
+.choose_lottery_panel .tit {
+	LINE-HEIGHT: 30px; WIDTH: 173px; MARGIN-BOTTOM: 5px; BACKGROUND: url(/images/prizedetail/detail_bg.gif) no-repeat 0px -64px; HEIGHT: 30px; margin-left:0px; float:left;
+}
+
+.choose_lottery_panel ul li a {
+	color:#000000;
+}
+.choose_lottery_panel_bottom {
+	WIDTH: 196px; BACKGROUND: url(/images/prizedetail/detail_bg.gif) no-repeat 0px -128px; HEIGHT: 9px; OVERFLOW: hidden
+}
+
+.choose_lottery_panel .tit A {
+	PADDING-LEFT: 15px; DISPLAY: block; COLOR: #515151; FONT-WEIGHT: normal; TEXT-DECORATION: none
+}
+.choose_lottery_panel .tit A.ticai {
+	BACKGROUND: url(../images/prizedetail/lottery_logo_bg.gif) no-repeat 10px -97px;
+	color:#000000;
+}
+.choose_lottery_panel .tit A.fucai {
+	BACKGROUND: url(../images/prizedetail/lottery_logo_bg.gif) no-repeat 10px 4px;
+	color:#000000;
+	margin-left:0px;
+}
+.choose_lottery_panel .tit A.zucai {
+	BACKGROUND: url(../images/prizedetail/lottery_logo_bg.gif) no-repeat 10px -145px;
+	color:#000000;
+}
+.choose_lottery_panel .tit A.gaopincai {
+	BACKGROUND: url(../images/prizedetail/lottery_logo_bg.gif) no-repeat 10px -269px;
+	color:#000000;
+}
+.choose_lottery_panel .item LI {
+	BACKGROUND: url(/img/allopenprize/cznav_li_bg.gif) no-repeat center bottom
+}
+.choose_lottery_panel .item LI H1 {
+	LINE-HEIGHT: 33px; PADDING-LEFT: 10px; BACKGROUND: url(/img/allopenprize/cznav_bg.gif) no-repeat 15px -22px; HEIGHT: 35px; FONT-WEIGHT: normal
+}
+.choose_lottery_panel .item LI A {
+	COLOR: #333333
+}
+.choose_lottery_panel .item LI.on H1 {
+	PADDING-LEFT: 45px; BACKGROUND: url(/img/allopenprize/cznav_bg.gif) no-repeat 15px 5px; FONT-WEIGHT: normal
+}
+.choose_lottery_panel .item LI.on A {
+	COLOR: #cc0000
+}
+.choose_lottery_panel .dfc_item LI {
+	BACKGROUND: url(/img/allopenprize/cznav_li_bg.gif) no-repeat center bottom
+}
+.choose_lottery_panel .dfc_item LI H1 {
+	LINE-HEIGHT: 33px; PADDING-LEFT: 45px; BACKGROUND: url(/img/allopenprize/cznav_bg.gif) no-repeat 15px -22px; HEIGHT: 35px; FONT-WEIGHT: normal
+}
+.choose_lottery_panel .dfc_item LI A {
+	COLOR: #333333
+}
+.choose_lottery_panel .dfc_item LI.on H1 {
+	PADDING-LEFT: 45px; BACKGROUND: url(/img/allopenprize/cznav_bg.gif) no-repeat 15px -50px; FONT-WEIGHT: normal
+}
+.choose_lottery_panel .dfc_ul {
+	PADDING-BOTTOM: 10px; PADDING-LEFT: 45px
+}
+.choose_lottery_panel .dfc_ul LI {
+	LINE-HEIGHT: 20px; PADDING-LEFT: 7px; BACKGROUND: url(/img/allopenprize/cznav_bg.gif) no-repeat 0px -80px
+}
+.choose_lottery_panel .dfc_ul LI.on {
+	BACKGROUND: url(/img/allopenprize/cznav_bg.gif) no-repeat 0px -110px
+}
+.choose_lottery_panel .dfc_ul LI.on A {
+	COLOR: #cc0000
+}
+
+.small_img {
+	width: 16px;
+	height: 16px;
+}
+
+/* lottery_navigate  end*/
+

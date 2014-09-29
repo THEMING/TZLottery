@@ -1,0 +1,378 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*left*/
+/*球的种类信息*/
+.lotter_left { float:left; display:inline; width:735px; height:auto; margin-top:15px; display:inline; }
+.ball { float:left; display:inline; width:733px; height:auto; margin-top:15px; border:1px #fbcca5 solid; background:#fff;}
+.ball_img { float:left; display:inline; width:105px; height:100px; margin-top:15px; margin-left:15px;}
+.ball_infor { float:left; display:inline; width:410px; height:100px; margin-top:15px;}
+.ball_infor li { line-height:25px; font-size:14px;}
+.ball_infor li span { color:#d20019;}
+.jiangchi { font-size:16px; font-weight:bold; color:#f60;}
+.ball_time { float:left; display:inline; width:170px; height:100px; margin-top:15px; margin-left:20px;}
+.ball_time li { line-height:25px; font-size:14px; font-weight:bold;}
+.ball_time li span { color:#d20019;}
+.ball_time_bg { width:170px; height:22px; margin-top:10px; background:#000;}
+.ball_arrow { width:170px; height:22px; margin-top:15px; background:url(../images/369caibg/arrow.gif) no-repeat; background-position: 118px 9px; text-align:center; color:#36c; cursor:pointer;}
+.ball_Remind { float:left; display:inline; width:700px; height:auto; margin-top:5px; margin-left:15px; margin-bottom:15px; padding-top:10px; border-top:1px #fbcca5 dashed; display:none;}
+.ball_Remind a{color:#ff0000;}
+.ball_Remind li {line-height:25px; font-size:13px;}
+.ball_Remind li　span { color:#d20019; font-weight:bold; font-size:16px;}
+
+/*玩法选择*/
+.BMTitleBg {float:left; display:inline; width:732px; height:33px; margin-top:10px; border:1px #fbcca5 solid; border-bottom:0px; background:url(../images/369caibg/369cai_51.gif) repeat-x;}
+.BMTitleBg li {float:left; display:inline; width:85px; height:33px; line-height:33px; text-align:center; font-size:14px; cursor:pointer;}
+.BMTitleBg_current {border-right:1px #fbcca5 solid;border-left:1px #fbcca5 solid;background:url(../images/369caibg/369cai_49.gif) repeat-x; color:#960000; font-size:18px; font-weight:bold; display:block;}
+/*玩法、投注和投注操作*/
+.Ball_Method {float:left; display:inline; width:732px; height:auto; border:1px #fbcca5 solid; border-top:0px; background:#fff; display:none;}
+.BM_body {float:left; display:inline; width:732px; height:auto; background:#fff;}
+.BM_select { float:left; display:inline; width:85px; height:220px; border-right:1px #fbcca5 dashed;  background:#fff9df; text-align:center; line-height:220px; font-size:14px;}
+.BM_redarea { float:left; display:inline; width:400px; height:180px; margin-left:10px; border-right:2px #ccc solid;}
+/*红球区*/
+.redarea_title { width:400px; height:30px; line-height:30px; text-align:center; font-size:14px; font-weight:bold; color:#d20019;}
+.redarea_ball { width:400px; height:110px;}
+.redarea_ball_li { float:left; display:inline; width:30px; height:27px; margin-top:3px; margin-left:3px; background:url(../images/369caibg/ball_bg.gif) no-repeat; background-position:-63px center; line-height:27px; text-align:center; color:#414141; font-size:13px; cursor:pointer;}
+.redarea_operat { width:400px; height:35px; margin-top:5px;line-height:35px; }
+.redarea_listbox { float:left; display:inline; margin-top:10px; margin-left:100px;}
+.jixuan_empty { float:left; display:inline; margin-left:10px; margin-top:8px;}
+/*蓝球区*/
+.BM_bluearea { float:left; display:inline; width:215px; height:180px; margin-left:10px;}
+.bluearea_title { width:220px; height:30px; line-height:30px; text-align:center; font-size:14px; font-weight:bold; color:#0af;}
+.bluearea_ball { width:220px; height:110px;}
+.bluearea_ball_li { float:left; display:inline; width:30px; height:27px; margin-top:3px; margin-left:3px; background:url(../images/369caibg/ball_bg.gif) -131px center no-repeat; line-height:27px; text-align:center; color:#414141; font-size:13px; cursor:pointer;}
+.blueball_current {background-position:-96px center; font-weight:bold; color:#fff;}
+.bluearea_operat { width:220px; height:35px; margin-top:5px; line-height:35px; }
+.bluearea_listbox { float:left; display:inline; margin-top:10px; margin-left:20px;}
+/*红球和蓝球汇总*/
+.ball_total { float:left; display:inline; width:645px; height:auto; line-height:30px; text-align:center;}
+.ball_total span { color:#d20019; font-weight:bold; font-size:14px;}
+
+/*单式上传*/
+.only_bg { float:left; display:inline; width:645px; height:auto;}
+.only_fileName { float:left; display:inline; width:73px; height:25px; margin-top:15px; margin-left:15px; line-height:25px; text-align:right;}
+.only_fileInput { float:left; display:inline; width:260px; height:18px; margin-top:16px; margin-left:5px; border:1px #fbcca5 solid; background:#fff; line-height:18px;}
+.only_fileBtn { float:left; display:inline; width:58px; height:25px; margin-top:15px; margin-left:10px;}
+.only_getfiles { float:left; display:inline; width:205px; height:25px; margin-top:15px; margin-left:15px; font-size:13px;}
+.only_getfiles a { color:#36c; text-decoration:underline;}
+.only_Betting_num { float:left; display:inline; width:73px; height:25px; margin-top:10px; margin-left:15px; line-height:25px; text-align:right;}
+.only_Betting_input { float:left; display:inline; width:160px; height:18px; margin-top:10px;margin-left:5px; border:1px #fbcca5 solid; background:#fff; line-height:18px;}
+.only_Multiple { float:left; display:inline; width:42px; height:25px; margin-top:10px; margin-left:15px; line-height:25px; text-align:right;}
+.only_Multiple_input { float:left; display:inline; width:60px; height:18px; margin-top:10px;margin-left:5px; border:1px #fbcca5 solid; background:#fff; line-height:18px;}
+.only_total { float:left; display:inline; width:150px; height:25px; margin-top:10px; margin-left:15px; line-height:25px; color:#414141;}
+.only_total span { color:#d20019; font-weight:bold; font-size:14px;}
+.only_upload { float:left; display:inline; width:620px; height:auto; margin-left:15px; margin-bottom:15px; margin-top:15px; }
+.only_upload li {line-height:20px; font-size:14px;}
+.only_upload li　span { color:#d20019; font-weight:bold; font-size:16px;}
+
+/*投注清单*/
+.Betting_menu { float:left; display:inline; width:733px; height:auto; border-top:2px #fbcca5 solid; background:#fff;}
+.Betting_select { float:left; display:inline; width:85px; height:320px; border-right:1px #fbcca5 dashed;  background:#fff9df; text-align:center; line-height:220px; font-size:14px;}
+.Betting_add_btn_bg { float:left; display:inline; width:640px; height:46px; line-height:30px; text-align:center;}
+.Betting_add_btn-one { float:left; display:inline; width:500px; height:30px; margin-left:100px; margin-top:10px; }
+.Betting_add_btn { float:left; display:inline; width:120px; height:25px; margin-left:255px; margin-top:10px; }
+.Betting_add_btn_input { width:120px; height:25px; margin-top:15px;}
+.Betting_list_tcp {float:left;display:inline;width:490px; margin-left:80px; margin-top:5px; line-height:16px; font-size:14px; text-align: left;}
+.Betting_list { float:left; display:inline; width:490px; height:135px; margin-left:80px; margin-top:10px; line-height:25px; font-size:14px;}
+.Betting_list_area { width:490px; height:135px; border:1px #fbcca5 dashed;}
+.Betting_list_jixuan { float:left; display:inline; width:50px; height:25px; margin-left:10px; margin-top:11px;}
+.Betting_listbox { float:left; display:inline; margin-top:15px; margin-left:180px;}
+.Betting_list_empty { float:left; display:inline; width:77px; height:25px; margin-left:10px; margin-top:11px;}
+/*投注总额*/
+.Betting_total { float:left; display:inline; width:640px; height:40px; line-height:40px; text-align:center;}
+.Betting_total span { color:#d20019; font-weight:bold; font-size:14px;}
+
+/*购买方式*/
+.shop_Method { float:left; display:inline; width:732px; height:33px; border:0; border-top:1px #fbcca5 solid; background:url(../images/369caibg/369cai_51.gif) repeat-x;}
+.shop_Method li {float:left; display:inline; width:auto; height:33px; line-height:33px; text-align:center; font-size:14px;}
+.shop_Method_item { margin-left:15px; margin-top:6px;}
+/*合买设置*/
+.shop_together_bg {float:left; display:inline; width:733px; height:auto; border-bottom:2px #fbcca5 solid; background:#fff;}
+.shop_together { float:left; display:inline; width:85px; height:416px; border-right:1px #fbcca5 dashed;  background:#fff9df; text-align:center; line-height:380px; font-size:14px;}
+.shop_bg { float:left; display:inline; width:640px; height:auto;}
+.shop_name { float:left; display:inline; width:65px; height:25px; margin-top:10px; margin-left:15px; line-height:25px; text-align:right;}
+.shop_name span {color:#d20019;}
+.shop_con{ float:left; display:inline; width:auto; height:25px; margin-top:10px; margin-left:5px; line-height:25px;}
+.shop_input { float:left; display:inline; width:80px; height:18px; margin-top:9px; margin-left:5px; border:1px #fbcca5 solid; line-height:18px;}
+.shop_Public_item { margin-left:15px; margin-top:2px;}
+.shop_Public { float:left; display:inline; width:400px; height:25px; margin-top:10px; margin-left:5px; line-height:25px;}
+.shop_Public li { float:left; display:inline; width:auto;}
+.shop_Scheme { float:left; display:inline; width:490px; height:135px; margin-top:10px; margin-left:85px; border:1px #fbcca5 dashed; line-height:25px; font-size:14px; color:#414141;}
+.shop_Surplus { float:left; display:inline; width:110px; height:25px; margin-top:10px; margin-left:385px; line-height:30px;}
+
+/*追号设置*/
+.append_instr { float:left; display:inline; width:490px; height:25px; margin-top:5px; margin-left:85px; line-height:25px; color:#414141;}
+.append_instr span { color:#d20019;}
+.append_bg  { float:left; display:inline; width:85px; height:260px; border-right:1px #fbcca5 dashed;  background:#fff9df; text-align:center; line-height:260px; font-size:14px;}
+.append_listbox { float:left; display:inline; width:90px; height:25px; margin-left:30px; margin-top:20px;}
+.append_Rules { float:left; display:inline; width:120px; height:25px; margin-left:8px; margin-top:20px; font-size:14px;}
+.append_Rules a { color:#36c;}
+.append_textarea { float:left; display:inline; width:587px; height:135px; margin-left:30px; margin-top:5px; border:1px #fbcca5 dashed; overflow:auto;}
+.append_textarea li { float:left; display:inline; height:25px; line-height:25px;}
+.append_sortNum { float:left; display:inline; width:20px; height:25px; margin-top:4px; margin-left:10px;}
+.append_box { float:left; display:inline; width:20px; height:25px; margin-top:4px; margin-left:2px;}
+.append_period { float:left; display:inline; width:60px; height:25px; margin-top:4px; margin-left:2px;}
+.append_input { float:left; display:inline; width:50px; height:18px; margin-top:2px; margin-left:2px; border:1px #fbcca5 solid; line-height:18px;}
+.append_value { float:left; display:inline; width:110px; height:25px; margin-top:4px; margin-left:2px;}
+.append_total { float:left; display:inline; width:160px; height:25px; margin-top:10px; margin-left:450px;}
+
+/*确认购买*/
+.Purchase_bg { float:left; display:inline; width:85px; height:110px; border-right:1px #fbcca5 dashed;  background:#fff9df; text-align:center; line-height:110px; font-size:14px; }
+.Purchase_total { float:left; display:inline; width:400px; height:auto; margin-top:20px; margin-left:15px;}
+.Purchase_total li { line-height:25px; font-size:14px; color:#414141;}
+.Purchase_total li a { color:#36c;}
+.Purchase_total li span { color:#d20019; font-weight:bold;}
+.Purchase_btn { float:left; display:inline; width:130px; height:45px; margin-top:30px; margin-left:75px;}
+
+/*自动大小按钮*/
+.btn_1 { float:left; display:inline; width:auto; height:25px; background:url(../images/369caibg/369cai_btn1.gif) no-repeat; padding-left:10px; line-height:22px; font-size:12px; color:#000;}
+.btn_2 { float:left; display:inline; width:10px; height:25px; background:url(../images/369caibg/369cai_btn2.gif) no-repeat;}
+.zidingbtn_1 { float:left; margin-top:2px; display:inline; width:118px; height:25px; background:url(../images/index/zidingbtn1.jpg) no-repeat; padding-left:5px; line-height:22px; font-size:12px; color:#000;}
+.zidingbtn_2 { float:left; margin-left:15px; display:inline; width:75px; height:30px;}
+
+/*没选中的球*/
+.ball_up_false { float:left; display:inline; width:30px; height:27px; margin-top:3px; margin-left:3px; background:url(../images/369caibg/ball_bg.gif) no-repeat; background-position:2px center; line-height:27px; text-align:center; color:#414141; font-size:13px; cursor:pointer;}
+/*选中的球*/
+.ball_down_true {background-position:-32px center; font-weight:bold; color:#fff;}
+
+/*右栏*/
+.lotter_right { float:left; display:inline; width:252px; height:auto; margin-top:15px;margin-left:13px;}
+.lot1 { float:left; display:inline; width:250px; height:100px;  border:1px #000 solid;}
+.lot2 { float:left; display:inline; width:250px; height:100px;  border:1px #000 solid;}
+.lot3 { float:left; display:inline; width:250px; height:100px;  border:1px #000 solid;}
+/*开奖历史*/
+.history_top { width:252px; height:7px; margin-top:15px; background:url(../images/369caibg/right_03.jpg) no-repeat;}
+.history_body { width:252px; height:225px; margin-top:0; background:url(../images/369caibg/right_05.jpg) repeat-y;}
+.history_bottom { width:252px; height:7px;  background:url(../images/369caibg/right_07.jpg) no-repeat;}
+.history_title { float:left; display:inline; width:222px; height:25px; margin-top:5px; margin-left:15px; border-bottom:1px #eae0c2 solid; line-height:25px; font-size:14px; font-weight:bold; color:#000;}
+.history_Last { float:left; display:inline; width:222px; height:30px; margin-left:15px; line-height:30px; color:#000;}
+.history_LastNum { float:left; display:inline; width:222px; height:25px; margin-left:15px; line-height:25px;}
+.history_LastNum li { float:left; display:inline; width:27px; height:27px; margin-left:3px; background:url(../images/369caibg/ball_bg.gif) -33px center no-repeat; text-align:center; line-height:27px; color:#fff; font-weight:bold;}
+.history_ball_bg  {float:left; display:inline; width:222px; height:25px; margin-left:15px; line-height:25px;}
+.history_ball_bg li {float:left; display:inline; width:12px; height:27px; margin-left:3px; text-align:center; line-height:27px; color:#d80921; font-size:16px; font-weight:bold;}
+.history_ball_bg2  {float:left; display:inline; width:222px; height:25px; margin-left:15px; line-height:25px;}
+.history_ball_bg2 li {float:left; display:inline; width:24px; height:27px; margin-left:3px; text-align:center; line-height:27px; color:#d80921; font-size:16px; font-weight:bold;}
+.history_preNum { float:left; display:inline; width:222px; height:85px; margin-top:10px; margin-left:15px; padding-top:10px; padding-bottom:10px; border-top:1px #ffd297 solid;}
+.history_preNum li {width:auto; margin-left:5px; line-height:22px; font-size:14px;}
+.history_preNum .black { color:#000;}
+.history_preNum .red { color:#d20019;}
+.history_preNum .blue { color:#36c;}
+.history_more { float:right; width:100px; height:25px; margin-top:5px; margin-right:25px; background:url(../images/369caibg/more_gt.gif) right 10px no-repeat; line-height:25px;}
+.history_more a { color:#000;}
+
+/*统计分析*/
+.Stat { width:250px; height:280px; margin-top:10px; border:1px #fbcca5 solid; background:#fff;}
+.Stat .STitleBg { width:250px; height:29px;  background:url(../images/369caibg/369cai_14.gif) repeat-x;}
+.Stat .STitleBg .STitle { float:left; display:inline; width:120px; height:29px;  padding-left:25px; line-height:29px; background:url(../images/369caibg/redstar.gif) 10px 10px no-repeat; color:#960000; font-size:14px; font-weight:bold;}
+.Stat_softWare { float:left; display:inline; width:230px; height:auto; margin-left:10px; padding-right:10px; line-height:20px;}
+.Stat_softWare_pic {float:left; display:inline; width:60px; height:80px; margin-top:15px; margin-right:10px;}
+.Stat_softWare h3 { margin-top:10px; margin-bottom:10px; font-size:14px; font-weight:bold; color:#d20019;}
+.Stat_btn { float:right; width:102px; height:29px; margin-top:10px; margin-right:25px; display:block; }
+
+/*投注页专家推荐*/
+.RecomTitleBg { width:250px; height:33px; margin-top:10px; border:1px #fbcca5 solid; border-bottom:0px; background:url(../images/369caibg/369cai_51.gif) repeat-x;}
+.RecomTitle { float:left; display:inline; width:190px; height:33px;}
+.RecomTitle li { cursor:pointer;}
+.RecomTitle1 { float:left; display:inline; width:85px; height:33px; border-right:1px #fbcca5 solid; line-height:33px; text-align:center;  color:#666; font-size:14px;}
+.RecomTitle2 { float:left; display:inline; width:85px; height:33px; line-height:33px; text-align:center; color:#666; font-size:14px; }
+/*.RecomMore { float:right; width:48px; height:33px; line-height:33px; color:#960000; font-size:12px;}*/
+
+.Recom_Expert { width:250px; height:240px;  border:1px #fbcca5 solid; border-top:0px; background:#fff; display:none;}
+.Expert_pic { float:left; display:inline; width:60px; height:85px; margin-top:10px; margin-left:15px;}
+.Expert_pic li { line-height:25px; display:block; text-align:center;}
+.Expert_con { float:left; display:inline; width:160px; height:auto; margin-top:10px; margin-left:10px;}
+.Expert_con li { line-height:25px;}
+.Expert_con li span { font-size:14px; font-weight:bold; color:#d20019;}
+
+.RecomCon { width:250px; height:140px; border:1px #fbcca5 solid; border-top:0px; background:#fff; display:none;}
+.RecomCon ul { width:230px; height:130px; margin-left:10px; padding-top:15px;}
+.RecomCon ul li { line-height:25px; list-style-type:disc; list-style-position:inside;}
+.RecomCurrent_bg { background:url(../images/369caibg/369cai_49.gif) repeat-x;color:#960000; font-size:14px; font-weight:bold; display:block;}
+
+/*24小时客服*/
+.hours_24 { width:252px; height:75px; margin-top:10px; }
+
+
+/********七乐彩********/
+
+.qlc_bg { float:left; display:inline; width:510px; height:80px; margin-top:45px; margin-left:65px;}
+.qlc_operat { float:left; display:inline; width:380px; height:35px; margin-top:5px; margin-left:150px; line-height:35px; }
+
+.bluearea_ball { width:220px; height:110px;}
+.bluearea_ball_li { float:left; display:inline; width:30px; height:27px; margin-top:3px; margin-left:3px; background:url(../images/369caibg/ball_bg.gif) -131px center no-repeat; line-height:27px; text-align:center; color:#414141; font-size:13px; cursor:pointer;}
+.blueball_current {background-position:-96px center; font-weight:bold; color:#fff;}
+
+
+/*********大乐透********/
+
+.bigHappy_bet { float:left; display:inline; width:85px; height:160px; border-right:1px #fbcca5 dashed;  background:#fff9df; text-align:center; line-height:160px; font-size:14px;}
+.bigHappy_title { float:left; display:inline; width:640px; height:30px; margin-top:10px; line-height:30px; text-align:center; font-size:14px; font-weight:bold; color:#d20019;}
+.bigHappy_select { float:left; display:inline; width:400px; height:40px; margin-top:20px; margin-left:15px;}
+.bigHappy_all { float:left; display:inline; width:50px; height:26px; margin-top:22px; margin-left:20px; cursor:pointer;}
+.bigHappy_odd { float:left; display:inline; width:35px; height:26px; margin-top:22px; margin-left:10px; cursor:pointer;}
+.bigHappy_even { float:left; display:inline; width:35px; height:26px; margin-top:22px; margin-left:10px; cursor:pointer;}
+.bigHappy_empty { float:left; display:inline; width:50px; height:26px; margin-top:22px; margin-left:10px; cursor:pointer;}
+
+
+/**********排列三*********/
+
+/*直选*/
+.pailie_title { float:left; display:inline; width:640px; height:40px; margin-top:10px; line-height:40px; text-align:center; font-size:14px; font-weight:bold; color:#d20019;}
+.pailie_title li { float:left; display:inline; width:100px; height:25px; margin-left:10px; line-height:25px;}
+.pailie_digit_select { float:left; display:inline; width:640px; height:auto;}
+.pailie_digit { float:left; display:inline; width:70px; height:30px; margin-top:5px; margin-left:15px; font-size:14px; line-height:30px;}
+.pailie_select { float:left; display:inline; width:335px; height:30px; margin-top:5px; margin-left:10px;}
+.pailie_all { float:left; display:inline; width:50px; height:26px; margin-top:5px; margin-left:10px; cursor:pointer;}
+.pailie_odd { float:left; display:inline; width:35px; height:26px; margin-top:5px; margin-left:10px; cursor:pointer;}
+.pailie_even { float:left; display:inline; width:35px; height:26px; margin-top:5px; margin-left:10px; cursor:pointer;}
+.pailie_empty { float:left; display:inline; width:50px; height:26px; margin-top:5px; margin-left:10px; cursor:pointer;}
+
+/*组三*/
+.group_bet { float:left; display:inline; width:85px; height:239px; border-right:1px #fbcca5 dashed;  background:#fff9df; text-align:center; line-height:239px; font-size:14px;}
+.group { float:left; display:inline; width:640px; height:28px; margin-top:10px; font-size:13px; color:#d20019;}
+.group li { float:left; display:inline; width:70px; height:28px; margin-left:15px; line-height:28px; text-align:center; cursor:pointer;}
+.group_li { background:url(../images/369caibg/369cai_33.gif) -204px 5px no-repeat;}
+.group_current { background:url(../images/369caibg/title_bg.gif) -53px 5px no-repeat; color:#fff;}
+.group_bg { float:left; display:inline; width:645px; height:auto; display:none;}
+
+/*包号*/
+.bao_title { float:left; display:inline; width:640px; height:30px; margin-top:10px; line-height:30px; text-align:center; font-size:14px; font-weight:bold; color:#d20019;}
+.bao_select { float:left; display:inline; width:400px; height:40px; margin-top:20px; margin-left:15px;}
+/*和值*/
+.group_num { float:left; display:inline; width:400px; height:100px; margin-top:20px; margin-left:15px;}
+
+
+/***********七星彩***********/
+.qixingcai_select { float:left; display:inline; width:85px; height:357px; border-right:1px #fbcca5 dashed;  background:#fff9df; text-align:center; line-height:337px; font-size:14px;}
+
+/***********足球数字**********/
+.on3 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_3h.png); }
+.off3 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background: url(../images/lottery/sfc_3.png); }
+.on2 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_2h.png); }
+.off2 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background: url(../images/lottery/sfc_2.png); }
+.on1 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_1h.png); }
+.off1 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_1.png); }
+.on0 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_0h.png); }
+.off0 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_0.png); }
+.on31 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_3h.png); }
+.off31 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background: url(../images/lottery/sfc_3.png); }
+.on11 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_1h.png); }
+.off11 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_1.png); }
+.on01 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_0h.png); }
+.off01 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_0.png); }
+.on21 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_2h.png); }
+.off21 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_2.png); }
+.on32 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_3h.png); }
+.off32 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background: url(../images/lottery/sfc_3.png); }
+.on22 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_2h.png); }
+.off22 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background: url(../images/lottery/sfc_2.png); }
+.on12 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_1h.png); }
+.off12 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_1.png); }
+.on02 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_0h.png); }
+.off02 { float:left; display:inline; width:20px; height:20px; margin-left:13px; cursor:pointer; background:url(../images/lottery/sfc_0.png); }
+
+/**********足彩胜负14*************/
+.ZC14_select { float:left; display:inline; width:85px; height:550px; border-right:1px #fbcca5 dashed;  background:#fff9df; text-align:center; line-height:550px; font-size:14px;}
+.ZC14_title { float:left; display:inline; width:632px; height:30px; margin-top:10px; margin-left:8px; border-bottom:1px #fbcca5 solid; background:#f9e0e4;}
+.ZC14_title li { float:left; display:inline; height:30px; line-height:30px; text-align:center; font-size:14px; font-weight:bold; color:#d20019;}
+.space_changci { width:73px;}
+.space_saishi { width:90px; color:#0f3f94;}
+.space_bisaishijian { width:140px; color:#333;}
+.space_duizhen { width:140px; color:#0f3f94;}
+.space_bifen { width:120px;}
+.space_quanbao { width:50px;}
+.ZC14_tr { float:left; display:inline; width:632px; height:auto; margin-left:8px; border-bottom:1px #fff9df dashed; background:#f4f4f4;}
+.ZC14_tr li { float:left; display:inline; height:30px; line-height:30px; text-align:center;}
+.ZC14_tr li span { color:#d20019; font-weight:bold;}
+.bifen { height:23px; margin-left:5px; margin-top:7px; }
+.bifen li { float:left; display:inline; width:20px; height:20px; margin-left:13px; text-align:center;}
+.quanbao { margin-top:5px;}
+
+/************6场全半场************/
+.ZC6_select { float:left; display:inline; width:85px; height:550px; border-right:1px #fbcca5 dashed;  background:#fff9df; text-align:center; line-height:550px; font-size:14px;}
+.ZC6_title { float:left; display:inline; width:632px; height:30px; margin-top:10px; margin-left:8px; border-bottom:1px #fbcca5 solid; background:#f9e0e4;}
+.ZC6_title li { float:left; display:inline; height:30px; line-height:30px; text-align:center; font-size:14px; font-weight:bold; color:#d20019;}
+.ZC6_tr { float:left; display:inline; width:632px; height:auto; margin-left:8px; border-bottom:1px #fff9df dashed; background:#f4f4f4;}
+.ZC6_tr li { float:left; display:inline; height:60px; line-height:60px; text-align:center; }
+.ZC6_changci { width:73px;}
+.ZC6_saishi { width:90px; color:#0f3f94;}
+.ZC6_bisaishijian { width:140px; color:#333;}
+.ZC6_duizhen { width:140px; color:#0f3f94;}
+.ZC6_bifen { width:120px;}
+.ZC6_dz { width:130px; height:60px;}
+.ZC6_dz li { width:130px; height:30px; line-height:30px; text-align:center;color:#0f3f94;}
+.ZC6_bf { width:120px; height:60px;}
+.ZC6_bf1 { float:left; display:inline; width:110px; margin-top:7px; }
+.ZC6_bf1 li{ float:left; display:inline; width:20px; height:20px; margin-left:14px; text-align:center;color:#0f3f94;}
+.ZC6_bf2 { float:left; display:inline; width:110px; margin-top:10px; }
+.ZC6_bf2 li{ float:left; display:inline; width:20px; height:20px; margin-left:14px; text-align:center;color:#0f3f94;}
+.ZC6_quanbao { width:50px;}
+.ZC6_qb { float:left; display:inline; width:50px; height:60px; }
+.ZC6_qb1 { width:50px; height:20px; margin-top:6px;}
+.ZC6_qb2 { width:50px; height:20px; margin-top:12px;}
+
+/************6场全半场************/
+.ZC4_bf1 { float:left; display:inline; width:110px; margin-top:7px; }
+.ZC4_bf1 li{ float:left; display:inline; width:20px; height:20px; margin-left:7px; text-align:center;color:#0f3f94;}
+.ZC4_bf2 { float:left; display:inline; width:110px; margin-top:10px; }
+.ZC4_bf2 li{ float:left; display:inline; width:20px; height:20px; margin-left:7px; text-align:center;color:#0f3f94;}
+
+/************4场进球************/
+.ZC4_select { float:left; display:inline; width:85px; height:400px; border-right:1px #fbcca5 dashed;  background:#fff9df; text-align:center; line-height:400px; font-size:14px;}
+.ZC4_title { float:left; display:inline; width:632px; height:30px; margin-top:10px; margin-left:8px; border-bottom:1px #fbcca5 solid; background:#f9e0e4;}
+.ZC4_title li { float:left; display:inline; height:30px; line-height:30px; text-align:center; font-size:14px; font-weight:bold; color:#d20019;}
+
+/*奇偶行背景*/
+.ZC_tr_odd { background:#faedee;}
+
+/************下拉表单************/
+.select{
+     border-right: #000000 1px solid;
+     border-top: #ffffff 1px solid;
+     font-size: 12px;
+     border-left: #ffffff 1px solid;
+     color:#003366;
+     border-bottom: #000000 1px solid;
+     background-color: #f4f4f4;
+}
+
+/************双色球软件************/
+.shuangseqiuruanjianhoubu {
+	float:left; 
+	display:inline;
+	width:733px;
+	height:230px;
+	margin-top:10px;
+}
+.left-suoshuisoft {
+	float:left;
+	display:inline;
+	width:360px;
+	height:228px;
+	border:1px solid #fbcca5
+}
+.left-suoshuisoft ul li {
+	float:left;
+	display:inline;
+	line-height:1.6;
+	text-indent:0.2em;
+	font-size:13px;
+}
+.linkofdow {
+	float:right;
+	margin-right:20px;
+}
+.right-tongjisoft {
+	float:right;
+	display:inline;
+	width:360px;
+	height:228px;
+	border:1px solid #fbcca5
+}
+.right-tongjisoft ul li {
+	float:left;
+	display:inline;
+	line-height:1.6;
+	text-indent:0.2em;
+	font-size:13px;
+}

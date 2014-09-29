@@ -1,0 +1,33 @@
+1411887045448|-1||debug||com.p6spy.engine.common.P6SpyOptions reloading properties
+2014-09-28 14:50:45:450|-1||info||Using properties file: E:\myeclipe10Workspace\TZLottery\WebRoot\WEB-INF\classes\spy.properties
+2014-09-28 14:50:45:450|-1||info||No value in environment for: getStackTrace, using: false
+2014-09-28 14:50:45:450|-1||info||No value in environment for: getAppender, using: com.p6spy.engine.logging.appender.StdoutLogger
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getAppend, using: true
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getRealDataSource, using: /RealMySqlDS
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getJNDIContextFactory, using: null
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getJNDIContextProviderURL, using: null
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getJNDIContextCustom, using: null
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getRealDataSourceProperties, using: port;3306,serverName;myhost,databaseName;jbossdb,foo;bar
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getFilter, using: false
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getDeregisterDrivers, using: true
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getUsePrefix, using: true
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getExecutionThreshold, using: 0
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getAutoflush, using: true
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getExclude, using: null
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getExcludecategories, using: resultset,info, batch,debug,result
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getInclude, using: null
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getIncludecategories, using: batch,statement,commit, rollback
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getLogfile, using: spy.log
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getRealdriver, using: com.mysql.jdbc.Driver
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getRealdriver2, using: null
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getRealdriver3, using: null
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getSpydriver, using: com.p6spy.engine.spy.P6SpyDriver
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getDateformat, using: yyyy-MM-dd HH:mm:ss:SS
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getDateformatter, using: java.text.SimpleDateFormat@62a10e7a
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getStringmatcher, using: com.p6spy.engine.common.SubstringMatcher
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getStringMatcherEngine, using: com.p6spy.engine.common.SubstringMatcher@5a2445d7
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getStackTraceClass, using: 
+2014-09-28 14:50:45:451|-1||info||No value in environment for: getSQLExpression, using: null
+2014-09-28 14:50:45:452|-1||info||No value in environment for: getReloadProperties, using: false
+2014-09-28 14:50:45:452|-1||info||No value in environment for: getReloadPropertiesInterval, using: 60
+2014-09-28 14:50:45:452|-1||info||No value in environment for: getRealDataSourceClass, using: com.mysql.jdbc.jdbc2.optional.MysqlDataSource

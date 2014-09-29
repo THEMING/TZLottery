@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "struts-2.1.7.dtd">
+<struts>
+	<package name="活动中心" extends="adminstruts-default" namespace="/oss/active">
+		<action name="activitiesMng" class="activity.activityManager">
+			<result name="success">active_list.jsp</result>
+			<result name="edit">active_edit.jsp</result>
+			<result name="save">active_edit.jsp</result>
+		</action>
+		
+		<action name="activityDetailMng" class="activity.activityDetailManager">
+			<result name="success">active_detail_list.jsp</result>
+		</action>
+	</package>
+</struts>

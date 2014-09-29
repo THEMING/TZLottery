@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>优惠活动</title>
+<link rel="stylesheet" href="css/huodong.css">
+<link rel="shortcut icon" href="chart/favicon.ico" type="image/x-icon"  /> 
+</head>
+
+<body>
+<div id="zhongjiang-whole">
+    <div class="ql-title">
+	    <div class="ql-SHANG">
+           上一彩票，好运滚滚来！
+        </div>
+        <div class="ql-LOGIN">
+            <A href="/register.htm">免费注册</A>  &nbsp; &nbsp;<A href="/help">帮助中心</A>
+        </div>  
+  </div>
+    <div class="ql-banner">
+        <div class="ql-Btn">
+            <div class="ql-lBtn">
+                <a href="http://www.369cai.com"><img src="images/huodong/button_09.png"></a> &nbsp;<a href="/register.htm"><img src="images/huodong/button_06.png"></a>
+            </div>
+        </div>
+    </div>
+	<div class="clear"></div>
+	<div class="ql-Datu">
+	<div class="clear"></div>   
+	</div>
+    <div class="ql-Big">
+        <div class="ql-left">
+		  <div class="ql-Aleft">
+			   <strong>活动时间：</strong><br>    
+					<a href="#">截止2011年12月31日前</a><br>
+			   <strong>活动内容：</strong><br>  
+					<a href="#"> (1)注册用户首次购彩，一彩票送您5元彩金，保您开门红！</a><br>
+					<a href="#">(2)如购彩已经中奖不再赠送，如未中奖开奖后即日返还5元彩金到用户账号！</a><br>
+					<a href="#">(3)首次发起合买适应本活动，参与合买不适应本活动!</a><br>
+		  </div>
+		  <div class="ql-Bleft">
+			   <strong>活动时间：</strong><br>    
+					<a href="#">截止2011年12月31日前</a><br>
+			   <strong>活动内容：</strong><br>  
+					<a href="#">(1)活动期间凡单一方案中奖满1000元,即加奖100元，满2000元，即可加奖200元！</a><br>
+					<a href="#">(2)多中多加，加奖金额最高可达1000元！</a><br>
+					<a href="#">(3)加奖仅可用于购彩。</a><br>
+		  </div>
+          <div class="ql-Bbottom">
+			   <p><strong>活动时间：</strong><br>    
+			     <a href="#">截止2011年12月31日前</a><br>
+			          <strong>活动内容：</strong><br>  
+			     <a href="#">(1)充值满50元，即可获得软件注册！</a><br>
+	        <a href="#">(2)多款软件均可参加活动，如双色球缩水过滤专家，足彩叠加过滤专家等！</a></p>
+			   <p><a href="#">(3)超强功能，缩水过滤，帮您省钱中大奖，多位百万大奖用户实证！</a><br>
+			     <a href="#"></a><br>
+	                </p>
+          </div>
+		</div>
+        <div class="ql-right">
+            <div class="ql-l1">
+               <a href="/register.htm">
+               简单信息填写，30秒<br>
+               成为本站会员
+               </a>
+        </div> 
+            <div class="ql-l2">
+               <a href="/register.htm">多种充值渠道：支付<br />
+               宝，银行卡</a>
+          </div> 
+            <div class="ql-l2">
+               <a href="/register.htm">彩种全面，追号、合买<br />
+               定制跟单玩儿法更多</a>
+            </div> 
+            <div class="ql-l2">
+               <a href="/register.htm">
+              提现24小时内到账，绑<br>
+                定银行卡资金更安全
+               </a>
+            </div> 
+      </div>  
+</div>
+    
+	  	<div class="foot_copyright_box">
+			<p align="center">COPYRIGHT 2002-2011 369cai ALL RIGHT RESERVED&nbsp;&nbsp;</p>
+			<p align="center">版权所有©北京比特太奇科技有限公司&nbsp;&nbsp;
+			ICP许可：京ICP 备05022195 著作权声明 隐私保护</p>
+			<p align="center">郑重提示：彩票有风险，投资需谨慎，不向未满18周岁的青少年出售彩票</p>
+		</div>     
+</div>
+  
+
+
+</div>
+</body>
+</html>

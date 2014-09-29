@@ -1,0 +1,49 @@
+@charset "utf-8";
+
+
+.container {
+	width: 986px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+}
+
+.left{display:block; width:705px; float:left; border:1px solid #fbcca6;}
+.layout1{background:url(../images/lotteryInfo/beijing_03.gif) no-repeat center center; width:705px; height:30px; float:left; display:block;}
+.layout2{display:block; width:705px; float:left; margin-top:10px;}
+.layout3{display:block; float:left;}
+.layout3_1{display:block; float:left; margin-left:20px;}
+.layout4{display:block; width:711px; float:left;}
+.layout4 table tr td .infotiyao {
+	display:block;
+	border:2px solid #DDD;
+	margin:0 auto;
+	width:600px;
+	height:100px;
+	padding:9px;
+	line-height:1.8;
+	font:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.layout4_1{display:block; float:left; margin-top:10px; padding:15px; line-height:2;font-size:14px;text-indent:0.2em;color:#262626;letter-spacing:1px;}
+.layout4_1 hr {background:#F60;border:1px solid #fc9;}
+
+.right{display:block; width:270px; float: right;}
+.layout5{display:block; width:268px; height:224px;}
+.layout6{display:block; width:268px; margin-top:10px; border:1px solid #fbcca6; }
+.layout6_1{ display:block; background:url(../images/lotteryInfo/beijing1_03.gif) no-repeat center center; width:267px; height:29px;}
+.layout6_1{ display:block; background:url(../images/lotteryInfo/beijing1_03.gif) no-repeat center center; width:267px; height:29px;}
+.layout6_1 ul{display:block; width:100px; height:15px; margin:6px 0 0 15px;}
+.layout6_1 ul li{display: inline;}
+.layout6_1 ul li a{font-family:"宋体"; font-size:14px; color:#990000; text-decoration:none;}
+.layout6_2{display:block; width:267px; margin-top:10px;}
+
+#ckepop span {
+	color:#000
+}
+#ckepop a {
+	color:#36f;
+}

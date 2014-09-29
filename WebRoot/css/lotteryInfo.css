@@ -1,0 +1,128 @@
+@charset "utf-8";
+
+
+.container {
+	width: 986px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+}
+
+.left{display:block; width:705px; float:left; border:1px solid #fbcca6;}
+.layout1{background:url(../images/lotteryInfo/beijing_03.gif) no-repeat center center; width:705px; height:30px; float:left; display:block;}
+.layout2{display:block; width:705px; float:left; margin-top:10px;}
+.layout3{display:block; float:left;}
+.layout3_1{display:block; float:left; margin-left:20px;}
+.layout4{display:block; width:711px; float:left;}
+.layout4_1{display:block; font-size:12px; margin-top:10px; line-height:30px; padding:15px; text-indent:24px;font-size:13px;}
+.sharecontent {
+	padding:10px;
+	margin-top:10px;
+	border-top:1px solid #F93;
+}
+.right{display:block; width:270px; float: right;}
+.layout5{display:block; width:268px; height:224px;}
+.layout6{display:block; width:268px; margin-top:10px; border:1px solid #fbcca6; }
+.layout6_1{ display:block; background:url(../images/lotteryInfo/beijing1_03.gif) no-repeat center center; width:267px; height:29px;}
+.layout6_1{ display:block; background:url(../images/lotteryInfo/beijing1_03.gif) no-repeat center center; width:267px; height:29px;}
+.layout6_1 ul{display:block; width:100px; height:15px; margin:6px 0 0 15px;}
+.layout6_1 ul li{display: inline;}
+.layout6_1 ul li a{font-family:"宋体"; color:#990000; text-decoration:none;}
+.layout6_2{display:block; width:267px; margin-top:10px;}
+#ckepop span {
+	float:left;
+	color:#000;
+	text-indent:0px;
+}
+#ckepop a {
+	text-indent:0px;
+	color:#36f;
+}
+.jingcaizuqiu {
+	float:left;
+	width:50px;
+}
+.list-name {
+	float:left;
+	width:180px;
+}
+.list-name ul li {
+	float:left;
+	width:50px;
+	margin-top:10px;
+	padding-left:10px;
+}
+.team-duizhen {
+	margin:0 auto;
+	margin-top:10px;
+	padding-top:16px;
+	height:90px;
+	border:2px solid #ccc;
+}
+.team-duizhen ul li {
+	float:left;
+	text-align:center;
+	margin-left:8px;
+	padding:2px 0px 5px 0px;
+	border:2px solid #eee;
+}
+.team-duizhen ul li:hover {border:2px solid #fc9;}
+.b1 {height: 1px; font-size: 1px; overflow: hidden; display: block; background: #FC9; margin: 0 3px; clear:both;}
+.b2 {height: 1px; font-size: 1px; overflow: hidden; display: block; background: #fff; border-right: 2px solid #FC9; border-left: 2px solid #FC9; margin: 0 1px; clear:both;}
+.b3 {height: 1px; font-size: 1px; overflow: hidden; display: block; background: #fff; border-right: 1px solid #FC9; border-left: 1px solid #FC9; margin: 0 1px; clear:both;}
+
+.bc {font-size: 13px; overflow: hidden; display: block; background:#fff; border-right: 1px solid #FC9; border-left: 1px solid #FC9; margin: 0 0px; clear:both;}
+.bt {background: #ffc;margin:0 2px;padding:5px; color:#960000; font-size:14px; font-weight:bold;}
+.bf {background: #FFFFFF;margin:0 2px; height:130px; padding:5px; line-height:1.7;text-align:center;}
+.bb {background: #FFFFFF;margin:0 2px; padding:5px; line-height:1.7;text-align:center;}
+.bb ul li {
+	padding-bottom:8px;
+	border-bottom:1px dotted #ccc;
+}
+.li1 {
+	background:url(../images/img/checkout.png) top left no-repeat;
+	text-align:left;
+	padding-left:34px;
+}
+.li2 {
+	background:url(../images/img/vv-xpincon_23.png) top left no-repeat;
+	text-align:left;
+	padding-left:34px;
+	MARGIN-TOP:8PX;
+}
+.li3 {
+	background:url(../images/img/money.png) top left no-repeat;
+	text-align:left;
+	padding-left:34px;
+	MARGIN-TOP:8PX;
+}
+.li4 {
+	background:url(../images/img/vv-xpincon_32.png) top left no-repeat;
+	text-align:left;
+	padding-left:34px;
+	MARGIN-TOP:8PX;
+}
+
+.d_body	{ height:auto; margin-top:10px;}
+.d_top	{height:41px; border-left:1px solid #Fc9;border-bottom:1px solid #Fc9; background:#ffc; border-right:1px solid #Fc9;}
+.d_t	{float:left; margin-top:7px; margin-left:10px; border:1px solid #Fc9; width:100px; height:31px; line-height:31px; background-color:#eee;}
+.d_t a	{color:#555; text-decoration:none;}
+.d_t a:hover	{color:#933; text-decoration:underline; font-weight:bold; }
+.a_b	{float:left; margin-top:7px; border:1px solid #Fc9; border-bottom:0px; width:60px; margin-left:4px; height:32px; line-height:31px; background-color:#eee;}
+.a_b a	{color:#555; text-decoration:none;}
+.a_b a:hover	{color:#933; text-decoration:underline; font-weight:bold; }
+
+.d_main	{border:1px solid #fc9; border-top:0px; height:100px;}
+.ln		{position:relative; border-bottom:1px solid #fc9; top:40px; z-index:-1;}
+
+.b		{background-color:#fff; height:100%; display:none; margin:10px;}
+.f		{background-color:#fff; height:100%; display:none; margin:10px;}
+
+.on		{border-bottom:1px solid #fff; background-color:#fff;}
+
+
+.fl		{float:left;}
+.clr	{clear:both;}
+.of		{overflow:hidden;}
+.textcenter{text-align:center;vertical-align:middle;}

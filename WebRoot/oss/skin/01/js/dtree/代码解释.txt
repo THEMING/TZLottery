@@ -1,0 +1,177 @@
+无限级可刷新Js树型菜单 dTree 2.05,作者：Geir Landr? 
+
+功能说明：
+
+1、可设置无限级菜单
+　2、不必使用框架
+　3、可刷新，多页面内跳转不会影响菜单（IE6下好像有点问题）
+　4、可限级创造子树
+　5、支持目前主流浏览器：IE5，6，7，ff
+　6、节点图片可设置切换图片效果
+
+ 
+无限级Js树型菜单属性使用说明（翻译：rlog）:
+
+
+函数
+
+
+add()
+
+向树里添加一个节点
+
+只能在树被创建之前调用.
+
+必须 id, pid, name
+
+参数
+
+名字
+ 类型
+ 描述
+ 
+id
+ Number
+ 唯一的ID号
+ 
+pid
+ Number
+ 判定父节点的数字,根节点的值为 -1
+ 
+name
+ String
+ 节点的文本标签
+ 
+url
+ String
+ 节点的Url
+ 
+title
+ String
+ 节点的Title
+ 
+target
+ String
+ 节点的target
+ 
+icon
+ String
+ 用做节点的图标,节点没有指定图标时使用默认值
+ 
+iconOpen
+ String
+ 用做节点打开的图标,节点没有指定图标时使用默认值
+ 
+open
+ Boolean
+ 判断节点是否打开
+ 
+
+
+例子
+
+mytree.add(1, 0, ’My node’, ’node.html’, ’node title’, ’mainframe’, ’img/musicfolder.gif’);
+
+openAll()
+
+打开所有节点
+
+可在树被创建以前或以后调用.
+
+例子
+
+mytree.openAll();
+
+closeAll()
+
+关闭所有节点
+
+可在树被创建以前或以后调用.
+
+例子
+
+mytree.closeAll();
+
+ 
+
+openTo()
+
+Opens the tree to a certain node and can also select the node.
+
+只能在树被创建以后调用..
+
+参数
+
+名字
+ 类型
+ 描述
+ 
+id
+ Number
+ 节点唯一的ID号
+ 
+select
+ Boolean
+ 判断节点是否被选择
+ 
+
+
+例子
+
+mytree.openTo(4, true);
+
+配置
+
+变量
+ 类型
+ 默认值
+ 描述
+ 
+target
+ String
+ true
+ 所有节点的target
+ 
+folderLinks
+ Boolean
+ true
+ 文件夹可链接
+ 
+useSelection
+ Boolean
+ true
+ 节点可被选择(高亮)
+ 
+useCookies
+ Boolean
+ true
+ 树可以使用cookies记住状态
+ 
+useLines
+ Boolean
+ true
+ 创建带线的树
+ 
+useIcons
+ Boolean
+ true
+ 创建带有图标的树
+ 
+useStatusText
+ Boolean
+ false
+ 用节点名替代显示在状态栏的节点url
+ 
+closeSameLevel
+ Boolean
+ false
+ 只有一个有父级的节点可以被展开,当这个函数可用时openAll() 和 closeAll() 函数将不可用
+ 
+inOrder
+ Boolean
+ false
+ 如果父级节点总是添加在子级节点之前,使用这个参数可以加速菜单显示.
+ 
+例子
+
+mytree.config.target = "mytarget";

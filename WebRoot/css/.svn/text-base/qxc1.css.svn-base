@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+
+.qxc_bet_box {
+	height: 340px;
+	border: thin solid #99CCFF;
+}
+
+.qxc_bet_box .left {
+	text-align:center; 
+	float:left;
+	width:80px;
+	height:20px;
+	background:#EEEEEE;
+	padding-bottom:160px;
+	padding-top:160px;
+}
+
+.standard_area_top {
+	width:410px;
+	float:left;
+	color: #FF0000;
+	text-align: center;
+	height: 20px;
+}
+
+
+.standard_area {
+	padding-top:20px;
+	padding-left:20px;
+	width:580px;
+	float:left;
+	margin-left: 2px;
+}
+
+.box_main .kjHistory_li1 {
+	width:80px;
+	text-align:center;
+}
+
+.box_main .kjHistory_li2 {
+	width:100px;
+	text-align:center;
+}

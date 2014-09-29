@@ -1,0 +1,61 @@
+@CHARSET "UTF-8";
+
+.mobliebigbg {
+	width:994px;
+	height:371px;
+	margin:0 auto;
+	margin-top:10px;
+	background:url(../images/369caibg/shoujibigbg_03.png) no-repeat;
+}
+.kehuduanjieshao {
+	float:left;
+	width:270px;
+	height:350px;
+	padding-left:400px;
+	padding-top:100px;
+	line-height:30px;
+	text-indent:24px;
+}
+.hBTN {
+	float:right;
+	width:300px;
+	height:171px;
+	padding-top:200px;
+}
+.gongnengtedian {
+	margin:0 auto;
+	width:994px;
+	height:1130px;
+}
+.topogongneng {
+	height:43px;
+	background:url(../images/369caibg/shoujibigbg_07.png) repeat-x;
+	line-height:43px;
+	font-size:14px;
+	font-weight:bold;
+	color:#f30;
+	border:1px solid #fc9;
+	padding-left:15px;
+}
+.box-tu-shuoming {
+	border-top:0px;
+	height:1060px;
+	border:1px solid #fc9;
+	text-align:center;
+	padding-top:20px;
+}
+
+.first-tu {
+	float:left;
+	width:250px;
+	height:470px;
+	line-height:1.6;
+	padding-left:58px;
+}
+.first-tu ul .tu1 {
+	width:240px;
+	height:400px;
+	padding:5px;
+	border:1px solid #ccc;
+	text-align:center;
+}

@@ -1,0 +1,121 @@
+/* CSS Document */
+
+
+
+.lanqiutabed {
+	width:986px;
+	height:33px;
+	margin:20px 0px 20px 0px;
+	border-bottom:3px solid #c5cb35;
+}
+.lanqiutabed ul li {
+	float:left;
+	text-align:center;
+	width:75px;
+	height:20px;
+	display:block;
+	padding-top:13px;
+	cursor:pointer;
+	margin-left:8px;
+	background:url(../images/369caibg/lanqiu.jpg) no-repeat center;
+	background-position:0px 6px;
+}
+.lanqiutabed ul .zhiboalive {
+	text-align:center;
+	font-size:13px;
+	width:100px;
+	font-weight:bold;
+	background:url(../images/369caibg/369websoft_17.gif) bottom no-repeat;
+	background-position:0px 7px;
+}
+.lanqiutabed ul .tabed {
+	text-align:center;
+	padding:0px;
+	height:33px;
+	line-height:33px;
+	display:block;
+	width:100px;
+    background:url(../images/369caibg/lanqiutabed.jpg) no-repeat center;
+	background-position:0px 2px;
+	color:#fff;
+	font-size:14px;
+	font-weight:bold;
+}
+.lanqiutabed ul .nothing {
+	width:500px;
+	float:right;
+	background:none;
+}
+
+.BGTOP-LEFT .one_or_mul-change {
+	height:30px;
+	border:1px solid #ccc;
+	border-bottom:0px;
+		margin-right:1px;
+}
+.BGTOP-LEFT .one_or_mul-change ul li {
+	float:left;
+	width:70px;
+	display:inline;
+	text-align:center;
+	line-height:30px;
+	cursor:pointer;
+}
+.normal1 {
+	background:url(../images/mbg.png) no-repeat;
+	background-position:2px -15px;
+	line-height:30px;
+	font-size:13px;
+	color:#fff;
+	font-weight:bold;
+}
+.dgtztabed1 {
+	background:url(../images/mbg.png) no-repeat;
+	background-position:2px -15px;
+	line-height:30px;
+	font-size:13px;
+	color:#fff;
+	font-weight:bold;
+}
+
+.BGTOP-LEFT .tabcont .tablefor_shenpingfu tr td {
+    background:#c5cb35;
+	border-right:1px solid #fff;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	color:#fff;
+}
+.BGTOP-LEFT .tabcont .oddscontent-table {
+	border-left:1px solid #ebebeb;
+	border-right:1px solid #ebebeb;
+}
+.BGTOP-LEFT .tabcont .oddscontent-table tr td font {
+	color:#f00;
+}
+.BGTOP-LEFT .tabcont .oddscontent-table tr td {
+	text-align:center;
+	height:30px;
+	border-bottom:1px solid #ccc;
+    line-height:20px;
+}
+.BGTOP-LEFT .tabcont table tr.old {
+	background:#eeeeee;
+}
+.BGTOP-LEFT .tabcont table tr.next {
+    background:#FAFAD2;
+	color:#f00;
+}
+.BGTOP-LEFT .tabcont table tr .colored {
+	background:#F66;
+	color:#fff;
+}
+.BGTOP-LEFT .tabcont table tr td .chenck {
+	margin-right:3px;
+}
+.ql_show{width:75px;height:23px; padding-top:4px; background:url(../images/lottery/bbg2.jpg) no-repeat center;float:left;}
+.ql_showzi{width:50px;font-size:12px; height:18px; line-height:16px;margin-left:14px;}
+.ql_showzi a{color:#000000}
+.ql_hide{width:75px;height:23px; padding-top:4px; background:url(../images/lottery/bbg2.jpg) no-repeat center;float:left;margin-left:15px;}
+.ql_hidezi{width:50px;font-size:12px;height:18px; line-height:16px;margin-left:14px; color:#333;}
+.ql_hidezi a{color:#ffffff}

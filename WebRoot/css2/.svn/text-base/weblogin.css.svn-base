@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* CSS Document */
+
+.login_top { float:left; width:990px; height:37px; margin-left:5px; background:url(../images/369caibg/369login_03.gif) no-repeat;}
+.login_body { float:left; width:990px; height:auto; margin-left:5px; padding-bottom:30px; background:url(../images/369caibg/369login_05.gif) repeat-y}
+.login_bottom { float:left;  width:990px; height:8px; margin-left:5px; background:url(../images/369caibg/369login_23.gif) no-repeat;}
+.login_welcome { width:400px; height:37px; line-height:37px; padding-left:20px; font-size:14px;}
+.login_titileBg { width:700px; height:37px; margin-top:30px; margin-left:145px; line-height:37px; background:url(../images/369caibg/369login_08.gif) center bottom no-repeat;text-align:center;}
+.login_titile { height:35px; font-size:20px; color:#960000;}
+.login_titile li { float:left; width:70px; height:35px; margin-left:10px; border:1px #ccc solid; border-bottom:0; text-align:center; line-height:37px; font-size:14px; cursor:pointer;}
+.login_currentBg { background:url(../images/369caibg/369cai_49.gif) repeat-x; color:#333; font-weight:bold;}
+.login_user { width:700px; height:auto; margin-left:145px;}
+.user_loading { width:500px; height:30px;  margin-top:25px; margin-left:100px; line-height:30px; font-size:20px; font-weight:bold; color:#333;} 
+.user_loading_instro { width:600px; height:20px; margin-top:10px; margin-left:100px;  line-height:20px; font-size:14px; color:#999;}
+
+
+.user_outer { width:620px; height:280px; margin-left:80px;}
+.Reg_outer {width:620px; height:300px; margin-left:80px;}
+.user_outer1 { float:left; width:620px; height:auto;}
+.user_name { float:left;  width:100px; height:30px; margin-top:15px; line-height:30px; text-align:right; font-size:14px; color:#333;}
+.user_inputBg { float:left; width:200px; height:30px; margin-top:15px;}
+.user_input { width:200px; height:25px; line-height:25px; border:1px #ccc solid; color:#333;}
+.user_input_instro { float:left; width:300px; height:30px; margin-top:15px; margin-left:10px; line-height:30px;}
+.user_input_instro1 { float:left; width:100px; height:30px; margin-top:15px; margin-left:10px; line-height:30px;color:#1d50a2;}
+.user_input_instro2 { float:left; width:50px; height:30px; margin-top:15px; margin-left:10px; line-height:30px;color:#1d50a2;}
+.user_input_instro1 a { color:#1d50a2; text-decoration:underline;}
+.check_boxBg { float:left; width:300px; height:40px;}
+.check_password { float:left; width:25px; height:30px; margin-top:25px; margin-left:100px;}
+.check_passwordtext { float:left; width:65px; height:30px; line-height:30px; margin-top:20px;}
+.check_load { float:left; width:25px; height:30px; margin-top:25px; margin-left:20px;}
+.check_loadtext { float:left; width:65px; height:30px; line-height:30px; margin-top:20px;}
+.check_agreement { float:left; width:25px; height:30px; margin-top:35px; margin-left:20px;}
+.check_agreementtext { float:left; width:120px; height:30px; line-height:30px; margin-top:30px;}
+.loadingBtn { float:left; width:100px; height:36px; margin-top:10px; margin-left:180px; text-align:center;}
+.register_rule { float:left; margin-left:50px; margin-top:20px; padding:10px; width: 500px; height:120px; overflow-y:scroll;	border: thin solid #FBCCAA; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

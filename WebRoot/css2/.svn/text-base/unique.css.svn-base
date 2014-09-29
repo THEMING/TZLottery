@@ -1,0 +1,136 @@
+@charset "utf-8";
+
+.six-whole {
+	width:100%;
+	height:1600px;
+	background:url(../images/unique/fangge_bg_01.png) repeat-x;
+}
+
+.title-img {
+	width:1051px;
+	height:523px;
+	margin:0 auto;
+	text-align:center;
+	background:url(../images/unique/ggg_03.png) no-repeat;
+}
+
+.cont-six {
+	width:1051px;
+	height:855px;
+	margin:0 auto;
+	background:url(../images/unique/ggg_05.png) no-repeat;
+}
+
+.cont-top {
+	width:810px;
+	height:500px;
+	margin-left:150px;
+}
+.con-top-left {
+	_float:left;
+	float:left;
+	width:380px;
+	height:320px;
+	margin-top:120px;
+}
+.con-top-left li {
+	width:370px;
+	text-indent:2em;
+	line-height:2;
+	color:#000;
+}
+
+.con-top-right {
+	_float:right;
+	float:right;
+	width:320px;
+	height:260px;
+	margin-top:60px;
+}
+.con-top-right .btn-buy {
+	margin-left:150px;
+	margin-top:15px;
+}
+.con-top-right table .title {
+	background:#930;
+	color:#fff;
+	font-size:12px;
+	height:15px;
+	text-align:center;
+}
+.con-top-right table .cont-white {
+	background:#fff;
+	colot:#000;
+	font-size:12px;
+	height:15px;
+	text-align:center;
+}
+.con-top-right table .cont-color {
+	background:#FFC;
+	colot:#000;
+	font-size:12px;
+	height:15px;
+	text-align:center;
+}
+
+
+.cont-boto {
+	width:810px;
+	height:400px;
+	margin-left:80px;
+}
+.cont-boto-left {
+	float:left;
+	width:320px;
+	height:260px;
+}
+.cont-boto-left ul .special {
+	width:300px;
+	height:80px;
+	margin:0 auto;
+	margin-top:10px;
+	border-bottom:1px dotted #F60
+}
+.cont-boto-left ul .special span {
+	color:#000;
+	margin-left:50px;
+}
+.cont-boto-left ul .special span .sz {
+	color:#f00;
+	font-size:25px;
+	font-weight:bold;
+	line-height:2;
+	margin-left:0px;
+}
+.cont-boto-left ul .special table {
+	margin-top:15px;
+}
+.cont-boto-left ul .special table tr .kaijaingredball {
+	background:url(../images/369caibg/369cai_44.gif) center no-repeat;
+	text-align:center;
+	font-size:13px;
+	font-weight:bold;
+	color:#fff;
+	height:25px;
+}
+.cont-boto-left ul .special table tr td {
+	background:url(../images/369caibg/369cai_45.gif) center no-repeat;
+	text-align:center;
+	font-size:13px;
+	font-weight:bold;
+	color:#fff;
+	height:25px;
+}
+
+.cont-boto-right {
+	float:right;
+	width:380px;
+	height:320px;
+	margin-top:30px;
+}
+.cont-boto-right li {
+	width:370px;
+	text-indent:2em;
+	line-height:2;
+	color:#000;
+}

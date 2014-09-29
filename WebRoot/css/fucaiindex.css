@@ -1,0 +1,690 @@
+@charset "utf-8";
+/* CSS Document */
+.b1 {height: 1px; font-size: 1px; overflow: hidden; display: block; background: #FC9; margin: 0 3px; clear:both;}
+.b2 {height: 1px; font-size: 1px; overflow: hidden; display: block; background: #fff; border-right: 2px solid #FC9; border-left: 2px solid #FC9; margin: 0 1px; clear:both;}
+.b3 {height: 1px; font-size: 1px; overflow: hidden; display: block; background: #fff; border-right: 1px solid #FC9; border-left: 1px solid #FC9; margin: 0 1px; clear:both;}
+
+.bc {font-size: 13px; overflow: hidden; display: block; background:#fff; border-right: 1px solid #FC9; border-left: 1px solid #FC9; margin: 0 0px; clear:both;}
+.bt {background: #ffe7ba;margin:0 1px;padding:5px; color:#960000; font-size:14px; font-weight:bold;}
+.bt1 {background: #ffe7ba;margin:0 1px;padding:5px; cursor:pointer; color:#960000; font-size:14px; font-weight:bold;}
+.bf {background: #FFFFFF;margin:0 1px; height:130px; padding:5px; line-height:1.7;text-align:center;}
+.bb {background: #FFFFFF;margin:0 1px; padding:5px; line-height:1.7;text-align:left;}
+
+
+
+
+.kaijiang-index-cont {
+	width:993px;
+	margin:0 auto;
+	margin-top:10px;
+}
+
+/*......................fucai lottery left box start.........................*/
+.fucai-left-box {
+	float:left;
+	width:238px;
+	height:auto;
+	border-bottom: 1px solid #FC9;
+}
+.bb ul li {
+	height:auto;
+	border-bottom:1px dotted #ccc;
+}
+.bb ul li div {
+    line-height:3;	
+}
+.NO-list1 table tr td {
+	text-align:center;
+	font-size:13px;
+	font-weight:bold;
+	height:35px;
+	color:#ffffff;
+	background:url(../images/369caibg/ball_bg1.gif) no-repeat;
+	background-position:-30px;
+
+}
+.NO-list1 table tr .last-lanqiu {
+	text-align:center;
+	font-size:13px;
+	font-weight:bold;
+	color:#ffffff;
+    background:url(../images/369caibg/ball_bg1.gif) no-repeat;
+	background-position:-96px;
+}
+.touzhu-xiangqing {
+	font-size:14px;
+	font-weight:bold;
+	color:red;
+	text-align:center;
+}
+.touzhu-xiangqing a {
+	color:red
+}
+
+.middle-kaijiang-news {
+	float:left;
+	width:418px;
+	height:auto;
+	margin-left:15px;
+	display:inline;
+}
+.middle-kaijiang-news a h1 {
+	font-size:17px;
+	color:#F30
+}
+.middle-kaijiang-news a:hover {
+	color:#F30;
+}
+.big-title {
+    border-bottom:1px dotted red;
+}
+.middle-kaijiang-news ul li {
+	text-align:left;
+}
+.mijicontent {
+	float:left;
+	width:250px;
+	height:40px;
+	margin:0 auto;
+	padding-top:10px;
+	padding-left:14px;
+	line-height:25px;
+}
+
+.odds-box {
+	float:right;
+    width:305px;
+	height:395px;
+	border:1px solid #fc9;	
+}
+.oddstitle {
+    height:35px;
+	background:url(../images/369caibg/oddsbg_05.png) repeat-x;
+	line-height:35px;
+	color:#960000;
+	font-size:14px;
+	font-weight:bold;
+	padding-left:15px;
+}
+.odds-box .tubiaobox {
+	width:280px;
+	height:140px;
+	border-bottom:1px dotted #ccc;
+	margin:0 auto;
+	margin-top:20px;
+	padding:5px;
+}
+.odds-box .tubiaobox ul {
+	width:240px;
+	margin:0 auto;
+}
+.odds-box .tubiaobox ul li {
+	float:left;
+	text-align:center;
+	line-height:2.5;
+	padding:2px;
+}
+.odds-box .tubiaobox ul li a {
+	padding:2px;
+	color:#C00;
+	border:2px solid #eee;
+	font-weight:bold;
+	display:block;
+}
+.odds-box .tubiaobox ul li a:hover {
+	padding:2px;
+	color:#F90;
+	display:block;
+	border:2px solid #F60
+} 
+.odds-box .tubiaofenlei {
+	width:280px;
+	height:auto;
+	margin:0 auto;
+	padding-top:10px;
+}
+.odds-box .tubiaofenlei ul li {
+	width:280px;
+	height:70px;
+	margin:0 auto;
+	line-height:1.7;
+	border-bottom:1px dotted #ccc;
+}
+.odds-box .tubiaofenlei ul .tongjifenxilist1 {
+	padding-top:53px;
+	width:60px;
+	font-size:12px;
+	background:url(../images/369caibg/tongji_11.png) no-repeat 7px;
+}
+
+
+
+
+/*....................huodong box start.............................*/
+.huodongbox {
+	height:100px;
+	background:url(../images/369caibg/huodong_15.png) repeat-x;
+	border-left:1px solid #fc9;
+	border-right:1px solid #fc9;
+	padding-left:50px;
+	padding-top:8px;
+}
+.huodongbox ul li {
+	float:left;
+	font-size:15px;
+	font-weight:bold;
+	margin-left:20px;
+}
+.huodongbox ul li a {
+	color:#ffffff;
+}
+
+
+/*....................goucai box start.............................*/
+.selcet-caizhong {
+	margin-top:10px;
+	float:left;
+	width:238px;
+}
+.caizhongbox {
+	position:absolute;
+	width:226px;
+	height:317px;
+	border:1px solid #fc9;
+	border-top:0px;
+	padding:5px;
+}
+.caizhongbox .list1-fucai {
+	height:auto;
+	border-bottom:1px dotted #960;
+	padding-bottom:15px;
+}
+.caizhongbox .list1-fucai .fucailist {
+	padding-left:30px;
+	margin-left:10px;
+	background:url(../images/img/369cai_18.gif) left no-repeat;
+}
+.caizhongbox .list1-fucai .jiajiang {
+	position:absolute;
+	z-index:777;
+	background:url(../images/img/gif-0493.gif) no-repeat;
+	width:30px;
+	height:17px;
+	left: 45%;
+	top: 18px;
+}
+.caizhongbox .list1-fucai .newwanfa {
+	position:absolute;
+	z-index:999;
+	background:url(../images/img/gif-0376.gif) no-repeat;
+	width:30px;
+	height:17px;
+	left: 25%;
+	top: 245px;
+}
+.caizhongbox .list1-fucai ul {
+	height:auto;
+	padding:25px 0px 34px 0px;
+}
+.caizhongbox .list1-fucai ul li {
+	float:left;
+	margin-left:8px;
+}
+.ticailist {
+	padding-left:30px;
+	margin-left:0px;
+	background:url(../images/img/369cai_21.gif) left no-repeat;
+}
+.zucailist {
+	padding-left:30px;
+	margin-left:0px;
+	background:url(../images/img/369cai_23.gif) left no-repeat;
+}
+.jingcailist {
+	padding-left:30px;
+	margin-left:0px;
+	background:url(../images/img/jingzucai1.gif) left no-repeat;
+}
+
+
+/*..................kuaisutouzhu start......................*/
+
+.kuaitoubox {
+	float:left;
+	margin-left:15px;
+	margin-top:10px;
+	width:420px;
+	height:360px;
+	border:1px solid #fc9;
+}
+.kuaitoubox .shuangseqiubox {
+	width:400px;
+	height:280px;
+	margin:0 auto;
+	margin-top:15px;
+	text-align:center;
+}
+.kuaitoubox .shuangseqiubox ul li {
+	float:left;
+}
+.kuaitoubox .shuangseqiubox ul .SSQlogo {
+	width:68px;
+	height:87px;
+	background:url(../images/img/369cai_49.gif) no-repeat
+}
+.kuaitoubox .shuangseqiubox .prize-box {
+	margin:0 auto;
+	margin-top:10px;
+	text-align:center;
+}
+.kuaitoubox .shuangseqiubox .btn-box {
+	width:300px;
+	height:100px;
+	margin:0 auto;
+	margin-top:10px;
+}
+.kuaitoubox .shuangseqiubox .btn-box ul li {
+	margin-top:20px;
+}
+.kuaitoubox .shuangseqiubox .btn-box ul .secondbtn {
+	padding-left:65px;
+	margin-right:80px;
+}
+.kuaitoubox .shuangseqiubox .btn-box ul .fristbtn {
+	width:200px;
+	margin-left:0px;
+}
+
+
+/*..................zhongjianguser start.....................*/
+.zhongjianguser {
+	float:right;
+	margin-top:10px;
+	width:307px;
+	height:362px;
+}
+.paihang-box {
+	width:305px;
+	height:327px;
+	border:1px solid #fc9;
+}
+.paihang-box .paihangtabchange {
+	width:305px;
+	height:30px;
+	background:url(../images/369caibg/369cai_14.gif) repeat-x;
+}
+.paihang-box .paihangtabchange ul li {
+	float:left;
+	width:152px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	color:#000;
+	font-weight:bold;
+	cursor:pointer;
+}
+.paihang-box .paihangtabchange ul .ontab {
+	background:#fff;
+	width:153px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	color:#960000;
+}
+.tablepaihang1 {
+	text-align:center;
+}
+
+/*...............banner..................*/
+.banner-soft {
+	width:993px;
+	height:90px;
+	margin:0 auto;
+	margin-top:10px;
+	text-align:center;
+}
+.banner-six {
+	width:993px;
+	height:70px;
+	margin:0 auto;
+	margin-top:10px;
+	text-align:center;
+}
+
+/*...................soft start.......................*/
+.soft-introduce {
+	float:left;
+	margin-top:10px;
+	width:238px;
+	height:510px;
+}
+.soft-introduce .ssqsoft-content {
+	width:236px;
+	height:480px;
+	border:1px solid #fc9;
+}
+.soft-introduce .ssqsoft-content ul .toptilte {
+	text-align:center;
+	font-size:14px;
+	font-weight:bold;
+	padding-top:10px;
+	color:#F30;
+}
+.ssqsoft-content .jsrtxt {
+	clear:both;
+	line-height:30px;
+	margin:0 auto;
+	text-indent:24px;
+	padding:5px 0;
+	width:220px;
+	padding-bottom:14px;
+	border-bottom:1px dotted #cccccc;
+}
+.ssqsoft-content .jsrtxt img {
+	float: left;
+    height: 58px;
+    margin: 0 5px 0 0;
+    width: 58px;
+}
+.ssqsoft-content ul {
+	margin-top:10px;
+	padding-left:10px;
+}
+.ssqsoft-content ul li {
+	padding-bottom:8px;
+	list-style:inside disc;
+	color:#36f;
+}
+.touzhucecelue {
+	float:left;
+	margin-top:10px;
+	margin-left:15px;
+	width:418px;
+	height:515px;
+}
+.touzhucecelue ul li a {
+	color:#F63;
+	font-size:13px;
+}
+.touzhucecelue ul .ssqtouzhucelue {
+	height:250px;
+}
+.touzhucecelue ul .ssqtouzhucelue .shuangseqiujiqiao li {
+	margin-top:7px;
+}
+.touzhucecelue ul .ssqtouzhucelue hr {
+	border:1px solid #eeeeee;
+}
+.touzhucecelue ul .ssqtouzhucelue b {
+	color:#f30;
+	font-size:15px;
+	font-weight:bold;
+}
+.qitasoft-jieshao {
+	float:right;
+	width:307px;
+	height:510px;
+	margin-top:10px;
+}
+.qitaruanjian-box {
+	width:305px;
+	height:480px;
+	border:1px solid #fc9;
+}
+.qitaruanjian-box ul .toptilte {
+	text-align:center;
+	font-size:14px;
+	font-weight:bold;
+	padding-top:10px;
+	color:#F30;
+}
+/*...................zhuanjia huodong......................*/
+.jingcaihuodong {
+    width:238px;
+	height:300px;
+	float:left;	
+	margin-top:10px;
+}
+.jingcaihuodongbox {
+	width:236px;
+	height:270px;
+	border:1px solid #fc9;
+}
+.jingcaihuodongbox .toptubox {
+    width:144px;
+	height:84px;
+	margin:0 auto;
+	margin-top:14px;
+	text-align:center;	
+	border:1px solid #ccc;
+}
+.listof-jingcai {
+	width:250px;
+	margin:0 auto;
+	margin-top:10px;
+}
+.listof-jingcai li {
+	margin-bottom:10px;
+	list-style:disc;
+}
+
+
+.zhuanjiatuijian {
+	float:left;
+	margin-left:15px;
+	margin-top:10px;
+	width:418px;
+	height:300px;
+}
+.zhuanjiatuijian .spantop li {
+	float:left;
+	line-height:30px;
+	width:209px;
+	background:#Ffc;
+}
+.zhuanjiatuijian .listofyuce li {
+    line-height:30px;
+}
+.zhuanjiatuijian .listofyuce li a {
+	display:block;
+	float:left;
+}
+.zhuanjiatuijian .listofyuce li span {
+	display:block;
+	float:right;
+}
+
+
+.zucaihudong {
+	float:right;
+	width:307px;
+	height:300px;
+	margin-top:10px;
+}
+.zucaihuodongbox {
+	width:305px;
+	height:270px;
+	border:1px solid #fc9;
+}
+.zucaihuodongbox .toptubox {
+    width:144px;
+	height:84px;
+	margin:0 auto;
+	margin-top:14px;
+	text-align:center;	
+	border:1px solid #ccc;
+}
+/*fax*/
+.blk_18 {
+BORDER-RIGHT: #e3e3e3 1px solid; BORDER-TOP: #e3e3e3 1px solid; MARGIN:0 auto; FONT-SIZE: 12px; OVERFLOW: hidden; BORDER-LEFT: #e3e3e3 1px solid; WIDTH: 390px; BORDER-BOTTOM: #e3e3e3 1px solid; ZOOM: 1
+}
+.blk_18 .pcont {
+FLOAT: left; OVERFLOW: hidden; WIDTH: 350px
+}
+.blk_18 .ScrCont {
+WIDTH: 32766px; ZOOM: 1
+}
+.blk_18 #List1_1 {
+FLOAT: left
+}
+.blk_18 #List2_1 {
+FLOAT: left
+}
+.blk_18 .LeftBotton {
+BACKGROUND: url(http://www.lanrentuku.com/images/uppic/200901172157020.gif) no-repeat; FLOAT: left; MARGIN: 10px 1px; WIDTH: 15px; HEIGHT: 72px
+}
+.blk_18 .RightBotton {
+BACKGROUND: url(http://www.lanrentuku.com/images/uppic/200901172157020.gif) no-repeat; FLOAT: left; MARGIN: 10px 1px; WIDTH: 15px; HEIGHT: 72px
+}
+.blk_18 .LeftBotton {
+BACKGROUND-POSITION: 0px 0px; MARGIN-LEFT: 5px
+}
+.blk_18 .RightBotton {
+BACKGROUND-POSITION: 0px -100px; MARGIN-LEFT: -1px
+}
+.blk_18 .LeftBotton:hover {
+BACKGROUND-POSITION: -20px 0px
+}
+.blk_18 .RightBotton:hover {
+BACKGROUND-POSITION: -20px -100px
+}
+.blk_18 .pl IMG {
+DISPLAY: block; MARGIN: 6px auto 1px; CURSOR: pointer; BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.blk_18 .pl {
+BORDER: #FFFFFF 1px solid; FLOAT: left; MARGIN-LEFT:20PX; WIDTH: 140px; LINE-HEIGHT: 24px; TEXT-ALIGN: center; TEXT-DECORATION: underline;
+}
+.blk_18 A.pl:hover {
+BACKGROUND: #fff; BORDER: #ff9900 1px solid; COLOR: #ff9900; 
+}
+.commu_cont3 {
+MARGIN: 9px 7px 7px; LINE-HEIGHT: 150%
+}
+.commu_cont3 UL {
+WIDTH: 188px
+}
+
+
+/*..................benzhoumiji.................*/
+.benzhousuoshuimiji {
+	position:absolute;
+	width:405px;
+	height:120px;
+	background:#eee;
+	border:2px solid #ccc;
+}
+.benzhousuoshuimiji .zuojiaobig {
+	position:relative;
+	float:left;
+	width:50px;
+	height:30px;
+	left:-2px;
+	top:-3px;
+	background:url(../images/369caibg/miji_02.png) no-repeat;
+}
+.benzhousuoshuimiji .tiltboxcont {
+	position:relative;
+	float:left;
+	width:100px;
+	height:30px;
+	left:-10px;
+	top:10px;
+	z-index:800;
+	color:#f30;
+	font-size:15px;
+	font-weight:bold;
+}
+.benzhousuoshuimiji .biaoqianfuceng {
+	position:relative;
+	float:left;
+	width:46px;
+	height:48px;
+	left:200px;
+	top:-8px;
+	z-index:3;
+	background:url(../images/369caibg/bianqian_03.jpg) no-repeat;
+}
+
+.companyintroduce {
+	margin-top:130px;
+}
+.companyintroduce .jsrtxt {
+	clear:both;
+	cursor:pointer;
+	line-height:27px;
+	margin:0 auto;
+	text-indent:24px;
+	padding:5px 0;
+	width:400px;
+}
+.companyintroduce .jsrtxt img {
+	float: left;
+    height: 58px;
+    margin: 0 5px 0 0;
+    width: 90px;
+}
+.wanfabox {
+	border-bottom:1px dotted #CCC;
+}
+.jsrtxt {
+	clear:both;
+	line-height:30px;
+	margin:0 auto;
+	text-indent:24px;
+	padding:5px 0;
+	width:220px;
+}
+.jsrtxt img {
+	float: left;
+    height: 58px;
+    margin: 0 5px 0 0;
+    width: 58px;
+}
+
+.jingcaiguize {
+	margin:0 auto;
+	margin-top:10px;
+	display:inline;
+}
+.jingcaiguize ul {
+	padding:10px;
+}
+.jingcaiguize ul li {
+	list-style:inside disc;
+	color:!important #F30;
+	margin-bottom:8px;
+}
+/*==================lablebanner-start====================*/
+.bigbox {
+	background:#cc0000
+}
+.close {
+	position:relative;
+	left:960px;
+	top:5px;
+	background:#fff;
+	padding:2px;
+	border:1px solid #eee;
+	font-size:15px;
+	font-weight:bold;
+}
+.lablebanner-box {MARGIN: 0px auto; WIDTH: 998px; height:90PX; DISPLAY: block; background:url(../images/img/lablebanner.jpg) no-repeat;}
+.mainbanner-box {MARGIN: 0px auto; WIDTH: 998px; DISPLAY: none}
+
+.ql-zhiyin{width:970px;height:70px;padding-left:20px;margin:0 auto;margin-top:15px;border-top:solid 1px #FFCC99;border-left:solid 1px #FFCC99;border-bottom:solid 1px #FFCC99;border-right:solid 1px #FFCC99;clear:both;}
+.ql-zhuce{width:240px;height:53px;margin-top:5px;margin-left:8px;float:left;}
+.ql-retb{width:48px;height:53px;float:left;}
+.ql-detail{width:125px;height:43px;margin-top:7px;float:left;margin-left:10px;font-size:12px;}
+.ql-detail a{font-weight:bold;color:#000000}
+.ql-jiantou{width:42px;height:53px;float:left;margin-left:10px;}
+.ql-zhuce2{width:190px;height:53px;margin-top:5px;margin-left:10px;float:left;}
+
+
+#tab_mo_1 .titieofusers ul li {
+	
+	float:left;
+	display:inline-block;
+	line-height:30px;
+	text-align:center;
+	padding:0px 25px 0px 20px;
+}

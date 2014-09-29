@@ -1,0 +1,227 @@
+@CHARSET "UTF-8";
+
+.container {
+	width: 986px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+}
+
+.text {
+	width: 150px; 
+	height: 20px; 
+	border: 1px #ccc solid;
+	margin: 0 5px;
+}
+
+.customer_center_main {
+	width: 986px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+}
+
+.customer_center_main .left {
+	float: left; width:148px; height:auto; border:1px #ccc solid; 
+}
+
+.customer_center_main .right {
+	float: right; 
+	width: 795px;
+}
+
+.left .title { width:146px; height:29px; margin:1px; line-height:29px; text-align:center; background:url(../images/369caibg/helpcenter_03.gif) repeat-x; font-size:14px; font-weight:bold; color:#333;}
+
+.left .list_main {
+	background: #FFF6EE;
+	border:1px solid #ccc;
+}
+
+.list_main h1{
+	height: 28px;
+	line-height:28px; 
+	background: #FFE8D3; 
+	color: #7F2D00;
+}
+
+.list_main ul {
+	margin: 0px 0px 10px 10px;
+	margin-left:0px;
+}
+.list_main li{text-align: right; padding-right:15px; line-height: 30px;}
+.list_main li a{font-size: 14px;}
+.list_main li a:hover{text-decoration: none;}
+
+.list_main li.on {
+	background:#E3E3E3; 
+	line-height: 33px;
+}
+
+.customer_center_main .right {
+	float: right; 
+	width: 825px;
+}
+
+.right .top {
+	font-size: 14px;
+	border: 1px #ccc solid; 
+	height:140px;
+	background:#F5F5F5;
+	padding:8px 15px 10px 15px;
+}
+
+.right .content {
+	border: 0px #ccc solid; 
+
+}
+
+.content_style {
+	width:823px;
+}
+.top-left {
+	float:left;
+	width:70px;
+	height:90px;
+	border:1px solid #CCC;
+	padding:4px 4px 4px 4px;
+}
+.top-right {
+	float:right;
+	width:680px;
+	height:auto;
+	padding-bottom:10px;
+}
+.content_style2 {
+	width:775px;
+}
+
+#hot-newsscroll {
+	BORDER-BOTTOM: red 0px solid; BORDER-LEFT: red 0px solid; LIST-STYLE-TYPE: none; MARGIN: 8px 0px 0px; WIDTH:auto; HEIGHT: 20px; OVERFLOW: hidden; BORDER-TOP: red 0px solid; BORDER-RIGHT: red 0px solid
+}
+#hot-newsscroll LI {
+	PADDING-BOTTOM: 0px; LINE-HEIGHT: 20px; MARGIN: 0px auto; PADDING-LEFT: 4px; PADDING-RIGHT: 4px; HEIGHT: 18px; FONT-SIZE: 12px; PADDING-TOP: 0px
+}
+#hot-newsscroll LI A {
+	COLOR: red
+}
+/* common tab */
+.tab_box .tab_top ul li.on {
+	font-weight: bold; 
+	background:#fff; 
+	height: 27px; 
+	border:2px #999 solid;
+	border-bottom:0px #999 solid;
+}
+
+.tab_box .tab_top ul li {
+	float: left; 
+	background:#ccc -338px -197px no-repeat; 
+	width: 80px; 
+	height: 26px; 
+	margin-right: 2px; 
+	text-align: center; 
+	line-height: 26px; 
+	color: #7F2D00; 
+	cursor: pointer;  
+	position: relative; 
+	top: 2px;
+}
+
+.tab_box .main {
+	border: 2px #999 solid;
+	background: #fff; 
+	padding: 10px; 
+}
+
+.customer_table {
+}
+
+.customer_table .title {
+	text-align: center;
+	margin-left: 5px; 
+	margin-right: 5px; 
+	height:30px;
+}
+
+.customer_table .center {
+	text-align: center;
+}
+
+.customer_table .right {
+	text-align:right;
+}
+
+.customer_table .left {
+	padding-left:10px;
+}
+
+.customer_table td {
+	border-bottom: 1px #666 dashed;
+	height:30px;
+}
+
+.zjmx_title {
+	background: #ccc; 
+}
+
+#main3 h1 {
+	margin-top: 15px;
+	margin-bottom: 15px; 
+}
+
+#main4 h1 {
+	margin-top: 15px;
+	margin-bottom: 15px; 
+}
+
+#main3 .bank_box {
+	float: left;
+	width:450px;
+}
+
+#main3 .vline {
+	float: left;
+	width:10px;
+	height:160px;
+	margin-right:15px;
+	border-right: 1px #FF6633 dashed; 
+}
+#main3 .pay_box {
+	float: left; 
+}
+
+/*软件注册*/
+
+.customer-beizhu {
+     width:%50;
+	 height:360px;
+	 margin-top:10px;
+	 padding:10px 30px 15px 15px;
+}
+.ticheng {
+	 width:750px;
+	 height:122px;
+	 margin-bottom:20px;
+	 border-bottom:1px dashed #ccc;
+}
+.ticheng2 {
+	 width:750px;
+	 height:60px;
+	 margin-bottom:20px;
+	 border-bottom:1px dashed #ccc;
+}
+.ticheng-img {
+	 float:left;
+	 width:70px;
+	 height:50px;
+	 border-right:1px solid #ccc;
+}
+.ticheng-con {
+	 height:auto;
+	 float:left;
+	 padding-top:10px;
+	 margin-left:15px;
+	 line-height:2;
+} 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "struts-2.1.7.dtd">
+<struts>
+	<constant name="struts.i18n.reload" value="true" /><!-- 修改资源文件后自动装载 -->
+    <constant name="struts.devMode" value="true" /><!-- 开发模式会有更多日志信息 -->
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <constant name="struts.locale" value="zh_CN" />
+    <constant name="struts.objectFactory" value="spring"/>
+    <constant name="struts.configuration.xml.reload" value="true" /><!-- 修改Struts配置文件后自动装载 -->
+    <constant name="struts.custom.i18n.resources" value="ApplicationResources" /> <!--资源文件名 -->
+    <constant name="struts.serve.static" value="true" /><!--指明Struts的静态内容取法,true到jar包中拿,false到../struts路径中拿-->
+    <constant name="struts.serve.static.browserCache" value="false" />
+    <constant name="struts.multipart.maxSize" value="2097152" /><!--文件上传大小-->
+    <constant name="struts.ui.theme" value="simple" />
+    <constant name="struts.action.extension" value="aspx,htm,jhtml" />
+    <constant name="struts.multipart.saveDir" value="/tmp"></constant>
+    
+    <package name="default" extends="struts-default">
+		 <interceptors>
+			<interceptor name="exceptionInteceptor" class="com.xsc.lottery.web.interceptor.ExceptionInteceptor"/>
+			<interceptor name="bindUrlInteceptor" class="com.xsc.lottery.web.interceptor.BindUrlInteceptor"></interceptor>
+			<interceptor-stack name="LotteryCompleteStack">
+				<interceptor-ref name="completeStack" />
+				<interceptor-ref name="exceptionInteceptor" />
+				<interceptor-ref name="bindUrlInteceptor" />
+			</interceptor-stack>
+		 </interceptors>
+		 <default-interceptor-ref name="LotteryCompleteStack"></default-interceptor-ref>
+		 <global-results>
+			<result name="ajaxjson">/util/ajaxJsonString.jsp</result>
+			<result name="error">/404.html</result>
+		</global-results>
+	</package>
+	<include file="client-strust.xml"></include>
+	<!--<include file="admin-struts.xml"></include>
+	<include file="partner-struts.xml"></include>
+	<include file="otherApi-strust.xml"></include>-->
+	<include file="active-struts.xml"></include>
+	<include file="admin-struts.xml"></include>
+</struts>
