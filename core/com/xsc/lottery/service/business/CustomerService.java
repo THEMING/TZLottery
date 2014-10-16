@@ -62,6 +62,13 @@ public interface CustomerService extends LotteryBaseService<Customer>{
 	 */
 	public Page<BackMoneyRequest> getBackMoneyRequestPage(Page<BackMoneyRequest> page,String fStatu,String fTimeName, String fNikname, String fRaelname, Calendar fSTime, Calendar fETime, String fBank, String fBankCard, String fOpenSpace);
 
+	/*根据条件获取总金额*/
+	public BigDecimal getPaymentRequestSum(
+            String f_moneyChannel, String f_name,
+           String f_numNo, Calendar f_starTime, Calendar f_endTime,
+           String f_statu, String f_user, String fUserTypes, Calendar fSTime,
+           Calendar fETime);
+	
 	/**
 	 * 获得符合条件的客户提款信息
 	 */
@@ -79,6 +86,12 @@ public interface CustomerService extends LotteryBaseService<Customer>{
 	 * 冻结/解冻
 	 */
 	public void updateWallet(Wallet wallet);
+	
+	/*根据条件获取提款总金额*/
+	public BigDecimal getBackMoneyRequestSum(
+             String fStatu, String fNikname,
+            String fRaelname, String fTimeName, Calendar fSTime,
+            Calendar fETime, String fBank, String fBankCard, String fOpenSpace);
 	
 	/**
 	 * 提款请求
@@ -182,11 +195,11 @@ public interface CustomerService extends LotteryBaseService<Customer>{
     		String recommendName, Calendar startTime, Calendar endTime);
 	
 	@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
-	public Page<Customer> getRecommendorsPage2(Page<Customer> page,Customer customer);
+	public Page<Customer> getRecommendorsPage2(Page<Customer> page,Customer customer, Calendar startTime, Calendar endTime);
 	
 	/** 根据推荐人，开始结束时间 查出被推荐人注册数 */
 	@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
-	public Long getRecommendorsPage2(Page<Customer> page,Customer customer, Calendar startTime, Calendar endTime);
+	public Long getRecommendorsPageNum(Page<Customer> page,Customer customer, Calendar startTime, Calendar endTime);
 
 	@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = false)
 	public CustomerCommission saveCommssion(CustomerCommission entity);

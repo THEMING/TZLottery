@@ -97,6 +97,11 @@ public interface SmsLogService
 	public SmsLog saveSmsLog(String mobile,String content,Long customerId,SmsLogType logType); 
 	
 	/**
+	 * 保存短信日志以及发送状态
+	 */
+	public SmsLog saveSmsLogAndSendState(String mobile,String content,Long customerId,SmsLogType logType,SmsLogState smsLogState,String mark); 
+	
+	/**
 	 * 获取短信日志记录
 	 * @param page
 	 * @param mobile

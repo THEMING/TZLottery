@@ -80,6 +80,7 @@ public class SmsLogServiceImpl implements SmsLogService
 	    	{
 	    		criteria.add(Restrictions.eq("state", state));
 	    	} 
+	    	criteria.addOrder(Order.desc("id"));
 	    	page = smsLogDao.findByCriteria(page, criteria);
 	    	return page;
 		}
@@ -533,6 +534,27 @@ public class SmsLogServiceImpl implements SmsLogService
     	smsLog.setType(logType);
     	smsLog.setUserId("1");
     	smsLog.setUserPriority(3);
+		smsLogDao.save(smsLog);
+		return smsLog;
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public SmsLog saveSmsLogAndSendState(String mobile,String content,Long customerId,SmsLogType logType,SmsLogState smsLogState,String mark)
+	{
+		SmsLog smsLog = new SmsLog();
+    	smsLog.setContent(content);
+    	smsLog.setMobile(mobile);
+    	smsLog.setRetryCount(0);
+    	smsLog.setCustomerId(customerId);
+    	smsLog.setSendPriority(5);
+    	smsLog.setSendState(SmsSendState.IMMEDIATELY);
+    	smsLog.setSmsSendType(SmsSendType.YUN);
+    	smsLog.setState(smsLogState);
+    	smsLog.setSendTime(Calendar.getInstance());
+    	smsLog.setType(logType);
+    	smsLog.setUserId("1");
+    	smsLog.setUserPriority(3);
+    	smsLog.setMark(mark);
 		smsLogDao.save(smsLog);
 		return smsLog;
 	}

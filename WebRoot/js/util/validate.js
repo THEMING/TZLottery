@@ -412,7 +412,7 @@ function isRealName(s)
 
 function isPwd(s)
 {
-	if(s.search(/^[A-Za-z0-9]{6,15}$/)!=-1)
+	if(s.search(/^[A-Za-z0-9]{6,40}$/)!=-1)
 		return true;
 	else
 		return false;

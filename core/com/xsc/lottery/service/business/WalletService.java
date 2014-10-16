@@ -5,9 +5,11 @@ import java.util.Calendar;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.modules.orm.hibernate.Page;
 
 import com.xsc.lottery.entity.business.Customer;
 import com.xsc.lottery.entity.business.Wallet;
+import com.xsc.lottery.entity.business.WalletLog;
 import com.xsc.lottery.service.LotteryBaseService;
 
 public interface WalletService extends LotteryBaseService<Wallet>{
@@ -38,4 +40,11 @@ public interface WalletService extends LotteryBaseService<Wallet>{
 	   */
 	 @Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
 	 public BigDecimal getRechargeMon(Calendar startTime, Calendar endTime, Customer customer);
+	 
+	 /**
+	   * 获取某时间段内被推荐人的充值情况
+	   * @return
+	   */
+	 @Transactional(propagation=Propagation.NOT_SUPPORTED,readOnly=true)
+	 public Page<WalletLog> getRechargeDetail(Page<WalletLog> wlPage,Calendar startTime, Calendar endTime, Customer customer);
 }

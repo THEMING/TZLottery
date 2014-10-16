@@ -199,7 +199,7 @@ public class SmsLog extends BaseObject
 	 */
 	public static enum SmsSendType
 	{
-		EMAY("亿美短信接口"), SH81666("上海81666短信接口"), ZGYD10086("中国移动短信接口"), CSAP("彩搜短信接口");
+		EMAY("亿美短信接口"), SH81666("上海81666短信接口"), ZGYD10086("中国移动短信接口"), CSAP("彩搜短信接口"),YUN("云通讯平台");
 
 		private String text;
 

@@ -7,6 +7,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Expression;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springside.modules.orm.hibernate.Page;
 import org.springside.modules.orm.hibernate.SimpleHibernateTemplate;
 
 import com.xsc.lottery.dao.PagerHibernateTemplate;
@@ -33,6 +35,7 @@ public class WalletServiceImpl implements WalletService{
 
 	 private PagerHibernateTemplate<Wallet, Long> walletDao;
 	 public SimpleHibernateTemplate<WalletLog, Long> walletLogDao;
+	 public PagerHibernateTemplate<WalletLog, Long> walletLogPageDao;
 	 @Autowired
     public void setSessionFactory(
             @Qualifier("sessionFactory") SessionFactory sessionfactory)
@@ -40,6 +43,8 @@ public class WalletServiceImpl implements WalletService{
         this.walletDao = new PagerHibernateTemplate<Wallet, Long>(
                 sessionfactory, Wallet.class);
         this.walletLogDao = new PagerHibernateTemplate<WalletLog, Long>(
+                sessionfactory, WalletLog.class);
+        this.walletLogPageDao = new PagerHibernateTemplate<WalletLog, Long>(
                 sessionfactory, WalletLog.class);
     }
 	 
@@ -111,7 +116,7 @@ public class WalletServiceImpl implements WalletService{
 		 criteria.createAlias("wallet.customer", "customer")
 		 .add(Restrictions.eq("customer.superior", customer));
 	     criteria.add(Restrictions.or(Restrictions.eq("type", WalletLogType.直接充值), Restrictions.eq("type", WalletLogType.账户充值)));
-	     criteria.setProjection(Projections.groupProperty("customer.id"));
+	     
 	     if(startTime != null)
 	     {
 	        criteria.add(Restrictions.ge("time", startTime));
@@ -121,12 +126,9 @@ public class WalletServiceImpl implements WalletService{
 	        criteria.add(Restrictions.le("time", endTime));
 	     }
 	     criteria.setProjection(Projections.rowCount());
-	     Long payNumb = new Long(0);
-	     Object o = criteria.uniqueResult();
-	     if(o!=null){
-	    	 payNumb = Long.parseLong(o.toString());
-	     }
-		return payNumb;
+	     criteria.setProjection(Projections.groupProperty("customer.id"));
+	     int num = criteria.list().size();
+		return new Long(num);
 	}
 	
 	public BigDecimal getRechargeMon(Calendar startTime, Calendar endTime, Customer customer){	
@@ -151,5 +153,27 @@ public class WalletServiceImpl implements WalletService{
 	    	 sumNum = (BigDecimal)payNum;
 	     }
 		return sumNum;
+	}
+	
+	/*获取被推荐人的充值情况*/
+	public Page<WalletLog> getRechargeDetail(Page<WalletLog> wlPage,Calendar startTime, Calendar endTime, Customer customer){	
+		
+		Criteria criteria = walletLogPageDao.createCriteria();
+		criteria.createAlias("wallet", "wallet");
+		 criteria.createAlias("wallet.customer", "customer");
+		 criteria.add(Restrictions.eq("customer.superior", customer));
+	     criteria.add(Restrictions.or(Restrictions.eq("type", WalletLogType.直接充值), Restrictions.eq("type", WalletLogType.账户充值)));
+	     if(startTime != null)
+	     {
+	        criteria.add(Restrictions.ge("time", startTime));
+	     }
+	     if(endTime != null)
+	     {
+	        criteria.add(Restrictions.le("time", endTime));
+	     }
+	     criteria.addOrder(Order.desc("id"));
+	     
+	     Page<WalletLog> page = walletLogPageDao.findByCriteria(wlPage, criteria);
+	        return page;
 	}
 }

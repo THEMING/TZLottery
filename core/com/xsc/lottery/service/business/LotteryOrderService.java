@@ -400,9 +400,10 @@ public interface LotteryOrderService extends LotteryBaseService<Order>
     @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
     public BigDecimal getKuaiQianSum(Calendar f_stime,Calendar f_etime);
     
-    /** 获取某时间段内被推荐人的消费人数 根据推荐人，开始结束时间 */
+    /** 获取某时间段内被推荐人的消费人数 根据推荐人，开始结束时间 
+     * @param lotteryType */
 	@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
-	public Long getSumPayByCustomer(Calendar startTime, Calendar endTime,Customer customer);
+	public Long getSumPayByCustomer(Calendar startTime, Calendar endTime,Customer customer, LotteryType lotteryType);
     
     /**
      * 日报统计
@@ -469,5 +470,8 @@ public interface LotteryOrderService extends LotteryBaseService<Order>
      * @param overTime
      * @return
      */
-	public BigDecimal getSumMoneyByCustomer(Calendar startTime, Calendar overTime, Customer customer);
+	public BigDecimal getSumMoneyByCustomer(Calendar startTime, Calendar overTime, Customer customer, LotteryType lotteryType);
+	
+	/*获取某时间段内被推荐人的购彩情况*/
+	public Page<Order> getOrderDetailByCustomer(Page<Order> page,Calendar startTime, Calendar overTime,Customer customer, LotteryType lotteryType);
 }

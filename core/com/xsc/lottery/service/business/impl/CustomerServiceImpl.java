@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
@@ -34,6 +35,7 @@ import com.xsc.lottery.entity.business.NewlyWinPrize;
 import com.xsc.lottery.entity.business.PaymentRequest;
 import com.xsc.lottery.entity.business.Wallet;
 import com.xsc.lottery.entity.business.WalletLog;
+import com.xsc.lottery.entity.business.SmsLog.SmsLogState;
 import com.xsc.lottery.entity.business.SmsLog.SmsLogType;
 import com.xsc.lottery.entity.enumerate.BackMoneyStatus;
 import com.xsc.lottery.entity.enumerate.Bank;
@@ -47,8 +49,10 @@ import com.xsc.lottery.service.business.LotteryOrderService;
 import com.xsc.lottery.service.business.SmsLogService;
 import com.xsc.lottery.service.listener.active.ActivityListener;
 import com.xsc.lottery.task.message.MessageTaskExcutor;
+import com.xsc.lottery.util.Configuration;
 import com.xsc.lottery.util.DateUtil;
 import com.xsc.lottery.util.MD5;
+import com.xsc.lottery.util.SmsUtil;
 
 @Service("customerService")
 @Transactional
@@ -550,6 +554,69 @@ public class CustomerServiceImpl implements CustomerService
         page = paymentRequestDao.findByCriteria(page, criteria);
         return page;
     }
+    
+    /*
+     * 根据查询条件获得客户充值流水信息总和
+     * 
+     * @see
+     * com.xsc.lottery.service.business.CustomerService#getPaymentRequestPage
+     * (org.springside.modules.orm.hibernate.Page, java.lang.String,
+     * java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+     * java.lang.String, java.lang.String)
+     */
+    @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
+    public BigDecimal getPaymentRequestSum(
+             String f_moneyChannel, String f_name,
+            String f_numNo, Calendar f_starTime, Calendar f_endTime,
+            String f_statu, String f_user, String fUserTypes, Calendar fSTime,
+            Calendar fETime)
+    {
+        logger.debug("根据查询条件获得客户充值流水信息总和");
+        Criteria criteria = paymentRequestDao.createCriteria();
+        if (!StringUtils.isEmpty(f_moneyChannel)) {
+            criteria.add(Restrictions.eq("channel", MoneyChannel
+                    .valueOf(f_moneyChannel)));
+        }
+        criteria.createAlias("customer", "customer");
+        if (!StringUtils.isEmpty(f_name)) {
+            criteria.add(Restrictions.eq("customer.nickName", f_name));
+        }
+        if (!StringUtils.isEmpty(fUserTypes)) {
+            criteria.add(Restrictions.eq("customer.usrType", UserType
+                    .valueOf(fUserTypes)));
+        }
+
+        if (fSTime != null) {
+            criteria.add(Restrictions.ge("customer.registerTime", fSTime));
+        }
+        if (fETime != null) {
+            criteria.add(Restrictions.le("customer.registerTime", fETime));
+        }
+
+        if (!StringUtils.isEmpty(f_numNo)) {
+            criteria.add(Restrictions.eq("serialNumber", f_numNo));
+        }
+        if (f_starTime != null) {
+            criteria.add(Restrictions.ge("payTime", f_starTime));
+        }
+        if (f_endTime != null) {
+            criteria.add(Restrictions.le("payTime", f_endTime));
+        }
+        if (!StringUtils.isEmpty(f_statu)) {
+            criteria.add(Restrictions.eq("finish", Boolean
+                    .parseBoolean(f_statu)));
+        }
+        if (!StringUtils.isEmpty(f_user)) {
+            criteria.createAlias("user", "user");
+            criteria.add(Restrictions.eq("user.adminName", f_user));
+        }
+        Object o = criteria.setProjection(Projections.sum("money")).uniqueResult();
+        BigDecimal oo = new BigDecimal(0);
+        if(o!=null){
+        	oo = (BigDecimal) o;
+        }
+        return oo;
+    }
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
     public Page<BackMoneyRequest> getBackMoneyRequestPage(
@@ -607,6 +674,67 @@ public class CustomerServiceImpl implements CustomerService
         criteria.addOrder(Order.desc("id"));
         page = backMoneyRequestDao.findByCriteria(page, criteria);
         return page;
+    }
+    
+    @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
+    public BigDecimal getBackMoneyRequestSum(
+             String fStatu, String fNikname,
+            String fRaelname, String fTimeName, Calendar fSTime,
+            Calendar fETime, String fBank, String fBankCard, String fOpenSpace)
+    {
+        logger.debug("根据查询条件获得客户提款流水信息总和");
+        Criteria criteria = backMoneyRequestDao.createCriteria();
+
+        if (!StringUtils.isEmpty(fStatu)) {
+            criteria.add(Restrictions.eq("status", BackMoneyStatus
+                    .valueOf(fStatu)));
+        }
+        if (!StringUtils.isEmpty(fNikname)) {
+            criteria.createAlias("customer", "customer");
+            criteria.add(Restrictions.eq("customer.nickName", fNikname));
+        }
+        if (!StringUtils.isEmpty(fRaelname)) {
+            criteria.createAlias("customer", "customer");
+            criteria.add(Restrictions.or(Restrictions.eq("customer.realName",
+                    fRaelname), Restrictions.eq("realName", fRaelname)));
+        }
+        if (fTimeName != null) {
+            if (fTimeName.equals("申请时间")) {
+                if (fSTime != null) {
+                    criteria.add(Restrictions.ge("applyTime", fSTime));
+                }
+                if (fETime != null) {
+                    criteria.add(Restrictions.le("applyTime", fETime));
+                }
+            }
+            if (fTimeName.equals("返款时间")) {
+                if (fSTime != null) {
+                    criteria.add(Restrictions.ge("sendTime", fSTime));
+                }
+                if (fETime != null) {
+                    criteria.add(Restrictions.le("sendTime", fETime));
+                }
+            }
+        }
+
+        if (!StringUtils.isEmpty(fBank)) {
+            criteria.add(Restrictions.eq("bank", Bank.valueOf(fBank)));
+        }
+
+        if (!StringUtils.isEmpty(fBankCard)) {
+            criteria.add(Restrictions.eq("bankCard", fBankCard));
+        }
+
+        if (!StringUtils.isEmpty(fOpenSpace)) {
+            criteria.add(Restrictions.eq("openSpace", fOpenSpace));
+        }
+        Object o = criteria.setProjection(Projections.sum("money")).uniqueResult();
+        BigDecimal oo = new BigDecimal(0);
+        if(o!=null){
+        	oo = (BigDecimal)o;
+        }
+        
+        return oo;
     }
     
     @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
@@ -1007,7 +1135,7 @@ public class CustomerServiceImpl implements CustomerService
     /** 得到被推荐人注册数 根据推荐人，开始，结束时间作为条件*/
     @SuppressWarnings("unchecked")
         @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
-    public Long getRecommendorsPage2(Page<Customer> page, Customer customer,Calendar startTime, Calendar endTime)
+    public Long getRecommendorsPageNum(Page<Customer> page, Customer customer,Calendar startTime, Calendar endTime)
 	{
     	Criteria criteria = customerDao.createCriteria();
     	criteria.add(Restrictions.eq("superior", customer));
@@ -1037,22 +1165,27 @@ public class CustomerServiceImpl implements CustomerService
 		overTime.set(curReportDate.get(Calendar.YEAR), curReportDate.get(Calendar.MONTH), curReportDate.get(Calendar.DATE), 23, 59, 59);
 		Customer customer = new Customer();
 		customer.setId(new Long(2988));
-    	Long regNum = customerService.getRecommendorsPage2(null,customer,startTime, overTime);	
-    	System.out.println("============================="+regNum);
+//    	Long regNum = customerService.getRecommendorsPage2(null,customer,startTime, overTime);	
+//    	System.out.println("============================="+regNum);
 	}
     
     /** 得到被推荐人列表*/
     @SuppressWarnings("unchecked")
         @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
-    public Page<Customer> getRecommendorsPage2(Page<Customer> page, Customer customer)
+    public Page<Customer> getRecommendorsPage2(Page<Customer> page, Customer customer,Calendar stime, Calendar etime)
 	{
     	Criteria criteria = customerDao.createCriteria();
 
         criteria.add(Restrictions.or(Restrictions.eq("superior", customer), 
     			Restrictions.eq("ssuperior", customer)));
         
-              
-      
+        if (stime != null) {
+            criteria.add(Restrictions.ge("registerTime", stime));
+        }
+        if (etime != null) {
+            criteria.add(Restrictions.le("registerTime", etime));
+        }
+        criteria.addOrder(Order.desc("id"));
         page = customerDao.findByCriteria(page, criteria);
         return page;
 	}
@@ -1150,7 +1283,13 @@ public class CustomerServiceImpl implements CustomerService
 		//customer.setQuestion(question);
 		
 		String content ="【一彩票网】欢迎使用一彩票，一彩票手机验证码为"+customer.getYanzhenma();
-		smsLogService.saveSmsLog(customer.getMobileNo(), content, customer.getId(),SmsLogType.VALID);
+		Map result = SmsUtil.sendSms(customer.getMobileNo(), new String[]{customer.getYanzhenma()},Configuration.getInstance().getValue("phoneVilTemplateIDYUN"));
+		if("000000".equals(result.get("statusCode"))){//发送成功
+			smsLogService.saveSmsLogAndSendState(customer.getMobileNo(), content, customer.getId(),SmsLogType.VALID,SmsLogState.SENDED,"");
+		}else{
+			smsLogService.saveSmsLogAndSendState(customer.getMobileNo(), content, customer.getId(),SmsLogType.VALID,SmsLogState.FAILURE,"错误码=" + result.get("statusCode") +" 错误信息= "+result.get("statusMsg"));
+		}
+//		smsLogService.saveSmsLog(customer.getMobileNo(), content, customer.getId(),SmsLogType.VALID);
 		customerDao.save(customer);
 		//messageTaskExcutor.addNotifyCustomer(customer);
 		return  customer;

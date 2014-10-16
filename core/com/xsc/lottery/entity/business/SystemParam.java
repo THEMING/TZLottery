@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -15,7 +16,7 @@ import com.xsc.lottery.entity.BaseObject;
  * @author caipiao
  */
 @Entity
-@Table(name = "business_system_param")
+@Table(name = "business_system_param",uniqueConstraints = { @UniqueConstraint(columnNames = { "name"}) })
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class SystemParam extends BaseObject
 {
@@ -25,8 +26,19 @@ public class SystemParam extends BaseObject
 	@GeneratedValue
 	private Long id;
 	
+	/*
+	 * 参数描述
+	 */
+	private String description;
+	
+	/*
+	 *参数名 
+	 */
 	private String name;
 	
+	/*
+	 * 参数值
+	 */
 	private String value;
 
 	public Long getId()
@@ -37,6 +49,16 @@ public class SystemParam extends BaseObject
 	public void setId(Long id)
 	{
 		this.id = id;
+	}
+
+	public String getDescription()
+	{
+		return description;
+	}
+
+	public void setDescription(String description)
+	{
+		this.description = description;
 	}
 
 	public String getName() {

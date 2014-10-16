@@ -30,6 +30,7 @@ import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,6 +59,7 @@ import com.xsc.lottery.entity.business.Ticket;
 import com.xsc.lottery.entity.business.WalletLog;
 import com.xsc.lottery.entity.business.WinDescribeOrder;
 import com.xsc.lottery.entity.business.WinDescribeTicket;
+import com.xsc.lottery.entity.business.SmsLog.SmsLogState;
 import com.xsc.lottery.entity.business.SmsLog.SmsLogType;
 import com.xsc.lottery.entity.enumerate.BusinessType;
 import com.xsc.lottery.entity.enumerate.ChaseItermStatus;
@@ -87,7 +89,9 @@ import com.xsc.lottery.task.email.Email369TaskExcutor;
 import com.xsc.lottery.task.message.MessageTaskExcutor;
 import com.xsc.lottery.task.ticket.TicketBusinessFactory;
 import com.xsc.lottery.task.ticket.TicketTreatmentWork;
+import com.xsc.lottery.util.Configuration;
 import com.xsc.lottery.util.DateUtil;
+import com.xsc.lottery.util.SmsUtil;
 
 @Service("lotteryOrderService")
 @Transactional
@@ -95,6 +99,7 @@ public class LotteryOrderServiceImpl implements LotteryOrderService
 {
     public Logger logger = LoggerFactory.getLogger(this.getClass());
     public PagerHibernateTemplate<Order, Long> orderDao;
+    public PagerHibernateTemplate<Customer, Long> customerDao;
     public PagerHibernateTemplate<Ticket, Long> ticketDao;
     public SimpleHibernateTemplate<WinDescribeTicket, Long> winDescribeTicketDao;
     public SimpleHibernateTemplate<WinDescribeOrder, Long> winDescribeOrderDao;
@@ -146,6 +151,8 @@ public class LotteryOrderServiceImpl implements LotteryOrderService
     {
         this.orderDao = new PagerHibernateTemplate<Order, Long>(sessionfactory,
                 Order.class);
+        this.customerDao = new PagerHibernateTemplate<Customer, Long>(sessionfactory,
+                        Customer.class);
         this.ticketDao = new PagerHibernateTemplate<Ticket, Long>(
                 sessionfactory, Ticket.class);
         this.winDescribeTicketDao = new SimpleHibernateTemplate<WinDescribeTicket, Long>(
@@ -630,8 +637,13 @@ public class LotteryOrderServiceImpl implements LotteryOrderService
 	        	String content = "【一彩票网】您好：";
 		    	content += "您的购买的" + order.getTerm().getTermNo() + "期" + order.getType() + "，订单号为：" + order.getPlan().getNumberNo() + "的订单，出票失败！";
 		    	content += "对此表示抱歉，为了避免您的损失，请重新购彩！";
-		    	smsLogService.saveSmsLog(order.getCustomer().getMobileNo(), content, order.getCustomer().getId(),SmsLogType.NOTICE);
-	        	
+//		    	smsLogService.saveSmsLog(order.getCustomer().getMobileNo(), content, order.getCustomer().getId(),SmsLogType.NOTICE);
+		    	Map result = SmsUtil.sendSms(order.getCustomer().getMobileNo(), new String[]{order.getTerm().getTermNo(),order.getType().name(),order.getPlan().getNumberNo()},Configuration.getInstance().getValue("payfailTemplateIDYUN"));
+	    		if("000000".equals(result.get("statusCode"))){//发送成功
+	    			smsLogService.saveSmsLogAndSendState(order.getCustomer().getMobileNo(), content, order.getCustomer().getId(),SmsLogType.NOTICE,SmsLogState.SENDED,"");
+	    		}else{
+	    			smsLogService.saveSmsLogAndSendState(order.getCustomer().getMobileNo(), content, order.getCustomer().getId(),SmsLogType.NOTICE,SmsLogState.FAILURE,"错误码=" + result.get("statusCode") +" 错误信息= "+result.get("statusMsg"));
+	    		}
 //	        	messageTaskExcutor.adderror(order);
 	        	
 	    		xtTime.add(Calendar.MINUTE, 5);
@@ -2479,7 +2491,7 @@ public class LotteryOrderServiceImpl implements LotteryOrderService
 	}
 
 	@SuppressWarnings("unchecked")
-	public BigDecimal getSumMoneyByCustomer(Calendar startTime, Calendar overTime,Customer customer)
+	public BigDecimal getSumMoneyByCustomer(Calendar startTime, Calendar overTime,Customer customer,LotteryType lotteryType)
 	{
 		 Criteria criteria = orderDao.createCriteria();
 		 criteria.createAlias("customer", "customer");
@@ -2494,6 +2506,9 @@ public class LotteryOrderServiceImpl implements LotteryOrderService
 	     {
 	        criteria.add(Restrictions.le("successTime", overTime));
 	     }
+	     if(lotteryType!=null&&!LotteryType.全部.equals(lotteryType)){
+	    	 criteria.add(Restrictions.eq("type", lotteryType));
+	     }
 	     List<Object> list = criteria.list();
 	     BigDecimal sumNum=new BigDecimal(0.00);
 	     Object obj= list.get(0);
@@ -2505,15 +2520,13 @@ public class LotteryOrderServiceImpl implements LotteryOrderService
 	     
 	}
 	
-	/* 获取某时间段被推荐人的消费人数 根据推荐人，开始结束时间*/
 	@SuppressWarnings("unchecked")
-	public Long getSumPayByCustomer(Calendar startTime, Calendar overTime,Customer customer)
+	public Page<Order> getOrderDetailByCustomer(Page<Order> page,Calendar startTime, Calendar overTime,Customer customer,LotteryType lotteryType)
 	{
 		 Criteria criteria = orderDao.createCriteria();
 		 criteria.createAlias("customer", "customer");
 		 criteria.add(Restrictions.eq("customer.superior", customer));
 	     criteria.add(Restrictions.or(Restrictions.eq("status", OrderStatus.出票成功), Restrictions.eq("status", OrderStatus.部分出票成功)));
-	     criteria.setProjection(Projections.groupProperty("customer.id"));
 	     if(startTime != null)
 	     {
 	        criteria.add(Restrictions.ge("successTime", startTime));
@@ -2522,13 +2535,40 @@ public class LotteryOrderServiceImpl implements LotteryOrderService
 	     {
 	        criteria.add(Restrictions.le("successTime", overTime));
 	     }
-	     criteria.setProjection(Projections.rowCount());
-	     Long payNumb = new Long(0);
-	     Object o = criteria.uniqueResult();
-	     if(o!=null){
-	    	 payNumb = Long.parseLong(o.toString()) ;
+	     if(lotteryType!=null&&!LotteryType.全部.equals(lotteryType)){
+	    	 criteria.add(Restrictions.eq("type", lotteryType));
 	     }
-		return payNumb;
+	     criteria.addOrder(Property.forName("id").desc());
+	     
+	     Page<Order> p = orderDao.findByCriteria(page, criteria);
+		return p;
+	     
+	}
+	
+	/* 获取某时间段被推荐人的消费人数 根据推荐人，开始结束时间*/
+	@SuppressWarnings("unchecked")
+	public Long getSumPayByCustomer(Calendar startTime, Calendar overTime,Customer customer, LotteryType lotteryType)
+	{
+		
+		 Criteria criteria = orderDao.createCriteria();
+		 criteria.createAlias("customer", "customer");
+		 criteria.add(Restrictions.eq("customer.superior", customer));
+	     criteria.add(Restrictions.or(Restrictions.eq("status", OrderStatus.出票成功), Restrictions.eq("status", OrderStatus.部分出票成功)));
+	     
+	     if(startTime != null)
+	     {
+	        criteria.add(Restrictions.ge("successTime", startTime));
+	     }
+	     if(overTime != null)
+	     {
+	        criteria.add(Restrictions.le("successTime", overTime));
+	     }
+	     if(lotteryType!=null&&!LotteryType.全部.equals(lotteryType)){
+	    	 criteria.add(Restrictions.eq("type", lotteryType));
+	     }
+	     criteria.setProjection(Projections.rowCount());
+	     criteria.setProjection(Projections.groupProperty("customer.id"));
+		return new Long(criteria.list().size());
 	     
 	}
 	
