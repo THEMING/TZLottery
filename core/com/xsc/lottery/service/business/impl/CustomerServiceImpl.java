@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -21,13 +22,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.orm.hibernate.Page;
 import org.springside.modules.orm.hibernate.SimpleHibernateTemplate;
 
+import com.xsc.lottery.alipay.util.MapUtil;
 import com.xsc.lottery.dao.PagerHibernateTemplate;
+import com.xsc.lottery.entity.admin.AdminUser;
 import com.xsc.lottery.entity.business.BackMoneyRequest;
 import com.xsc.lottery.entity.business.Customer;
 import com.xsc.lottery.entity.business.CustomerCommission;
@@ -40,10 +45,12 @@ import com.xsc.lottery.entity.business.SmsLog.SmsLogType;
 import com.xsc.lottery.entity.enumerate.BackMoneyStatus;
 import com.xsc.lottery.entity.enumerate.Bank;
 import com.xsc.lottery.entity.enumerate.BusinessType;
+import com.xsc.lottery.entity.enumerate.CustomerType;
 import com.xsc.lottery.entity.enumerate.MoneyChannel;
 import com.xsc.lottery.entity.enumerate.UserType;
 import com.xsc.lottery.entity.enumerate.WalletLogType;
 import com.xsc.lottery.java.common.SystemWarningNotify;
+import com.xsc.lottery.service.business.CpsReportService;
 import com.xsc.lottery.service.business.CustomerService;
 import com.xsc.lottery.service.business.LotteryOrderService;
 import com.xsc.lottery.service.business.SmsLogService;
@@ -342,13 +349,204 @@ public class CustomerServiceImpl implements CustomerService
     {
         return (Wallet) walletDao.getSession().get(Wallet.class, Id);
     }
+    
+    public static void main(String[] args)
+	{
+    	String[] contextPaths = new String[] { "applicationContext.xml" };
+		ApplicationContext springContext = new ClassPathXmlApplicationContext(contextPaths);
+		PagerHibernateTemplate<Customer, Long> customerDao = (PagerHibernateTemplate<Customer, Long>) springContext.getBean("customerDao");
+		StringBuffer hql = new StringBuffer("update business_customer bc set bc.adminUser_id=:adminUser_id where 1=1 and bc.id in (:customerIds)");
+		SQLQuery query = customerDao.getSession().createSQLQuery(hql.toString());
+		
+		query.setParameter("adminUser_id", 11);
+		query.setParameter("customerIds", 11);
+		
+		int i = query.executeUpdate();
+	}
+    
+    public void updateCustomers(Map map){
+    	StringBuffer hql = new StringBuffer("update business_customer set admin_user_id=:adminUser_id where 1=1");
+    	if (MapUtil.checkKey(map, "customerIds")) {
+        	hql.append(" and id in(:customerIds)");
+        }    	
+    	
+    	if (MapUtil.checkKey(map, "f_serch")) {
+            if (MapUtils.getString(map, "f_serch").equals("用户名")) {
+            	hql.append(" and nick_name like :f_serchName");
+            }
+            if (MapUtils.getString(map, "f_serch").equals("真实姓名")) {
+            	hql.append(" and real_name like :f_serchName");
+            }
+            if (MapUtils.getString(map, "f_serch").equals("邮箱")) {
+            	hql.append(" and email like :f_serchName");
+            }
+        }
+        if (MapUtil.checkKey(map, "f_starTime")) {
+        	hql.append(" and register_time >=:f_starTime");
+        }
+        if (MapUtil.checkKey(map, "f_endTime")) {
+        	hql.append(" and register_time <=:f_endTime");
+        }
+        if (MapUtil.checkKey(map, "f_orderserch")
+                && (MapUtils.getString(map, "f_orderserch").equals("购彩用户") || MapUtils.getString(map, "f_orderserch").equals("未购彩用户"))) {
+            if (MapUtils.getString(map, "f_orderserch").equals("购彩用户")) {
+                if (MapUtil.checkKey(map, "stratTime")|| MapUtil.checkKey(map, "endTime")) {
+                    List<Long> list = lotteryOrderService.getCustomerId(
+                    		(Calendar)MapUtils.getObject(map,"stratTime"), (Calendar)MapUtils.getObject(map,"endTime"));
+                    hql.append(" and id in (:idList)");
+                }
+            }
+            if (MapUtils.getString(map, "f_orderserch").equals("未购彩用户")) {
+                if (MapUtil.checkKey(map, "stratTime")|| MapUtil.checkKey(map, "endTime")) {
+                    List<Long> list = lotteryOrderService.getCustomerId(
+                    		(Calendar)MapUtils.getObject(map,"stratTime"), (Calendar)MapUtils.getObject(map,"endTime"));
+                    if (list != null && list.size() > 0){
+                    	hql.append(" and id not in (:idList)");
+                    }
+
+                }
+            }
+        }
+        
+        if(MapUtil.checkKey(map, "usrType")) {
+        	hql.append(" and usr_type =:usrType");
+        }
+        if(MapUtil.checkKey(map, "isApply"))
+        {
+        	hql.append(" and is_apply =:isApply");
+        }
+        if(MapUtil.checkKey(map, "isPass"))
+        {
+        	hql.append(" and is_pass =:isPass");
+        }
+        
+        
+        
+        
+        if(MapUtil.checkKey(map, "sBalance")||MapUtil.checkKey(map, "eBalance")){
+        	hql.append(" and wallet_id in (select id from business_wallet w where 1=1 ");
+        	
+        	
+        	if(MapUtil.checkKey(map, "sBalance")){
+        	
+        		hql.append(" and w.balance>=:sBalance");
+               }
+               
+            if(MapUtil.checkKey(map, "eBalance")){
+            	
+            	hql.append(" and w.balance<=:eBalance");
+               }
+            
+            hql.append(")");
+        }
+        
+        if(MapUtil.checkKey(map, "havenotDispath")){
+        	hql.append(" and admin_user_id is null");
+        }
+        
+        
+        SQLQuery query = customerDao.getSession().createSQLQuery(hql.toString());//customerDao.getSession().createSQLQuery(hql.toString());
+    	
+        
+        //================================sql与变量的分割========================================
+        
+        query.setParameter("adminUser_id", MapUtils.getLong(map,"adminUser_id"));
+        
+        if (MapUtil.checkKey(map, "customerIds")) {
+//        	query.setString("customerIds", MapUtils.getString(map,"customerIds"));
+        	query.setParameterList("customerIds", (List)MapUtils.getObject(map,"customerIds"));
+        }    	
+    	
+    	if (MapUtil.checkKey(map, "f_serch")) {
+            if (MapUtils.getString(map, "f_serch").equals("用户名")) {
+            	query.setString("f_serchName", MapUtils.getString(map,"f_serchName")+"%");
+            }
+            if (MapUtils.getString(map, "f_serch").equals("真实姓名")) {
+            	query.setString("f_serchName", MapUtils.getString(map,"f_serchName")+"%");
+            }
+            if (MapUtils.getString(map, "f_serch").equals("邮箱")) {
+            	query.setString("f_serchName", MapUtils.getString(map,"f_serchName")+"%");
+            }
+        }
+        if (MapUtil.checkKey(map, "f_starTime")) {
+        	query.setCalendar("f_starTime", (Calendar)MapUtils.getObject(map,"f_starTime"));
+        }
+        if (MapUtil.checkKey(map, "f_endTime")) {
+        	query.setCalendar("f_endTime", (Calendar)MapUtils.getObject(map,"f_endTime"));
+        }
+        if (MapUtil.checkKey(map, "f_orderserch")
+                && (MapUtils.getString(map, "f_orderserch").equals("购彩用户") || MapUtils.getString(map, "f_orderserch").equals("未购彩用户"))) {
+            if (MapUtils.getString(map, "f_orderserch").equals("购彩用户")) {
+                if (MapUtil.checkKey(map, "stratTime")|| MapUtil.checkKey(map, "endTime")) {
+                    List<Long> list = lotteryOrderService.getCustomerId(
+                    		(Calendar)MapUtils.getObject(map,"stratTime"), (Calendar)MapUtils.getObject(map,"endTime"));
+                    query.setParameterList("idList", list);
+                }
+            }
+            if (MapUtils.getString(map, "f_orderserch").equals("未购彩用户")) {
+                if (MapUtil.checkKey(map, "stratTime")|| MapUtil.checkKey(map, "endTime")) {
+                    List<Long> list = lotteryOrderService.getCustomerId(
+                    		(Calendar)MapUtils.getObject(map,"stratTime"), (Calendar)MapUtils.getObject(map,"endTime"));
+                    if (list != null && list.size() > 0){
+                        query.setParameterList("idList", list);
+                    }
+
+                }
+            }
+        }
+        
+        if(MapUtil.checkKey(map, "usrType")) {
+        	query.setParameter("usrType",MapUtils.getObject(map,"usrType"));
+        }
+        if(MapUtil.checkKey(map, "isApply"))
+        {
+        	query.setBoolean("isApply",MapUtils.getBooleanValue(map,"isApply"));
+        }
+        if(MapUtil.checkKey(map, "isPass"))
+        {
+        	query.setBoolean("isPass",MapUtils.getBooleanValue(map,"isPass"));
+        }
+        
+        
+        
+        
+        if(MapUtil.checkKey(map, "sBalance")||MapUtil.checkKey(map, "eBalance")){
+        	
+        	
+        	if(MapUtil.checkKey(map, "sBalance")){
+        	
+        		query.setBigDecimal("sBalance",(BigDecimal)MapUtils.getObject(map, "sBalance"));
+               }
+               
+            if(MapUtil.checkKey(map, "eBalance")){
+            	
+        		query.setBigDecimal("eBalance",(BigDecimal)MapUtils.getObject(map, "eBalance"));
+               }
+            
+        }
+        
+        int i = query.executeUpdate();
+        
+        
+    	
+//    	String hql1 = "SELECT sum(o.money) FROM business_payment_request o where o.customer_id=:customerId and o.finish=1";
+//        SQLQuery query = paymentRequestDao.getSession().createSQLQuery(hql);
+//        query.setParameter("customerId", customer.getId());
+//        if (query.list().get(0) != null) {
+//            BigDecimal sum = new BigDecimal(query.list().get(0) + "");
+//            return sum;
+//        } 
+//        else {
+//            return new BigDecimal(0);
+//        }
+    }
 
     /** 分页获得客户信息 */
     @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
     public Page<Customer> getLotteryCustomerPage(Page<Customer> page,
             Calendar stratTime, Calendar endTime, String f_orderserch,
             String f_serch, Calendar f_starTime, Calendar f_endTime,
-            String f_serchName, UserType type,Boolean isApply,Integer isPass)
+            String f_serchName, UserType type,Boolean isApply,Integer isPass,Map queryMap)
     {
         logger.debug("根据查询条件获得分页期次列表");
         Criteria criteria = customerDao.createCriteria();
@@ -360,7 +558,7 @@ public class CustomerServiceImpl implements CustomerService
                 criteria.add(Restrictions.like("realName", f_serchName + "%"));
             }
             if (f_serch.equals("邮箱")) {
-                criteria.add(Restrictions.eq("emil", f_serchName));
+                criteria.add(Restrictions.eq("email", f_serchName));
             }
         }
         if (f_starTime != null) {
@@ -401,6 +599,28 @@ public class CustomerServiceImpl implements CustomerService
         {
         	criteria.add(Restrictions.eq("isPass", isPass));
         }
+        
+        if(MapUtil.checkKey(queryMap, "adminUser")){
+        	criteria.add(Restrictions.eq("adminUser", (AdminUser)MapUtils.getObject(queryMap, "adminUser")));
+        }
+        
+        if(MapUtil.checkKey(queryMap, "sBalance")||MapUtil.checkKey(queryMap, "eBalance")){
+        	criteria.createAlias("wallet", "wallet");
+        	
+        	if(MapUtil.checkKey(queryMap, "sBalance")){
+               	criteria.add(Restrictions.ge("wallet.balance", (BigDecimal)MapUtils.getObject(queryMap, "sBalance")));
+               }
+               
+            if(MapUtil.checkKey(queryMap, "eBalance")){
+               	criteria.add(Restrictions.le("wallet.balance", (BigDecimal)MapUtils.getObject(queryMap, "eBalance")));
+               }
+        }
+        
+        if(MapUtil.checkKey(queryMap, "havenotDispath")){
+        	criteria.add(Restrictions.isNull("adminUser"));
+        }
+        
+        
         criteria.addOrder(Order.desc("id"));
         page = customerDao.findByCriteria(page, criteria);
         return page;
@@ -463,6 +683,13 @@ public class CustomerServiceImpl implements CustomerService
     public List<Customer> getCustomerByProperty(String name, Object value)
     {
         return customerDao.findByProperty(name, value);
+    }
+    
+    /** 根据用户类型查询用户 */
+    @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
+    public List<Customer> getCustomerByCustomerType(CustomerType type)
+    {
+    	return customerDao.createCriteria().add(Restrictions.eq("customerType", type)).list();
     }
 
     /** 根据唯一属性得到客户对象 */
@@ -1155,19 +1382,19 @@ public class CustomerServiceImpl implements CustomerService
         return regNumb;
 	}
     
-    public static void main(String[] args)
-	{
-    	CustomerService customerService = new CustomerServiceImpl();
-    	Calendar curReportDate = Calendar.getInstance();
-    	Calendar startTime = Calendar.getInstance();
-		Calendar overTime = Calendar.getInstance();
-		startTime.set(curReportDate.get(Calendar.YEAR), curReportDate.get(Calendar.MONTH), curReportDate.get(Calendar.DATE), 0, 0, 0);
-		overTime.set(curReportDate.get(Calendar.YEAR), curReportDate.get(Calendar.MONTH), curReportDate.get(Calendar.DATE), 23, 59, 59);
-		Customer customer = new Customer();
-		customer.setId(new Long(2988));
-//    	Long regNum = customerService.getRecommendorsPage2(null,customer,startTime, overTime);	
-//    	System.out.println("============================="+regNum);
-	}
+//    public static void main(String[] args)
+//	{
+//    	CustomerService customerService = new CustomerServiceImpl();
+//    	Calendar curReportDate = Calendar.getInstance();
+//    	Calendar startTime = Calendar.getInstance();
+//		Calendar overTime = Calendar.getInstance();
+//		startTime.set(curReportDate.get(Calendar.YEAR), curReportDate.get(Calendar.MONTH), curReportDate.get(Calendar.DATE), 0, 0, 0);
+//		overTime.set(curReportDate.get(Calendar.YEAR), curReportDate.get(Calendar.MONTH), curReportDate.get(Calendar.DATE), 23, 59, 59);
+//		Customer customer = new Customer();
+//		customer.setId(new Long(2988));
+////    	Long regNum = customerService.getRecommendorsPage2(null,customer,startTime, overTime);	
+////    	System.out.println("============================="+regNum);
+//	}
     
     /** 得到被推荐人列表*/
     @SuppressWarnings("unchecked")

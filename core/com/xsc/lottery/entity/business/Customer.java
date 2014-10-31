@@ -18,11 +18,14 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Index;
 
 import com.xsc.lottery.entity.BaseObject;
+import com.xsc.lottery.entity.admin.AdminUser;
 import com.xsc.lottery.entity.enumerate.Bank;
 import com.xsc.lottery.entity.enumerate.CredentType;
 import com.xsc.lottery.entity.enumerate.CustomerStatus;
+import com.xsc.lottery.entity.enumerate.CustomerType;
 import com.xsc.lottery.entity.enumerate.RegChannel;
 import com.xsc.lottery.entity.enumerate.RegSource;
 import com.xsc.lottery.entity.enumerate.UserType;
@@ -37,12 +40,21 @@ public class Customer extends BaseObject
     @Id
     @GeneratedValue
     private Long id;
+    
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "customerType")
+    @Index(name = "customerTypeIndex")
+    private CustomerType customerType;
 
     @Column(nullable = false, unique = true)
     private String nickName;
 
     @Column(nullable = false)
     private String password;
+    
+    @ManyToOne
+    @JoinColumn(name = "adminUser_id")
+    private AdminUser adminUser;
 
     @Column
     private String realName;
@@ -151,7 +163,7 @@ public class Customer extends BaseObject
     /**
      * 推广渠道
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "channel_id",nullable = true)
     private SpreadChannel channel;
     
@@ -188,7 +200,27 @@ public class Customer extends BaseObject
     @Enumerated(EnumType.ORDINAL)
     private RegChannel regChannel;
     
-    public Integer getIsPass() {
+    public AdminUser getAdminUser()
+	{
+		return adminUser;
+	}
+
+	public void setAdminUser(AdminUser adminUser)
+	{
+		this.adminUser = adminUser;
+	}
+
+	public CustomerType getCustomerType()
+	{
+		return customerType;
+	}
+
+	public void setCustomerType(CustomerType customerType)
+	{
+		this.customerType = customerType;
+	}
+
+	public Integer getIsPass() {
 		return isPass;
 	}
 

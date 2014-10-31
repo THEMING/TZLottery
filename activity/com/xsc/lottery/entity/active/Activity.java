@@ -2,16 +2,29 @@ package com.xsc.lottery.entity.active;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import com.xsc.lottery.entity.BaseObject;
+import com.xsc.lottery.entity.business.Article;
+import com.xsc.lottery.entity.partner.Partner;
 
 @SuppressWarnings("serial")
 @Entity
@@ -54,7 +67,65 @@ public class Activity extends BaseObject
     /** 限额 */
     private BigDecimal threshold = BigDecimal.ZERO;
     
-    public BigDecimal getGivenMoney()
+    @OneToOne
+    @JoinColumn(name = "article_id",nullable = true)
+    private Article article;
+    
+//    @ManyToOne
+//    @JoinColumn(name = "partner_id",nullable = true)
+//    private Partner partner;
+    
+    @Cascade(value=CascadeType.SAVE_UPDATE)
+    @ManyToMany(fetch = FetchType.LAZY)  
+    @JoinTable(name = "business_activity_partner",
+    joinColumns =  @JoinColumn(name = "activity_id", referencedColumnName = "id", nullable = false) ,
+    inverseJoinColumns =  @JoinColumn(name = "partner_id", referencedColumnName = "id", nullable = false) )  
+    Set<Partner> partners;  
+    
+    /*是否公开被代理商使用*/
+	private Boolean isPublic;
+    
+    public Boolean getIsPublic()
+	{
+		return isPublic;
+	}
+
+	public void setIsPublic(Boolean isPublic)
+	{
+		this.isPublic = isPublic;
+	}
+
+	public Set<Partner> getPartners()
+	{
+		return partners;
+	}
+
+	public void setPartners(Set<Partner> partners)
+	{
+		this.partners = partners;
+	}
+
+//	public Partner getPartner()
+//	{
+//		return partner;
+//	}
+//
+//	public void setPartner(Partner partner)
+//	{
+//		this.partner = partner;
+//	}
+
+	public Article getArticle()
+	{
+		return article;
+	}
+
+	public void setArticle(Article article)
+	{
+		this.article = article;
+	}
+
+	public BigDecimal getGivenMoney()
     {
         return givenMoney;
     }

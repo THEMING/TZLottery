@@ -1,6 +1,7 @@
 package com.xsc.lottery.service.business.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.orm.hibernate.Page;
 
 import com.xsc.lottery.cache.LotteryTermCache;
+import com.xsc.lottery.common.ComponentContextLoader;
+import com.xsc.lottery.common.Constants;
 import com.xsc.lottery.dao.PagerHibernateTemplate;
+import com.xsc.lottery.entity.active.Activity;
+import com.xsc.lottery.entity.active.ActivityDetail;
+import com.xsc.lottery.entity.active.ActivityDetailType;
+import com.xsc.lottery.entity.active.ActivityType;
 import com.xsc.lottery.entity.business.LotteryTerm;
 import com.xsc.lottery.entity.business.MatchArrange;
 import com.xsc.lottery.entity.business.Plan;
@@ -40,9 +47,11 @@ import com.xsc.lottery.entity.enumerate.TermStatus;
 import com.xsc.lottery.entity.enumerate.TicketStatus;
 import com.xsc.lottery.handle.BaseLotteryHandle;
 import com.xsc.lottery.handle.LotteryHandleFactory;
+import com.xsc.lottery.service.active.ActivityService;
 import com.xsc.lottery.service.business.ChaseService;
 import com.xsc.lottery.service.business.LotteryOrderService;
 import com.xsc.lottery.service.business.LotteryTermService;
+import com.xsc.lottery.service.business.SysParamService;
 import com.xsc.lottery.task.ticket.TicketBusinessFactory;
 import com.xsc.lottery.task.ticket.TicketTreatmentWork;
 import com.xsc.lottery.task.ticket.TicketTreatmentWork.winTicketDis;
@@ -78,6 +87,11 @@ public class LotteryTermServiceImpl implements LotteryTermService
     @Autowired
     public TicketBusinessFactory ticketBusinessFactory;
     
+    @Autowired
+    private SysParamService sysParamService;
+    
+    @Autowired
+    private ActivityService activityService;
     
     @Autowired
     private void setSessionFactory(final SessionFactory sessionfactory)
@@ -130,7 +144,8 @@ public class LotteryTermServiceImpl implements LotteryTermService
     }
 
     /** 获取当前期 */
-    @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
+    @SuppressWarnings("unchecked")
+	@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
     public LotteryTerm getCurrentTerm(LotteryType type)
     {
         logger.debug("获取当前期");
@@ -347,30 +362,182 @@ public class LotteryTermServiceImpl implements LotteryTermService
     {
         Map<Long, BigDecimal> oMap = new HashMap<Long, BigDecimal>();
         Map<Long, BigDecimal> oTaxMap = new HashMap<Long, BigDecimal>();
+        Map<Long, BigDecimal> addMap = new HashMap<Long, BigDecimal>();//加奖Map
+        //是否有加奖活动
+        Activity activity = activityService.getActivityByType(ActivityType.加奖);
         if (list != null) {
-            for (winTicketDis ticketdis : list) {
-                com.xsc.lottery.entity.business.Order order = orderservice
-                        .findUniqueTicketByProperty("otherOrderID", ticketdis
-                                .getOrderId());
-                if (ticketdis.getWinMoney().intValue() > 0
-                        && ticketdis.getTaxMoney().intValue() > 0) {
-                    if (oMap.get(order.getId()) == null) {
-                        oMap.put(order.getId(), ticketdis.getWinMoney());
-                        oTaxMap.put(order.getId(), ticketdis.getTaxMoney());
+            for (winTicketDis ticketdis : list)
+            {
+                com.xsc.lottery.entity.business.Order order = orderservice.findUniqueTicketByProperty("otherOrderID", ticketdis.getOrderId());
+                BigDecimal winMoney = ticketdis.getWinMoney();
+                BigDecimal taxMoney = ticketdis.getTaxMoney();
+                BigDecimal addMoney = new BigDecimal(0.00);//加奖金额
+                if (taxMoney.intValue() > 0 && taxMoney.intValue() > 0)
+                {
+                	//判断是否有加奖活动
+                	if(activity!=null)
+                	{
+                		//计算加奖金额  十一运夺金如下奖等加奖
+                    	if(order.getType() == LotteryType.十一运夺金)
+                    	{
+                    		Ticket ticket = orderservice.getTicketByOtherOrderId(ticketdis.getOrderId());
+                    		switch (ticket.getPlayType())
+    						{
+    							case rx_3:
+    								if(winMoney.intValue()%22==0)
+    								{
+    									
+    									int num = winMoney.intValue()/22;
+    									addMoney = addBouns(order.getType(),winMoney.subtract(new BigDecimal(3*num)));
+    								}
+    								else
+    								{
+    									addMoney = addBouns(order.getType(),winMoney);
+    								}
+    								break;
+    							case rx_4:
+    								if(winMoney.intValue()%90==0)
+    								{
+    									
+    									int num = winMoney.intValue()/90;
+    									addMoney = addBouns(order.getType(),winMoney.subtract(new BigDecimal(12*num)));
+    								}
+    								else
+    								{
+    									addMoney = addBouns(order.getType(),winMoney);
+    								}
+    								break;
+    							case rx_5:
+    								if(winMoney.intValue()%600==0)
+    								{
+    									
+    									int num = winMoney.intValue()/600;
+    									addMoney = addBouns(order.getType(),winMoney.subtract(new BigDecimal(60*num)));
+    								}
+    								else
+    								{
+    									addMoney = addBouns(order.getType(),winMoney);
+    								}
+    								break;
+    							case rx_7:
+    								if(winMoney.intValue()%30==0)
+    								{
+    									
+    									int num = winMoney.intValue()/30;
+    									addMoney = addBouns(order.getType(),winMoney.subtract(new BigDecimal(4*num)));
+    								}
+    								else
+    								{
+    									addMoney = addBouns(order.getType(),winMoney);
+    								}
+    								break;
+    							case q3_zhix:
+    								if(winMoney.intValue()%1300==0)
+    								{
+    									
+    									int num = winMoney.intValue()/1300;
+    									addMoney = addBouns(order.getType(),winMoney.subtract(new BigDecimal(130*num)));
+    								}
+    								else
+    								{
+    									addMoney = addBouns(order.getType(),winMoney);
+    								}
+    								break;
+    							case q3_zux:
+    								if(winMoney.intValue()%220==0)
+    								{
+    									
+    									int num = winMoney.intValue()/220;
+    									addMoney = addBouns(order.getType(),winMoney.subtract(new BigDecimal(25*num)));
+    								}
+    								else
+    								{
+    									addMoney = addBouns(order.getType(),winMoney);
+    								}
+    								break;
+    							default:
+    								addMoney = addBouns(order.getType(),winMoney);
+    								break;
+    						}
+                    	}else
+                    	{
+                    		addMoney = addBouns(order.getType(),winMoney);
+                    	}
+                    	taxMoney = taxMoney.add(addMoney);//税后金额加上加奖奖金
+                	}
+                    if (oMap.get(order.getId()) == null)
+                    {
+                        oMap.put(order.getId(), winMoney);
+                        oTaxMap.put(order.getId(), taxMoney);
+                        addMap.put(order.getId(), addMoney);
                     }
-                    else {
-                        oMap.put(order.getId(), oMap.get(order.getId()).add(
-                                ticketdis.getWinMoney()));
-                        oTaxMap.put(order.getId(), oTaxMap.get(order.getId())
-                                .add(ticketdis.getTaxMoney()));
+                    else
+                    {
+                        oMap.put(order.getId(), oMap.get(order.getId()).add(winMoney));
+                        oTaxMap.put(order.getId(), oTaxMap.get(order.getId()).add(taxMoney));
+                        addMap.put(order.getId(), addMap.get(order.getId()).add(addMoney));
                     }
                 }
             }
             Set<Long> set = oMap.keySet();
-            for (Long id : set) {
+            for (Long id : set)
+            {
                 orderservice.updateOrder(id, oMap.get(id), oTaxMap.get(id));
+                //写活动明细
+                if(activity!=null)
+                {
+                	ActivityDetail detail = new ActivityDetail();
+                    detail.setActDetailType(ActivityDetailType.加奖);
+                    detail.setActivity(activity);
+                    detail.setAddmoney(addMap.get(id));
+                    detail.setCreateTime(Calendar.getInstance());
+                    com.xsc.lottery.entity.business.Order order = orderservice.findById(id);
+                    detail.setCustomer(order.getCustomer());
+                    detail.setFinished(true);
+                    detail.setOrder(order);
+                    detail.setPaymentRequest(null);
+                    activityService.saveActivityDetail(detail);
+                }
             }
         }
+    }
+    
+    /**
+     * <pre>
+     *  计算加奖奖金(系统加奖)
+     * </pre>
+     * @param type       彩种
+     * @param bounsMoney 奖金
+     * @return
+     */
+    private BigDecimal addBouns(LotteryType type,BigDecimal bounsMoney)
+    {
+    	BigDecimal rate  = new BigDecimal(0);
+    	switch (type)
+		{
+			case 广西快3:
+				rate = BigDecimal.valueOf(Double.valueOf(sysParamService.getSysParamByName(Constants.GXK3_BOUNS_RATE).getValue()));
+				break;
+			case 十一运夺金:
+				rate = BigDecimal.valueOf(Double.valueOf(sysParamService.getSysParamByName(Constants.SD11X5_BOUNS_RATE).getValue()));
+				break;
+			case 快乐扑克3:
+				rate = BigDecimal.valueOf(Double.valueOf(sysParamService.getSysParamByName(Constants.SDKLPK3_BOUNS_RATE).getValue()));
+				break;
+			case 老11选5:
+				rate = BigDecimal.valueOf(Double.valueOf(sysParamService.getSysParamByName(Constants.JX11X5_BOUNS_RATE).getValue()));
+				break;
+			case 重庆时时彩:
+				rate = BigDecimal.valueOf(Double.valueOf(sysParamService.getSysParamByName(Constants.CQSSC_BOUNS_RATE).getValue()));
+				break;
+			case 上海11选5:
+				rate = BigDecimal.valueOf(Double.valueOf(sysParamService.getSysParamByName(Constants.SH11X5_BOUNS_RATE).getValue()));
+				break;
+			default:
+				break;
+		}
+    	if(rate == null)  rate = new BigDecimal(0);
+    	return bounsMoney.multiply(rate);
     }
 
     public void oppenPrizeItems(List<PlanItem> items, LotteryTerm term,com.xsc.lottery.entity.business.Order order)
@@ -397,7 +564,7 @@ public class LotteryTermServiceImpl implements LotteryTermService
                             winDescribeOrder.setMoney(wticket.getTaxmoney());
                             winDescribeOrder.setNumber(wticket.getNumber());
                             winDescribeOrder.setOrder(order);
-                            if(term.getType() != LotteryType.老11选5 && term.getType()!= LotteryType.快乐扑克3 && term.getType()!= LotteryType.广西快3&& term.getType()!= LotteryType.上海11选5 && term.getType()!= LotteryType.十一运夺金 && term.getType()!= LotteryType.重庆时时彩)
+                            if(!LotteryType.KuaiKaiTypeMap.containsKey(term.getType().getName_EN()))
                             {
 	                            winDescribeOrder.setPrizeLevel(wticket .getPrizeLevel());
 	                            if (winDescribeOrderMap.get(wticket.getPrizeLevel().getName()) != null)
@@ -416,7 +583,7 @@ public class LotteryTermServiceImpl implements LotteryTermService
                 }
             }
         }
-        if(term.getType()!=LotteryType.老11选5 && term.getType()!= LotteryType.快乐扑克3 && term.getType()!= LotteryType.广西快3&& term.getType()!= LotteryType.上海11选5 && term.getType()!= LotteryType.十一运夺金 && term.getType()!= LotteryType.重庆时时彩)
+        if(!LotteryType.KuaiKaiTypeMap.containsKey(term.getType().getName_EN()))
         {
 	        if (winDescribeOrderMap != null)
 	        {
@@ -598,7 +765,8 @@ public class LotteryTermServiceImpl implements LotteryTermService
     }
     
     /**为手机开奖历史写的分页查询*/
-    @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
+    @SuppressWarnings("unchecked")
+	@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
     public List<LotteryTerm> getTermByZSMapForPhone(LotteryType type, int num, int begin)
     {
         Criteria criteria = lotteryTermDao.createCriteria(Restrictions.eq(
@@ -813,4 +981,5 @@ public class LotteryTermServiceImpl implements LotteryTermService
     	List<Ticket> list =  criteria.list();
         return  list;
     }
+    
 }

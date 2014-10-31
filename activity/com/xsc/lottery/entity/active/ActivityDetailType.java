@@ -6,4 +6,6 @@ public enum ActivityDetailType
     购彩活动,
     充值活动,
     手机绑定,
+    激活账户,
+    加奖
 }

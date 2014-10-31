@@ -474,4 +474,13 @@ public interface LotteryOrderService extends LotteryBaseService<Order>
 	
 	/*获取某时间段内被推荐人的购彩情况*/
 	public Page<Order> getOrderDetailByCustomer(Page<Order> page,Calendar startTime, Calendar overTime,Customer customer, LotteryType lotteryType);
+	
+	/**
+	 * <pre>
+	 *  通过第三方订单ID查询票
+	 * </pre>
+	 * @param otherOrderId  第三方订单Id
+	 * @return
+	 */
+	public Ticket getTicketByOtherOrderId(String otherOrderId);
 }

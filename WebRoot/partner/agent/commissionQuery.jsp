@@ -20,12 +20,12 @@ var postPath = "<%=request.getContextPath()%>";
 		$("#page").submit();
 	}
 	function goToPayment(date){
-		$("#f_sTime").val(date);
+		$("#f_sTime").val(date.substr(0,10)+" 00:00:00");
 		$("#f_eTime").val(date.substr(0,10)+" 23:59:59");
 		$("#gotopay").submit();
 	}
 	function goToRegister(date){
-		$("#f_sTime2").val(date);
+		$("#f_sTime2").val(date.substr(0,10)+" 00:00:00");
 		$("#f_eTime2").val(date.substr(0,10)+" 23:59:59");
 		$("#gotoreg").submit();
 	}goToRegister

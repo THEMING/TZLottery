@@ -599,6 +599,13 @@ public abstract class TicketTreatmentWork implements ApplicationListener
     }
     private boolean needToCheckSP(final Ticket ticket)
     {
+    	boolean flag = false;
+    	if((ticket.getType().equals(LotteryType.竞彩足球) || ticket.getType().equals(LotteryType.竞彩足球)) && ticket.getRatio() == null)
+    	{
+    		flag =  true;
+    	}
+    	return flag;
+    	/*
     	if (ticket.getType().equals(LotteryType.竞彩足球) && 
     			ticket.getRatio() == null &&
     			!ticket.getContent().split("\\|")[2].split("\\*")[0].equals("1")) { // 非单场过关
@@ -622,6 +629,7 @@ public abstract class TicketTreatmentWork implements ApplicationListener
     		return true;
     	}
     	return false;
+    	*/
     }
     
     private void addCheckSP(final Ticket ticket, int delay)

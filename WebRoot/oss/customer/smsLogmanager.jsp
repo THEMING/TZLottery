@@ -47,8 +47,10 @@ var postPath = "<%=request.getContextPath()%>";
 		<br/>
 	<table border="0" width="100%" align="center">
 		<tr>
+		<td>发送者</td>
 			<td>手机号码</td>
 			<td>短信内容</td>
+			<td>备注</td>
 			<td>短信状态</td>
 			<td>发送时间</td>
 			<td>成功时间</td>
@@ -56,8 +58,10 @@ var postPath = "<%=request.getContextPath()%>";
 		</tr>
 		<s:iterator value="smsLogPage.result" status="s" id="rs">
 			<tr>
+			<td>${rs.sendUserName}</td>
 				<td>${rs.mobile}</td>
 				<td>${rs.content}</td>
+				<td>${rs.mark}</td>
 				<td>${rs.state.text}</td>
 				<td>
 				<s:date name="#rs.sendTime" format="yyyy-MM-dd HH:mm"/>

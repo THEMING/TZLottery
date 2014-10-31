@@ -63,7 +63,7 @@
 			<result name="info">agentInfo.jsp</result>
 		</action>
 		<action name="customerRela" class="Agent.manager" method="customerRela">
-		<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+		<!-- <interceptor-ref name="partnerStackInteceptor"></interceptor-ref> -->
 			<result name="list">customerRela.jsp</result>
 		</action>
 		<action name="tikuanChaxun" class="Agent.manager" method="tikuanChaxun">

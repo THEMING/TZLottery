@@ -7,12 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.xsc.lottery.entity.BaseObject;
+import com.xsc.lottery.entity.partner.Partner;
 
 /**
  * <pre>
@@ -265,10 +268,12 @@ public class SmsLog extends BaseObject
 	private SmsLogType type;
 
 	/*
-	 * 发送人
+	 * 发送人 匹配的是AdminUser的id
 	 */
 	@Column(length = 20)
 	private String userId;
+	
+	private String sendUserName;
 
 	/*
 	 * 发送人优先级
@@ -305,6 +310,31 @@ public class SmsLog extends BaseObject
 	 * 备注
 	 */
 	private String mark;
+	
+	/*接受短信的客户*/
+	@ManyToOne
+	@JoinColumn(name = "customerObjId")
+	private Customer customer;
+
+	public String getSendUserName()
+	{
+		return sendUserName;
+	}
+
+	public void setSendUserName(String sendUserName)
+	{
+		this.sendUserName = sendUserName;
+	}
+
+	public Customer getCustomer()
+	{
+		return customer;
+	}
+
+	public void setCustomer(Customer customer)
+	{
+		this.customer = customer;
+	}
 
 	public String getContent()
 	{

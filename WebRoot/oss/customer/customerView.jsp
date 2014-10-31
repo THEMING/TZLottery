@@ -55,7 +55,7 @@
 		<br />
 		<h1>活动获得金额：${customer.ployAccur }</h1>
 		<br />
-		<h1>账户余额：${customer.wallet.balance }　　　<a href="manageFinanialQuery.aspx?f_name=${rs.nickName }">账务明细</a></h1>
+		<h1>账户余额：${customer.wallet.balance }　　　<a href="manageFinanialQuery.aspx?customerId=${customer.id }">账务明细</a></h1>
 		<br />
         <h1>冻结金额：${customer.wallet.freezeMoney }</h1>
         <br />

@@ -32,4 +32,13 @@ public interface ActivityService extends LotteryBaseService<Activity>
     public boolean isFirstOrder(Order order);
     
     public List<ActivityDetail> getActivityDetails(ActivityDetailType type, boolean checked);
+    
+    /**
+     * <pre>
+     *  通过活动类型查询活动
+     * </pre>
+     * @param type 活动类型
+     * @return
+     */
+    public Activity getActivityByType(ActivityType type);
 }

@@ -1,6 +1,7 @@
 package com.xsc.lottery.service.business;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springside.modules.orm.hibernate.Page;
 
@@ -96,6 +97,8 @@ public interface SmsLogService
 	 */
 	public SmsLog saveSmsLog(String mobile,String content,Long customerId,SmsLogType logType); 
 	
+	public SmsLog saveSmsLog(SmsLog smsLog);
+	
 	/**
 	 * 保存短信日志以及发送状态
 	 */
@@ -109,6 +112,15 @@ public interface SmsLogService
 	 * @return
 	 */
 	public Page<SmsLog> getSmsLogPage(Page<SmsLog> page,String mobile, SmsLogState state,Long id);
+	
+	/**
+	 * 根据map对象获取短信日志记录
+	 * @param page
+	 * @param mobile
+	 * @param state 
+	 * @return
+	 */
+	public Page<SmsLog> getSmsLogPageByMap(Page<SmsLog> page,Map map);
 	
 	/**
 	 * 根据id获取短信日志记录

@@ -25,23 +25,24 @@
   </head>
   <body>
   <div class="tab">
-    <s:form  id="form_id" action="/oss/article/manageArticle.htm" method="post">
-	<s:hidden name="action" value="index" />
+    <form action="/oss/article/manageArticle.htm" method="post">
 	<table width="60%">
 	<caption class="redbold">新闻管理</caption>
   	<tr>
     <td width="120" height="25" ><div align="center">类别: <s:select list="categoryList" name="category.id" listKey="id" listValue="name"  value="category.id" headerKey="-1" headerValue="--全部--"/></div></td>
     <td width="130" height="25">标题：<input type="text" name="title" id="title" value="${title }" /> </td>
     <td width="220" >发布时间:
-    <input type="text" name="begin_publishTime" value="${begin_publishTime}"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true});"/> -
-    <input type="text" name="end_publishTime" value="${end_publishTime}"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true});"/>
+    <input type="text" name="startTime" value="<s:date name="startTime" format="yyyy-MM-dd HH:mm:ss"/>"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true});"/> -
+    <input type="text" name="endTime" value="<s:date name="endTime" format="yyyy-MM-dd HH:mm:ss"/>"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true});"/>
     </td>
-	<td width="150" height="25" bgcolor="#ffffff"><div align="left"><input type="submit" name="submit" value="查询" />&nbsp;&nbsp;<input type="button" name="add_btn" value="添加" onclick="javascript:add();"/></div></td>
+	<td width="150" height="25" bgcolor="#ffffff"><div align="left">
+	<input type="submit" value="查询" />&nbsp;&nbsp;
+	<input type="button" name="add_btn" value="添加" onclick="javascript:add();"/></div>
+	</td>
   	</tr>
 	</table>
-	</s:form>
 	<br>
-	<form action="/oss/article/manageArticle.htm" method="post">
+	
 	<table width="80%" cellspacing="3">
 	 	<tr>
 	    <td align="center">标题</td>
@@ -65,7 +66,7 @@
 	  	</td>
 	  	<td align="center"><a href="/oss/article/manageArticle.htm?action=delete&id=<s:property value="id" />">删除记录</a></td>
 	  	<td align="center"><a href="/oss/article/manageArticle.htm?action=detail&id=<s:property value="id" />">修改记录</a></td>
-	  	<td align="center"><a href="/lotteryInfo/index.htm?action=detail&id=<s:property value="id" />">预览</a></td>
+	  	<td align="center"><a href="http://www.yicp.com/actinfo/news_<s:property value="id" />.html">预览</a></td>
 	  	</tr>
 	  	</s:iterator>
   		</table>

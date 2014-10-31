@@ -23,7 +23,9 @@ import com.xsc.lottery.entity.admin.WinPrize;
 import com.xsc.lottery.entity.business.Article;
 import com.xsc.lottery.entity.business.ArticleCategory;
 import com.xsc.lottery.entity.business.ArticleInLink;
+import com.xsc.lottery.entity.business.Customer;
 import com.xsc.lottery.entity.enumerate.LotteryType;
+import com.xsc.lottery.entity.partner.Partner;
 import com.xsc.lottery.service.business.ArticleService;
 
 
@@ -169,6 +171,44 @@ public class ArticleServiceImpl implements ArticleService
 			criteria.add(Restrictions.like("title", "%"+title+"%"));
 		}
 		criteria.addOrder(Order.desc("publishTime"));
+		
+		return ArticleDao.findByCriteria(page, criteria);
+	}
+	
+	public Page<Article> getPicturePage(Page<Article> page, Calendar startTime,
+			Calendar endTime, String articleType, LotteryType lotteryType,ArticleCategory category,String title,Partner partner)
+	{
+		Criteria criteria = ArticleDao.createCriteria();
+		if(startTime != null) {
+			criteria.add(Restrictions.ge("publishTime", startTime));
+		}
+		
+		if(endTime != null) {
+			criteria.add(Restrictions.le("publishTime", endTime));
+		}
+		
+		if(articleType != null) {
+			criteria.add(Restrictions.eq("type", articleType));
+		}
+		
+		if(lotteryType != null) {
+			criteria.add(Restrictions.eq("lotteryType", lotteryType));
+		}
+		
+		if(partner != null&&partner.getId()!=null&&partner.getId()!=-1) {
+			criteria.add(Restrictions.in("partners", new Object[]{partner}));
+		}
+		
+		if(category != null&&category.getId()!=-1){
+			criteria.add(Restrictions.eq("category", category));
+		}
+		
+		if(!StringUtils.isEmpty(title))
+		{
+			criteria.add(Restrictions.like("title", "%"+title+"%"));
+		}
+		criteria.add(Restrictions.eq("isPicture", true));
+		criteria.addOrder(Order.desc("id"));
 		
 		return ArticleDao.findByCriteria(page, criteria);
 	}

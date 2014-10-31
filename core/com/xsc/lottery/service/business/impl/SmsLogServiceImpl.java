@@ -4,7 +4,9 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
@@ -21,9 +23,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.orm.hibernate.Page;
+import org.springside.modules.orm.hibernate.SimpleHibernateTemplate;
 
 import cn.emay.sdk.client.api.MO;
 
+import com.xsc.lottery.alipay.util.MapUtil;
 import com.xsc.lottery.dao.PagerHibernateTemplate;
 import com.xsc.lottery.entity.business.Customer;
 import com.xsc.lottery.entity.business.SmsLog;
@@ -55,6 +59,8 @@ public class SmsLogServiceImpl implements SmsLogService
 	private PagerHibernateTemplate<SmsMoLog, Long> smsMoLogDao;
 	
 	private PagerHibernateTemplate<SmsPartner, Long> smsPartnerDao;
+	
+	private SimpleHibernateTemplate<Customer, Long> customerDao;
 
 	private static final Log logger = LogFactory.getLog(SmsLogServiceImpl.class);
 	
@@ -65,6 +71,7 @@ public class SmsLogServiceImpl implements SmsLogService
 	     this.smsLogDao = new PagerHibernateTemplate<SmsLog, Long>(sessionfactory, SmsLog.class);
 	     this.smsMoLogDao = new PagerHibernateTemplate<SmsMoLog, Long>(sessionfactory, SmsMoLog.class);
 	     this.smsPartnerDao = new PagerHibernateTemplate<SmsPartner, Long>(sessionfactory, SmsPartner.class);
+	     this.customerDao = new SimpleHibernateTemplate<Customer, Long>(sessionfactory, Customer.class);
 	 }
 	 
 	 //根据条件查询短信日志记录
@@ -84,6 +91,35 @@ public class SmsLogServiceImpl implements SmsLogService
 	    	page = smsLogDao.findByCriteria(page, criteria);
 	    	return page;
 		}
+	 
+	//根据条件查询短信日志记录
+		 @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
+		    public Page<SmsLog> getSmsLogPageByMap(Page<SmsLog> page,Map map)
+			{
+		    	Criteria criteria = smsLogDao.createCriteria();
+		    	if(MapUtil.checkKey(map, "userId"))
+		    	{
+		    		criteria.add(Restrictions.eq("userId", MapUtils.getString(map, "userId")));
+		    	}   
+		    	if(MapUtil.checkKey(map, "state"))
+		    	{
+		    		criteria.add(Restrictions.eq("state", MapUtils.getObject(map, "state")));
+		    	}   
+		    	
+		    	if(MapUtil.checkKey(map, "sendSTime"))
+		    	{
+		    		criteria.add(Restrictions.ge("sendTime", MapUtils.getObject(map, "sendSTime")));
+		    	}   
+		    	
+		    	if(MapUtil.checkKey(map, "sendETime"))
+		    	{
+		    		criteria.add(Restrictions.le("sendTime", MapUtils.getObject(map, "sendETime")));
+		    	}  
+		    	
+		    	criteria.addOrder(Order.desc("id"));
+		    	page = smsLogDao.findByCriteria(page, criteria);
+		    	return page;
+			}
 
 	public void smsMoFromServer()
 	{
@@ -535,6 +571,15 @@ public class SmsLogServiceImpl implements SmsLogService
     	smsLog.setUserId("1");
     	smsLog.setUserPriority(3);
 		smsLogDao.save(smsLog);
+		return smsLog;
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public SmsLog saveSmsLog(SmsLog smsLog)
+	{
+		if(smsLog!=null){
+			smsLogDao.save(smsLog);
+		}
 		return smsLog;
 	}
 	

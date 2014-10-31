@@ -136,7 +136,9 @@ public class JczqTaskExcutor implements ApplicationListener
                     List<Order> orders = matchArrangeService.stopToSaleCreateHm(match);
                     TicketTreatmentWork ttw = ticketBusinessFactory.getTreatmentTicketByType(currentTerm.getOutPoint());
 	                for(Order order : orders) {
-	                    ttw.addTaker(order);
+	                	//解决竞彩合买保底不出票的问题
+                        //ttw.addTaker(order);
+	                    ttw.putOrderToQueue(order);
 	                }
                 }
                 catch (Exception e) {

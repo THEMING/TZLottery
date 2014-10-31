@@ -151,4 +151,25 @@ public class ActivityServiceImpl implements ActivityService
         page = activityDetaildao.findByCriteria(page, criteria);
         return page;
     }
+
+	/* （非 Javadoc）
+	 * @see com.xsc.lottery.service.active.ActivityService#isActivityByType(com.xsc.lottery.entity.active.ActivityType)
+	 */
+	public Activity getActivityByType(ActivityType type)
+	{
+		Activity activity = null;
+		List<Activity> list = getCurrentActivities();
+		if(list!=null&&list.size()!=0)
+		{
+			for (Activity obj : list)
+			{
+				if(type == obj.getType())
+				{
+					activity = obj;
+					break;
+				}
+			}
+		}
+		return activity;
+	}
 }

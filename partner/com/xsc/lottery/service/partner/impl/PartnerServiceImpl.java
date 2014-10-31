@@ -1,5 +1,7 @@
 package com.xsc.lottery.service.partner.impl;
 
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -8,10 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.orm.hibernate.Page;
 
 import com.xsc.lottery.dao.PagerHibernateTemplate;
+import com.xsc.lottery.entity.business.Customer;
 import com.xsc.lottery.entity.partner.Partner;
 import com.xsc.lottery.service.partner.PartnerService;
 

@@ -137,7 +137,6 @@
 		</action>
 	</package>
 	
-	
  	<!-- 客户中心 -->
 	<package name="admin_customer" extends="adminstruts-default" namespace="/oss/customer">
 		<action name="adminfanli" class="lashou.fanli">
@@ -339,6 +338,49 @@
 		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
 			<result>userOrclList.jsp</result>
 			<result name="view">userOrclView.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 图片管理 -->
+	<package name="admin_picture" extends="adminstruts-default" namespace="/oss/picture">
+		<action name="pictureManage" class="Admin.ArticleManagement" >
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+		<param name="pictureReuqest">true</param>
+			<result>pictureManage.jsp</result>
+			<result name="edit">picture_edit.jsp</result>
+		</action>
+	</package>
+	
+	<!-- CRM系统 -->
+	<package name="admin_system" extends="adminstruts-default" namespace="/oss/crmSystem">
+		<action name="CRMManage" class="Admin.CRMSystem" >
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>MyCustomers.jsp</result>
+			<result name="template">templateManager.jsp</result>
+		</action>
+		<action name="myPerformance" class="Admin.CRMSystem" method="getMyPerformance">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>MyPerformance.jsp</result>
+		</action>
+		<action name="mySendSms" class="Admin.CRMSystem" method="getMySendSms">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>MySendSms.jsp</result>
+		</action>
+		<action name="mySendEmail" class="Admin.CRMSystem" method="getMySendEmail">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>MySendEmail.jsp</result>
+		</action>
+		<action name="emailManager" class="Admin.CRMSystem" method="getAllEmail">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>emailManager.jsp</result>
+		</action>
+		<action name="dispatchCustomer" class="Admin.CRMSystem" method="dispatchCustomer">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>dispatchCustomer.jsp</result>
+		</action>
+		<action name="templateManager" class="Admin.CRMSystem" method="templateManager">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="template">templateManager.jsp</result>
 		</action>
 	</package>
 	

@@ -1,21 +1,28 @@
 package com.xsc.lottery.entity.business;
 
 import java.util.Calendar;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import com.xsc.lottery.entity.BaseObject;
 import com.xsc.lottery.entity.enumerate.LotteryType;
+import com.xsc.lottery.entity.partner.Partner;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "business_article")
@@ -29,6 +36,24 @@ public class Article  extends BaseObject
 	
 	@Column(nullable = false)
     private String title;
+	
+	/*标记是否图片*/
+	private Boolean isPicture;
+	
+	/*关联的代理商id
+	@ManyToOne
+	@JoinColumn(name = "partner_id")
+	private Partner partner;*/
+	
+	@Cascade(value=CascadeType.SAVE_UPDATE)
+    @ManyToMany(fetch = FetchType.LAZY)  
+    @JoinTable(name = "business_article_partner",
+    joinColumns =  @JoinColumn(name = "article_id", referencedColumnName = "id", nullable = false) ,
+    inverseJoinColumns =  @JoinColumn(name = "partner_id", referencedColumnName = "id", nullable = false) )  
+    Set<Partner> partners;  
+	
+	/*是否公开被代理商使用*/
+	private Boolean isPublic;
 	
 	@ManyToOne
 	@JoinColumn(name = "category_id")
@@ -78,6 +103,46 @@ public class Article  extends BaseObject
 	 */
 	private String jumpUrl;
 	
+	public Boolean getIsPublic()
+	{
+		return isPublic;
+	}
+
+	public void setIsPublic(Boolean isPublic)
+	{
+		this.isPublic = isPublic;
+	}
+
+	public Set<Partner> getPartners()
+	{
+		return partners;
+	}
+
+	public void setPartners(Set<Partner> partners)
+	{
+		this.partners = partners;
+	}
+
+	/*public Partner getPartner()
+	{
+		return partner;
+	}
+
+	public void setPartner(Partner partner)
+	{
+		this.partner = partner;
+	}*/
+
+	public Boolean getIsPicture()
+	{
+		return isPicture;
+	}
+
+	public void setIsPicture(Boolean isPicture)
+	{
+		this.isPicture = isPicture;
+	}
+
 	public String getTitle() {
 		return title;
 	}

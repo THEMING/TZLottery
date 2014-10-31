@@ -1,19 +1,36 @@
 package com.xsc.lottery.admin.action.active;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springside.modules.orm.hibernate.Page;
+import org.springside.modules.orm.hibernate.SimpleHibernateTemplate;
 
 import com.xsc.lottery.admin.action.AdminBaseAction;
+import com.xsc.lottery.dao.PagerHibernateTemplate;
 import com.xsc.lottery.entity.active.Activity;
 import com.xsc.lottery.entity.active.ActivityOrderType;
 import com.xsc.lottery.entity.active.ActivityStatus;
 import com.xsc.lottery.entity.active.ActivityType;
+import com.xsc.lottery.entity.business.Article;
+import com.xsc.lottery.entity.business.ArticleCategory;
+import com.xsc.lottery.entity.partner.Partner;
 import com.xsc.lottery.service.active.ActivityService;
+import com.xsc.lottery.service.business.ArticleService;
 import com.xsc.lottery.service.listener.active.ActivityListener;
+import com.xsc.lottery.service.partner.PartnerService;
 import com.xsc.lottery.util.DateUtil;
 
 @SuppressWarnings("serial")
@@ -25,7 +42,13 @@ public class ActivitiesAction extends AdminBaseAction
     private ActivityService activityService;
     
     @Autowired
+    private ArticleService articleService;
+    
+    @Autowired
     private ActivityListener activityListener;
+    
+    @Autowired
+	private PartnerService partnerService;
     
     private Page<Activity> page;
 
@@ -62,6 +85,35 @@ public class ActivitiesAction extends AdminBaseAction
     private ActivityOrderType activityOrderType;
     
     private String sysmsg;
+    
+    private  List<Partner> partnerList = new ArrayList<Partner>();
+	private  Partner partner = null;
+	
+	private  List<Article> articleList = new ArrayList<Article>();
+	private  Article article = null;
+	
+	public SimpleHibernateTemplate<Partner, Long> partnerDao;
+	
+	public SimpleHibernateTemplate<Article, Long> ArticleDao;
+	
+	private Activity activity;
+	
+	private String partnerIdss;
+	
+	private Map<Long, Object> mapPartnerSelected = new HashMap<Long, Object>();
+
+	private Boolean isPublic;
+	
+	@Autowired
+    public void setSessionFactory(
+            @Qualifier("sessionFactory") SessionFactory sessionfactory)
+    {        
+        this.partnerDao = new SimpleHibernateTemplate<Partner, Long>(sessionfactory,
+                Partner.class);
+        
+        this.ArticleDao = new SimpleHibernateTemplate<Article, Long>(sessionfactory,
+        		Article.class);
+    }
 
     public String index()
     {
@@ -76,7 +128,7 @@ public class ActivitiesAction extends AdminBaseAction
     public String edit()
     {
         if (id != null && id > 0) {
-            Activity activity = activityService.findById(id);
+            activity = activityService.findById(id);
             this.name = activity.getName();
             this.shortName = activity.getShortName();
             this.activityType = activity.getType();
@@ -85,7 +137,21 @@ public class ActivitiesAction extends AdminBaseAction
             this.givenMoney = activity.getGivenMoney();
             this.threshold = activity.getThreshold();
             this.activityOrderType = activity.getOrderType();
+            article = activity.getArticle();
+//            partner = activity.getPartner();
+            
+            Set<Partner> pS = activity.getPartners();
+			if(pS!=null){
+				for(Partner p:pS){
+					mapPartnerSelected.put(p.getId(), p.getId());
+				}
+			}
         }
+        
+        partnerList = partnerDao.createCriteria().addOrder(Order.desc("id")).list();
+        
+        articleList = ArticleDao.createCriteria().add(Restrictions.eq("isPicture", true)).list();
+        
         return "edit";
     }
 
@@ -94,6 +160,7 @@ public class ActivitiesAction extends AdminBaseAction
         Activity activity = new Activity();
         if (id != null && id > 0) {
             activity = activityService.findById(id);
+            activity.setPartners(null);
         }
         activity.setName(name);
         activity.setShortName(shortName);
@@ -102,7 +169,33 @@ public class ActivitiesAction extends AdminBaseAction
         activity.setType(activityType);
         activity.setGivenMoney(givenMoney);
         activity.setThreshold(threshold);
+        activity.setIsPublic(isPublic);
         activity.setOrderType(activityOrderType);
+        if(article.getId()!=null){
+        	article = ArticleDao.get(article.getId());
+        	activity.setArticle(article);
+        }else{
+        	activity.setArticle(null);
+        }
+        
+//        if(partner.getId()!=null){
+//        	partner = partnerDao.get(partner.getId());
+//        	activity.setPartner(partner);
+//        }else{
+//        	activity.setPartner(null);
+//        }
+        
+        if(partnerIdss!=null&&!"".equals(partnerIdss)){
+			String[] partnerIds = partnerIdss.split(",");
+			Set<Partner> pS = new HashSet<Partner>();
+			for(String partnerId:partnerIds){
+				Partner p = partnerService.findById(Long.parseLong(partnerId));
+				pS.add(p);
+			}
+			activity.setPartners(pS);
+		}
+        
+        
         activityService.save(activity);
         
         activityListener.addNewActivity(activity);
@@ -110,7 +203,87 @@ public class ActivitiesAction extends AdminBaseAction
         return "save";
     }
 
-    public Page<Activity> getPage()
+    public String getPartnerIdss()
+	{
+		return partnerIdss;
+	}
+
+	public void setPartnerIdss(String partnerIdss)
+	{
+		this.partnerIdss = partnerIdss;
+	}
+
+	public Map<Long, Object> getMapPartnerSelected()
+	{
+		return mapPartnerSelected;
+	}
+
+	public void setMapPartnerSelected(Map<Long, Object> mapPartnerSelected)
+	{
+		this.mapPartnerSelected = mapPartnerSelected;
+	}
+
+	public Boolean getIsPublic()
+	{
+		return isPublic;
+	}
+
+	public void setIsPublic(Boolean isPublic)
+	{
+		this.isPublic = isPublic;
+	}
+
+	public Activity getActivity()
+	{
+		return activity;
+	}
+
+	public void setActivity(Activity activity)
+	{
+		this.activity = activity;
+	}
+
+	public List<Article> getArticleList()
+	{
+		return articleList;
+	}
+
+	public void setArticleList(List<Article> articleList)
+	{
+		this.articleList = articleList;
+	}
+
+	public Article getArticle()
+	{
+		return article;
+	}
+
+	public void setArticle(Article article)
+	{
+		this.article = article;
+	}
+
+	public List<Partner> getPartnerList()
+	{
+		return partnerList;
+	}
+
+	public void setPartnerList(List<Partner> partnerList)
+	{
+		this.partnerList = partnerList;
+	}
+
+	public Partner getPartner()
+	{
+		return partner;
+	}
+
+	public void setPartner(Partner partner)
+	{
+		this.partner = partner;
+	}
+
+	public Page<Activity> getPage()
     {
         return page;
     }

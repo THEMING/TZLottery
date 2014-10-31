@@ -8,7 +8,9 @@ import com.xsc.lottery.entity.admin.WinPrize;
 import com.xsc.lottery.entity.business.Article;
 import com.xsc.lottery.entity.business.ArticleCategory;
 import com.xsc.lottery.entity.business.ArticleInLink;
+import com.xsc.lottery.entity.business.Customer;
 import com.xsc.lottery.entity.enumerate.LotteryType;
+import com.xsc.lottery.entity.partner.Partner;
 import com.xsc.lottery.service.LotteryBaseService;
 
 public interface ArticleService extends LotteryBaseService<Article>
@@ -16,6 +18,8 @@ public interface ArticleService extends LotteryBaseService<Article>
 	public List<Article> getAllArticles();
 	public Page<Article> getArticlePage(Page<Article> page, Calendar startTime,
 			Calendar endTime, String articleType, LotteryType lotteryType,ArticleCategory category,String title);
+	public Page<Article> getPicturePage(Page<Article> page, Calendar startTime,
+			Calendar endTime, String articleType, LotteryType lotteryType,ArticleCategory category,String title,Partner partner);
 	public List<Article> getArticlesByTypeAndNum(String type, int num);
 	public List<Article> getArticlesByLotteryTypeAndNum(LotteryType type, int num);
 	public List<Article> getArticlesByAuthorAndNum(String author, int num);

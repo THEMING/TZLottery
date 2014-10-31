@@ -207,6 +207,30 @@ public class AgentManagerAction extends LotteryClientBaseAction
 
 	private BigDecimal surplusComm = new BigDecimal(0);
 
+	private String credentNo;
+
+	private String infoMessage;
+
+	public String getInfoMessage()
+	{
+		return infoMessage;
+	}
+
+	public void setInfoMessage(String infoMessage)
+	{
+		this.infoMessage = infoMessage;
+	}
+
+	public String getCredentNo()
+	{
+		return credentNo;
+	}
+
+	public void setCredentNo(String credentNo)
+	{
+		this.credentNo = credentNo;
+	}
+
 	public BigDecimal getSurplusComm()
 	{
 		return surplusComm;
@@ -903,12 +927,18 @@ public class AgentManagerAction extends LotteryClientBaseAction
 //		AdminUser au = this.getCurAdminUser();
 		customer = this.getCurCustomer();
 		SpreadChannel sc = customer.getChannel();
+		if(sc==null){
+			sc = new SpreadChannel();
+		}
 		sc.setRealName(realName);
 		sc.setLinkPhone(linkPhone);
 		sc.setQQ(qq);
 		sc.setEmail(email);
-		sc.setName(name);
+		customer.setChannel(sc);
+//		sc.setName(name);
+		customer.setCredentNo(credentNo);
 		customerService.save(customer);
+		infoMessage = "修改成功";
 		return getAgentInfo();
 		// return "saveAgentInfo";
 	}
@@ -1158,9 +1188,9 @@ public class AgentManagerAction extends LotteryClientBaseAction
 			bindMessage = "开户名不能为空!";
 			bool = false;
 		}
-		if (!bankName.equals(customer.getRealName()))
+		if (!bankName.equals(customer.getChannel().getRealName()))
 		{
-			bindMessage = "开户名与真实姓名不一至!";
+			bindMessage = "开户名与公司名不一至!";
 			bool = false;
 		}
 

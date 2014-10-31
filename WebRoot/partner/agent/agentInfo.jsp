@@ -49,8 +49,8 @@ var customerId = "${customer.id}";
 		$("#qq").show();
 		$("#emailSp").hide();
 		$("#email").show();
-		$("#nameSp").hide();
-		$("#name").show();
+		$("#credentNoSp").hide();
+		$("#credentNo").show();
 	}
 	function gotoEditBank(){
 		$("#bankSp").hide();
@@ -59,7 +59,6 @@ var customerId = "${customer.id}";
 		$("#bankNumber").show();
 		$("#bankNameSp").hide();
 		$("#bankName").show();
-		$("#bankNameMsg").show();
 		$("#provinceSp").hide();
 		$("#province").show();
 		$("#citySp").hide();
@@ -89,31 +88,31 @@ var customerId = "${customer.id}";
 		<tr>
 			<td>代理ID</td>
 			<td id="customerTd"></td>
-			<td>真实姓名</td>
+			<td>公司名</td>
 			<td><span id="realNameSp">${customer.channel.realName }</span><input style="display: none;" type="text" name="realName" id="realName" value="${customer.channel.realName }" /></td>
-			<td>联系电话</td>
-			<td><span id="linkPhoneSp">${customer.channel.linkPhone }</span><input style="display: none;" type="text" name="linkPhone" id="linkPhone" value="${customer.channel.linkPhone }" /></td>
+			<td>公司注册号</td>
+			<td><span id="credentNoSp">${customer.credentNo }</span><input style="display: none;" type="text" name="credentNo" id="credentNo" value="${customer.credentNo }" /></td>
+			
 		</tr>
 		<tr>
+			<td>联系电话</td>
+			<td><span id="linkPhoneSp">${customer.channel.linkPhone }</span><input style="display: none;" type="text" name="linkPhone" id="linkPhone" value="${customer.channel.linkPhone }" /></td>
 			<td>QQ:</td>
 			<td><span id="qqSp">${customer.channel.QQ }</span><input style="display: none;" type="text" name="qq" id="qq" value="${customer.channel.QQ }" /></td>
 			<td>邮箱:</td>
 			<td><span id="emailSp">${customer.channel.email }</span><input style="display: none;" type="text" name="email" id="email" value="${customer.channel.email }" /></td>
-			<td>渠道名称</td>
-			<td><span id="nameSp">${customer.channel.name }</span><input style="display: none;" type="text" name="name" id="name" value="${customer.channel.name }" /></td>
+			
 		</tr>
 		<tr>
-			<td>渠道地址:</td>
-			<td>${customer.channel.url }</td>
-			<td>一级推荐提成比例:</td>
+			<td>提成比例:</td>
 			<td>${customer.superRatio }</td>
 			<td>佣金:</td>
 			<td>${customer.superCommission }(元)<input type="button" value="转账到余额" onclick="yongjingChongzhi()"/><font color="red">${message }</font></td>
+			<td>账号余额:</td>
+		<td>${customer.wallet.balance }(元)<input type="button" value="申请提款" onclick="shenqingTikuan()"/><font color="red">${tikuanMessage }</font></td>
 		</tr>
 		<tr>
-		<td>账号余额:</td>
-		<td>${customer.wallet.balance }(元)<input type="button" value="申请提款" onclick="shenqingTikuan()"/><font color="red">${tikuanMessage }</font></td>
-		<td colspan="4" align="center"><input type="button" onclick="gotoEditInfo()" value="编辑"/><input type="submit" value="保存"/></td>
+		<td colspan="6" align="center"><input type="button" onclick="gotoEditInfo()" value="编辑"/><input type="submit" value="保存"/><font color="red">${infoMessage }</font></td>
 		</tr>
 		</table>
 		</form>
@@ -139,7 +138,7 @@ var customerId = "${customer.id}";
 			<td>
 			<span id="bankNameSp">${customer.bankName }</span>
 			<input style="display: none;" type="text" name="bankName" id="bankName" value="${customer.bankName }"/>
-	           				<font style="display: none;" id="bankNameMsg" color="red">开户名与您个人资料的真实姓名必须一致</font></td>
+	           				</td>
 			</tr>
 			<tr>
 			<td>开户支行：省：</td>

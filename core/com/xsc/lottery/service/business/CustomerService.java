@@ -3,6 +3,7 @@ package com.xsc.lottery.service.business;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import com.xsc.lottery.entity.business.PaymentRequest;
 import com.xsc.lottery.entity.business.Wallet;
 import com.xsc.lottery.entity.business.WalletLog;
 import com.xsc.lottery.entity.enumerate.BusinessType;
+import com.xsc.lottery.entity.enumerate.CustomerType;
 import com.xsc.lottery.entity.enumerate.UserType;
 import com.xsc.lottery.service.LotteryBaseService;
 
@@ -51,6 +53,16 @@ public interface CustomerService extends LotteryBaseService<Customer>{
 	 * 保存充值请求
 	 */
 	public void savePaymentRequest(PaymentRequest entity);
+	
+	/**
+	 * 用hql批量更新客户
+	 */
+	public void updateCustomers(Map map);
+	
+	/**
+	 * 根据用户类型查询用户  
+	 *  */
+	public List<Customer> getCustomerByCustomerType(CustomerType type);
 	
 	/**
 	 * 分页获得客户充值流水信息
@@ -108,7 +120,7 @@ public interface CustomerService extends LotteryBaseService<Customer>{
 	/**分页获得客户信息*/
 	public Page<Customer> getLotteryCustomerPage(Page<Customer> page, Calendar stratTime,
 			Calendar endTime, String f_orderserch, String f_serch, Calendar f_starTime, Calendar f_endTime,
-			String f_serchName, UserType type,Boolean isApply,Integer isPass);
+			String f_serchName, UserType type,Boolean isApply,Integer isPass,Map queryMap);
 	
 	public List<PaymentRequest> getPaymentRequestList(
 			Customer customer, Calendar fStime, Calendar fEtime);
