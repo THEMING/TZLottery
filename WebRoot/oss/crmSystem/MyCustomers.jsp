@@ -63,6 +63,12 @@ function jumpPage1() {
 		var emailMsg = "";
 		var firstFla = 0;
 		
+		var cantSmsMsg = "";//由于超过限制短信数不能发短信的用户
+		var cantEmailMsg = "";//由于超过限制邮件数不能发邮件的用户
+		
+		var canSmsNum = $("#canSmsNum").val();//限制的短信数
+		var canEmailNum = $("#canEmailNum").val();//限制的邮件数
+		
 		var aa = $('input[name="cusId"]:checked').val([]);
 		
 		if(id!=null){
@@ -76,7 +82,10 @@ function jumpPage1() {
 		
 		for(var i=0;i<aa.length;i++){
 			if(status==1&&$("#phoneNum_"+aa[i].value).val()!=""){//短信
-			
+				if(parseInt($("#smsAccept_"+aa[i].value).val())>parseInt(canSmsNum)){
+					cantSmsMsg += "["+$("#nickName_"+aa[i].value).val()+"]";
+					continue;
+				}
 				if(firstFla==0){
 					phoneNums += $("#phoneNum_"+aa[i].value).val();
 					ids += $("#cusId_"+aa[i].value).val();
@@ -88,7 +97,10 @@ function jumpPage1() {
 					nickNames += ","+"["+$("#nickName_"+aa[i].value).val()+"]";
 				}
 			}else if(status==2&&$("#email_"+aa[i].value).val()!=""){//邮件
-			
+				if(parseInt($("#emailAccept_"+aa[i].value).val())>parseInt(canEmailNum)){
+					cantEmailMsg += "["+$("#nickName_"+aa[i].value).val()+"]";
+					continue;
+				}
 				if(firstFla==0){
 					emails += $("#email_"+aa[i].value).val();
 					ids += $("#cusId_"+aa[i].value).val();
@@ -110,25 +122,61 @@ function jumpPage1() {
 		}
 		
 		if(status==1&&phoneNums!=""){//短信
+			var msg = "";
 			if(phoneMsg!=""){
-				alert("用户"+phoneMsg+"尚未绑定手机，已从勾选列表中去掉");
+				msg = "用户"+phoneMsg+"尚未绑定手机;";
+				
+			}
+			if(cantSmsMsg!=""){
+				msg += "用户"+cantSmsMsg+"超过了可发送的短信数;"
+			}
+			if(msg!=""){
+				alert(msg+"已从勾选列表中去掉");
 			}
 			$("#phoneIds").val(ids);
 			$("#phoneNums").val(phoneNums);
 			$("#phoneNickNames").val(nickNames);
 			showSms();
 		}else if(status==2&&emails!=""){//邮件
+			var msg = "";
 			if(emailMsg!=""){
-				alert("用户"+emailMsg+"尚未绑定邮箱，已从勾选列表中去掉");
+				msg = "用户"+phoneMsg+"尚未绑定邮箱;";
+			}
+			if(cantEmailMsg!=""){
+				msg += "用户"+cantEmailMsg+"超过了可发送的邮件数;"
+			}
+			if(msg!=""){
+				alert(msg+"已从勾选列表中去掉");
 			}
 			$("#emailIds").val(ids);
 			$("#emails").val(emails);
 			$("#emailNickNames").val(nickNames);
 			showEmail();
-		}else if(status==1&&phoneMsg!=""){
-			alert("所选用户都未绑定手机，操作失败");
-		}else if(status==2&&emailMsg!=""){
-			alert("所选用户都未绑定邮箱，操作失败");
+		}else if(status==1&&(phoneMsg!=""||cantSmsMsg!="")){
+			var msg = "";
+			if(phoneMsg!=""){
+				msg = "用户"+phoneMsg+"尚未绑定手机;";
+				
+			}
+			if(cantSmsMsg!=""){
+				msg += "用户"+cantSmsMsg+"超过了可发送的短信数;"
+			}
+			if(msg!=""){
+				alert(msg+"已从勾选列表中去掉");
+			}
+			//alert("所选用户都未绑定手机，操作失败");
+		}else if(status==2&&(emailMsg!=""||cantEmailMsg!="")){
+			var msg = "";
+			if(emailMsg!=""){
+				msg = "用户"+phoneMsg+"尚未绑定邮箱;";
+			}
+			if(cantEmailMsg!=""){
+				msg += "用户"+cantEmailMsg+"超过了可发送的邮件数;"
+			}
+			if(msg!=""){
+				alert(msg+"已从勾选列表中去掉");
+			}
+			//alert("所选用户都未绑定邮箱，操作失败");
 		}
 	}
 	
@@ -263,6 +311,15 @@ function jumpPage1() {
 
 	}
 	
+	function cli(obj){
+		if($("[name="+obj.name+"]").attr("checked")){
+			$("[name="+obj.name+"]").val(true);
+		}else{
+			$("[name="+obj.name+"]").val(false);
+		}
+		
+	}
+	
 </script>
 </head>
 <body>
@@ -270,6 +327,11 @@ function jumpPage1() {
  <div class="tab">
 <s:form  action="CRMManage.htm" method="post">
 <s:hidden name="action" id="action" value="index"/>
+
+<input type="hidden" name="canSmsNum" id="canSmsNum" value="${canSmsNum}">
+<input type="hidden" name="canEmailNum" id="canEmailNum" value="${canEmailNum}">
+
+
 <table width="60%">
 <caption class="redbold">我的客户</caption>
   <tr>
@@ -309,10 +371,26 @@ function jumpPage1() {
     <input type="text" name="f_eTime" value="<s:date name="f_eTime" format="yyyy-MM-dd HH:mm:ss"/>"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true});"/>
     </td>
   </tr>
+  <tr>
+  	<td ><div align="center">
+  		今天还能发短信的客户
+  	</div>
+  	</td>
+  	<td >
+  		<input name="canSms" type="checkbox" id="canSms" onclick="cli(this)" <s:if test="canSms">checked</s:if> value="<s:if test="canSms">true</s:if>" />
+  	</td>
+  	<td ><div align="center">
+  		今天还能发邮件的客户
+  	</div>
+  	</td>
+  	<td >
+  		<input name="canEmail" type="checkbox" id="canEmail" onclick="cli(this)" <s:if test="canEmail">checked</s:if> value="<s:if test="canEmail">true</s:if>" />
+  	</td>
+  </tr>
 </table>
 
 <br>
-<input type="button" value="批量发短信" onclick="sendMany(1)"><input type="button" value="批量发邮件" onclick="sendMany(2)">   总充值金额：<font color="red">${paymentMoenySum}</font>（元）   总购彩金额：<font color="red">${outMoneySum}</font>（元）
+<input type="button" value="批量发短信" onclick="sendMany(1)">&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" value="批量发邮件" onclick="sendMany(2)">   总充值金额：<font color="red">${paymentMoenySum}</font>（元）   总购彩金额：<font color="red">${outMoneySum}</font>（元）
 <br>
 <br>
 <table >
@@ -331,7 +409,10 @@ function jumpPage1() {
     <td height="25"><div align="center">购彩总额</div></td>
     <td height="25"><div align="center">操作</div></td>
     <td height="25"><div align="center">注册时间</div></td>
-    <td height="25"><div align="center">最后登陆时间</div></td>
+    <%--<td height="25"><div align="center">最后登陆时间</div></td>
+    --%>
+    <td height="25"><div align="center">今天已发短信数</div></td>
+    <td height="25"><div align="center">今天已发邮件数</div></td>
     <td height="25"><div align="center">操作</div></td>
   </tr>
   	<s:iterator id="rs" value="customerPage.result" status="st">
@@ -364,7 +445,22 @@ function jumpPage1() {
       </td>
       <td height="25" ><a href="/oss/customer/manageCustomer.aspx?action=view&customerId=${rs.id }">资</a>|<a href="/oss/customer/manageFinanialQuery.aspx?customerId=${rs.id }">账</a></td>
       <td height="25" ><s:date name="#rs.registerTime" format="yyyy-MM-dd HH:mm"/></td>
-       <td height="25" ><s:date name="#rs.lastLoginTime" format="yyyy-MM-dd HH:mm"/></td>
+       <%--<td height="25" ><s:date name="#rs.lastLoginTime" format="yyyy-MM-dd HH:mm"/></td>
+       --%>
+       <td height="25" ><s:if test="#rs.smsAccept!=null">
+				<s:property value="#rs.smsAccept.substring(today-1,today)"/>
+				</s:if><s:else>0</s:else>
+				<input type="hidden" id="smsAccept_${rs.id}" value="<s:if test="#rs.smsAccept!=null">
+				<s:property value="#rs.smsAccept.substring(today-1,today)"/>
+				</s:if><s:else>0</s:else>" >
+				</td>
+	   <td height="25" ><s:if test="#rs.emailAccept!=null">
+				<s:property value="#rs.emailAccept.substring(today-1,today)"/>
+				</s:if><s:else>0</s:else>
+				<input type="hidden" id="emailAccept_${rs.id}" value="<s:if test="#rs.emailAccept!=null">
+				<s:property value="#rs.emailAccept.substring(today-1,today)"/>
+				</s:if><s:else>0</s:else>" >
+				</td>
        <td height="25" >
        <a href="javascript:sendMany(1,${rs.id })">发短信</a>
        <a href="javascript:sendMany(2,${rs.id })">发邮件</a></td>
@@ -424,7 +520,7 @@ function jumpPage1() {
 		</form>
 </div>
 <br /><br />
-<div hidden="" id="smsTDiv" style="top:100px; margin-left:-275px;position:absolute;left:50%; width:550px; height:200px; background-color:#81eb96; z-index:1;">
+<div hidden="" id="smsTDiv" style="top:100px; margin-left:-275px;position:absolute;left:50%; width:550px; height:300px; background-color:#ffffff; z-index:1;">
 <form id="smsForm" action="CRMManage.htm" method="post">
 <s:hidden name="action" id="action" value="sendSMS"/>
 <s:hidden name="phoneNums" id="phoneNums"/>
@@ -432,13 +528,13 @@ function jumpPage1() {
 <div align="center">
 <h3><strong>发送短信</strong></h3>
 </div>
-短信模板：<s:select onchange="setSmsContent(this)" list="smsTemplateList" name="smsTemplate.id" listKey="id" listValue="title" value="id" headerValue="请选择..." headerKey=""/>
+&nbsp;&nbsp;短信模板：<s:select onchange="setSmsContent(this)" list="smsTemplateList" name="smsTemplate.id" listKey="id" listValue="title" value="id" headerValue="请选择..." headerKey=""/>
 		<br>
-		发送的用户：<input id="phoneNickNames" name="nickNames" type="text">
+		&nbsp;&nbsp;发送的用户：<input id="phoneNickNames" name="nickNames" type="text">
 		<br>
-		参数：<input type="text" id="smsArgument" name="smsArgument">
+		&nbsp;&nbsp;参数：<input type="text" id="smsArgument" name="smsArgument">
 		<br>
-		内容：<textarea id="smsContent" name="smsContent" cols="80" rows="3" readonly="readonly"></textarea>
+		&nbsp;&nbsp;内容：<textarea id="smsContent" name="smsContent" cols="80" rows="10" readonly="readonly"></textarea>
 		<br>
 		<div style="width:100px;margin-left:-25px;position:absolute;left:50%;">
 		<input type="button" onclick="checkFrom(1)" value="提交" ><input type="button" onclick="closee(1)" value="关闭" >
@@ -446,7 +542,7 @@ function jumpPage1() {
 		</form>
 </div>
 <br /><br />
-<div hidden="" id="emailTDiv" style="top:100px; margin-left:-275px;position:absolute;left:50%; width:550px; height:200px; background-color:#81eb96; z-index:1;">
+<div hidden="" id="emailTDiv" style="top:100px; margin-left:-275px;position:absolute;left:50%; width:550px; height:300px; background-color:#ffffff; z-index:1;">
 <form id="emailForm" action="CRMManage.htm" method="post">
 <s:hidden name="action" id="action" value="sendEmail"/>
 <s:hidden name="emails" id="emails"/>
@@ -454,15 +550,15 @@ function jumpPage1() {
 <div align="center">
 <h3><strong>发送邮件</strong></h3>
 </div>
-邮件模板：<s:select onchange="setEmsilContent(this)" list="emailTemplateList" name="emailTemplate.id" listKey="id" listValue="title" value="emailTemplate.id" headerValue="请选择..." headerKey=""/>
+&nbsp;&nbsp;邮件模板：<s:select onchange="setEmsilContent(this)" list="emailTemplateList" name="emailTemplate.id" listKey="id" listValue="title" value="emailTemplate.id" headerValue="请选择..." headerKey=""/>
 	<br>
-		发送的用户：<input id="emailNickNames" name="nickNames" type="text">
+		&nbsp;&nbsp;发送的用户：<input id="emailNickNames" name="nickNames" type="text">
 		<br>
-		参数：<input type="text" id="emailArgument" name="emailArgument">
+		&nbsp;&nbsp;参数：<input type="text" id="emailArgument" name="emailArgument">
 		<br>
-		标题：<input type="text" id="emailTitle" name="emailTitle" readonly="readonly">
+		&nbsp;&nbsp;标题：<input type="text" id="emailTitle" name="emailTitle" readonly="readonly">
 		<br>
-		内容：<textarea id="emailContent" name="emailContent" cols="80" rows="3" readonly="readonly"></textarea>
+		&nbsp;&nbsp;内容：<textarea id="emailContent" name="emailContent" cols="80" rows="10" readonly="readonly"></textarea>
 		<br>
 		<div style="width:100px;margin-left:-25px;position:absolute;left:50%;">
 		<input type="button" onclick="checkFrom(2)" value="提交" ><input type="button" onclick="closee(2)" value="关闭" >

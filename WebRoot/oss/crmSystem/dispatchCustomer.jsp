@@ -135,7 +135,7 @@ function jumpPage1() {
 			success: function(data, textStatus){
 			var a=eval("("+data+")");
 		
-			if(a.message=="业务员不存在")
+			if(a.message!="业务员存在")
 			{
 			 	$("#"+inputId+"Span").html("<font style='color:red'>"+a.message+"</font>")
 			}else{
@@ -153,6 +153,10 @@ function jumpPage1() {
 		var obj = new Object();
 		
 		if(inputId=="adminUserAll"){
+			if($("#totalCountHide").val()==0){
+				alert("没有查询结果");
+				return;
+			}
 			obj = $("#queryForm").serialize();	
 			obj = obj+"&oper="+inputId+"&adminUserCheck="+$("#"+inputId).val()+"&action=dispatchCustomerToSomeOne";
 		}else if(inputId=="adminUserPage"){
@@ -165,7 +169,7 @@ function jumpPage1() {
 				for(var i = 1;i<selectedCus.length;i++){
 					ids += ","+ selectedCus[i].value;
 				}
-				obj.customerIds = ids;alert(ids);
+				obj.customerIds = ids;
 				obj.oper = inputId;
 				obj.adminUserCheck = $("#"+inputId).val();
 				obj.action = "dispatchCustomerToSomeOne";
@@ -245,7 +249,7 @@ function jumpPage1() {
   </tr>
   <tr>
   	<td colspan="2">
-  		对当前全部<font style='color:red'>${customerPage.totalCount}</font>位客户分配给业务员<input id="adminUserAll" onblur="checkIsFindCustomer('adminUserAll');" placeholder="请输入业务员账号" name="adminUserAll" type="text"><span id="adminUserAllSpan" class="gray"></span>   <input type="button" value="分配" onclick="dispath('adminUserAll')">
+  		对当前全部<font style='color:red'>${customerPage.totalCount}<input hidden="" id="totalCountHide" name="totalCountHide" value="${customerPage.totalCount}"></font>位客户分配给业务员<input id="adminUserAll" onblur="checkIsFindCustomer('adminUserAll');" placeholder="请输入业务员账号" name="adminUserAll" type="text"><span id="adminUserAllSpan" class="gray"></span>   <input type="button" value="分配" onclick="dispath('adminUserAll')">
   	</td>
   	<td  colspan="2">
   		对当前页<font style='color:red'>${customerPage.pageSize}</font>位客户分配给业务员<input id="adminUserPage" onblur="checkIsFindCustomer('adminUserPage');" placeholder="请输入业务员账号" name="adminUserPage" type="text"><span id="adminUserPageSpan" class="gray"></span>   <input type="button" value="分配" onclick="dispath('adminUserPage')">
@@ -317,7 +321,7 @@ function jumpPage1() {
 	<tr><td>
 		<div>
 	<input type="hidden" name="pageNo" id="pageNo" value="1" />
-	每页${customerPage.pageSize}条 共${customerPage.totalCount}条记录 第${customerPage.pageNo}/${customerPage.totalPages}页   
+	每页<input type="text" name="pageSize" style="width: 30px" id="pageSize" value="${customerPage.pageSize}" />条 共${customerPage.totalCount}条记录 第${customerPage.pageNo}/${customerPage.totalPages}页   
 	<s:if test="customerPage.pageNo==1">
 		<span class="disabled">首页</span> 
 		<span class="disabled">前一页</span>

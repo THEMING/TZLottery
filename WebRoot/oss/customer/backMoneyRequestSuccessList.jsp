@@ -1,4 +1,4 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ include file="../skin/02/taglib.jsp" %>
 <head>
 <title>提款审核管理</title>
@@ -72,6 +72,7 @@ function subm(cmd,strId) {
 
 <table >
   <tr><!--（成功，失败）-->
+    <td height="25"><div align="center">编号</div></td>
     <td height="25"><div align="center">提款时间</div></td>
     <td height="25"><div align="center">用户名</div></td>
     <td height="25"><div align="center">姓名</div></td>
@@ -86,6 +87,7 @@ function subm(cmd,strId) {
   </tr>
   	<s:iterator id="rs" value="page.result">
 	  <tr>
+	  <td height="25" >${rs.id}</td>
       <td height="25" ><s:date name="#rs.applyTime" format="yyyy-MM-dd HH:mm"/></td>
       <td height="25" ><a href="manageCustomer.aspx?action=view&customerId=${rs.customer.id }">${rs.customer.nickName}</a></td>
       <td height="25" >${rs.realName}</td>

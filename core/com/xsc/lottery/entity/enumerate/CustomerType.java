@@ -10,5 +10,8 @@ public enum CustomerType
 	CPSCustomer,
 	
 	/**代理商用户*/
-	AgentCustomer
+	AgentCustomer,
+	
+	/**业务员*/
+	BusinessCustomer,
 }

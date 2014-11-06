@@ -69,6 +69,10 @@
 		<br />
 		<h1>提款手续费：${feeMoney }</h1>
 		<br />
+		<h1>推荐人ID：${customer.superior.id}</h1>
+		<br />
+		<h1>推荐人用户名：${customer.superior.nickName}</h1>
+		<br />
 		<br />
 		<h1><input type="button" value="返回" onclick="history.back()"/></h1>
 		<br />

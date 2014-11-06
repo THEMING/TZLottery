@@ -39,6 +39,7 @@ var postPath = "<%=request.getContextPath()%>";
 	
 	<br/>
 	发送者:<input type="text" id="sendUserNameQuery" name="sendUserNameQuery">
+	接受者:<input type="text" name="acceptCust" value="${acceptCust}">
 	发送时间:<input type="text" name="sTime" value="<s:date name="sTime" format="yyyy-MM-dd HH:mm:ss"/>"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd 00:00:00',readOnly:true});"/>-
     <input type="text" name="eTime" value="<s:date name="eTime" format="yyyy-MM-dd HH:mm:ss"/>"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true});"/>
 		发送状态：<s:select list="emailStatelist" name="emailState" id="emailState" listValue="text" headerValue="请选择..." headerKey=""></s:select>

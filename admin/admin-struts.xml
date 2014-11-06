@@ -11,6 +11,15 @@
 				<interceptor-ref name="LotteryCompleteStack" />
 				<interceptor-ref name="adminUrlInteceptor" />
 			</interceptor-stack>
+			
+			<interceptor name="partnerLoginInteceptor"
+				class="com.xsc.lottery.interceptor.partner.PartnerLoginInterceptor">
+			</interceptor>
+			<!-- <interceptor name="partnerLoginInteceptor" class="com.xsc.lottery.web.interceptor.LoginInteceptor"></interceptor> -->
+			<interceptor-stack name="partnerStackInteceptor">
+				<interceptor-ref name="LotteryCompleteStack"/>
+				<interceptor-ref name="partnerLoginInteceptor"/>
+			</interceptor-stack>
 		</interceptors>
 		<global-results>
 			<result name="admLogin" type="redirect">/oss/adminLogin.htm</result>
@@ -63,6 +72,9 @@
 			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
 			<result name="list">systemParamManager.jsp</result>
 			<result name="addParam">add_param.jsp</result>
+		</action>
+		<action name="ourPerformance" class="ourPerformance">
+			<result>OurPerformance.jsp</result>
 		</action>
 	</package>
 	
@@ -354,33 +366,40 @@
 	<!-- CRM系统 -->
 	<package name="admin_system" extends="adminstruts-default" namespace="/oss/crmSystem">
 		<action name="CRMManage" class="Admin.CRMSystem" >
-			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
 			<result>MyCustomers.jsp</result>
 			<result name="template">templateManager.jsp</result>
 		</action>
+		
 		<action name="myPerformance" class="Admin.CRMSystem" method="getMyPerformance">
-			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
 			<result>MyPerformance.jsp</result>
 		</action>
 		<action name="mySendSms" class="Admin.CRMSystem" method="getMySendSms">
-			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
 			<result>MySendSms.jsp</result>
 		</action>
 		<action name="mySendEmail" class="Admin.CRMSystem" method="getMySendEmail">
-			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
 			<result>MySendEmail.jsp</result>
 		</action>
+		
+		
 		<action name="emailManager" class="Admin.CRMSystem" method="getAllEmail">
-			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<!-- <interceptor-ref name="adminStackInteceptor"></interceptor-ref> -->
 			<result>emailManager.jsp</result>
 		</action>
 		<action name="dispatchCustomer" class="Admin.CRMSystem" method="dispatchCustomer">
-			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<!-- <interceptor-ref name="adminStackInteceptor"></interceptor-ref> -->
 			<result>dispatchCustomer.jsp</result>
 		</action>
 		<action name="templateManager" class="Admin.CRMSystem" method="templateManager">
-			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<!-- <interceptor-ref name="adminStackInteceptor"></interceptor-ref> -->
 			<result name="template">templateManager.jsp</result>
+		</action>
+		<action name="thePerformance" class="Admin.CRMSystem" method="getThePerformance">
+			<!-- <interceptor-ref name="adminStackInteceptor"></interceptor-ref> -->
+			<result>ThePerformance.jsp</result>
 		</action>
 	</package>
 	
@@ -402,6 +421,12 @@
 			<result name="list">inLinkManage.jsp</result>
 			<result name="edit">inLink_edit.jsp</result>
 			<result>inLinkManage.jsp</result>
+		</action>
+		<action name="manageFriendlyLink" class="Admin.FriendlyLinkManagement">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="list">friendlyLinkManage.jsp</result>
+			<result name="edit">friendlyLink_edit.jsp</result>
+			<result>friendlyLinkManage.jsp</result>
 		</action>
 		<action name="insertArticle" class="Admin.ArticleManagement">
 		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>

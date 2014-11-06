@@ -268,7 +268,7 @@ public class SmsLog extends BaseObject
 	private SmsLogType type;
 
 	/*
-	 * 发送人 匹配的是AdminUser的id
+	 * 发送人 匹配的是Customer的id
 	 */
 	@Column(length = 20)
 	private String userId;

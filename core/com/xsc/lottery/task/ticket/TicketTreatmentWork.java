@@ -600,7 +600,7 @@ public abstract class TicketTreatmentWork implements ApplicationListener
     private boolean needToCheckSP(final Ticket ticket)
     {
     	boolean flag = false;
-    	if((ticket.getType().equals(LotteryType.竞彩足球) || ticket.getType().equals(LotteryType.竞彩足球)) && ticket.getRatio() == null)
+    	if((ticket.getType().equals(LotteryType.竞彩足球) || ticket.getType().equals(LotteryType.竞彩篮球)) && ticket.getRatio() == null)
     	{
     		flag =  true;
     	}

@@ -109,9 +109,10 @@ public interface SmsLogService
 	 * @param page
 	 * @param mobile
 	 * @param state 
+	 * @param m 
 	 * @return
 	 */
-	public Page<SmsLog> getSmsLogPage(Page<SmsLog> page,String mobile, SmsLogState state,Long id);
+	public Page<SmsLog> getSmsLogPage(Page<SmsLog> page,String mobile, SmsLogState state,Long id, Map m);
 	
 	/**
 	 * 根据map对象获取短信日志记录

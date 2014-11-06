@@ -200,7 +200,39 @@ public class Customer extends BaseObject
     @Enumerated(EnumType.ORDINAL)
     private RegChannel regChannel;
     
-    public AdminUser getAdminUser()
+    /**
+     * 用户被业务员发送邮件的次数 
+     * 数据格式初始为31个0，对应每个月的31天
+     * 当业务员发送了推销邮件 当天对应的位置加一 每个月一号清空*/
+    private String emailAccept="0000000000000000000000000000000";
+    
+    /**
+     * 用户被业务员发送短信的次数 
+     * 数据格式初始为31个0，对应每个月的31天
+     * 当业务员发送了推销短信 当天对应的位置加一 每个月一号清空*/
+    private String smsAccept="0000000000000000000000000000000";//"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0";
+    
+    public String getEmailAccept()
+	{
+		return emailAccept;
+	}
+
+	public void setEmailAccept(String emailAccept)
+	{
+		this.emailAccept = emailAccept;
+	}
+
+	public String getSmsAccept()
+	{
+		return smsAccept;
+	}
+
+	public void setSmsAccept(String smsAccept)
+	{
+		this.smsAccept = smsAccept;
+	}
+
+	public AdminUser getAdminUser()
 	{
 		return adminUser;
 	}

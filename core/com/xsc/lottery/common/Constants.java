@@ -59,4 +59,23 @@ public interface Constants
      */
     public final static String ISOPEN_CUSTOMER_IMPORT_TASK = "isopen_customer_import_task";
     
+    /*
+     * 出票倍数限制 
+     */
+    public final static String MAX_TICKET_MULTIPLE = "max_ticket_multiple";
+    
+    /*
+     * 单票最大金额
+     */
+    public final static String MAX_TICKET_MONEY = "max_ticket_money";
+    
+    /*
+     * 限制业务员每天给每个客户发送的邮件数
+     */
+    public final static String CUSTOMER_RECEIVE_EMAIL_FROM_BUSSINESS = "customer_receive_email_from_bussiness";
+    
+    /*
+     * 限制业务员每天给每个客户发送的短信数
+     */
+    public final static String CUSTOMER_RECEIVE_SMS_FROM_BUSSINESS = "customer_receive_sms_from_bussiness";
 }

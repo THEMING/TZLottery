@@ -8,7 +8,7 @@ import com.xsc.lottery.entity.admin.WinPrize;
 import com.xsc.lottery.entity.business.Article;
 import com.xsc.lottery.entity.business.ArticleCategory;
 import com.xsc.lottery.entity.business.ArticleInLink;
-import com.xsc.lottery.entity.business.Customer;
+import com.xsc.lottery.entity.business.FriendlyLink;
 import com.xsc.lottery.entity.enumerate.LotteryType;
 import com.xsc.lottery.entity.partner.Partner;
 import com.xsc.lottery.service.LotteryBaseService;
@@ -51,6 +51,16 @@ public interface ArticleService extends LotteryBaseService<Article>
 	public List<ArticleInLink> findAllInLink();
 	public ArticleInLink getInLink(Long id);
 	public void deleteInLink(Long id);
+	
+	public FriendlyLink updateFriendlyLink(FriendlyLink paramFriendlyLink);
+
+	public FriendlyLink saveFriendlyLink(FriendlyLink paramFriendlyLink);
+
+	public List<FriendlyLink> findAllFriendlyLink();
+
+	public FriendlyLink getFriendlyLink(Long paramLong);
+
+	public void deleteFriendlyLink(Long paramLong);
 	
 	
 	

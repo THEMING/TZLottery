@@ -11,6 +11,7 @@
 		</style>
 	</head>
 	<body>
+		<div style="padding:20px 20px;">
 		<label style="font-size:16px">活动信息</label>
 		<br/>
 		<span style="color:red">${sysmsg }</span>
@@ -34,6 +35,8 @@
 		<h1>开始时间： <input type="text" id="startTime" name="startTime" value="${startTime}"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',readOnly:true});"/></h1>
 		<br />
 		<h1>结束时间： <input type="text" id="endTime" name="endTime" value="${endTime}"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',readOnly:true});"/></h1>
+		<br />
+		<h1>是否显示： <input type="checkbox" id="isShow" name="isShow" value=<s:if test="activity.isShow">true</s:if><s:else>false</s:else> onchange="oncheck(this)" <s:if test="activity.isShow">checked</s:if> /></h1>
 		<br/>
 		<%--<h1>关联的代理商： <s:select list="partnerList" name="partner.id" listKey="id" listValue="nickName" value="partner.id" headerValue="请选择..." headerKey=""/></h1>
 		
@@ -82,13 +85,14 @@
 		<br/>
 		<h1>图片： <s:select onchange="loadPicture(this)" list="articleList" name="article.id" listKey="id" listValue="title" value="article.id" headerValue="请选择..." headerKey=""/></h1>
 		<br/>
-		<div id="showPictureArea" style="height: 400px;width:670px;">
+		<div id="showPictureArea" style="width:670px;padding-left: 45px;">
 		${activity.article.content}
 		</div>
 		<br/>
 		<h1><input type="submit" value="确定" onclick="return check()"/></h1>
 		<br/>
 		</form>
+		</div>
 	</body>
 </html>
 
@@ -124,7 +128,7 @@
 	
 	function oncheck(obj){
 		$(obj).val($(obj).attr("checked"));
-		
+		if(obj.id=="isShow") return;
 		if(obj.id=="isPublic"&&$(obj).attr("checked")==false){
 			$("#partnerDiv").show();
 		}else if(obj.id=="isPublic"&&$(obj).attr("checked")==true){

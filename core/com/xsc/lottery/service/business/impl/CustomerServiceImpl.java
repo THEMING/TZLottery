@@ -31,6 +31,7 @@ import org.springside.modules.orm.hibernate.Page;
 import org.springside.modules.orm.hibernate.SimpleHibernateTemplate;
 
 import com.xsc.lottery.alipay.util.MapUtil;
+import com.xsc.lottery.common.Constants;
 import com.xsc.lottery.dao.PagerHibernateTemplate;
 import com.xsc.lottery.entity.admin.AdminUser;
 import com.xsc.lottery.entity.business.BackMoneyRequest;
@@ -38,6 +39,7 @@ import com.xsc.lottery.entity.business.Customer;
 import com.xsc.lottery.entity.business.CustomerCommission;
 import com.xsc.lottery.entity.business.NewlyWinPrize;
 import com.xsc.lottery.entity.business.PaymentRequest;
+import com.xsc.lottery.entity.business.SystemParam;
 import com.xsc.lottery.entity.business.Wallet;
 import com.xsc.lottery.entity.business.WalletLog;
 import com.xsc.lottery.entity.business.SmsLog.SmsLogState;
@@ -54,6 +56,7 @@ import com.xsc.lottery.service.business.CpsReportService;
 import com.xsc.lottery.service.business.CustomerService;
 import com.xsc.lottery.service.business.LotteryOrderService;
 import com.xsc.lottery.service.business.SmsLogService;
+import com.xsc.lottery.service.business.SysParamService;
 import com.xsc.lottery.service.listener.active.ActivityListener;
 import com.xsc.lottery.task.message.MessageTaskExcutor;
 import com.xsc.lottery.util.Configuration;
@@ -73,6 +76,8 @@ public class CustomerServiceImpl implements CustomerService
     public PagerHibernateTemplate<PaymentRequest, Long> paymentRequestDao;
     public PagerHibernateTemplate<WalletLog, Long> walletLogDao;
     public PagerHibernateTemplate<NewlyWinPrize, Long> newlyWinPrizeDao;
+    @Autowired
+    public SysParamService sysParamService;
     
     public PagerHibernateTemplate<CustomerCommission, Long> customerCommissionDao;
     @Autowired
@@ -364,8 +369,14 @@ public class CustomerServiceImpl implements CustomerService
 		int i = query.executeUpdate();
 	}
     
+    public void clearCustomerEmailAndSmsAcceptNum(Map map){
+    	StringBuffer hql = new StringBuffer("update business_customer set email_accept='0000000000000000000000000000000',sms_accept='0000000000000000000000000000000'");
+    	SQLQuery query = customerDao.getSession().createSQLQuery(hql.toString());
+    	query.executeUpdate();
+    }
+    
     public void updateCustomers(Map map){
-    	StringBuffer hql = new StringBuffer("update business_customer set admin_user_id=:adminUser_id where 1=1");
+    	StringBuffer hql = new StringBuffer("update business_customer set superior_id=:superior_id where 1=1");
     	if (MapUtil.checkKey(map, "customerIds")) {
         	hql.append(" and id in(:customerIds)");
         }    	
@@ -441,7 +452,7 @@ public class CustomerServiceImpl implements CustomerService
         }
         
         if(MapUtil.checkKey(map, "havenotDispath")){
-        	hql.append(" and admin_user_id is null");
+        	hql.append(" and superior_id is null");
         }
         
         
@@ -450,7 +461,7 @@ public class CustomerServiceImpl implements CustomerService
         
         //================================sql与变量的分割========================================
         
-        query.setParameter("adminUser_id", MapUtils.getLong(map,"adminUser_id"));
+        query.setParameter("superior_id", MapUtils.getLong(map,"superior"));
         
         if (MapUtil.checkKey(map, "customerIds")) {
 //        	query.setString("customerIds", MapUtils.getString(map,"customerIds"));
@@ -604,6 +615,10 @@ public class CustomerServiceImpl implements CustomerService
         	criteria.add(Restrictions.eq("adminUser", (AdminUser)MapUtils.getObject(queryMap, "adminUser")));
         }
         
+        if(MapUtil.checkKey(queryMap, "superior")){
+        	criteria.add(Restrictions.eq("superior", (Customer)MapUtils.getObject(queryMap, "superior")));
+        }
+        
         if(MapUtil.checkKey(queryMap, "sBalance")||MapUtil.checkKey(queryMap, "eBalance")){
         	criteria.createAlias("wallet", "wallet");
         	
@@ -617,7 +632,16 @@ public class CustomerServiceImpl implements CustomerService
         }
         
         if(MapUtil.checkKey(queryMap, "havenotDispath")){
-        	criteria.add(Restrictions.isNull("adminUser"));
+        	criteria.add(Restrictions.isNull("superior"));
+        }
+        
+        if(MapUtil.checkKey(queryMap, "canEmail")&&MapUtils.getBooleanValue(queryMap, "canEmail")==true){
+        	criteria.add(Restrictions.sqlRestriction(" {alias}.email_accept is null or substring({alias}.email_accept,"+Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+",1)<="+sysParamService.getSysParamByName(Constants.CUSTOMER_RECEIVE_EMAIL_FROM_BUSSINESS).getValue()));
+        	
+        }
+        
+        if(MapUtil.checkKey(queryMap, "canSms")&&MapUtils.getBooleanValue(queryMap, "canSms")==true){
+        	criteria.add(Restrictions.sqlRestriction(" {alias}.sms_accept is null or substring({alias}.sms_accept,"+Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+",1)<="+sysParamService.getSysParamByName(Constants.CUSTOMER_RECEIVE_SMS_FROM_BUSSINESS).getValue()));
         }
         
         
@@ -1365,7 +1389,11 @@ public class CustomerServiceImpl implements CustomerService
     public Long getRecommendorsPageNum(Page<Customer> page, Customer customer,Calendar startTime, Calendar endTime)
 	{
     	Criteria criteria = customerDao.createCriteria();
-    	criteria.add(Restrictions.eq("superior", customer));
+    	
+    	
+    	if(customer!=null){
+    		criteria.add(Restrictions.eq("superior", customer));
+    	}
         
         if (startTime != null) {
             criteria.add(Restrictions.ge("registerTime", startTime));
@@ -1666,6 +1694,101 @@ public class CustomerServiceImpl implements CustomerService
         if (list.isEmpty())
             return null;
         return list;
+	}
+	
+	public List getThePerformance(Map m)
+	{
+		StringBuffer hql = new StringBuffer("" +
+				"select bc.nick_name," +
+				"case when cps.commission is null then 0 else cps.commission end," +
+				"case when cps.pay is null then 0 else cps.pay end," +
+				"case when cps.rechargeMon is null then 0 else cps.rechargeMon end," +
+				"case when e.emailSum is null then 0 else e.emailSum end," +
+				"case when s.smsSum is null then 0 else s.smsSum end from business_customer bc " +
+				"left join (select customer_id id,sum(commission) commission,sum(total) pay,sum(recharge_mon) rechargeMon from business_cps_day_report where 1=1");
+				
+		
+		
+		if(MapUtil.checkKey(m, "f_sTime")){
+			hql.append(" and report_date>=:f_sTime");
+		}
+		if(MapUtil.checkKey(m, "f_eTime")){
+			hql.append(" and report_date<=:f_eTime");
+		}
+		
+		hql.append(" group by customer_id) cps on bc.id = cps.id ");
+		
+		
+		hql.append(" left join (select store_id id, count(*) emailSum from business_email_log where state='SENDED'");
+		
+		if(MapUtil.checkKey(m, "f_sTime")){
+			hql.append(" and send_time>=:f_sTime");
+		}
+		if(MapUtil.checkKey(m, "f_eTime")){
+			hql.append(" and send_time<=:f_eTime");
+		}
+		
+		hql.append(" group by store_id) e on bc.id = e.id ");
+		
+		
+		hql.append(" left join (select user_id id, count(*) smsSum from business_sms_log where state='SENDED' ");
+		
+		if(MapUtil.checkKey(m, "f_sTime")){
+			hql.append(" and send_time>=:f_sTime");
+		}
+		if(MapUtil.checkKey(m, "f_eTime")){
+			hql.append(" and send_time<=:f_eTime");
+		}
+		
+		hql.append(" group by user_id) s on bc.id = s.id " +
+				" where 1=1"); 
+		
+		if(MapUtil.checkKey(m, "customer_type")){
+			hql.append(" and customer_type=:customer_type");
+		}
+		
+		if(MapUtil.checkKey(m, "businessMan")){
+			hql.append(" and nick_name like :nick_name");
+		}
+		
+		hql.append(" order by bc.id desc");
+		
+		
+		
+		SQLQuery query = customerDao.getSession().createSQLQuery(hql.toString());
+		
+		if(MapUtil.checkKey(m, "f_sTime")){
+			query.setParameter("f_sTime", MapUtils.getObject(m,"f_sTime"));
+		}
+		
+		if(MapUtil.checkKey(m, "f_eTime")){
+			query.setParameter("f_eTime", MapUtils.getObject(m,"f_eTime"));
+		}
+		
+		if(MapUtil.checkKey(m, "customer_type")){
+			query.setString("customer_type", MapUtils.getString(m,"customer_type"));
+		}
+		
+		if(MapUtil.checkKey(m, "businessMan")){
+			query.setString("nick_name", "%"+MapUtils.getString(m,"businessMan")+"%");
+		}
+		
+//		if(MapUtil.checkKey(m, "pageSize")){
+//			query.setMaxResults(MapUtils.getIntValue(m, "pageSize"));
+//		}else{
+//			query.setMaxResults(15);
+//		}
+//		
+//		if(MapUtil.checkKey(m, "pageNo")){
+//			int page = MapUtils.getIntValue(m, "pageNo");
+//			int pageSize = MapUtils.getIntValue(m, "pageSize");
+//			query.setFirstResult((page-1)*pageSize); 
+//		}else{
+//			query.setFirstResult(0);
+//		}
+		
+		
+		return query.list();
 	}
 	
 }

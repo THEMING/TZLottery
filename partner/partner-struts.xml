@@ -108,4 +108,5 @@
 			<result name="list">cpaExtension.jsp</result>
 		</action>
 	</package>
+	
 </struts>

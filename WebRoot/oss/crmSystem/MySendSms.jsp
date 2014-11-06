@@ -48,6 +48,7 @@ var postPath = "<%=request.getContextPath()%>";
 	<form id="page" action="mySendSms.htm" method="post" >
 	
 	<br/>
+	接受客户:<input type="text" name="acceptCust" value="${acceptCust}">
 	发送时间:<input type="text" name="f_sTime" value="<s:date name="f_sTime" format="yyyy-MM-dd HH:mm:ss"/>"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd 00:00:00',readOnly:true});"/>-
     <input type="text" name="f_eTime" value="<s:date name="f_eTime" format="yyyy-MM-dd HH:mm:ss"/>"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true});"/>
 		短信状态：<s:select list="smsLogStateList" name="smsLogState" id="smsLogState" listValue="text" headerValue="请选择..." headerKey=""></s:select>

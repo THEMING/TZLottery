@@ -6,7 +6,7 @@
 <%@taglib prefix="s" uri="/struts-tags"%>
 <html xmlns="http://www.w3.org/1999/xhtml"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<title>一彩票-运营支撑系统</title>
+<title>一彩票-代理商系统</title>
 <link href="../oss/skin/01/css/main.css" rel="stylesheet" type="text/css"/>
 <style>   
 #foldheader{cursor:hand; font-weight:bold;list-style-image:url(images/fold.gif); } 

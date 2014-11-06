@@ -8,7 +8,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.apache.commons.collections.MapUtils;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
@@ -21,6 +23,7 @@ import org.springside.modules.orm.hibernate.Page;
 import org.springside.modules.orm.hibernate.SimpleHibernateTemplate;
 
 import com.xsc.lottery.admin.action.AdminBaseAction;
+import com.xsc.lottery.common.Constants;
 import com.xsc.lottery.entity.admin.AdminUser;
 import com.xsc.lottery.entity.business.AdminSendSomeThingTemplate;
 import com.xsc.lottery.entity.business.Article;
@@ -38,6 +41,7 @@ import com.xsc.lottery.entity.business.WalletLog;
 import com.xsc.lottery.entity.business.SmsLog.SmsLogState;
 import com.xsc.lottery.entity.business.SmsLog.SmsLogType;
 import com.xsc.lottery.entity.business.SmsLog.SmsSendState;
+import com.xsc.lottery.entity.enumerate.CustomerType;
 import com.xsc.lottery.entity.enumerate.OrderStatus;
 import com.xsc.lottery.entity.enumerate.SendTemplateType;
 import com.xsc.lottery.entity.enumerate.UserType;
@@ -45,20 +49,25 @@ import com.xsc.lottery.entity.partner.Partner;
 import com.xsc.lottery.service.admin.AdminUserService;
 import com.xsc.lottery.service.business.AdminSendSomeThingTemplateService;
 import com.xsc.lottery.service.business.CommunityService;
+import com.xsc.lottery.service.business.CpsReportService;
 import com.xsc.lottery.service.business.CustomerService;
 import com.xsc.lottery.service.business.EmailLogService;
 import com.xsc.lottery.service.business.LotteryOrderService;
 import com.xsc.lottery.service.business.SmsLogService;
+import com.xsc.lottery.service.business.SysParamService;
 import com.xsc.lottery.util.EmailUtil;
+import com.xsc.lottery.web.action.LotteryClientBaseAction;
 import com.xsc.lottery.web.action.json.JsonMsgBean;
 
 @SuppressWarnings("serial")
 @Scope("prototype")
 @Controller("Admin.CRMSystem")
-public class CRMSystemAction extends AdminBaseAction{
+public class CRMSystemAction extends LotteryClientBaseAction{
 	
 	@Autowired
     private CustomerService customerService;
+	@Autowired
+    private CpsReportService cpsReportService;
 	@Autowired
 	private SmsLogService smsLogService;
 	@Autowired
@@ -69,12 +78,15 @@ public class CRMSystemAction extends AdminBaseAction{
 	private EmailLogService emailService;
 	
 	@Autowired
+    public SysParamService sysParamService;
+	
+	@Autowired
 	private AdminSendSomeThingTemplateService adminSendSomeThingTemplateService;
 	@Autowired
 	private AdminUserService adminUserService;
 	private Page<Customer> customerPage;
 	private int pageNo = 1;
-	private int pageSize = 15;
+	private int pageSize = 50;
 	private Calendar f_sTime;
 	private Calendar f_eTime;
 	private Date sTime;
@@ -140,6 +152,18 @@ public class CRMSystemAction extends AdminBaseAction{
 	private String temIds;
 	private String t_id;
 	private String sendUserNameQuery;
+	
+	private List<Map> thePerformanceLi = null;
+	
+	private Boolean canSms;
+	private Boolean canEmail;
+	
+	private int today = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+	
+	private String canEmailNum = "";
+	private String canSmsNum = "";
+	private String acceptCust = "";
+	private String businessMan ="";
     
 	
 	@Autowired
@@ -165,14 +189,28 @@ public class CRMSystemAction extends AdminBaseAction{
 		return "template";
 	}
 	
+	public String getThePerformance(){
+		Map m = new HashMap();
+		m.put("customer_type", 3);//业务员
+		m.put("f_sTime", f_sTime);
+		m.put("f_eTime", f_eTime);
+		m.put("businessMan", businessMan );
+//		m.put("pageSize", pageSize);
+//		m.put("pageNo", pageNo);
+		thePerformanceLi = customerService.getThePerformance(m);
+		return SUCCESS;
+	}
+	
 	public String dispatchCustomerToSomeOne(){
 		
-		AdminUser au = null;
+//		AdminUser au = null;
+		Customer c = null;
 		if(adminUserCheck!=null&&!"".equals(adminUserCheck)&&oper!=null&&!"".equals(oper)){//分配操作
 			
 			Map map=new HashMap();
-		   	au = adminUserService.getAdminUser(adminUserCheck);
-		   	if(null==au){//业务员没找到
+//		   	au = adminUserService.getAdminUser(adminUserCheck);
+		   	c = customerService.getCustomerOrName(adminUserCheck);
+		   	if(null==c){//业务员没找到
 		   		map.put("message", "业务员不存在");
 		         setJsonString(JsonMsgBean.MapToJsonString(map));
 		         return AJAXJSON;
@@ -180,7 +218,6 @@ public class CRMSystemAction extends AdminBaseAction{
 			
 		   	if("adminUserAll".equals(oper)){//分配全部查询的客户给指定业务员 
 		   		Map m = new HashMap();
-				m.put("adminUser_id", au.getId());
 				m.put("f_serch", f_serch);
 				m.put("f_serchName", f_serchName);
 				m.put("f_starTime", f_starTime);
@@ -190,12 +227,13 @@ public class CRMSystemAction extends AdminBaseAction{
 				m.put("endTime", f_eTime);
 				m.put("usrType", userType);
 				m.put("sBalance", sBalance);
+				m.put("superior", c.getId());
 				m.put("eBalance", eBalance);
 				m.put("havenotDispath", true);
 				customerService.updateCustomers(m);
 			}else if("adminUserPage".equals(oper)||"adminUserSelected".equals(oper)){//分配当前页的客户给指定业务员 
 				Map m = new HashMap();
-				m.put("adminUser_id", au.getId());
+				m.put("superior", c.getId());
 				String[] cids = customerIds.split(",");
 				m.put("customerIds", Arrays.asList(cids));
 				customerService.updateCustomers(m);
@@ -228,10 +266,14 @@ public class CRMSystemAction extends AdminBaseAction{
 	
 	public String cheackAdminUser(){
 	   	 Map map=new HashMap();
-	   	AdminUser au = adminUserService.getAdminUser(adminUserCheck);
-	   	 if(null==au)
+	   	 Customer c = customerService.getCustomerOrName(adminUserCheck);
+//	   	AdminUser au = adminUserService.getAdminUser(adminUserCheck);
+	   	 if(null==c)
 	   	{
 	   		 map.put("message", "业务员不存在");
+	         setJsonString(JsonMsgBean.MapToJsonString(map));
+	    }else if(null==c.getCustomerType()||!CustomerType.BusinessCustomer.equals(c.getCustomerType())){
+	    	map.put("message", "该用户不是业务员类型");
 	         setJsonString(JsonMsgBean.MapToJsonString(map));
 	    } else
 	    {
@@ -257,11 +299,17 @@ public class CRMSystemAction extends AdminBaseAction{
 	public String index() {
 		smsTemplateList = adminSendSomeThingTemplateDao.createCriteria().add(Restrictions.eq("sendTemplateType", SendTemplateType.短信)).list();
 		emailTemplateList = adminSendSomeThingTemplateDao.createCriteria().add(Restrictions.eq("sendTemplateType", SendTemplateType.邮件)).list();
-		AdminUser au = this.getCurAdminUser();
+		canEmailNum = sysParamService.getSysParamByName(Constants.CUSTOMER_RECEIVE_EMAIL_FROM_BUSSINESS).getValue();
+		canSmsNum = sysParamService.getSysParamByName(Constants.CUSTOMER_RECEIVE_SMS_FROM_BUSSINESS).getValue();
+//		AdminUser au = this.getCurAdminUser();
+		Customer c = this.getCurCustomer();
 		Map map = new HashMap();
-		map.put("adminUser", au);
+//		map.put("adminUser", au);
+		map.put("superior", c);
 		map.put("sBalance", sBalance);
 		map.put("eBalance", eBalance);
+		map.put("canEmail", canEmail);
+		map.put("canSms", canSms);
 		customerPage = new Page<Customer>();
 		customerPage.setPageNo(pageNo);
 		customerPage.setPageSize(pageSize);
@@ -350,10 +398,11 @@ public class CRMSystemAction extends AdminBaseAction{
 	
 	public String getMySendSms(){
 		Map m = new HashMap();
-		m.put("userId", this.getCurAdminUser().getId());
+		m.put("userId", this.getCurCustomer().getId());
 		m.put("state", smsLogState);
 		m.put("sendSTime", f_sTime);
 		m.put("sendETime", f_eTime);
+		m.put("acceptCust", acceptCust );
 		smsLogPage.setPageNo(pageNo);
 		smsLogPage.setPageSize(pageSize);
 		smsLogPage.setAutoCount(true);
@@ -364,10 +413,11 @@ public class CRMSystemAction extends AdminBaseAction{
 	
 	public String getMySendEmail(){
 		Map m = new HashMap();
-		m.put("storeId", this.getCurAdminUser().getId());//storeId 为发送管理员id
+		m.put("storeId", this.getCurCustomer().getId());//storeId 为发送业务员id
 		m.put("state", emailState);
 		m.put("sendSTime", sTime);
 		m.put("sendETime", eTime);
+		m.put("acceptCust", acceptCust );
 		Page<EmailLog> page = new Page<EmailLog>();
 		page.setAutoCount(true);
 		page.setPageNo(pageNo);
@@ -384,6 +434,8 @@ public class CRMSystemAction extends AdminBaseAction{
 		m.put("sendSTime", sTime);
 		m.put("sendETime", eTime);
 		m.put("sendUserNameQuery", sendUserNameQuery);
+		m.put("acceptCust", acceptCust);
+		
 		Page<EmailLog> page = new Page<EmailLog>();
 		page.setAutoCount(true);
 		page.setPageNo(pageNo);
@@ -444,11 +496,15 @@ public class CRMSystemAction extends AdminBaseAction{
 			 sms.setType(SmsLogType.COMMON);
 			 sms.setSendTime(Calendar.getInstance());
 			 sms.setSendPriority(3);
-			 sms.setUserId(this.getCurAdminUser().getId().toString());
-			 sms.setSendUserName(this.getCurAdminUser().getAdminName());
+			 sms.setUserId(this.getCurCustomer().getId().toString());
+			 sms.setSendUserName(this.getCurCustomer().getNickName());
 			 sms.setSmsSendType(SmsSendType.EMAY);
-			 sms.setCustomer(customerService.findById(Long.parseLong(pis[j])));
+			 Customer c = customerService.findById(Long.parseLong(pis[j]));
+			 sms.setCustomer(c);
 			 smsLogService.saveSmsLog(sms);
+			 
+			 c.setSmsAccept(getTheAccept(c.getSmsAccept()));
+			 customerService.save(c);
 			 
 		}
 		
@@ -461,6 +517,31 @@ public class CRMSystemAction extends AdminBaseAction{
 		
 		
 		return AJAXJSON;
+	}
+	
+	public static String getTheAccept(String initAccept){
+		if(initAccept==null||"".equals(initAccept)){
+			initAccept = "0000000000000000000000000000000";
+		}
+		Calendar cal=Calendar.getInstance();//使用日历类
+		  int day=cal.get(Calendar.DAY_OF_MONTH);//得到天
+		  int i = initAccept.charAt(day-1);
+		  StringBuffer sb = new StringBuffer(initAccept.substring(0, day-1)+(i-48+1)+initAccept.substring(day));
+		  
+//		  String[] init = initAccept.split(",");
+//		  int i = Integer.parseInt(init[day-1]);
+//		  init[day-1] = i+1+"";
+//		  StringBuffer sb = new StringBuffer(init[0]);
+//		  
+//		  for(int k=1;k<init.length;k++){
+//			  sb.append(","+init[k]);
+//		  }
+		return sb.toString()+"||"+sb.length();
+	}
+	
+	public static void main(String[] args)
+	{
+		System.out.println(getTheAccept("0003000000000000000000000000000"));
 	}
 	
 	public String sendEmail(){
@@ -485,7 +566,7 @@ public class CRMSystemAction extends AdminBaseAction{
 			EmailLog emailLog = new EmailLog();
 			emailLog.setContent(emailContent);
 			emailLog.setTitle(emailTitle);
-			emailLog.setStoreId(this.getCurAdminUser().getId().toString());
+			emailLog.setStoreId(this.getCurCustomer().getId().toString());
 			emailLog.setEmail(es[j]);
 			emailLog.setSendLevel(5);
 			emailLog.setType(EmailType.NORMAL);
@@ -493,8 +574,12 @@ public class CRMSystemAction extends AdminBaseAction{
 			emailLog.setSendTime(new Date());
 			emailLog.setRetryCount(0);
 			emailLog.setUsername(enns[j]);
-			emailLog.setSendUserName(this.getCurAdminUser().getAdminName());
+			emailLog.setSendUserName(this.getCurCustomer().getNickName());
 			emailService.saveOrUpdate(emailLog);
+			
+			Customer c = customerService.getCustomerOrName(enns[j].substring(1, enns[j].length()-1));//因为enns[j] 的值是[*]的格式
+			c.setEmailAccept(getTheAccept(c.getEmailAccept()));
+			customerService.save(c);
 //			sms.setContent(emailContent);
 //			sms.setMobile(es[j]);
 //			sms.setCustomerId(Long.parseLong(eis[j]));
@@ -515,14 +600,87 @@ public class CRMSystemAction extends AdminBaseAction{
 		
 		return AJAXJSON;
 	}
-	
-	public static void main(String[] args)
+
+
+	public String getBusinessMan()
 	{
-		String mm = "{1}，你好，你的订单{2}已经出票";
-		mm.replace("{1}", "mz");
-		System.out.println(mm.replace("{1}", "mz"));
+		return businessMan;
 	}
 
+	public void setBusinessMan(String businessMan)
+	{
+		this.businessMan = businessMan;
+	}
+
+	public String getAcceptCust()
+	{
+		return acceptCust;
+	}
+
+	public void setAcceptCust(String acceptCust)
+	{
+		this.acceptCust = acceptCust;
+	}
+
+	public String getCanEmailNum()
+	{
+		return canEmailNum;
+	}
+
+	public void setCanEmailNum(String canEmailNum)
+	{
+		this.canEmailNum = canEmailNum;
+	}
+
+	public String getCanSmsNum()
+	{
+		return canSmsNum;
+	}
+
+	public void setCanSmsNum(String canSmsNum)
+	{
+		this.canSmsNum = canSmsNum;
+	}
+
+	public int getToday()
+	{
+		return today;
+	}
+
+	public void setToday(int today)
+	{
+		this.today = today;
+	}
+
+	public Boolean getCanSms()
+	{
+		return canSms;
+	}
+
+	public void setCanSms(Boolean canSms)
+	{
+		this.canSms = canSms;
+	}
+
+	public Boolean getCanEmail()
+	{
+		return canEmail;
+	}
+
+	public void setCanEmail(Boolean canEmail)
+	{
+		this.canEmail = canEmail;
+	}
+
+	public List getThePerformanceLi()
+	{
+		return thePerformanceLi;
+	}
+
+	public void setThePerformanceLi(List thePerformanceLi)
+	{
+		this.thePerformanceLi = thePerformanceLi;
+	}
 
 	public String getSendUserNameQuery()
 	{

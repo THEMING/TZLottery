@@ -23,7 +23,7 @@ import com.xsc.lottery.entity.admin.WinPrize;
 import com.xsc.lottery.entity.business.Article;
 import com.xsc.lottery.entity.business.ArticleCategory;
 import com.xsc.lottery.entity.business.ArticleInLink;
-import com.xsc.lottery.entity.business.Customer;
+import com.xsc.lottery.entity.business.FriendlyLink;
 import com.xsc.lottery.entity.enumerate.LotteryType;
 import com.xsc.lottery.entity.partner.Partner;
 import com.xsc.lottery.service.business.ArticleService;
@@ -38,6 +38,7 @@ public class ArticleServiceImpl implements ArticleService
     public PagerHibernateTemplate<WinPrize, Long> WinPrizeDao;
     public PagerHibernateTemplate<ArticleCategory, Long> categoryDao;
     public PagerHibernateTemplate<ArticleInLink, Long> inLinkDao;
+    public PagerHibernateTemplate<FriendlyLink, Long> friendlyLinkDao;
     @Autowired
     public void setSessionFactory(
             @Qualifier("sessionFactory") SessionFactory sessionfactory)
@@ -50,6 +51,8 @@ public class ArticleServiceImpl implements ArticleService
                 sessionfactory, ArticleCategory.class);
         this.inLinkDao = new PagerHibernateTemplate<ArticleInLink, Long>(
                 sessionfactory, ArticleInLink.class);
+        this.friendlyLinkDao = new PagerHibernateTemplate<FriendlyLink,Long>(
+        		sessionfactory, FriendlyLink.class);
     }
     
     public Article findById(Long id)
@@ -369,4 +372,32 @@ public class ArticleServiceImpl implements ArticleService
 		inLinkDao.save(articleInLink);
 		return articleInLink;
 	}
+	
+	public void deleteFriendlyLink(Long id)
+	  {
+	    friendlyLinkDao.delete(id);
+	  }
+
+	  public List<FriendlyLink> findAllFriendlyLink()
+	  {
+	    return friendlyLinkDao.findAll();
+	  }
+
+	  public FriendlyLink getFriendlyLink(Long id)
+	  {
+	    FriendlyLink friendlyLink = (FriendlyLink)friendlyLinkDao.get(id);
+	    return friendlyLink;
+	  }
+
+	  public FriendlyLink saveFriendlyLink(FriendlyLink friendlyLink)
+	  {
+	    friendlyLinkDao.save(friendlyLink);
+	    return friendlyLink;
+	  }
+
+	  public FriendlyLink updateFriendlyLink(FriendlyLink friendlyLink)
+	  {
+	    friendlyLinkDao.save(friendlyLink);
+	    return friendlyLink;
+	  }
 }

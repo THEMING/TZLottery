@@ -4,7 +4,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <head>
-<title>我发过的邮件</title>
+<title>业务员业绩</title>
 <link href="../../oss/skin/01/css/main.css" rel="stylesheet" type="text/css">
 <script src="../../oss/skin/01/js/jquery-1.3.2.js" type="text/javascript"></script>
 <link href="../../oss/styles/base.css" rel="stylesheet" type="text/css">
@@ -34,47 +34,38 @@ var postPath = "<%=request.getContextPath()%>";
 <body>
 
 <div class="tab" align="center">
-<h3><strong>我发过的邮件</strong></h3>
-	<form id="page" action="mySendEmail.htm" method="post" >
+<h3><strong>业务员业绩</strong></h3>
+	<form id="page" action="thePerformance.htm" method="post" >
 	
 	<br/>
-	接受客户:<input type="text" name="acceptCust" value="${acceptCust}">
-	发送时间:<input type="text" name="sTime" value="<s:date name="sTime" format="yyyy-MM-dd HH:mm:ss"/>"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd 00:00:00',readOnly:true});"/>-
-    <input type="text" name="eTime" value="<s:date name="eTime" format="yyyy-MM-dd HH:mm:ss"/>"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true});"/>
-		发送状态：<s:select list="emailStatelist" name="emailState" id="emailState" listValue="text" headerValue="请选择..." headerKey=""></s:select>
-		<!-- <input type="text" name="state" id="state" />  -->
+	业务员:<input type="text" name="businessMan" value="${businessMan}">
+	统计时间:<input type="text" name="f_sTime" value="<s:date name="f_sTime" format="yyyy-MM-dd HH:mm:ss"/>"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd 00:00:00',readOnly:true});"/>-
+    <input type="text" name="f_eTime" value="<s:date name="f_eTime" format="yyyy-MM-dd HH:mm:ss"/>"  onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',readOnly:true});"/>
+		
 		<input type="submit" value="查询" />
 		<br/>
 		<br/>
 	<table border="0" width="100%" align="center">
 		<tr>
-			<td>接收的客户</td>
-			<td>标题</td>
-			<td>内容</td>
-			<td>状态</td>
-			<td>发送时间</td>
-			<td>成功时间</td>
+		<td>业务员</td>
+			<td>累计佣金</td>
+			<td>其客户总购彩金额</td>
+			<td>其客户总充值金额</td>
+			<td>发送邮件数</td>
+			<td>发送短信数</td>
 		</tr>
-		<s:iterator value="emailLogPage.result" status="s" id="rs">
+		<s:iterator value="thePerformanceLi" status="s" id="rs">
 			<tr>
-				<%--<td><s:if test="#rs.mobile!=''">
-				<s:property value="#rs.mobile.substring(0,7)"/>****
-				</s:if></td>
-				--%>
-				<td><s:property value="#rs.username.substring(1,#rs.username.length()-1)"/></td>
-				<td>${rs.title}</td>
-				<td>${rs.content}</td>
-				<td>${rs.state.text}</td>
-				<td>
-				<s:date name="#rs.sendTime" format="yyyy-MM-dd HH:mm"/>
-				</td>
-				<td>
-				<s:date name="#rs.successTime" format="yyyy-MM-dd HH:mm"/>
-				</td>
+			<td>${rs[0]}</td>
+			<td>${rs[1]}</td>
+			<td>${rs[2]}</td>
+			<td>${rs[3]}</td>
+			<td>${rs[4]}</td>
+			<td>${rs[5]}</td>
 			</tr>
 		</s:iterator>
 	</table>
-	<table width="90%" border="0" align="center">
+	<%--<table width="90%" border="0" align="center">
 	<tr><td>
 		<div>
 	<input type="hidden" name="pageNo" id="pageNo" value="1" />
@@ -102,6 +93,6 @@ var postPath = "<%=request.getContextPath()%>";
 	</td>
 	</tr>
 	</table>
-	</form>
+	--%></form>
 </div>
 </body>

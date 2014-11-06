@@ -302,20 +302,20 @@ function jumpPage1() {
   </table>
 --%></s:form>
 </div>
-<div hidden="" id="addTDiv" style="top:100px; margin-left:-275px;position:absolute;left:50%; width:550px; height:200px; background-color:#81eb96; z-index:1;">
+<div hidden="" id="addTDiv" style="top:100px; margin-left:-275px;position:absolute;left:50%; width:550px; height:300px; background-color:#ffffff; z-index:1;">
 <form action="CRMManage.htm" method="post">
 <s:hidden name="action" id="action" value="addT"/>
 <s:hidden name="t_id" id="t_id"/>
 <div align="center">
 <h3><strong>模板信息</strong></h3>
 </div>
-	标题：<input type="text" id="t_title" name="t_title"/>
+	&nbsp;&nbsp;标题：<input type="text" id="t_title" name="t_title"/>
 		<br />
-		<h1>类型： <s:select list="sendTemplateTypeList" name="sendTemplateType" id="sendTemplateTypee" listValue="name()" headerValue="请选择..." headerKey=""></s:select></h1>
+		<h1>&nbsp;&nbsp;类型： <s:select list="sendTemplateTypeList" name="sendTemplateType" id="sendTemplateTypee" listValue="name()" headerValue="请选择..." headerKey=""></s:select></h1>
 		<br/>
-		<h1>内容：<textarea id="t_content" name="t_content" cols="80" rows="3"></textarea>
+		<h1>&nbsp;&nbsp;内容：<textarea id="t_content" name="t_content" cols="80" rows="3"></textarea>
 		<br />
-		<h1>描述：<textarea id="t_description" name="t_description" cols="80" rows="3"></textarea>
+		<h1>&nbsp;&nbsp;描述：<textarea id="t_description" name="t_description" cols="80" rows="10"></textarea>
 		<br />
 		<div style="width:100px;margin-left:-25px;position:absolute;left:50%;">
 		<input type="submit" value="确定"><input type="button" value="取消" onclick="javascript:hideAddDiv();">

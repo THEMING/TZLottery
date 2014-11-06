@@ -76,7 +76,7 @@ public class SmsLogServiceImpl implements SmsLogService
 	 
 	 //根据条件查询短信日志记录
 	 @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
-	    public Page<SmsLog> getSmsLogPage(Page<SmsLog> page,String mobile,SmsLogState state,Long id)
+	    public Page<SmsLog> getSmsLogPage(Page<SmsLog> page,String mobile,SmsLogState state,Long id,Map map)
 		{
 	    	Criteria criteria = smsLogDao.createCriteria();
 	    	if(mobile != null && !mobile.equals(""))
@@ -86,6 +86,10 @@ public class SmsLogServiceImpl implements SmsLogService
 	    	if(state != null && !state.equals(""))
 	    	{
 	    		criteria.add(Restrictions.eq("state", state));
+	    	} 
+	    	if(MapUtil.checkKey(map, "sender"))
+	    	{
+	    		criteria.add(Restrictions.like("sendUserName", "%"+MapUtils.getString(map, "sender")+"%"));
 	    	} 
 	    	criteria.addOrder(Order.desc("id"));
 	    	page = smsLogDao.findByCriteria(page, criteria);
@@ -115,6 +119,12 @@ public class SmsLogServiceImpl implements SmsLogService
 		    	{
 		    		criteria.add(Restrictions.le("sendTime", MapUtils.getObject(map, "sendETime")));
 		    	}  
+		    	
+		    	if(MapUtil.checkKey(map, "acceptCust"))
+		    	{
+		    		criteria.createAlias("customer", "customer");
+		    		criteria.add(Restrictions.like("customer.nickName", MapUtils.getObject(map, "acceptCust")+"%"));
+		    	} 
 		    	
 		    	criteria.addOrder(Order.desc("id"));
 		    	page = smsLogDao.findByCriteria(page, criteria);

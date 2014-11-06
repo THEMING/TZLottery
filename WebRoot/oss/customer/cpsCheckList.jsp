@@ -65,7 +65,7 @@
       <s:if test="#rs.isPass==1">通过</s:if>
       <s:if test="#rs.isPass==2">未通过</s:if>
       </td>
-      <td height="25" ><s:date name="#rs.createTime" format="yyyy-MM-dd HH:mm"/></td>
+      <td height="25" ><s:date name="#rs.channel.createTime" format="yyyy-MM-dd HH:mm"/></td>
       <td height="25" ><a href="manageCpsCheck.aspx?action=view&customerId=${rs.id }">审核</a>
       <s:if test="#rs.isPass==0">
       <input type="button" onClick="javascript:operate(${rs.id}, 1)" value="通过">

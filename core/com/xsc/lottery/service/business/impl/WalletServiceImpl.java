@@ -113,8 +113,12 @@ public class WalletServiceImpl implements WalletService{
 	{
 		Criteria criteria = walletLogDao.createCriteria();
 		 criteria.createAlias("wallet", "wallet");
-		 criteria.createAlias("wallet.customer", "customer")
-		 .add(Restrictions.eq("customer.superior", customer));
+		 criteria.createAlias("wallet.customer", "customer");
+		 
+		 if(customer!=null){
+			 criteria.add(Restrictions.eq("customer.superior", customer));
+		 }
+		 
 	     criteria.add(Restrictions.or(Restrictions.eq("type", WalletLogType.直接充值), Restrictions.eq("type", WalletLogType.账户充值)));
 	     
 	     if(startTime != null)
@@ -136,7 +140,11 @@ public class WalletServiceImpl implements WalletService{
 		Criteria criteria = walletLogDao.createCriteria();
 		criteria.createAlias("wallet", "wallet");
 		 criteria.createAlias("wallet.customer", "customer");
-		 criteria.add(Restrictions.eq("customer.superior", customer));
+		 
+		 if(customer!=null){
+			 criteria.add(Restrictions.eq("customer.superior", customer));
+		 }
+		 
 		 criteria.setProjection(Projections.projectionList().add(Projections.sum("inMoney")));
 	     criteria.add(Restrictions.or(Restrictions.eq("type", WalletLogType.直接充值), Restrictions.eq("type", WalletLogType.账户充值)));
 	     if(startTime != null)

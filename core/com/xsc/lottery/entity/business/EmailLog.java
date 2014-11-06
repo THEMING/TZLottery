@@ -95,7 +95,7 @@ public class EmailLog
 	@Column(length = 30)
 	private String sendUserName;
 
-	//发送者id 匹配的是AdminUser的id
+	//发送者id 匹配的是Customer的id
 	@Column(length = 10)
 	private String storeId;
 

@@ -1,4 +1,4 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ include file="../skin/02/taglib.jsp" %>
 <head>
 <title>提款二级审核管理</title>
@@ -75,6 +75,7 @@ function dosub()
 </head>
 <body>
  <div class="tab">
+ <span style="color:red;font-size:18px">${message}</span>
 <s:form  action="manageWithdrawMonney2" method="post" >
 <s:hidden name="action" id="action" value="index"></s:hidden>
 <s:hidden name="bmid" id="bmid"/>
@@ -95,6 +96,7 @@ function dosub()
 <table >
   <tr><!--（成功，失败）-->
   	<td height="25"><div align="center"><input type="button" value="全选" onclick="doSelectAll();" id="selectall"></input></div></td>
+    <td height="25"><div align="center">编号</div></td>
     <td height="25"><div align="center">提款时间</div></td>
     <td height="25"><div align="center">用户名</div></td>
     <td height="25"><div align="center">姓名</div></td>
@@ -112,6 +114,7 @@ function dosub()
 	  <tr>
 	  <input type="hidden" value="${rs.id }" id="myhidden_<s:property value='#st.index'/>"></input>
 	  <td><input type="checkbox" name="mycheckbox" id="mycheckbox_<s:property value='#st.index'/>"></input></td>
+      <td height="25" >${rs.id}</td>
       <td height="25" ><s:date name="#rs.applyTime" format="yyyy-MM-dd HH:mm"/></td>
       <td height="25" ><a href="manageCustomer.aspx?action=view&customerId=${rs.customer.id }"  target="blank">${rs.customer.nickName}</a></td>
       <td height="25" >${rs.realName}</td>

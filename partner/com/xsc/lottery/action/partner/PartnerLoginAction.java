@@ -17,6 +17,7 @@ import com.xsc.lottery.entity.admin.AdminRoleFunction;
 import com.xsc.lottery.entity.admin.AdminUser;
 import com.xsc.lottery.entity.business.Customer;
 import com.xsc.lottery.entity.business.SpreadChannel;
+import com.xsc.lottery.entity.enumerate.CustomerType;
 import com.xsc.lottery.entity.partner.Partner;
 import com.xsc.lottery.service.admin.AdminChannelService;
 import com.xsc.lottery.service.business.CustomerService;
@@ -158,17 +159,11 @@ public class PartnerLoginAction extends LotteryClientBaseAction
         	parentChannelList.add(ac);
         }
         else if(new Long(1).equals(depth)){
-        	
-//        	parentChannelList = adminChannelService.getAdminChannelDepthAsc(depth);
-        	
         	AdminChannel ac = new AdminChannel();//基本信息
         	ac.setId(new Long(1));
         	ac.setRighturl("/partner/agent/agentInfo.aspx");
         	ac.setChannelName("基本信息");
         	parentChannelList.add(ac);
-        	
-//            roleFunction = userService.getRoleFunctionList(adminUser.getRole()
-//                    .getId(), depth);
         }else if(new Long(2).equals(depth)){
         	AdminChannel ac = new AdminChannel();//注册用户
         	ac.setId(new Long(2));
@@ -205,14 +200,25 @@ public class PartnerLoginAction extends LotteryClientBaseAction
         	ac7.setRighturl("/partner/agent/agentManager.htm");
         	ac7.setChannelName("报表查询");
         	parentChannelList.add(ac7);
+        }else if(new Long(4).equals(depth)){
+        	AdminChannel ac = new AdminChannel();//我的客户
+        	ac.setId(new Long(4));
+        	ac.setRighturl("/oss/crmSystem/CRMManage.aspx");
+        	ac.setChannelName("我的工作台");
+        	parentChannelList.add(ac);
+        	
+        	AdminChannel ac2 = new AdminChannel();//我发过的邮件
+        	ac2.setId(new Long(4));
+        	ac2.setRighturl("/oss/crmSystem/mySendEmail.htm");
+        	ac2.setChannelName("我发过的邮件");
+        	parentChannelList.add(ac2);
+        	
+        	AdminChannel ac3 = new AdminChannel();//我发过的短信
+        	ac3.setId(new Long(4));
+        	ac3.setRighturl("/oss/crmSystem/mySendSms.htm");
+        	ac3.setChannelName("我发过的邮件");
+        	parentChannelList.add(ac3);
         }
-//        for (AdminRoleFunction rf : roleFunction) {
-//            AdminChannel ac = new AdminChannel();
-//            ac = rf.getChannel();
-//            if (ac.getChannelName().getBytes().length > 3) {
-//            	parentChannelList.add(ac);
-//			}
-//        }
         return "left";
     }
     
@@ -237,6 +243,14 @@ public class PartnerLoginAction extends LotteryClientBaseAction
     	ac3.setId(new Long(2));
     	ac3.setChannelName("统计数据");
     	depthList.add(ac3);
+    	Customer c = this.getCurCustomer();
+    	if(c.getCustomerType()!=null&&CustomerType.BusinessCustomer.equals(c.getCustomerType())){
+    		AdminChannel ac4 = new AdminChannel();//crm系统 业务员专用
+        	ac4.setId(new Long(4));
+        	ac4.setChannelName("crm系统");
+        	depthList.add(ac4);
+    	}
+    	
         return "head";
     }
     

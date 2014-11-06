@@ -39,6 +39,7 @@ var postPath = "<%=request.getContextPath()%>";
 </form>
 	<form action="/oss/customer/smsLogManager.htm" method="post" >
 	<br/>
+	发送者:<input type="text" name="sender" value="${sender}">
 		手机号码：<input type="text" name="mobile" id="mobile" value="${mobile}"/>
 		短信状态：<s:select list="smsLogStateList" name="smsLogState" id="smsLogState" listValue="text" headerValue="请选择..." headerKey=""></s:select>
 		<!-- <input type="text" name="state" id="state" />  -->

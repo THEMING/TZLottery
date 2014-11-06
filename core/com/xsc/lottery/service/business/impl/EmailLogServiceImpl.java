@@ -103,6 +103,11 @@ public class EmailLogServiceImpl implements EmailLogService
     		criteria.add(Restrictions.like("sendUserName", "%"+MapUtils.getString(map, "sendUserNameQuery")+"%"));
     	}  
     	
+    	if(MapUtil.checkKey(map, "acceptCust"))
+    	{
+    		criteria.add(Restrictions.like("username", "%"+MapUtils.getString(map, "acceptCust")+"%"));
+    	}   
+    	
     	criteria.addOrder(Order.desc("id"));
     	page = emailLogDao.findByCriteria(page, criteria);
     	return page;

@@ -40,6 +40,9 @@ public interface CustomerService extends LotteryBaseService<Customer>{
 
 	/**根据openId得到客户数据*/
 	public Customer getCustomerByOpenId(String openId);
+	
+	/**每月重置客户接受过的来自业务员的邮件和短信的数目*/
+	public void clearCustomerEmailAndSmsAcceptNum(Map map);
 
 	/**分页获得客户流水金额信息*/
 	public Page<WalletLog> getWalletLogPage(Page<WalletLog> page, int inORout, Calendar beginTime,
@@ -248,5 +251,7 @@ public interface CustomerService extends LotteryBaseService<Customer>{
 	 * @return
 	 */
 	public List<Customer> getCpsCustomerList();
+	
+	public List getThePerformance(Map m);
 	
 }

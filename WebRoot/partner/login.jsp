@@ -28,14 +28,16 @@
 </script>
 
  <style type="text/css">
-	body{font:"宋体";font-size:12px;}
-	a:link,a:visited{font-size:12px;color:#666;text-decoration:none;}
+    *{margin:0;padding:0;}
+	body{font:"宋体";font-size:14px;}
+	ul,li{list-style:none;}
+	a:link,a:visited{font-size:14px;color:#666;text-decoration:none;}
 	a:hover{color:#ff0000;text-decoration:underline;}
-	#Tab{margin:0 auto;width:700px;border:0px solid #BCE2F3;}
-	.Menubox{height:28px;border-bottom:1px solid #ce1212;}
+	#Tab{margin:0 auto;width:700px;border:0px solid #c0c0c0;}
+	.Menubox{height:30px;}
 	.Menubox ul{list-style:none;margin:7px 40px;padding:0;position:absolute;}
-	.Menubox ul li{float:left;background:#ce1212;line-height:20px;display:block;cursor:pointer;width:65px;text-align:center;color:#fff;font-weight:bold;border-top:1px solid #ce1212;border-left:1px solid #ce1212;border-right:1px solid #ce1212;}
-	.Menubox ul li.hover{background:#fff;border-bottom:1px solid #fff;color:#ce1212;}
+	.Menubox ul li{margin:1px;float:left;line-height:22px;display:block;cursor:pointer;width:65px;text-align:center;color:gray;font-weight:bold;border-top:1px solid #c0c0c0;border-left:1px solid #c0c0c0;border-right:1px solid #c0c0c0;}
+	.Menubox ul li.hover{background:#fff;border-bottom:1px solid #fff;color:green;}
  </style>
  <script>
 	<!--

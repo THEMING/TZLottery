@@ -30,6 +30,7 @@
 	     <td height="25"><div align="center">活动类型</div></td>
 	     <td height="25"><div align="center">活动状态</div></td>
 	     <td height="25"><div align="center">是否公开</div></td>
+	     <td height="25"><div align="center">网站显示</div></td>
 	     <td height="25"><div align="center">订单状态限制</div></td>
 	     <td height="25"><div align="center">购彩额度限制</div></td>
 	     <td height="25"><div align="center">加奖额度</div></td>
@@ -43,6 +44,7 @@
 	       <td height="25" align="center" >${rs.type}</td>
 	       <td height="25" align="center" >${rs.status}</td>
 	       <td height="25" align="center" ><s:if test="#rs.isPublic">是</s:if><s:else>否</s:else></td>
+	       <td height="25" align="center" ><s:if test="#rs.isShow">是</s:if><s:else>否</s:else></td>
 	       <td height="25" align="center" >${rs.orderType}</td>
 	       <td height="25" align="center" >${rs.threshold}</td>
 	       <td height="25" align="center" >${rs.givenMoney}</td>
