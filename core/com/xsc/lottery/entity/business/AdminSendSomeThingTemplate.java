@@ -11,10 +11,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Index;
 
 import com.xsc.lottery.entity.BaseObject;
-import com.xsc.lottery.entity.enumerate.CredentType;
 import com.xsc.lottery.entity.enumerate.SendTemplateType;
 
 @SuppressWarnings("serial")
@@ -35,6 +33,7 @@ public class AdminSendSomeThingTemplate extends BaseObject
     @Column(name = "sendTemplateType")
     private SendTemplateType sendTemplateType;
 	
+	@Column(nullable = false, columnDefinition="LONGTEXT")
 	private String content;
 	
 	private String description;

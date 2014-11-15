@@ -19,13 +19,11 @@ import org.springside.modules.orm.hibernate.Page;
 import org.springside.modules.orm.hibernate.SimpleHibernateTemplate;
 
 import com.xsc.lottery.admin.action.AdminBaseAction;
-import com.xsc.lottery.dao.PagerHibernateTemplate;
 import com.xsc.lottery.entity.active.Activity;
 import com.xsc.lottery.entity.active.ActivityOrderType;
 import com.xsc.lottery.entity.active.ActivityStatus;
 import com.xsc.lottery.entity.active.ActivityType;
 import com.xsc.lottery.entity.business.Article;
-import com.xsc.lottery.entity.business.ArticleCategory;
 import com.xsc.lottery.entity.partner.Partner;
 import com.xsc.lottery.service.active.ActivityService;
 import com.xsc.lottery.service.business.ArticleService;
@@ -104,6 +102,8 @@ public class ActivitiesAction extends AdminBaseAction
 
 	private Boolean isPublic;
 	
+	private Boolean isShow;
+	
 	@Autowired
     public void setSessionFactory(
             @Qualifier("sessionFactory") SessionFactory sessionfactory)
@@ -136,6 +136,8 @@ public class ActivitiesAction extends AdminBaseAction
             this.endTime = DateUtil.toyyyy_MM_dd_HH_mm(activity.getEndTime());
             this.givenMoney = activity.getGivenMoney();
             this.threshold = activity.getThreshold();
+            this.isShow = activity.getIsShow() == null ?false:activity.getIsShow();
+            this.isPublic = activity.getIsPublic() == null ?false:activity.getIsPublic();
             this.activityOrderType = activity.getOrderType();
             article = activity.getArticle();
 //            partner = activity.getPartner();
@@ -169,7 +171,8 @@ public class ActivitiesAction extends AdminBaseAction
         activity.setType(activityType);
         activity.setGivenMoney(givenMoney);
         activity.setThreshold(threshold);
-        activity.setIsPublic(isPublic);
+        activity.setIsPublic(isPublic==null?false:isPublic);
+        activity.setIsShow(isShow==null?false:isShow);
         activity.setOrderType(activityOrderType);
         if(article.getId()!=null){
         	article = ArticleDao.get(article.getId());
@@ -442,4 +445,14 @@ public class ActivitiesAction extends AdminBaseAction
     {
         return sysmsg;
     }
+
+	public Boolean getIsShow()
+	{
+		return isShow;
+	}
+
+	public void setIsShow(Boolean isShow)
+	{
+		this.isShow = isShow;
+	}
 }

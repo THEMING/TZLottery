@@ -216,19 +216,27 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 		if (tickets.size() < 1) {
 			return;
 		}
-
+		
 		Map<String, Ticket> ticketMap = new HashMap<String, Ticket>();
 		Ticket lastTicket = tickets.get(tickets.size() - 1);
 		StringBuilder sendParam = new StringBuilder();
 		sendParam.append("LotID=").append(typeToDYJType(lastTicket.getType()))
 				.append("_");
 		sendParam.append("OrderIDs=");
+		int failnum = 0; //记录失败票数
 		for (int i = 0; i < tickets.size() - 1; i++) {
 			Ticket ticket = tickets.get(i);
+			//如果票已经标记失败  就不用再查询
+			if(ticket.getStatus().equals(TicketStatus.出票失败))
+			{
+				failnum ++;	
+				continue;
+			}
 			sendParam.append(ticket.getOtherOrderID() + ",");
 			ticketMap.put(ticket.getOtherOrderID(), ticket);
 		}
-
+		//如果失败的票数等于总票数  那么直接返回不用做票查询
+		if((tickets.size() == 1 && lastTicket.getStatus() == TicketStatus.出票失败) || tickets.size() == failnum) return; 
 		sendParam.append(lastTicket.getOtherOrderID());
 		ticketMap.put(lastTicket.getOtherOrderID(), lastTicket);
 
@@ -360,7 +368,9 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 					xValue = new String(ZLibUtils.decompress(base64.decodeBuffer(xValue)));
 					logger.info("竞彩篮球第三方订单号"+ticket.getOtherOrderID()+"赔率为："+xValue);
 					String ratio = null;
+					String special = null;
 					String spfs[] = xValue.split("\\|");
+					String oneSpecial = "";
 					String oneRatio = "";
 					String options[] = spfs[1].split("\\,");
 					if(ticket.getPlayType() == PlayType.SF)
@@ -391,13 +401,13 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 						for (int i = 0; i < options.length; i++) {
 							String temp[] = options[i].split("\\=");
 							String option[] = temp[1].split("\\/");
+							String rangfen = temp[1].split("\\_")[0];//选项的让分存储在哪？如何显示给用户
+							logger.info(temp[0]+"让分："+rangfen);
+							oneSpecial += rangfen;
 							for (int j = 0; j < option.length; j++) {
 								String tempStr = option[j];
-								String rangfen = tempStr.split("\\_")[0];//选项的让分存储在哪？如何显示给用户
-								logger.info(temp[0]+"让分："+rangfen);
 								if(j<(option.length-1))
 								{
-									
 									oneRatio += tempStr.substring(tempStr.indexOf("(")+1, tempStr.indexOf(")"))+"/";
 								}
 								else
@@ -407,6 +417,7 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 							}
 							if(i<(options.length-1))
 							{
+								oneSpecial += "|";
 								oneRatio += "|";
 							}
 						}
@@ -416,13 +427,13 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 						for (int i = 0; i < options.length; i++) {
 							String temp[] = options[i].split("\\=");
 							String option[] = temp[1].split("\\/");
+							String zongfen = temp[1].split("\\_")[0];//选项的预设总分存储在哪？如何显示给用户
+							logger.info(temp[0]+"预设总分："+zongfen);
+							oneSpecial += zongfen;
 							for (int j = 0; j < option.length; j++) {
 								String tempStr = option[j];
-								String zongfen = tempStr.split("\\_")[0];//选项的预设总分存储在哪？如何显示给用户
-								logger.info(temp[0]+"预设总分："+zongfen);
 								if(j<(option.length-1))
 								{
-									
 									oneRatio += tempStr.substring(tempStr.indexOf("(")+1, tempStr.indexOf(")"))+"/";
 								}
 								else
@@ -432,6 +443,7 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 							}
 							if(i<(options.length-1))
 							{
+								oneSpecial += "|";
 								oneRatio += "|";
 							}
 						}
@@ -465,18 +477,20 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 							String gameTypes = options[i].split("\\>")[0];
 							String temp[] = options[i].split("\\=");
 							String option[] = temp[1].split("\\/");
+							if("RFSF".equals(gameTypes))
+							{
+								String rangfen = temp[1].split("\\_")[0];//选项的让分存储在哪？如何显示给用户
+								logger.info(temp[0]+"让分："+rangfen);
+								oneSpecial += rangfen;
+							}
+							else if("DXF".equals(gameTypes))
+							{
+								String zongfen = temp[1].split("\\_")[0];//选项的预设总分存储在哪？如何显示给用户
+								logger.info(temp[0]+"预设总分："+zongfen);
+								oneSpecial += zongfen;
+							}
 							for (int j = 0; j < option.length; j++) {
 								String tempStr = option[j];
-								if("RFSF".equals(gameTypes))
-								{
-									String rangfen = tempStr.split("\\_")[0];//选项的让分存储在哪？如何显示给用户
-									logger.info(temp[0]+"让分："+rangfen);
-								}
-								else if("DXF".equals(gameTypes))
-								{
-									String zongfen = tempStr.split("\\_")[0];//选项的预设总分存储在哪？如何显示给用户
-									logger.info(temp[0]+"预设总分："+zongfen);
-								}
 								if(j<(option.length-1))
 								{
 									
@@ -489,13 +503,18 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 							}
 							if(i<(options.length-1))
 							{
+								oneSpecial += "|";
 								oneRatio += "|";
 							}
 						}
 					}
 					ratio = oneRatio;
+					special = oneSpecial;
 					if (ratio != null && !ratio.equals("")) {
 						ticket.setRatio(ratio);
+					}
+					if (special != null && !special.equals("")) {
+						ticket.setTicketSpecial(special);
 					}
 				} else {
 					logger.info("三方票号为 " + ticket.getOtherOrderID()
@@ -560,7 +579,7 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 			xml = NetWorkUtil.getHttpUrl(url, buildRequestParam("110",
 					sendParam.toString(), MathUtil.getSerialNumber(20)),
 					"GB2312");
-			logger.info("getOpenResult=========" + xml);
+			System.out.println("getOpenResult=========" + xml);
 			Map<String, String> returnMap = parseResponse(xml);
 			String xvalue = returnMap.get("xValue");
 			if ("0".equals(returnMap.get("xCode"))
@@ -581,7 +600,7 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 				throw new Exception(term + "期获取开奖结果数据失败,返回失败结果："
 						+ returnMap.get("xCode"));
 		} catch (Exception e) {
-			logger.info("==============获取结果失败===========" + e);
+			System.out.println("==============获取结果失败===========" + e);
 
 			if (term.getType().equals(LotteryType.老11选5)
 					|| term.getType().equals(LotteryType.快乐扑克3) || term.getType().equals(LotteryType.上海11选5) || term.getType().equals(LotteryType.十一运夺金) || term.getType().equals(LotteryType.重庆时时彩)) {
@@ -611,7 +630,7 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 						.getTimeInMillis();
 				s = s - 60000l;
 				if (System.currentTimeMillis() - s >= 0) {
-					logger.info("=======接口返回结果========" + xml);
+					System.out.println("=======接口返回结果========" + xml);
 					logger.warn(term + "期获取开奖结果数据异常.==>" + e.getMessage());
 					SystemWarningNotify.addWarningDescription("大赢家出票异常：" + e);
 					return;

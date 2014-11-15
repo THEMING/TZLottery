@@ -92,6 +92,11 @@ public interface CustomerService extends LotteryBaseService<Customer>{
             String fRaelname, String fTimeName, Calendar fSTime,
             Calendar fETime, String fBank, String fBankCard, String fOpenSpace);
 	
+    public Map getLotteryCustomerPageForBusinessMan(
+            Calendar stratTime, Calendar endTime, String f_orderserch,
+            String f_serch, Calendar f_starTime, Calendar f_endTime,
+            String f_serchName, UserType type,Boolean isApply,Integer isPass,Map queryMap);
+    
 	/**
 	 * 提款请求
 	 * **/

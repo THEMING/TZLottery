@@ -10,7 +10,7 @@
 function subm(cmd,strId) {
     $("#bmid").val(strId);
     $("#action").val(cmd);
-    $("#memo").val($("#message").val());
+    $("#memo").val($("#message_"+strId).val());
 	$("form").submit();
 }
 
@@ -127,7 +127,7 @@ function dosub()
       <td height="25" ><s:date name="#rs.sendTime" format="yyyy-MM-dd HH:mm:ss"/></td>
       <td height="25" >
       	<c:if test="${rs.status=='一级审核'}">
-      		<input type="text" id="message" value="${rs.memo }"></input>
+      		<input type="text" id="message_${rs.id}" value="${rs.memo }"></input>
         </c:if>
         ${rs.memo }
       </td>

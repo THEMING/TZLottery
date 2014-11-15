@@ -9,6 +9,8 @@
 <script src="../../oss/skin/01/js/jquery-1.3.2.js" type="text/javascript"></script>
 <link href="../../oss/styles/base.css" rel="stylesheet" type="text/css">
 <script src="../../oss/skin/01/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+<script src="../../util/jsAndCss/div.js" type=text/javascript></script>
+<link href="../../util/jsAndCss/div.css" rel="stylesheet" type="text/css">
 <script>
 var postPath = "<%=request.getContextPath()%>";
 	function jumpPage(pageNo) {
@@ -62,7 +64,9 @@ var postPath = "<%=request.getContextPath()%>";
 			<td>${rs.sendUserName}</td>
 				<td><s:property value="#rs.username.substring(1,#rs.username.length()-1)"/></td>
 				<td>${rs.title}</td>
-				<td>${rs.content}</td>
+				<td>
+				<div class="dragCss" style="width:600px; height:80px;overflow-y:scroll;">${rs.content}</div>
+				</td>
 				<td>${rs.state.text}</td>
 				<td>
 				<s:date name="#rs.sendTime" format="yyyy-MM-dd HH:mm"/>

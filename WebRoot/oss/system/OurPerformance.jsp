@@ -104,7 +104,6 @@ window.onload = function(){
 </script>
 
 </head>
-
 <body>
 <br />
 <br />
@@ -113,18 +112,33 @@ window.onload = function(){
 <br />
 
 		<div style="position: absolute;top: 100px;left: 50px;height: 450px;width: 30%;">
-			<div>注册总人数：${regNumAll} 人
-				<canvas id="canvas1" height="450" width="600"></canvas>
+			<div>
+				<canvas id="canvas1" height="450" width="600"></canvas><br /><br /><br />
+				<font size="6" >注册总人数：<font size="6" color="red">${regNumAll}</font> 人</font>
+				<br /><br />
+				<font size="6" >月注册人数：<font size="6" color="red">${regNumM}</font> 人</font>
+				<br /><br />
+				<font size="6" >周注册人数：<font size="6" color="red">${regNumW}</font> 人</font>
 			</div>
 		</div>
 		<div style="position: absolute;top: 100px;left: 500px;height: 450px;width: 30%;" >
-			<div>充值总人数：${rechargeNumAll} 人
-				<canvas id="canvas2" height="450" width="600"></canvas>
+			<div>
+				<canvas id="canvas2" height="450" width="600"></canvas><br /><br /><br />
+				<font size="6" >充值总人数：<font size="6" color="red">${rechargeNumAll}</font> 人</font>
+				<br /><br />
+				<font size="6" >月充值人数：<font size="6" color="red">${rechargeNumM}</font> 人</font>
+				<br /><br />
+				<font size="6" >周充值人数：<font size="6" color="red">${rechargeNumW}</font> 人</font>
 			</div>
 		</div>
 		<div style="position: absolute;top: 100px;left: 950px;height: 450px;width: 30%;">
-			<div>充值总金额：${rechargeMonAll} 元
-				<canvas id="canvas3" height="450" width="600"></canvas>
+			<div>
+				<canvas id="canvas3" height="450" width="600"></canvas><br /><br /><br />
+				<font size="6" >充值总金额：<font size="6" color="red">${rechargeMonAll}</font> 元</font>
+				<br /><br />
+				<font size="6" >月充值金额：<font size="6" color="red">${rechargeMonM}</font> 元</font>
+				<br /><br />
+				<font size="6" >周充值金额：<font size="6" color="red">${rechargeMonW}</font> 元</font>
 			</div>
 		</div>
 </body>

@@ -27,7 +27,6 @@ import org.springside.modules.orm.hibernate.SimpleHibernateTemplate;
 
 import cn.emay.sdk.client.api.MO;
 
-import com.xsc.lottery.alipay.util.MapUtil;
 import com.xsc.lottery.dao.PagerHibernateTemplate;
 import com.xsc.lottery.entity.business.Customer;
 import com.xsc.lottery.entity.business.SmsLog;
@@ -41,6 +40,7 @@ import com.xsc.lottery.entity.business.SmsMoLog.SmsMoLogState;
 import com.xsc.lottery.service.business.SmsLogService;
 import com.xsc.lottery.util.CalendarUtil;
 import com.xsc.lottery.util.Configuration;
+import com.xsc.lottery.util.MapUtil;
 import com.xsc.lottery.util.SDKClient;
 import com.xsc.lottery.util.SignatureHelper;
 

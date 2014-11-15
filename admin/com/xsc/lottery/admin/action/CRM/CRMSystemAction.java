@@ -55,6 +55,7 @@ import com.xsc.lottery.service.business.EmailLogService;
 import com.xsc.lottery.service.business.LotteryOrderService;
 import com.xsc.lottery.service.business.SmsLogService;
 import com.xsc.lottery.service.business.SysParamService;
+import com.xsc.lottery.service.business.WalletService;
 import com.xsc.lottery.util.EmailUtil;
 import com.xsc.lottery.web.action.LotteryClientBaseAction;
 import com.xsc.lottery.web.action.json.JsonMsgBean;
@@ -76,17 +77,22 @@ public class CRMSystemAction extends LotteryClientBaseAction{
     private LotteryOrderService orderService;
 	@Autowired
 	private EmailLogService emailService;
-	
+	@Autowired
+	private WalletService walletLogService;
 	@Autowired
     public SysParamService sysParamService;
+	@Autowired
+	private LotteryOrderService lotteryOrderService;
 	
 	@Autowired
 	private AdminSendSomeThingTemplateService adminSendSomeThingTemplateService;
 	@Autowired
 	private AdminUserService adminUserService;
 	private Page<Customer> customerPage;
+	private List<Map> customerListMap = null;
 	private int pageNo = 1;
 	private int pageSize = 50;
+	private int totalNum = 0;
 	private Calendar f_sTime;
 	private Calendar f_eTime;
 	private Date sTime;
@@ -164,6 +170,7 @@ public class CRMSystemAction extends LotteryClientBaseAction{
 	private String canSmsNum = "";
 	private String acceptCust = "";
 	private String businessMan ="";
+	private int totalPages;
     
 	
 	@Autowired
@@ -295,7 +302,6 @@ public class CRMSystemAction extends LotteryClientBaseAction{
 	}
 	
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public String index() {
 		smsTemplateList = adminSendSomeThingTemplateDao.createCriteria().add(Restrictions.eq("sendTemplateType", SendTemplateType.短信)).list();
 		emailTemplateList = adminSendSomeThingTemplateDao.createCriteria().add(Restrictions.eq("sendTemplateType", SendTemplateType.邮件)).list();
@@ -310,85 +316,101 @@ public class CRMSystemAction extends LotteryClientBaseAction{
 		map.put("eBalance", eBalance);
 		map.put("canEmail", canEmail);
 		map.put("canSms", canSms);
-		customerPage = new Page<Customer>();
-		customerPage.setPageNo(pageNo);
-		customerPage.setPageSize(pageSize);
-		customerPage.setAutoCount(true);
-		customerPage = customerService.getLotteryCustomerPage(customerPage, f_sTime, f_eTime,
-                f_orderserch, f_serch, f_starTime, f_endTime, f_serchName, userType,null,null,map);
+//		customerPage = new Page<Customer>();
+//		customerPage.setPageNo(pageNo);
+//		customerPage.setPageSize(pageSize);
+//		customerPage.setAutoCount(true);
+//		customerPage = customerService.getLotteryCustomerPageForBusinessMan(customerPage, f_sTime, f_eTime,
+//                f_orderserch, f_serch, f_starTime, f_endTime, f_serchName, userType,null,null,map);
 		
-		for(Customer customer:customerPage.getResult()){
-			List<Order> orderList = orderService.getOrder(customer, null);
-	        List<Order> orderList1 = orderService.getOrderByNotCustomer(customer);
-			BigDecimal paymentMoeny = new BigDecimal(0);
-			paymentMoeny = customerService.getChongZhiSum(customer);
-	        BigDecimal outMoney = new BigDecimal(0);
-			for (Order o : orderList) {
-	            if (o.getCommunity() != null) {
-	                List<Part> listPart = communityService.getPartList(o
-	                        .getCommunity(), customer);
-	                for (Part p : listPart) {
-	                    if (o.getStatus().equals(OrderStatus.出票成功)
-	                            || o.getStatus().equals(OrderStatus.出票中))
-	                        outMoney = outMoney.add(p.getMoney());
-	                }
-	            }
-	            else {
-	                outMoney = outMoney.add(o.getOutAmount());
-	            }
-	        }
-	        for (Order o : orderList1) {
-	            List<Part> listPart = communityService.getPartList(
-	                    o.getCommunity(), customer);
-	            for (Part p : listPart) {
-	                if (o.getStatus().equals(OrderStatus.出票成功)
-	                        || o.getStatus().equals(OrderStatus.出票中))
-	                    outMoney = outMoney.add(p.getMoney());
-	            }
-	        }
-	        
-	        customer.setBankName(paymentMoeny.doubleValue()+"");//用开户名存放充值金额
-	        customer.setBankNumber(outMoney.doubleValue()+"");//用银行卡号存放购彩总额
-		}
+//		customerPageMap = new Page<Map>();
+//		customerPageMap.setPageNo(pageNo);
+//		customerPageMap.setPageSize(pageSize);
+//		customerPageMap.setAutoCount(true);
+		
+		map.put("pageNo", pageNo);
+		map.put("pageSize", pageSize);
+		
+		Map mm = customerService.getLotteryCustomerPageForBusinessMan( f_sTime, f_eTime,
+                f_orderserch, f_serch, f_starTime, f_endTime, f_serchName, userType,null,null,map);
+		customerListMap = (List<Map>) MapUtils.getObject(mm,"list");
+		totalNum = MapUtils.getIntValue(mm,"total");
+		totalPages = (int) Math.ceil(((double)totalNum)/((double)pageSize));
+//		for(Customer customer:customerPage.getResult()){
+//			List<Order> orderList = orderService.getOrder(customer, null);
+//	        List<Order> orderList1 = orderService.getOrderByNotCustomer(customer);
+//			BigDecimal paymentMoeny = new BigDecimal(0);
+//			paymentMoeny = customerService.getChongZhiSum(customer);
+//	        BigDecimal outMoney = new BigDecimal(0);
+//			for (Order o : orderList) {
+//	            if (o.getCommunity() != null) {
+//	                List<Part> listPart = communityService.getPartList(o
+//	                        .getCommunity(), customer);
+//	                for (Part p : listPart) {
+//	                    if (o.getStatus().equals(OrderStatus.出票成功)
+//	                            || o.getStatus().equals(OrderStatus.出票中))
+//	                        outMoney = outMoney.add(p.getMoney());
+//	                }
+//	            }
+//	            else {
+//	                outMoney = outMoney.add(o.getOutAmount());
+//	            }
+//	        }
+//	        for (Order o : orderList1) {
+//	            List<Part> listPart = communityService.getPartList(
+//	                    o.getCommunity(), customer);
+//	            for (Part p : listPart) {
+//	                if (o.getStatus().equals(OrderStatus.出票成功)
+//	                        || o.getStatus().equals(OrderStatus.出票中))
+//	                    outMoney = outMoney.add(p.getMoney());
+//	            }
+//	        }
+//	        
+//	        customer.setBankName(paymentMoeny.doubleValue()+"");//用开户名存放充值金额
+//	        customer.setBankNumber(outMoney.doubleValue()+"");//用银行卡号存放购彩总额
+//		}
 		
 		//以下算充值总额和购彩总额
-		Page<Customer> customerPagee = new Page<Customer>();
-		customerPagee.setPageNo(pageNo);
-		customerPagee.setPageSize(-1);
-		customerPagee.setAutoCount(true);
-		customerPagee = customerService.getLotteryCustomerPage(customerPagee, f_sTime, f_eTime,
-                f_orderserch, f_serch, f_starTime, f_endTime, f_serchName, userType,null,null,map);
+		outMoneySum = walletLogService.getRechargeMon(null, null, c);
+		paymentMoenySum = lotteryOrderService.getSumMoneyByCustomer(null, null, c,null);
 		
-		for(Customer customer:customerPagee.getResult()){
-			List<Order> orderList = orderService.getOrder(customer, null);
-	        List<Order> orderList1 = orderService.getOrderByNotCustomer(customer);
-			
-			paymentMoenySum = paymentMoenySum.add(customerService.getChongZhiSum(customer));
-	        
-			for (Order o : orderList) {
-	            if (o.getCommunity() != null) {
-	                List<Part> listPart = communityService.getPartList(o
-	                        .getCommunity(), customer);
-	                for (Part p : listPart) {
-	                    if (o.getStatus().equals(OrderStatus.出票成功)
-	                            || o.getStatus().equals(OrderStatus.出票中))
-	                        outMoneySum = outMoneySum.add(p.getMoney());
-	                }
-	            }
-	            else {
-	            	outMoneySum = outMoneySum.add(o.getOutAmount());
-	            }
-	        }
-	        for (Order o : orderList1) {
-	            List<Part> listPart = communityService.getPartList(
-	                    o.getCommunity(), customer);
-	            for (Part p : listPart) {
-	                if (o.getStatus().equals(OrderStatus.出票成功)
-	                        || o.getStatus().equals(OrderStatus.出票中))
-	                	outMoneySum = outMoneySum.add(p.getMoney());
-	            }
-	        }
-		}
+//		Page<Customer> customerPagee = new Page<Customer>();
+//		customerPagee.setPageNo(pageNo);
+//		customerPagee.setPageSize(-1);
+//		customerPagee.setAutoCount(true);
+//		customerPagee = customerService.getLotteryCustomerPage(customerPagee, f_sTime, f_eTime,
+//                f_orderserch, f_serch, f_starTime, f_endTime, f_serchName, userType,null,null,map);
+//		
+//		for(Customer customer:customerPagee.getResult()){
+//			List<Order> orderList = orderService.getOrder(customer, null);
+//	        List<Order> orderList1 = orderService.getOrderByNotCustomer(customer);
+//			
+//			paymentMoenySum = paymentMoenySum.add(customerService.getChongZhiSum(customer));
+//	        
+//			for (Order o : orderList) {
+//	            if (o.getCommunity() != null) {
+//	                List<Part> listPart = communityService.getPartList(o
+//	                        .getCommunity(), customer);
+//	                for (Part p : listPart) {
+//	                    if (o.getStatus().equals(OrderStatus.出票成功)
+//	                            || o.getStatus().equals(OrderStatus.出票中))
+//	                        outMoneySum = outMoneySum.add(p.getMoney());
+//	                }
+//	            }
+//	            else {
+//	            	outMoneySum = outMoneySum.add(o.getOutAmount());
+//	            }
+//	        }
+//	        for (Order o : orderList1) {
+//	            List<Part> listPart = communityService.getPartList(
+//	                    o.getCommunity(), customer);
+//	            for (Part p : listPart) {
+//	                if (o.getStatus().equals(OrderStatus.出票成功)
+//	                        || o.getStatus().equals(OrderStatus.出票中))
+//	                	outMoneySum = outMoneySum.add(p.getMoney());
+//	            }
+//	        }
+//		}
 		return SUCCESS;
 	}
 	
@@ -536,7 +558,7 @@ public class CRMSystemAction extends LotteryClientBaseAction{
 //		  for(int k=1;k<init.length;k++){
 //			  sb.append(","+init[k]);
 //		  }
-		return sb.toString()+"||"+sb.length();
+		return sb.toString();
 	}
 	
 	public static void main(String[] args)
@@ -551,6 +573,9 @@ public class CRMSystemAction extends LotteryClientBaseAction{
 		String[] eis = emailIds.split(",");
 		String[] enns = nickNames.split(",");
 		
+		adminSendSomeThingTemplate = adminSendSomeThingTemplateDao.get(emailTemplate.getId());
+		
+		emailContent = adminSendSomeThingTemplate.getContent();
 		
 		for(int j=0;j<es.length;j++){
 			
@@ -601,6 +626,37 @@ public class CRMSystemAction extends LotteryClientBaseAction{
 		return AJAXJSON;
 	}
 
+
+
+	public int getTotalPages()
+	{
+		return totalPages;
+	}
+
+	public void setTotalPages(int totalPages)
+	{
+		this.totalPages = totalPages;
+	}
+
+	public int getTotalNum()
+	{
+		return totalNum;
+	}
+
+	public void setTotalNum(int totalNum)
+	{
+		this.totalNum = totalNum;
+	}
+
+	public List<Map> getCustomerListMap()
+	{
+		return customerListMap;
+	}
+
+	public void setCustomerListMap(List<Map> customerListMap)
+	{
+		this.customerListMap = customerListMap;
+	}
 
 	public String getBusinessMan()
 	{

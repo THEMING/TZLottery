@@ -19,6 +19,7 @@ jQuery(document).ready(function() {
 function subm(cmd,strId) {
     $("#bmid").val(strId);
     $("#action").val(cmd);
+    $("#memo").val($("#msg_"+strId).val());
 	$("form").submit();
 }
 </script>
@@ -29,6 +30,7 @@ function subm(cmd,strId) {
 <s:form  action="manageWithdrawMoneySuccess" method="post" >
 <s:hidden name="action" id="action" value="index"></s:hidden>
 <s:hidden name="bmid" id="bmid"/>
+<s:hidden name="memo" id="memo"></s:hidden>
 <table width="60%">
 <caption class="redbold">提款审核管理</caption>
   <tr>
@@ -83,6 +85,7 @@ function subm(cmd,strId) {
     <td height="25"><div align="center">状态</div></td>
     <td height="25"><div align="center">操作人</div></td>
     <td height="25"><div align="center">操作时间</div></td>
+    <td height="25"><div align="center">失败原因</div></td>
     <td height="25"><div align="center">操作</div></td>
   </tr>
   	<s:iterator id="rs" value="page.result">
@@ -98,6 +101,12 @@ function subm(cmd,strId) {
       <td height="25" >${rs.status}</td>
       <td height="25" >${rs.user.adminName}</td>
       <td height="25" ><s:date name="#rs.sendTime" format="yyyy-MM-dd HH:mm"/></td>
+      <td height="25" >
+      	<c:if test="${rs.status=='二级审核'}">
+      		<input type="text" id="msg_${rs.id}" value="${rs.memo }"></input>
+        </c:if>
+        ${rs.memo }
+      </td>
       <td height="25" >
        <a href="manageCustomer.aspx?action=view&customerId=${rs.customer.id }" target="blank">|审核|</a>
       <c:if test="${rs.status=='二级审核'}">

@@ -64,12 +64,12 @@ public class CPSServiceImplTest2 extends SuperTest
 		customer.setId(new Long(2988));
     	
     	//总注册数
-    	Long regNum = customerService.getRecommendorsPage2(null,customer,startTime, overTime);	
-    	System.out.println("==========总注册数==================="+regNum);
-    	
-    	//消费人数
-		Long payNum = lotteryOrderService.getSumPayByCustomer(startTime, overTime, customer);
-		System.out.println("==========消费人数==================="+payNum);
+//    	Long regNum = customerService.getRecommendorsPage2(null,customer,startTime, overTime);	
+//    	System.out.println("==========总注册数==================="+regNum);
+//    	
+//    	//消费人数
+//		Long payNum = lotteryOrderService.getSumPayByCustomer(startTime, overTime, customer);
+//		System.out.println("==========消费人数==================="+payNum);
 		
 		//充值人数
 		Long rechargeNum = walletLogService.getRechargeNum(startTime, overTime, customer);

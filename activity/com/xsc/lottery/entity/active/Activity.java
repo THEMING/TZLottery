@@ -14,14 +14,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.xsc.lottery.entity.BaseObject;
 import com.xsc.lottery.entity.business.Article;
 import com.xsc.lottery.entity.partner.Partner;
@@ -84,6 +83,11 @@ public class Activity extends BaseObject
     
     /*是否公开被代理商使用*/
 	private Boolean isPublic;
+	
+	/*
+	 * 网站是否显示
+	 */
+	private Boolean isShow;
     
     public Boolean getIsPublic()
 	{
@@ -224,5 +228,15 @@ public class Activity extends BaseObject
     {
         this.orderType = orderType;
     }
+
+	public Boolean getIsShow()
+	{
+		return isShow;
+	}
+
+	public void setIsShow(Boolean isShow)
+	{
+		this.isShow = isShow;
+	}
 
 }

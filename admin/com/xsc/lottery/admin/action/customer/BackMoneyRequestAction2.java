@@ -73,6 +73,8 @@ public class BackMoneyRequestAction2 extends AdminBaseAction
     
     private BigDecimal minMoney;
     
+    private String message;
+    
     public String index()
     {
         page = new Page<BackMoneyRequest>();
@@ -109,40 +111,63 @@ public class BackMoneyRequestAction2 extends AdminBaseAction
     public String exit()
     {
         BackMoneyRequest bmr = customerService.findBackMoneyRequest(bmid);
-        bmr.setUser(this.getCurAdminUser());
-        bmr.setSendTime(Calendar.getInstance());
-        bmr.setStatus(BackMoneyStatus.已取消);
-        bmr.setMemo(memo);
-        customerService.updateBackMoneyRequestBackMoney(bmr);
+        if(bmr == null)
+        {
+        	message ="编号为{"+bmid+"}提款申请不存在,请刷新重试";
+        }
+        if(BackMoneyStatus.一级审核 != bmr.getStatus())
+        {
+        	message = "编号为{"+bmid+"}提款申请状态为"+bmr.getStatus()+",您没有审核权限";
+        }
+        else
+        {
+        	bmr.setUser(this.getCurAdminUser());
+            bmr.setSendTime(Calendar.getInstance());
+            bmr.setStatus(BackMoneyStatus.已取消);
+            bmr.setMemo(memo);
+            customerService.updateBackMoneyRequestBackMoney(bmr);
+            message = "编号为{"+bmid+"}提款申请取消成功";
+        }
         return index();
     }
     
     public String option()
     {
         BackMoneyRequest bmr = customerService.findBackMoneyRequest(bmid);
-        bmr.setUser(this.getCurAdminUser());
-        bmr.setStatus(BackMoneyStatus.二级审核);
-    	BigDecimal feeMoney = calculateFeeMoney(bmr.getMoney());
-    	bmr.setFeeMoney(feeMoney);
-        customerService.updateBackMoneyRequest(bmr);
-    	PayOutRequest por = new PayOutRequest();
-    	por.setTime(Calendar.getInstance());
-    	por.setBackMoneyRequest(bmr);
-    	por.setYURREF(MathUtil.getSerialNumber(16));
-    	por.setNUSAGE("账户返款");
-    	Customer customer = bmr.getCustomer();
-    	String city = customer.getProvince() + customer.getCity();
-    	String crtbnk = city + customer.getBank().toString() + customer.getSubbranch();
-    	por.setCRTBNK(crtbnk);
-    	por.setCTYCOD(bmr.getCode());
-    	por.setCRTPVC(city);
-    	por.setState(0);
-    	por.setStateDesc("等待初(一)审");
-    	por.setStateTime(Calendar.getInstance());
-    	por.setProgressFlag(5);
-		por.setMoney(bmr.getMoney().subtract(bmr.getFeeMoney()));
-    	
-    	payOutRequestService.save(por);
+        if(bmr == null)
+        {
+        	message ="编号为{"+bmid+"}提款申请不存在,请刷新重试";
+        }
+        if(BackMoneyStatus.一级审核 != bmr.getStatus())
+        {
+        	message = "编号为{"+bmid+"}提款申请状态为"+bmr.getStatus()+",您没有审核权限";
+        }
+        else
+        {
+        	 bmr.setUser(this.getCurAdminUser());
+             bmr.setStatus(BackMoneyStatus.二级审核);
+         	BigDecimal feeMoney = calculateFeeMoney(bmr.getMoney());
+         	bmr.setFeeMoney(feeMoney);
+             customerService.updateBackMoneyRequest(bmr);
+         	PayOutRequest por = new PayOutRequest();
+         	por.setTime(Calendar.getInstance());
+         	por.setBackMoneyRequest(bmr);
+         	por.setYURREF(MathUtil.getSerialNumber(16));
+         	por.setNUSAGE("账户返款");
+         	Customer customer = bmr.getCustomer();
+         	String city = customer.getProvince() + customer.getCity();
+         	String crtbnk = city + customer.getBank().toString() + customer.getSubbranch();
+         	por.setCRTBNK(crtbnk);
+         	por.setCTYCOD(bmr.getCode());
+         	por.setCRTPVC(city);
+         	por.setState(0);
+         	por.setStateDesc("等待初(一)审");
+         	por.setStateTime(Calendar.getInstance());
+         	por.setProgressFlag(5);
+     		por.setMoney(bmr.getMoney().subtract(bmr.getFeeMoney()));
+         	payOutRequestService.save(por);
+         	message = "编号为{"+bmid+"}的提款申请二级审核成功";
+        }
         return index();
     }
     
@@ -152,28 +177,40 @@ public class BackMoneyRequestAction2 extends AdminBaseAction
     	BackMoneyRequest bmr = null;
     	for (int i = 0; i < ids.length; i++) {
             bmr = customerService.findBackMoneyRequest(Long.parseLong(ids[i]));
-            bmr.setUser(this.getCurAdminUser());
-            bmr.setStatus(BackMoneyStatus.二级审核);
-            BigDecimal feeMoney = calculateFeeMoney(bmr.getMoney());
-        	bmr.setFeeMoney(feeMoney);
-            customerService.updateBackMoneyRequest(bmr);
-        	PayOutRequest por = new PayOutRequest();
-        	por.setTime(Calendar.getInstance());
-        	por.setBackMoneyRequest(bmr);
-        	por.setYURREF(MathUtil.getSerialNumber(16));
-        	por.setNUSAGE("账户返款");
-        	Customer customer = bmr.getCustomer();
-        	String city = customer.getProvince() + customer.getCity();
-        	String crtbnk = city + customer.getBank().toString() + customer.getSubbranch();
-        	por.setCRTBNK(crtbnk);
-        	por.setCTYCOD(bmr.getCode());
-        	por.setCRTPVC(city);
-        	por.setState(0);
-        	por.setStateDesc("等待初(一)审");
-        	por.setStateTime(Calendar.getInstance());
-        	por.setProgressFlag(5);
-			por.setMoney(bmr.getMoney().subtract(bmr.getFeeMoney()));
-        	payOutRequestService.save(por);
+            if(bmr == null)
+            {
+            	message +="编号为{"+bmid+"}提款申请不存在,请刷新重试";
+            }
+            if(BackMoneyStatus.一级审核 != bmr.getStatus())
+            {
+            	message += "编号为{"+bmid+"}提款申请状态为"+bmr.getStatus()+",您没有审核权限";
+            }
+            else
+            {
+            	 bmr.setUser(this.getCurAdminUser());
+                 bmr.setStatus(BackMoneyStatus.二级审核);
+                 BigDecimal feeMoney = calculateFeeMoney(bmr.getMoney());
+             	bmr.setFeeMoney(feeMoney);
+                 customerService.updateBackMoneyRequest(bmr);
+             	PayOutRequest por = new PayOutRequest();
+             	por.setTime(Calendar.getInstance());
+             	por.setBackMoneyRequest(bmr);
+             	por.setYURREF(MathUtil.getSerialNumber(16));
+             	por.setNUSAGE("账户返款");
+             	Customer customer = bmr.getCustomer();
+             	String city = customer.getProvince() + customer.getCity();
+             	String crtbnk = city + customer.getBank().toString() + customer.getSubbranch();
+             	por.setCRTBNK(crtbnk);
+             	por.setCTYCOD(bmr.getCode());
+             	por.setCRTPVC(city);
+             	por.setState(0);
+             	por.setStateDesc("等待初(一)审");
+             	por.setStateTime(Calendar.getInstance());
+             	por.setProgressFlag(5);
+     			por.setMoney(bmr.getMoney().subtract(bmr.getFeeMoney()));
+             	payOutRequestService.save(por);
+             	message += "编号为{"+bmid+"}的提款申请二级审核成功";
+            }
 		}
         return index();
     }
@@ -379,6 +416,16 @@ public class BackMoneyRequestAction2 extends AdminBaseAction
 		else {
 			return BigDecimal.valueOf(100);
 		}
+	}
+
+	public String getMessage()
+	{
+		return message;
+	}
+
+	public void setMessage(String message)
+	{
+		this.message = message;
 	}
 
 }

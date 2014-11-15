@@ -86,7 +86,7 @@ function jumpPage1() {
 	function setSmsContent(obj){
 		$.ajax({
 			type:"post",
-			url: "CRMManage.htm?action=getTemplate",
+			url: "CRMManageAdmin.htm?action=getTemplate",
 			data:{templateId:obj.value},
 			success: function(data, textStatus){
 			var a=eval("("+data+")");
@@ -98,7 +98,7 @@ function jumpPage1() {
 	function setEmsilContent(obj){
 		$.ajax({
 			type:"post",
-			url: "CRMManage.htm?action=getTemplate",
+			url: "CRMManageAdmin.htm?action=getTemplate",
 			data:{templateId:obj.value},
 			success: function(data, textStatus){
 			var a=eval("("+data+")");
@@ -130,7 +130,7 @@ function jumpPage1() {
 		}
 		$.ajax({
 			type:"post",
-			url: "CRMManage.htm?action=cheackAdminUser",
+			url: "CRMManageAdmin.htm?action=cheackAdminUser",
 			data:{adminUserCheck:$("#"+inputId).val()},
 			success: function(data, textStatus){
 			var a=eval("("+data+")");
@@ -193,7 +193,7 @@ function jumpPage1() {
 		
 		$.ajax({
 			type:"post",
-			url: "CRMManage.htm",
+			url: "CRMManageAdmin.htm",
 			data:obj,
 			success: function(data, textStatus){
 			var a=eval("("+data+")");
@@ -207,7 +207,8 @@ function jumpPage1() {
 <body>
 <div id="mask" class="mask"></div>  
  <div class="tab">
-<s:form id="queryForm" action="dispatchCustomer.htm" method="post">
+<s:form id="queryForm" action="CRMManageAdmin.htm" method="post">
+<s:hidden name="query" id="query" value="true"/>
 <table width="60%">
 <caption class="redbold">我的客户</caption>
   <tr>
@@ -249,10 +250,10 @@ function jumpPage1() {
   </tr>
   <tr>
   	<td colspan="2">
-  		对当前全部<font style='color:red'>${customerPage.totalCount}<input hidden="" id="totalCountHide" name="totalCountHide" value="${customerPage.totalCount}"></font>位客户分配给业务员<input id="adminUserAll" onblur="checkIsFindCustomer('adminUserAll');" placeholder="请输入业务员账号" name="adminUserAll" type="text"><span id="adminUserAllSpan" class="gray"></span>   <input type="button" value="分配" onclick="dispath('adminUserAll')">
+  		对当前全部<font style='color:red'>${totalNum}<input hidden="" id="totalCountHide" name="totalCountHide" value="${totalNum}"></font>位客户分配给业务员<input id="adminUserAll" onblur="checkIsFindCustomer('adminUserAll');" placeholder="请输入业务员账号" name="adminUserAll" type="text"><span id="adminUserAllSpan" class="gray"></span>   <input type="button" value="分配" onclick="dispath('adminUserAll')">
   	</td>
   	<td  colspan="2">
-  		对当前页<font style='color:red'>${customerPage.pageSize}</font>位客户分配给业务员<input id="adminUserPage" onblur="checkIsFindCustomer('adminUserPage');" placeholder="请输入业务员账号" name="adminUserPage" type="text"><span id="adminUserPageSpan" class="gray"></span>   <input type="button" value="分配" onclick="dispath('adminUserPage')">
+  		对当前页<font style='color:red'>${pageSize}</font>位客户分配给业务员<input id="adminUserPage" onblur="checkIsFindCustomer('adminUserPage');" placeholder="请输入业务员账号" name="adminUserPage" type="text"><span id="adminUserPageSpan" class="gray"></span>   <input type="button" value="分配" onclick="dispath('adminUserPage')">
   	</td>
   	</tr>
   	<tr>
@@ -282,15 +283,48 @@ function jumpPage1() {
     <td height="25"><div align="center">注册时间</div></td>
     <td height="25"><div align="center">最后登陆时间</div></td>
   </tr>
-  	<s:iterator id="rs" value="customerPage.result" status="st">
+  <s:iterator id="rs" value="customerListMap" status="st">
 	  <tr>
-	  <td><input name="cusId" type="checkbox" id="cusId_${rs.id}" value="${rs.id}"/></td>
-      <td height="25" >${rs.nickName}<input type="hidden" id="nickName_${rs.id}" value="${rs.nickName}"></td>
-      <td height="25" >${rs.realName}</td>
+	  <td><input name="cusId" type="checkbox" id="cusId_${rs[0]}" value="${rs[0]}"/></td>
+      <td height="25" >${rs[1]}<input type="hidden" id="nickName_${rs[0]}" value="${rs[1]}"></td>
+      <td height="25" >${rs[2]}</td>
       <%--<td height="25" ><s:if test="#rs.credentNo!=''">
 				<s:property value="#rs.credentNo.substring(0,12)"/>******
 				</s:if></td>
       <td height="25" >${rs.credentType}</td>--%>
+      <td height="25" ><s:if test="#rs[3]!=''">
+				****<s:property value="#rs[3].substring(4)"/>
+				</s:if><input type="hidden" id="email_${rs[0]}" value="${rs[3]}"></td>
+      <td height="25" ><s:if test="#rs[4]!=''">
+				<s:property value="#rs[4].substring(0,7)"/>****
+				</s:if><input type="hidden" id="phoneNum_${rs[0]}" value="${rs[4]}"></td>
+      <td height="25" >
+      <s:if test="#rs[5]==0">正常</s:if>
+      <s:else>冻结</s:else>
+      </td>
+      <td>
+      ${rs[6] }
+      </td>
+      <td>
+      ${rs[7] }
+      </td>
+      <td>
+      ${rs[8] }
+      </td>
+      <td height="25" ><a href="/oss/customer/manageCustomer.aspx?action=view&customerId=${rs[0] }">资</a>|<a href="/oss/customer/manageFinanialQuery.aspx?customerId=${rs[0] }">账</a></td>
+      <td height="25" ><s:date name="#rs[9]" format="yyyy-MM-dd HH:mm"/></td>
+       <td height="25" ><s:date name="#rs[12]" format="yyyy-MM-dd HH:mm"/></td>
+      </tr>
+    </s:iterator>
+  	<%--<s:iterator id="rs" value="customerPage.result" status="st">
+	  <tr>
+	  <td><input name="cusId" type="checkbox" id="cusId_${rs.id}" value="${rs.id}"/></td>
+      <td height="25" >${rs.nickName}<input type="hidden" id="nickName_${rs.id}" value="${rs.nickName}"></td>
+      <td height="25" >${rs.realName}</td>
+      <td height="25" ><s:if test="#rs.credentNo!=''">
+				<s:property value="#rs.credentNo.substring(0,12)"/>******
+				</s:if></td>
+      <td height="25" >${rs.credentType}</td>
       <td height="25" ><s:if test="#rs.email!=''">
 				****<s:property value="#rs.email.substring(4)"/>
 				</s:if><input type="hidden" id="email_${rs.id}" value="${rs.email}"></td>
@@ -315,31 +349,31 @@ function jumpPage1() {
        <td height="25" ><s:date name="#rs.lastLoginTime" format="yyyy-MM-dd HH:mm"/></td>
       </tr>
     </s:iterator>
-</table>
+--%></table>
 
 <table width="90%" border="0" align="center">
 	<tr><td>
 		<div>
 	<input type="hidden" name="pageNo" id="pageNo" value="1" />
-	每页<input type="text" name="pageSize" style="width: 30px" id="pageSize" value="${customerPage.pageSize}" />条 共${customerPage.totalCount}条记录 第${customerPage.pageNo}/${customerPage.totalPages}页   
-	<s:if test="customerPage.pageNo==1">
+	每页<input type="text" name="pageSize" style="width: 30px" id="pageSize" value="${pageSize}" />条 共${totalNum}条记录 第${pageNo}/${totalPages}页   
+	<s:if test="pageNo==1">
 		<span class="disabled">首页</span> 
 		<span class="disabled">前一页</span>
 	</s:if>
 	<s:else>
 		<a href="javascript:jumpPage(1)" class="cr_link">首页</a>
-		<a href="javascript:jumpPage(${customerPage.pageNo-1})" class="cr_link">前一页</a>
+		<a href="javascript:jumpPage(${pageNo}-1)" class="cr_link">前一页</a>
 	</s:else>
 	
-	<s:if test="customerPage.pageNo>=customerPage.totalPages">
+	<s:if test="pageNo>=totalPages">
 		<span class="disabled">后一页</span> 
 		<span class="disabled">末页</span>
 	</s:if>
 	<s:else>
-		<a href="javascript:jumpPage(${customerPage.pageNo+1})" class="cr_link">后一页</a>
-		<a href="javascript:jumpPage(${customerPage.totalPages})" class="cr_link">末页</a>
+		<a href="javascript:jumpPage(${pageNo}+1)" class="cr_link">后一页</a>
+		<a href="javascript:jumpPage(${totalPages})" class="cr_link">末页</a>
 	</s:else>
-	转 第<input type="text" name="pageNum" style="width: 30px" id="pageNum" value="${customerPage.pageNo}" />页  
+	转 第<input type="text" name="pageNum" style="width: 30px" id="pageNum" value="${pageNo}" />页  
 	<input type="button" value="跳转" onclick="jumpPage1();"/>
 	</div>
 	</td>

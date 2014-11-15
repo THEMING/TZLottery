@@ -324,7 +324,7 @@ public class WzlTicketTreatmentWork extends TicketTreatmentWork
 	@Override
 	public void getOpenResult(LotteryTerm term) {
 		logger.info("我中啦获取开奖结果 getOpenResult------->>>>>>>>>>");
-		logger.info("=================获取开奖结果===========================");
+		System.out.println("=================获取开奖结果===========================");
 		Xml2000Service service = new Xml2000Service();
 		String issue = term.getTermNo();
 		if(term.getType() == LotteryType.十一运夺金)
@@ -371,10 +371,10 @@ public class WzlTicketTreatmentWork extends TicketTreatmentWork
 	        }           
 		}
 		catch (Exception e) {
-			logger.info("==============获取结果失败===========" + e);
+			System.out.println("==============获取结果失败===========" + e);
 			if (term.getType().equals(LotteryType.老11选5)||term.getType().equals(LotteryType.重庆时时彩)||term.getType().equals(LotteryType.十一运夺金)) {
 				// 快频  间隔 10秒 
-				logger.info("=======接口返回结果========" + xml);
+				System.out.println("=======接口返回结果========" + xml);
                 logger.warn(term + "期获取开奖结果数据异常.==>" + e.getMessage());
                 SystemWarningNotify.addWarningDescription("我中了取开奖结果异常：" + e);
 				try {
@@ -404,7 +404,7 @@ public class WzlTicketTreatmentWork extends TicketTreatmentWork
 	                    .getTimeInMillis();
 	            s = s - 60000l;
 	            if (System.currentTimeMillis() - s >= 0) {
-	            	logger.info("=======接口返回结果========" + xml);
+	            	System.out.println("=======接口返回结果========" + xml);
 	                logger.warn(term + "期获取开奖结果数据异常.==>" + e.getMessage());
 	                SystemWarningNotify.addWarningDescription("我中了取开奖结果异常：" + e);
 	                return;

@@ -84,7 +84,7 @@
 </div>
 				<div class="user_name" id="userNameDiv">用户名：</div>
 				<div class="user_inputBg">
-					<input id="nickname" name="nickname" class="user_input" placeholder="用户名" type="text"/>
+					<input id="nickname" name="nickname" class="user_input" type="text"/>
 					
 				</div>
 				<div class="user_input_instro"><input type="hidden" id="loginType" name="loginType" value="1"/></div>

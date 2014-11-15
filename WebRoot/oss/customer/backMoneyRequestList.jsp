@@ -11,8 +11,8 @@
 function subm(cmd,strId) {
     $("#bmid").val(strId);
     $("#action").val(cmd);
-    $("#memo").val($("#message").val());
-    $("#codes").val($("#code").val());
+    $("#memo").val($("#message_"+strId).val());
+    //$("#codes").val($("#code").val());
 	$("form").submit();
 }
 
@@ -141,7 +141,7 @@ function dosub()
     <td height="25"><div align="center">操作人</div></td>
     <td height="25"><div align="center">审核时间</div></td>
     <td height="25" ><div align="center">城市名</div></td>
-    <!-- 
+     <!-- 
     <td height="25" ><div align="center">城市代号</div></td>
      -->
     <td height="25" ><div align="center">失败原因</div></td>
@@ -175,7 +175,7 @@ function dosub()
 	   --%>
       <td height="25" >
       	<c:if test="${rs.status=='待审核'}">
-      		<input type="text" id="message" value="${rs.memo }"></input>
+      		<input type="text" id="message_${rs.id}" value="${rs.memo }"></input>
         </c:if>
         ${rs.memo }
       </td>

@@ -53,20 +53,61 @@ public class OurPerformanceAction extends AdminBaseAction
 
 	private ArrayList dataA;
 
+	private Long regNumM;
+
+	private Long rechargeNumM;
+
+	private BigDecimal rechargeMonM;
+
+	private Long regNumW;
+
+	private Long rechargeNumW;
+
+	private BigDecimal rechargeMonW;
+
 	/**
 	 * 默认页
 	 * @return
 	 */
 	public String index()
 	{				
+		Calendar curCalendarS = Calendar.getInstance();
+		curCalendarS.set(curCalendarS.get(Calendar.YEAR), curCalendarS.get(Calendar.MONTH), curCalendarS.get(Calendar.DATE), 0, 0, 0);
+		
+		Calendar curCalendarE = Calendar.getInstance();
+		curCalendarE.set(curCalendarE.get(Calendar.YEAR), curCalendarE.get(Calendar.MONTH), curCalendarE.get(Calendar.DATE), 23, 59, 59);
+		
 		// 总注册数
 		regNumAll = customerService.getRecommendorsPageNum(null, null, null, null);
-
+		
 		// 充值人数
 		rechargeNumAll = walletLogService.getRechargeNum(null, null, null);
 
 		// 充值金额
 		rechargeMonAll = walletLogService.getRechargeMon(null, null, null);
+		
+		curCalendarS.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY );
+
+		// 周注册数
+		regNumW = customerService.getRecommendorsPageNum(null, null, curCalendarS, curCalendarE);
+		
+		// 周充值人数
+		rechargeNumW = walletLogService.getRechargeNum(curCalendarS, curCalendarE, null);
+
+		// 周充值金额
+		rechargeMonW = walletLogService.getRechargeMon(curCalendarS, curCalendarE, null);
+		
+		curCalendarS.set(Calendar.DATE, 1);
+
+		// 月注册数
+		regNumM = customerService.getRecommendorsPageNum(null, null, curCalendarS, curCalendarE);
+		
+		// 月充值人数
+		rechargeNumM = walletLogService.getRechargeNum(curCalendarS, curCalendarE, null);
+
+		// 月充值金额
+		rechargeMonM = walletLogService.getRechargeMon(curCalendarS, curCalendarE, null);
+		
 		return SUCCESS;
 	}
 	
@@ -102,6 +143,76 @@ public class OurPerformanceAction extends AdminBaseAction
 		map.put("dataA", dataA);
         setJsonString(JsonMsgBean.MapToJsonString(map));
         return AJAXJSON;
+	}
+
+	public ArrayList getDataA()
+	{
+		return dataA;
+	}
+
+	public void setDataA(ArrayList dataA)
+	{
+		this.dataA = dataA;
+	}
+
+	public Long getRegNumM()
+	{
+		return regNumM;
+	}
+
+	public void setRegNumM(Long regNumM)
+	{
+		this.regNumM = regNumM;
+	}
+
+	public Long getRechargeNumM()
+	{
+		return rechargeNumM;
+	}
+
+	public void setRechargeNumM(Long rechargeNumM)
+	{
+		this.rechargeNumM = rechargeNumM;
+	}
+
+	public BigDecimal getRechargeMonM()
+	{
+		return rechargeMonM;
+	}
+
+	public void setRechargeMonM(BigDecimal rechargeMonM)
+	{
+		this.rechargeMonM = rechargeMonM;
+	}
+
+	public Long getRegNumW()
+	{
+		return regNumW;
+	}
+
+	public void setRegNumW(Long regNumW)
+	{
+		this.regNumW = regNumW;
+	}
+
+	public Long getRechargeNumW()
+	{
+		return rechargeNumW;
+	}
+
+	public void setRechargeNumW(Long rechargeNumW)
+	{
+		this.rechargeNumW = rechargeNumW;
+	}
+
+	public BigDecimal getRechargeMonW()
+	{
+		return rechargeMonW;
+	}
+
+	public void setRechargeMonW(BigDecimal rechargeMonW)
+	{
+		this.rechargeMonW = rechargeMonW;
 	}
 
 	public ArrayList getRechargeNumA()

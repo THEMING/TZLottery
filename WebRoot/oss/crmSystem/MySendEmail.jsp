@@ -63,7 +63,7 @@ var postPath = "<%=request.getContextPath()%>";
 				--%>
 				<td><s:property value="#rs.username.substring(1,#rs.username.length()-1)"/></td>
 				<td>${rs.title}</td>
-				<td>${rs.content}</td>
+				<td><div style="width:100%; height:50px;overflow-y:scroll;">${rs.content}</div></td>
 				<td>${rs.state.text}</td>
 				<td>
 				<s:date name="#rs.sendTime" format="yyyy-MM-dd HH:mm"/>

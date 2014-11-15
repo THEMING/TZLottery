@@ -25,7 +25,7 @@
 		</script>
 	</head>
 	<body>
-		<s:form action="/oss/customer/manageHandAdd.htm" method="post" >
+		<s:form action="manageHandAdd" method="post" >
 		<s:hidden name="action" value="chongz"/>
 		<table>
 			<tr>

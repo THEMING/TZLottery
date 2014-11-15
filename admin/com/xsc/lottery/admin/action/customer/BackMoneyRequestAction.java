@@ -71,6 +71,8 @@ public class BackMoneyRequestAction extends AdminBaseAction
     
     private String code;
     
+    private String message;
+    
     public String index()
     {
         page = new Page<BackMoneyRequest>();
@@ -86,23 +88,47 @@ public class BackMoneyRequestAction extends AdminBaseAction
     public String exit()
     {
         BackMoneyRequest bmr = customerService.findBackMoneyRequest(bmid);
-        bmr.setUser(this.getCurAdminUser());
-        bmr.setSendTime(Calendar.getInstance());
-        bmr.setStatus(BackMoneyStatus.已取消);
-        bmr.setMemo(memo);
-        customerService.updateBackMoneyRequestBackMoney(bmr);
+        if(bmr == null)
+        {
+        	message ="编号为{"+bmid+"}提款申请不存在,请刷新重试";
+        }
+        if(BackMoneyStatus.待审核 != bmr.getStatus())
+        {
+        	message = "编号为{"+bmid+"}提款申请状态为"+bmr.getStatus()+",您没有审核权限";
+        }
+        else
+        {
+        	bmr.setUser(this.getCurAdminUser());
+            bmr.setSendTime(Calendar.getInstance());
+            bmr.setStatus(BackMoneyStatus.已取消);
+            bmr.setMemo(memo);
+            customerService.updateBackMoneyRequestBackMoney(bmr);
+            message = "编号为{"+bmid+"}提款申请取消成功";
+        }
         return index();
     }
 
     public String option()
     {
         BackMoneyRequest bmr = customerService.findBackMoneyRequest(bmid);
-        bmr.setUser(this.getCurAdminUser());
-        bmr.setStatus(BackMoneyStatus.一级审核);
-        if (StringUtils.isBlank(bmr.getCode())) {
-            bmr.setCode(code);
+        if(bmr == null)
+        {
+        	message ="编号为{"+bmid+"}提款申请不存在,请刷新重试";
         }
-        customerService.updateBackMoneyRequest(bmr);
+        if(BackMoneyStatus.待审核 != bmr.getStatus())
+        {
+        	message = "编号为{"+bmid+"}提款申请状态为"+bmr.getStatus()+",您没有审核权限";
+        }
+        else
+        {
+        	 bmr.setUser(this.getCurAdminUser());
+             bmr.setStatus(BackMoneyStatus.一级审核);
+             if (StringUtils.isBlank(bmr.getCode())) {
+                 bmr.setCode(code);
+             }
+             customerService.updateBackMoneyRequest(bmr);
+             message = "编号为{"+bmid+"}的提款申请一级审核成功";
+        }
         return index();
     }
     
@@ -112,9 +138,21 @@ public class BackMoneyRequestAction extends AdminBaseAction
     	BackMoneyRequest bmr = null;
     	for (int i = 0; i < ids.length; i++) {
     		bmr = customerService.findBackMoneyRequest(Long.parseLong(ids[i]));
-            bmr.setUser(this.getCurAdminUser());
-            bmr.setStatus(BackMoneyStatus.一级审核);
-            customerService.updateBackMoneyRequest(bmr);
+    		if(bmr == null)
+    	    {
+    	       	message +="编号为{"+bmid+"}提款申请不存在,请刷新重试";
+    	    }
+    	    if(BackMoneyStatus.待审核 != bmr.getStatus())
+    	    {
+    	      	message += "编号为{"+bmid+"}提款申请状态为"+bmr.getStatus()+",您没有审核权限";
+    	    }
+    	    else
+    	    {
+    	    	bmr.setUser(this.getCurAdminUser());
+                bmr.setStatus(BackMoneyStatus.一级审核);
+                customerService.updateBackMoneyRequest(bmr);
+                message += "编号为{"+bmid+"}的提款申请一级审核成功";
+    	    }
 		}
         return index();
     }
@@ -314,6 +352,16 @@ public class BackMoneyRequestAction extends AdminBaseAction
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public String getMessage()
+	{
+		return message;
+	}
+
+	public void setMessage(String message)
+	{
+		this.message = message;
 	}
 
 }

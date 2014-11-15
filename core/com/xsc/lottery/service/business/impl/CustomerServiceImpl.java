@@ -3,6 +3,7 @@ package com.xsc.lottery.service.business.impl;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -30,7 +31,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.orm.hibernate.Page;
 import org.springside.modules.orm.hibernate.SimpleHibernateTemplate;
 
-import com.xsc.lottery.alipay.util.MapUtil;
 import com.xsc.lottery.common.Constants;
 import com.xsc.lottery.dao.PagerHibernateTemplate;
 import com.xsc.lottery.entity.admin.AdminUser;
@@ -49,6 +49,7 @@ import com.xsc.lottery.entity.enumerate.Bank;
 import com.xsc.lottery.entity.enumerate.BusinessType;
 import com.xsc.lottery.entity.enumerate.CustomerType;
 import com.xsc.lottery.entity.enumerate.MoneyChannel;
+import com.xsc.lottery.entity.enumerate.OrderStatus;
 import com.xsc.lottery.entity.enumerate.UserType;
 import com.xsc.lottery.entity.enumerate.WalletLogType;
 import com.xsc.lottery.java.common.SystemWarningNotify;
@@ -62,6 +63,7 @@ import com.xsc.lottery.task.message.MessageTaskExcutor;
 import com.xsc.lottery.util.Configuration;
 import com.xsc.lottery.util.DateUtil;
 import com.xsc.lottery.util.MD5;
+import com.xsc.lottery.util.MapUtil;
 import com.xsc.lottery.util.SmsUtil;
 
 @Service("customerService")
@@ -550,6 +552,155 @@ public class CustomerServiceImpl implements CustomerService
 //        else {
 //            return new BigDecimal(0);
 //        }
+    }
+    
+    /** 分页获得客户信息 */
+    public Map getLotteryCustomerPageForBusinessMan(
+            Calendar stratTime, Calendar endTime, String f_orderserch,
+            String f_serch, Calendar f_starTime, Calendar f_endTime,
+            String f_serchName, UserType type,Boolean isApply,Integer isPass,Map queryMap)
+    {
+    	StringBuffer hql = new StringBuffer("");//bwll.in_money,boo.out_amount
+    	
+		hql.append("select bc.id,bc.nick_name,bc.real_name,bc.email,bc.mobile_no,bc.status,case when bwll.balance is null then 0 else bwll.balance end,case when bwll.in_money is null then 0 else bwll.in_money end,case when boo.out_amount is null then 0 else boo.out_amount end,bc.register_time,bc.sms_accept,bc.email_accept,bc.last_login_time" +
+				" from business_customer bc " +
+				
+				" left join (select bcc.id,sum(bwl.in_money) as in_money,bw.balance,bw.status from business_customer bcc, business_wallet bw , business_wallet_log bwl where bcc.wallet_id = bw.id and bwl.wallet_id = bw.id and (bwl.type = "+WalletLogType.直接充值.ordinal()+" or bwl.type = "+WalletLogType.账户充值.ordinal()+") ");
+					
+		if(MapUtil.checkKey(queryMap, "superior")){
+        	hql.append(" and bcc.superior_id ="+((Customer)MapUtils.getObject(queryMap, "superior")).getId());
+        }
+		
+		hql.append(" group by bcc.id) bwll on bwll.id = bc.id" + 
+//				" left join business_wallet bw on bc.wallet_id = bw.id" +
+//				" left join business_wallet_log bwl on bwl.wallet_id = bw.id and (bwl.type = " +WalletLogType.直接充值.ordinal()+" or bwl.type = "+WalletLogType.账户充值.ordinal()+")" +
+//				" left join business_order bo on bo.customer_id = bc.id and (bo.status = "+OrderStatus.出票成功.ordinal()+" or bo.status = "+OrderStatus.部分出票成功.ordinal()+")" +
+				" left join (select bccc.id,sum(bo.out_amount) as out_amount from business_customer bccc,business_order bo where  bo.customer_id = bccc.id and (bo.status = "+OrderStatus.出票成功.ordinal()+" or bo.status = "+OrderStatus.部分出票成功.ordinal()+") ");
+				
+		if(MapUtil.checkKey(queryMap, "superior")){
+			hql.append(" and bccc.superior_id ="+((Customer)MapUtils.getObject(queryMap, "superior")).getId());
+		}
+						
+		hql.append(" GROUP BY bccc.id) boo on boo.id = bc.id" +
+				" where 1=1 ");
+				
+        if (f_serch != null) {
+            if (f_serch.equals("用户名")) {
+            	hql.append(" and bc.nick_name like '%"+f_serchName+"%'");
+            }
+            if (f_serch.equals("真实姓名")) {
+            	hql.append(" and bc.real_name like '%"+f_serchName+"%'");
+            }
+            if (f_serch.equals("邮箱")) {
+            	hql.append(" and bc.email like '%"+f_serchName+"%'");
+            }
+        }
+        if (f_starTime != null) {
+        	hql.append(" and bc.register_time >=:f_starTime");
+        }
+        if (f_endTime != null) {
+        	hql.append(" and bc.register_time <=:f_endTime");
+        }
+        if (f_orderserch != null
+                && (f_orderserch.equals("购彩用户") || f_orderserch.equals("未购彩用户"))) {
+            if (f_orderserch.equals("购彩用户")) {
+                if (stratTime != null || endTime != null) {
+                    List<Long> list = lotteryOrderService.getCustomerId(
+                            stratTime, endTime);
+                    hql.append(" and bc.id in (:idList)");
+                }
+            }
+            if (f_orderserch.equals("未购彩用户")) {
+                if (stratTime != null || endTime != null) {
+                    List<Long> list = lotteryOrderService.getCustomerId(
+                            stratTime, endTime);
+                    if (list != null && list.size() > 0)
+                    	hql.append(" and bc.id in (:idList)");
+
+                }
+            }
+        }
+        
+        if(type != null) {
+        	hql.append(" and bc.usr_type ="+type.ordinal());
+        }
+        if(isApply != null)
+        {
+        	hql.append(" and bc.is_apply ="+isApply);
+        }
+        if(isPass != null)
+        {
+        	hql.append(" and bc.is_pass ="+isPass);
+        }
+        
+        if(MapUtil.checkKey(queryMap, "adminUser")){
+        	hql.append(" and bc.admin_user_id ="+((AdminUser)MapUtils.getObject(queryMap, "adminUser")).getId());
+        }
+        
+        if(MapUtil.checkKey(queryMap, "superior")){
+        	hql.append(" and bc.superior_id ="+((Customer)MapUtils.getObject(queryMap, "superior")).getId());
+        }
+        
+        if(MapUtil.checkKey(queryMap, "sBalance")||MapUtil.checkKey(queryMap, "eBalance")){
+        	
+        	if(MapUtil.checkKey(queryMap, "sBalance")){
+        		hql.append(" and bwll.balance >="+(BigDecimal)MapUtils.getObject(queryMap, "sBalance"));
+               }
+               
+            if(MapUtil.checkKey(queryMap, "eBalance")){
+            	hql.append(" and bwll.balance <="+(BigDecimal)MapUtils.getObject(queryMap, "eBalance"));
+               }
+        }
+        
+        if(MapUtil.checkKey(queryMap, "havenotDispath")){
+        	hql.append(" and bc.superior_id is null");
+        }
+        
+        if(MapUtil.checkKey(queryMap, "canEmail")&&MapUtils.getBooleanValue(queryMap, "canEmail")==true){
+        	hql.append(" and (bc.email_accept is null or substring(bc.email_accept,"+Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+",1)<="+sysParamService.getSysParamByName(Constants.CUSTOMER_RECEIVE_EMAIL_FROM_BUSSINESS).getValue()+")");
+        	
+        }
+        
+        if(MapUtil.checkKey(queryMap, "canSms")&&MapUtils.getBooleanValue(queryMap, "canSms")==true){
+        	hql.append(" and (bc.sms_accept is null or substring(bc.sms_accept,"+Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+",1)<="+sysParamService.getSysParamByName(Constants.CUSTOMER_RECEIVE_SMS_FROM_BUSSINESS).getValue()+")");
+        }
+        
+        hql.append(" order by bc.id desc");
+        
+        SQLQuery query = customerDao.getSession().createSQLQuery(hql.toString());
+        
+        if (f_starTime != null) {
+        	query.setCalendar("f_starTime",f_starTime);
+        }
+        if (f_endTime != null) {
+        	query.setCalendar("f_endTime",f_endTime);
+        }
+        if (f_orderserch != null
+                && (f_orderserch.equals("购彩用户") || f_orderserch.equals("未购彩用户"))) {
+            if (f_orderserch.equals("购彩用户")) {
+                if (stratTime != null || endTime != null) {
+                    List<Long> list = lotteryOrderService.getCustomerId(
+                            stratTime, endTime);
+                    query.setParameterList("idList", list);
+                }
+            }
+            if (f_orderserch.equals("未购彩用户")) {
+                if (stratTime != null || endTime != null) {
+                    List<Long> list = lotteryOrderService.getCustomerId(
+                            stratTime, endTime);
+                    if (list != null && list.size() > 0)
+                    	query.setParameterList("idList", list);
+
+                }
+            }
+        }
+		
+		Map map = new HashMap();
+		map.put("total", query.list().size());
+		query.setFirstResult((MapUtils.getInteger(queryMap, "pageNo")-1)*MapUtils.getInteger(queryMap, "pageSize"));
+		query.setMaxResults(MapUtils.getInteger(queryMap, "pageSize"));
+		map.put("list", query.list());
+		return map;
     }
 
     /** 分页获得客户信息 */

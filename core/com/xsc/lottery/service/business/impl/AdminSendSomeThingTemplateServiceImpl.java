@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.orm.hibernate.Page;
 import org.springside.modules.orm.hibernate.SimpleHibernateTemplate;
 
-import com.xsc.lottery.alipay.util.MapUtil;
 import com.xsc.lottery.dao.PagerHibernateTemplate;
 import com.xsc.lottery.entity.admin.AdminPermissions;
 import com.xsc.lottery.entity.admin.AdminRole;
@@ -29,6 +28,7 @@ import com.xsc.lottery.entity.business.AdminSendSomeThingTemplate;
 import com.xsc.lottery.entity.business.ArticleCategory;
 import com.xsc.lottery.service.admin.AdminUserService;
 import com.xsc.lottery.service.business.AdminSendSomeThingTemplateService;
+import com.xsc.lottery.util.MapUtil;
 
 @SuppressWarnings("unchecked")
 @Service("adminSendSomeThingTemplateService")

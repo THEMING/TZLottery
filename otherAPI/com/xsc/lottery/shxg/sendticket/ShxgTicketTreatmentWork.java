@@ -334,7 +334,7 @@ public class ShxgTicketTreatmentWork extends TicketTreatmentWork
 		catch (Exception e)
 		{
 
-			logger.info("==============获取结果失败===========" + e);
+			System.out.println("==============获取结果失败===========" + e);
 
 			if (term.getType().equals(LotteryType.广西快3))
 			{
@@ -363,7 +363,7 @@ public class ShxgTicketTreatmentWork extends TicketTreatmentWork
 				s = s - 60000l;
 				if (System.currentTimeMillis() - s >= 0)
 				{
-					logger.info("=======接口返回结果========"
+					System.out.println("=======接口返回结果========"
 							+ XXmlUtil.xml2String(outParamVo.getXmlRoot(), XXmlUtil.getMultilineXmlFormat()).trim());
 					logger.warn(term + "期获取新冠" + term.getType() + "开奖结果数据异常.==>" + e.getMessage());
 					SystemWarningNotify.addWarningDescription("新冠获取开奖号码异常：" + e);

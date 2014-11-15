@@ -56,7 +56,7 @@ public class JczqBingoCheck
         	boolean special = Boolean.valueOf(result.split("\\|")[0]);
         	String specificRes = result.split("\\|")[1];
         	
-        	String ratio = result.split("\\|")[2];
+        	//String ratio = result.split("\\|")[2];  单串固定奖  不需要取浮动奖赔率
         	
     		if (true == special)  // 该场比赛作废
     		{
@@ -75,6 +75,7 @@ public class JczqBingoCheck
     				if (betResults[j].equals(specificRes))
     				{
     					WinDesc newWinMatch = new WinDesc(matchNo);
+    					/*
     					if ( 1==m && 1==n) // 单串过关
     						if(ticket.getContent().split("\\|")[0].equals("CBF"))
     						{
@@ -89,6 +90,10 @@ public class JczqBingoCheck
     						String personalRatio = ticket.getRatio().split("\\|")[i].split("/")[j];
     						newWinMatch.ratioList.add(personalRatio);  // ratio 来自ticket，即为个人即时赔率
     					}
+    					*/
+    					//单串和多串都是固定奖（赔率）
+    					String personalRatio = ticket.getRatio().split("\\|")[i].split("/")[j];
+						newWinMatch.ratioList.add(personalRatio);  // ratio 来自ticket，即为个人即时赔率
             			winList.add(newWinMatch);
             			break;
     				}

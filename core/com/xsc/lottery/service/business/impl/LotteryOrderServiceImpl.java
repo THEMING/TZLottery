@@ -36,6 +36,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -91,7 +93,9 @@ import com.xsc.lottery.task.ticket.TicketBusinessFactory;
 import com.xsc.lottery.task.ticket.TicketTreatmentWork;
 import com.xsc.lottery.util.Configuration;
 import com.xsc.lottery.util.DateUtil;
+import com.xsc.lottery.util.EmailUtil;
 import com.xsc.lottery.util.SmsUtil;
+import com.xsc.lottery.util.TemplateUtil;
 
 @Service("lotteryOrderService")
 @Transactional
@@ -565,6 +569,36 @@ public class LotteryOrderServiceImpl implements LotteryOrderService
 	   }	 
     }
     
+    public void sendOrderDetailEmail(Order order){
+    	if(order==null||order.getCustomer().getEmail()==null||"".equals(order.getCustomer().getEmail())){
+    		return;
+    	}
+    	String mes = TemplateUtil.getOrderDetailEmailContent(order);
+		try
+		{
+			EmailUtil.sendEmail(order.getCustomer().getEmail(), "您的购彩订单"+order.getNumberNo()+order.getStatus().name(), mes);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+    }
+    
+    public void sendWinEmail(Order order){
+    	if(order==null||order.getCustomer().getEmail()==null||"".equals(order.getCustomer().getEmail())){
+    		return;
+    	}
+    	String mes = TemplateUtil.getWinEmailContent(order);
+		try
+		{
+			EmailUtil.sendEmail(order.getCustomer().getEmail(), "您的购彩订单"+order.getNumberNo()+"已中奖", mes);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+    }
+    
    /** 完成第三方票务交易后调用 */
     public void finishTicketBusiness(Order order, List<Ticket> returnTickets)
     {
@@ -573,6 +607,8 @@ public class LotteryOrderServiceImpl implements LotteryOrderService
             order.setOutAmount(order.getAmount());
             order.setSuccessTime(Calendar.getInstance());
 			setNtalkerLogFinish(order);
+			sendOrderDetailEmail(order);
+			
         }
         else {
             BigDecimal returnMoney = BigDecimal.ZERO;
@@ -585,11 +621,12 @@ public class LotteryOrderServiceImpl implements LotteryOrderService
                 order.setSuccessTime(Calendar.getInstance());
                 BigDecimal outAmount = order.getAmount().subtract(returnMoney);
                 order.setOutAmount(outAmount);
+                sendOrderDetailEmail(order);
             } 
             else {
                 order.setStatus(OrderStatus.出票失败);
                 order.setOrderResult(OrderResult.作废);
-                
+                sendOrderDetailEmail(order);
             }
             // 以下为退款
             if (order.getCommunity() == null) {
@@ -2231,7 +2268,15 @@ public class LotteryOrderServiceImpl implements LotteryOrderService
     	return s;
     }
     public static void main(String[] args) {
-    	LotteryOrderServiceImpl l=new LotteryOrderServiceImpl();
+    	Order o = new Order();
+    	o.setNumberNo("123456789");
+    	o.setStatus(OrderStatus.出票成功);
+    	Customer c = new Customer();
+    	c.setRealName("ming");
+    	c.setEmail("306081148@qq.com");
+    	o.setCustomer(c);
+//    	sendOrderDetailEmail(o);
+//    	LotteryOrderServiceImpl l=new LotteryOrderServiceImpl();
 		/*Calendar  c=Calendar.getInstance();
         Calendar s=Calendar.getInstance();
       
@@ -2285,11 +2330,11 @@ public class LotteryOrderServiceImpl implements LotteryOrderService
     	      c_begin.add(Calendar.DAY_OF_YEAR, 1);
     	     }*/
     	
-    	Calendar  c=Calendar.getInstance();
-        Calendar s=Calendar.getInstance();
-        s.set(2012, 4, 1, 0, 0, 0);
-		c.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
-    	l.getbeginDateAndendDate(s,c);
+//    	Calendar  c=Calendar.getInstance();
+//        Calendar s=Calendar.getInstance();
+//        s.set(2012, 4, 1, 0, 0, 0);
+//		c.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+//    	l.getbeginDateAndendDate(s,c);
     	   
     	
 	}

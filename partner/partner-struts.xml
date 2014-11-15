@@ -56,6 +56,27 @@
 		</action> -->
 	</package>
 	
+	<!-- CRM系统 -->
+	<package name="CRM_system" extends="partnerstruts-default" namespace="/partner/crmSystem">
+		<action name="CRMManage" class="Admin.CRMSystem" >
+			<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result>MyCustomers.jsp</result>
+		</action>
+		
+		<action name="myPerformance" class="Admin.CRMSystem" method="getMyPerformance">
+			<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result>MyPerformance.jsp</result>
+		</action>
+		<action name="mySendSms" class="Admin.CRMSystem" method="getMySendSms">
+			<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result>MySendSms.jsp</result>
+		</action>
+		<action name="mySendEmail" class="Admin.CRMSystem" method="getMySendEmail">
+			<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result>MySendEmail.jsp</result>
+		</action>
+	</package>
+	
 	<!-- 代理系统  -->
 	<package name="admin_agent" extends="partnerstruts-default" namespace="/partner/agent">
 		<action name="agentInfo" class="Agent.manager" method="getAgentInfo">

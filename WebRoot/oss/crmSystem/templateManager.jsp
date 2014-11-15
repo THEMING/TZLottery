@@ -4,9 +4,12 @@
 <title>我的客户</title>
 <link href="../skin/01/css/main.css" rel="stylesheet" type="text/css">
 <link href="../styles/base.css" rel="stylesheet" type="text/css">
+<link href="../../util/jsAndCss/div.css" rel="stylesheet" type="text/css">
 <script src="../skin/01/js/jquery-1.3.2.js" type=text/javascript></script>
 <script src="../skin/01/js/My97DatePicker/WdatePicker.js" type=text/javascript></script>
+<script src="../../util/jsAndCss/div.js" type=text/javascript></script>
 <script src="../../util/overlay.jsp" type=text/javascript></script>
+<script charset="utf-8" src="/kindeditor/kindeditor.js"></script>
 <style type="text/css">
 	.wrap{margin:0 auto;}
  </style>
@@ -17,6 +20,25 @@
             opacity:0.5; -moz-opacity:0.5;  
         }  
 </style>  
+<script>
+        var editor;
+        KindEditor.ready(function(K) {
+                editor = K.create('#t_content');
+        });
+	</script>
+	<script>
+	KE.show({
+			id : 't_content',
+			//cssPath : './index.css',
+			imageUploadJson : '/upload.aspx',
+			fileManagerJson : '../../jsp/file_manager_json.jsp',
+			allowFileManager : true,
+			allowUpload : true,
+			afterCreate : function(id) {
+			}
+		});
+	
+	</script>
 <script>
 function showMask(){  
     $("#mask").css("height",$(document).height());  
@@ -148,7 +170,7 @@ function jumpPage1() {
 	function setSmsContent(obj){
 		$.ajax({
 			type:"post",
-			url: "CRMManage.htm?action=getTemplate",
+			url: "CRMManageAdmin.htm?action=getTemplate",
 			data:{templateId:obj.value},
 			success: function(data, textStatus){
 			var a=eval("("+data+")");
@@ -181,7 +203,7 @@ function jumpPage1() {
         }
 		$.ajax({
 			type:"post",
-			url: "CRMManage.htm",
+			url: "CRMManageAdmin.htm",
 			data:{temIds:ids,action:"delTemplate"},
 			success: function(data, textStatus){
 			var a=eval("("+data+")");
@@ -195,7 +217,7 @@ function jumpPage1() {
 	function setEmsilContent(obj){
 		$.ajax({
 			type:"post",
-			url: "CRMManage.htm?action=getTemplate",
+			url: "CRMManageAdmin.htm?action=getTemplate",
 			data:{templateId:obj.value},
 			success: function(data, textStatus){
 			var a=eval("("+data+")");
@@ -208,11 +230,19 @@ function jumpPage1() {
 	function edit(id){
 		showAddDiv();
 		$("#t_title").val($("#title_"+id).val());
-		$("#t_content").val($("#content_"+id).val());
-		$("#t_description").val($("#description_"+id).val());
-		$("#t_id").val(id);
+		$.ajax({
+			type:"post",
+			url: "CRMManageAdmin.htm?action=getTemplate",
+			data:{templateId:id},
+			success: function(data, textStatus){
+				var a=eval("("+data+")");
+				KE.html("t_content", a.content);
+				$("#t_description").val($("#description_"+id).val());
+				$("#t_id").val(id);
+				
+				$("#sendTemplateTypee").attr('value',$("#sendTemplateType_"+id).val()); 
+		}})
 		
-		$("#sendTemplateTypee").attr('value',$("#sendTemplateType_"+id).val()); 
 	}
 	
 	function doSelectAll()
@@ -256,8 +286,10 @@ function jumpPage1() {
 	  <tr>
 	  <td><input name="temId" type="checkbox" id="temId_${rs.id}" value="${rs.id}"/></td>
       <td height="25" >${rs.sendTemplateType}<input type="hidden" id="sendTemplateType_${rs.id}" value="${rs.sendTemplateType}"></td>
-      <td height="25" >${rs.title}<input type="hidden" id="title_${rs.id}" value="${rs.title}"></td>
-      <td height="25" >${rs.content}<input type="hidden" id="content_${rs.id}" value="${rs.content}"></td>
+      <td height="25" >${rs.title}<input type="hidden" id="title_${rs.id}" value="${rs.title}"></td><!-- <s:property value="#rs.content.replace('<','【').replace('>','】')"/> -->
+      <td height="25" >
+      <div class="dragCss" style="width:600px; height:80px;overflow-y:scroll;">${rs.content}</div>
+      </td>
       <td height="25" >${rs.description }<input type="hidden" id="description_${rs.id}" value="${rs.description}"></td>
        <td height="25" >
        <a href="javascript:del(${rs.id })">删除</a>
@@ -295,6 +327,9 @@ function jumpPage1() {
 	</tr>
 	</table>
 	
+	
+	
+	
   <%--<table width="90%" border="0" align="center">
     <tr>
     <td><jsp:include page="../../util/page.jsp"></jsp:include></td>
@@ -302,8 +337,8 @@ function jumpPage1() {
   </table>
 --%></s:form>
 </div>
-<div hidden="" id="addTDiv" style="top:100px; margin-left:-275px;position:absolute;left:50%; width:550px; height:300px; background-color:#ffffff; z-index:1;">
-<form action="CRMManage.htm" method="post">
+<div hidden="" id="addTDiv" style="top:100px; margin-left:-400px;position:absolute;left:50%; width:800px; height:500px; background-color:#ffffff; z-index:1;">
+<form action="CRMManageAdmin.htm" method="post">
 <s:hidden name="action" id="action" value="addT"/>
 <s:hidden name="t_id" id="t_id"/>
 <div align="center">
@@ -313,9 +348,9 @@ function jumpPage1() {
 		<br />
 		<h1>&nbsp;&nbsp;类型： <s:select list="sendTemplateTypeList" name="sendTemplateType" id="sendTemplateTypee" listValue="name()" headerValue="请选择..." headerKey=""></s:select></h1>
 		<br/>
-		<h1>&nbsp;&nbsp;内容：<textarea id="t_content" name="t_content" cols="80" rows="3"></textarea>
+		<h1>&nbsp;&nbsp;内容：<textarea style="width:800px;height:300px;" id="t_content" name="t_content" cols="80" rows="10"></textarea>
 		<br />
-		<h1>&nbsp;&nbsp;描述：<textarea id="t_description" name="t_description" cols="80" rows="10"></textarea>
+		<h1>&nbsp;&nbsp;描述：<textarea id="t_description" name="t_description" cols="80" rows="3"></textarea>
 		<br />
 		<div style="width:100px;margin-left:-25px;position:absolute;left:50%;">
 		<input type="submit" value="确定"><input type="button" value="取消" onclick="javascript:hideAddDiv();">
@@ -324,7 +359,7 @@ function jumpPage1() {
 </div>
 <br /><br />
 <div hidden="" id="smsTDiv" style="top:100px; margin-left:-275px;position:absolute;left:50%; width:550px; height:150px; background-color:#81eb96; z-index:1;">
-<form id="smsForm" action="CRMManage.htm" method="post">
+<form id="smsForm" action="CRMManageAdmin.htm" method="post">
 <s:hidden name="action" id="action" value="sendSMS"/>
 <s:hidden name="phoneNums" id="phoneNums"/>
 <s:hidden name="phoneIds" id="phoneIds"/>
@@ -343,7 +378,7 @@ function jumpPage1() {
 </div>
 <br /><br />
 <div hidden="" id="emailTDiv" style="top:100px; margin-left:-275px;position:absolute;left:50%; width:550px; height:150px; background-color:#81eb96; z-index:1;">
-<form id="emailForm" action="CRMManage.htm" method="post">
+<form id="emailForm" action="CRMManageAdmin.htm" method="post">
 <s:hidden name="action" id="action" value="sendEmail"/>
 <s:hidden name="emails" id="emails"/>
 <s:hidden name="emailIds" id="emailIds"/>

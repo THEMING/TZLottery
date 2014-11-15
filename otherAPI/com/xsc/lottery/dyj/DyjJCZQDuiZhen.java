@@ -156,16 +156,17 @@ public class DyjJCZQDuiZhen implements ApplicationListener{
 	    	String wholeScore = "";
 	    	String halfScore = "";
 	    	Integer goals = 0;
-	    	String rfspfdg = "";
-	    	String rfspfduog = "";
-	    	String spfdg = "";
-	    	String spfduog = "";
-	    	String jqsdg = "";
-	    	String jqsduog = "";
-	    	String bqcdg = "";
-	    	String bqcduog = "";
-	    	String cbfdg = "";
-	    	String cbfduog = "";
+	    	String rfspfdg = "",rfspfduog = "",spfdg = "",spfduog = "",jqsdg = "",jqsduog = "",bqcdg = "",bqcduog = "",cbfdg = "",cbfduog = "";
+	    	String rfspfdgRatios = "";
+	    	String rfspfduogRatios = "";
+	    	String spfdgRatios = "";
+	    	String spfduogRatios = "";
+	    	String jqsdgRatios = "";
+	    	String jqsduogRatios = "";
+	    	String bqcdgRatios = "";
+	    	String bqcduogRatios = "";
+	    	String cbfdgRatios = "";
+	    	String cbfduogRatios = "";
 	    	String currentRatios = "";
 	    	int rangqiu = 0;
 	    	String rangfensaiguo = "";
@@ -269,571 +270,672 @@ public class DyjJCZQDuiZhen implements ApplicationListener{
 			
 			//让球胜平负单关
 			if (jsonObject.getString("fu_rqspf_sp3").equals("") || jsonObject.getString("fu_rqspf_sp3").equals("0")) {
-				rfspfdg += "0000" + ",";
+				rfspfdgRatios += "0000" + ",";
 			}else {
-				rfspfdg += jsonObject.getString("fu_rqspf_sp3") + ",";
+				rfspfdgRatios += jsonObject.getString("fu_rqspf_sp3") + ",";
 			}
 			if (jsonObject.getString("fu_rqspf_sp1").equals("") || jsonObject.getString("fu_rqspf_sp1").equals("0")) {
-				rfspfdg += "0000" + ",";
+				rfspfdgRatios += "0000" + ",";
 			}else {
-				rfspfdg += jsonObject.getString("fu_rqspf_sp1") + ",";
+				rfspfdgRatios += jsonObject.getString("fu_rqspf_sp1") + ",";
 			}
 			if (jsonObject.getString("fu_rqspf_sp0").equals("") || jsonObject.getString("fu_rqspf_sp0").equals("0")) {
-				rfspfdg += "0000";
+				rfspfdgRatios += "0000";
 			}else {
-				rfspfdg += jsonObject.getString("fu_rqspf_sp0");
+				rfspfdgRatios += jsonObject.getString("fu_rqspf_sp0");
 			}
 			
 			//让球胜平负多关
 			if (jsonObject.getString("rqspf_sp3").equals("") || jsonObject.getString("rqspf_sp3").equals("0")) {
-				rfspfduog += "0000" + ",";
+				rfspfduogRatios += "0000" + ",";
 			}else {
-				rfspfduog += jsonObject.getString("rqspf_sp3") + ",";
+				rfspfduogRatios += jsonObject.getString("rqspf_sp3") + ",";
 			}
 			if (jsonObject.getString("rqspf_sp1").equals("") || jsonObject.getString("rqspf_sp1").equals("0")) {
-				rfspfduog += "0000" + ",";
+				rfspfduogRatios += "0000" + ",";
 			}else {
-				rfspfduog += jsonObject.getString("rqspf_sp1") + ",";
+				rfspfduogRatios += jsonObject.getString("rqspf_sp1") + ",";
 			}
 			if (jsonObject.getString("rqspf_sp0").equals("") || jsonObject.getString("rqspf_sp0").equals("0")) {
-				rfspfduog += "0000";
+				rfspfduogRatios += "0000";
 			}else {
-				rfspfduog += jsonObject.getString("rqspf_sp0");
+				rfspfduogRatios += jsonObject.getString("rqspf_sp0");
 			}
 			
 			//胜平负单关
 			if (jsonObject.getString("fu_spf_sp3").equals("") || jsonObject.getString("fu_spf_sp3").equals("0")) {
-				spfdg += "0000" + ",";
+				spfdgRatios += "0000" + ",";
 			}else {
-				spfdg += jsonObject.getString("fu_spf_sp3") + ",";
+				spfdgRatios += jsonObject.getString("fu_spf_sp3") + ",";
 			}
 			if (jsonObject.getString("fu_spf_sp1").equals("") || jsonObject.getString("fu_spf_sp1").equals("0")) {
-				spfdg += "0000" + ",";
+				spfdgRatios += "0000" + ",";
 			}else {
-				spfdg += jsonObject.getString("fu_spf_sp1") + ",";
+				spfdgRatios += jsonObject.getString("fu_spf_sp1") + ",";
 			}
 			if (jsonObject.getString("fu_spf_sp0").equals("") || jsonObject.getString("fu_spf_sp0").equals("0")) {
-				spfdg += "0000";
+				spfdgRatios += "0000";
 			}else {
-				spfdg += jsonObject.getString("fu_spf_sp0");
+				spfdgRatios += jsonObject.getString("fu_spf_sp0");
 			}
 			
 			//胜平负多关
 			if (jsonObject.getString("spf_sp3").equals("") || jsonObject.getString("spf_sp3").equals("0")) {
-				spfduog += "0000" + ",";
+				spfduogRatios += "0000" + ",";
 			}else {
-				spfduog += jsonObject.getString("spf_sp3") + ",";
+				spfduogRatios += jsonObject.getString("spf_sp3") + ",";
 			}
 			if (jsonObject.getString("spf_sp1").equals("") || jsonObject.getString("spf_sp1").equals("0")) {
-				spfduog += "0000" + ",";
+				spfduogRatios += "0000" + ",";
 			}else {
-				spfduog += jsonObject.getString("spf_sp1") + ",";
+				spfduogRatios += jsonObject.getString("spf_sp1") + ",";
 			}
 			if (jsonObject.getString("spf_sp0").equals("") || jsonObject.getString("spf_sp0").equals("0")) {
-				spfduog += "0000";
+				spfduogRatios += "0000";
 			}else {
-				spfduog += jsonObject.getString("spf_sp0");
+				spfduogRatios += jsonObject.getString("spf_sp0");
 			}
 			
 			//进球数多关
 			if (jsonObject.getString("jqs_sp0").equals("") || jsonObject.getString("jqs_sp0").equals("0")) {
-				jqsduog += "0000" + ",";
+				jqsduogRatios += "0000" + ",";
 			}else {
-				jqsduog += jsonObject.getString("jqs_sp0") + ",";
+				jqsduogRatios += jsonObject.getString("jqs_sp0") + ",";
 			}
 			if (jsonObject.getString("jqs_sp1").equals("") || jsonObject.getString("jqs_sp1").equals("0")) {
-				jqsduog += "0000" + ",";
+				jqsduogRatios += "0000" + ",";
 			}else {
-				jqsduog += jsonObject.getString("jqs_sp1") + ",";
+				jqsduogRatios += jsonObject.getString("jqs_sp1") + ",";
 			}
 			if (jsonObject.getString("jqs_sp2").equals("") || jsonObject.getString("jqs_sp2").equals("0")) {
-				jqsduog += "0000" + ",";
+				jqsduogRatios += "0000" + ",";
 			}else {
-				jqsduog += jsonObject.getString("jqs_sp2") + ",";
+				jqsduogRatios += jsonObject.getString("jqs_sp2") + ",";
 			}
 			if (jsonObject.getString("jqs_sp3").equals("") || jsonObject.getString("jqs_sp3").equals("0")) {
-				jqsduog += "0000" + ",";
+				jqsduogRatios += "0000" + ",";
 			}else {
-				jqsduog += jsonObject.getString("jqs_sp3") + ",";
+				jqsduogRatios += jsonObject.getString("jqs_sp3") + ",";
 			}
 			if (jsonObject.getString("jqs_sp4").equals("") || jsonObject.getString("jqs_sp4").equals("0")) {
-				jqsduog += "0000" + ",";
+				jqsduogRatios += "0000" + ",";
 			}else {
-				jqsduog += jsonObject.getString("jqs_sp4") + ",";
+				jqsduogRatios += jsonObject.getString("jqs_sp4") + ",";
 			}
 			if (jsonObject.getString("jqs_sp5").equals("") || jsonObject.getString("jqs_sp5").equals("0")) {
-				jqsduog += "0000" + ",";
+				jqsduogRatios += "0000" + ",";
 			}else {
-				jqsduog += jsonObject.getString("jqs_sp5") + ",";
+				jqsduogRatios += jsonObject.getString("jqs_sp5") + ",";
 			}
 			if (jsonObject.getString("jqs_sp6").equals("") || jsonObject.getString("jqs_sp6").equals("0")) {
-				jqsduog += "0000" + ",";
+				jqsduogRatios += "0000" + ",";
 			}else {
-				jqsduog += jsonObject.getString("jqs_sp6") + ",";
+				jqsduogRatios += jsonObject.getString("jqs_sp6") + ",";
 			}
 			if (jsonObject.getString("jqs_sp7").equals("") || jsonObject.getString("jqs_sp7").equals("0")) {
-				jqsduog += "0000";
+				jqsduogRatios += "0000";
 			}else {
-				jqsduog += jsonObject.getString("jqs_sp7");
+				jqsduogRatios += jsonObject.getString("jqs_sp7");
 			}
 			
 			//进球数单关
 			if (jsonObject.getString("fu_jqs_sp0").equals("") || jsonObject.getString("fu_jqs_sp0").equals("0")) {
-				jqsdg += "0000" + ",";
+				jqsdgRatios += "0000" + ",";
 			}else {
-				jqsdg += jsonObject.getString("fu_jqs_sp0") + ",";
+				jqsdgRatios += jsonObject.getString("fu_jqs_sp0") + ",";
 			}
 			if (jsonObject.getString("fu_jqs_sp1").equals("") || jsonObject.getString("fu_jqs_sp1").equals("0")) {
-				jqsdg += "0000" + ",";
+				jqsdgRatios += "0000" + ",";
 			}else {
-				jqsdg += jsonObject.getString("fu_jqs_sp1") + ",";
+				jqsdgRatios += jsonObject.getString("fu_jqs_sp1") + ",";
 			}
 			if (jsonObject.getString("fu_jqs_sp2").equals("") || jsonObject.getString("fu_jqs_sp2").equals("0")) {
-				jqsdg += "0000" + ",";
+				jqsdgRatios += "0000" + ",";
 			}else {
-				jqsdg += jsonObject.getString("fu_jqs_sp2") + ",";
+				jqsdgRatios += jsonObject.getString("fu_jqs_sp2") + ",";
 			}
 			if (jsonObject.getString("fu_jqs_sp3").equals("") || jsonObject.getString("fu_jqs_sp3").equals("0")) {
-				jqsdg += "0000" + ",";
+				jqsdgRatios += "0000" + ",";
 			}else {
-				jqsdg += jsonObject.getString("fu_jqs_sp3") + ",";
+				jqsdgRatios += jsonObject.getString("fu_jqs_sp3") + ",";
 			}
 			if (jsonObject.getString("fu_jqs_sp4").equals("") || jsonObject.getString("fu_jqs_sp4").equals("0")) {
-				jqsdg += "0000" + ",";
+				jqsdgRatios += "0000" + ",";
 			}else {
-				jqsdg += jsonObject.getString("fu_jqs_sp4") + ",";
+				jqsdgRatios += jsonObject.getString("fu_jqs_sp4") + ",";
 			}
 			if (jsonObject.getString("fu_jqs_sp5").equals("") || jsonObject.getString("fu_jqs_sp5").equals("0")) {
-				jqsdg += "0000" + ",";
+				jqsdgRatios += "0000" + ",";
 			}else {
-				jqsdg += jsonObject.getString("fu_jqs_sp5") + ",";
+				jqsdgRatios += jsonObject.getString("fu_jqs_sp5") + ",";
 			}
 			if (jsonObject.getString("fu_jqs_sp6").equals("") || jsonObject.getString("fu_jqs_sp6").equals("0")) {
-				jqsdg += "0000" + ",";
+				jqsdgRatios += "0000" + ",";
 			}else {
-				jqsdg += jsonObject.getString("fu_jqs_sp6") + ",";
+				jqsdgRatios += jsonObject.getString("fu_jqs_sp6") + ",";
 			}
 			if (jsonObject.getString("fu_jqs_sp7").equals("") || jsonObject.getString("fu_jqs_sp7").equals("0")) {
-				jqsdg += "0000";
+				jqsdgRatios += "0000";
 			}else {
-				jqsdg += jsonObject.getString("fu_jqs_sp7");
+				jqsdgRatios += jsonObject.getString("fu_jqs_sp7");
 			}
 			
 			//fu_bqc_sp00 负负    0负 1平 3胜
 			//半全场单关
 			if (jsonObject.getString("fu_bqc_sp33").equals("") || jsonObject.getString("fu_bqc_sp33").equals("0")) {
-				bqcdg += "0000" + ",";
+				bqcdgRatios += "0000" + ",";
 			}else {
-				bqcdg += jsonObject.getString("fu_bqc_sp33") + ",";
+				bqcdgRatios += jsonObject.getString("fu_bqc_sp33") + ",";
 			}
 			if (jsonObject.getString("fu_bqc_sp31").equals("") || jsonObject.getString("fu_bqc_sp31").equals("0")) {
-				bqcdg += "0000" + ",";
+				bqcdgRatios += "0000" + ",";
 			}else {
-				bqcdg += jsonObject.getString("fu_bqc_sp31") + ",";
+				bqcdgRatios += jsonObject.getString("fu_bqc_sp31") + ",";
 			}
 			if (jsonObject.getString("fu_bqc_sp30").equals("") || jsonObject.getString("fu_bqc_sp30").equals("0")) {
-				bqcdg += "0000" + ",";
+				bqcdgRatios += "0000" + ",";
 			}else {
-				bqcdg += jsonObject.getString("fu_bqc_sp30") + ",";
+				bqcdgRatios += jsonObject.getString("fu_bqc_sp30") + ",";
 			}
 			if (jsonObject.getString("fu_bqc_sp13").equals("") || jsonObject.getString("fu_bqc_sp13").equals("0")) {
-				bqcdg += "0000" + ",";
+				bqcdgRatios += "0000" + ",";
 			}else {
-				bqcdg += jsonObject.getString("fu_bqc_sp13") + ",";
+				bqcdgRatios += jsonObject.getString("fu_bqc_sp13") + ",";
 			}
 			if (jsonObject.getString("fu_bqc_sp11").equals("") || jsonObject.getString("fu_bqc_sp11").equals("0")) {
-				bqcdg += "0000" + ",";
+				bqcdgRatios += "0000" + ",";
 			}else {
-				bqcdg += jsonObject.getString("fu_bqc_sp11") + ",";
+				bqcdgRatios += jsonObject.getString("fu_bqc_sp11") + ",";
 			}
 			if (jsonObject.getString("fu_bqc_sp10").equals("") || jsonObject.getString("fu_bqc_sp10").equals("0")) {
-				bqcdg += "0000" + ",";
+				bqcdgRatios += "0000" + ",";
 			}else {
-				bqcdg += jsonObject.getString("fu_bqc_sp10") + ",";
+				bqcdgRatios += jsonObject.getString("fu_bqc_sp10") + ",";
 			}
 			if (jsonObject.getString("fu_bqc_sp03").equals("") || jsonObject.getString("fu_bqc_sp03").equals("0")) {
-				bqcdg += "0000" + ",";
+				bqcdgRatios += "0000" + ",";
 			}else {
-				bqcdg += jsonObject.getString("fu_bqc_sp03") + ",";
+				bqcdgRatios += jsonObject.getString("fu_bqc_sp03") + ",";
 			}
 			if (jsonObject.getString("fu_bqc_sp01").equals("") || jsonObject.getString("fu_bqc_sp01").equals("0")) {
-				bqcdg += "0000" + ",";
+				bqcdgRatios += "0000" + ",";
 			}else {
-				bqcdg += jsonObject.getString("fu_bqc_sp01") + ",";
+				bqcdgRatios += jsonObject.getString("fu_bqc_sp01") + ",";
 			}
 			if (jsonObject.getString("fu_bqc_sp00").equals("") || jsonObject.getString("fu_bqc_sp00").equals("0")) {
-				bqcdg += "0000";
+				bqcdgRatios += "0000";
 			}else {
-				bqcdg += jsonObject.getString("fu_bqc_sp00");
+				bqcdgRatios += jsonObject.getString("fu_bqc_sp00");
 			}
 			
 			
 			
 			//半全场多关
 			if (jsonObject.getString("bqc_sp33").equals("") || jsonObject.getString("bqc_sp33").equals("0")) {
-				bqcduog += "0000" + ",";
+				bqcduogRatios += "0000" + ",";
 			}else {
-				bqcduog += jsonObject.getString("bqc_sp33") + ",";
+				bqcduogRatios += jsonObject.getString("bqc_sp33") + ",";
 			}
 			if (jsonObject.getString("bqc_sp31").equals("") || jsonObject.getString("bqc_sp31").equals("0")) {
-				bqcduog += "0000" + ",";
+				bqcduogRatios += "0000" + ",";
 			}else {
-				bqcduog += jsonObject.getString("bqc_sp31") + ",";
+				bqcduogRatios += jsonObject.getString("bqc_sp31") + ",";
 			}
 			if (jsonObject.getString("bqc_sp30").equals("") || jsonObject.getString("bqc_sp30").equals("0")) {
-				bqcduog += "0000" + ",";
+				bqcduogRatios += "0000" + ",";
 			}else {
-				bqcduog += jsonObject.getString("bqc_sp30") + ",";
+				bqcduogRatios += jsonObject.getString("bqc_sp30") + ",";
 			}
 			if (jsonObject.getString("bqc_sp13").equals("") || jsonObject.getString("bqc_sp13").equals("0")) {
-				bqcduog += "0000" + ",";
+				bqcduogRatios += "0000" + ",";
 			}else {
-				bqcduog += jsonObject.getString("bqc_sp13") + ",";
+				bqcduogRatios += jsonObject.getString("bqc_sp13") + ",";
 			}
 			if (jsonObject.getString("bqc_sp11").equals("") || jsonObject.getString("bqc_sp11").equals("0")) {
-				bqcduog += "0000" + ",";
+				bqcduogRatios += "0000" + ",";
 			}else {
-				bqcduog += jsonObject.getString("bqc_sp11") + ",";
+				bqcduogRatios += jsonObject.getString("bqc_sp11") + ",";
 			}
 			if (jsonObject.getString("bqc_sp10").equals("") || jsonObject.getString("bqc_sp10").equals("0")) {
-				bqcduog += "0000" + ",";
+				bqcduogRatios += "0000" + ",";
 			}else {
-				bqcduog += jsonObject.getString("bqc_sp10") + ",";
+				bqcduogRatios += jsonObject.getString("bqc_sp10") + ",";
 			}
 			if (jsonObject.getString("bqc_sp03").equals("") || jsonObject.getString("bqc_sp03").equals("0")) {
-				bqcduog += "0000" + ",";
+				bqcduogRatios += "0000" + ",";
 			}else {
-				bqcduog += jsonObject.getString("bqc_sp03") + ",";
+				bqcduogRatios += jsonObject.getString("bqc_sp03") + ",";
 			}
 			if (jsonObject.getString("bqc_sp01").equals("") || jsonObject.getString("bqc_sp01").equals("0")) {
-				bqcduog += "0000" + ",";
+				bqcduogRatios += "0000" + ",";
 			}else {
-				bqcduog += jsonObject.getString("bqc_sp01") + ",";
+				bqcduogRatios += jsonObject.getString("bqc_sp01") + ",";
 			}
 			if (jsonObject.getString("bqc_sp00").equals("") || jsonObject.getString("bqc_sp00").equals("0")) {
-				bqcduog += "0000";
+				bqcduogRatios += "0000";
 			}else {
-				bqcduog += jsonObject.getString("bqc_sp00");
+				bqcduogRatios += jsonObject.getString("bqc_sp00");
 			}
 
 			
 			//猜比分单关
 			if (jsonObject.getString("bf_sp10").equals("0") || jsonObject.getString("bf_sp10").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp10") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp10") + ",";
 			}
 			if (jsonObject.getString("bf_sp20").equals("0") || jsonObject.getString("bf_sp20").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp20") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp20") + ",";
 			}
 			if (jsonObject.getString("bf_sp21").equals("0") || jsonObject.getString("bf_sp21").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp21") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp21") + ",";
 			}
 			if (jsonObject.getString("bf_sp30").equals("0") || jsonObject.getString("bf_sp30").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp30") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp30") + ",";
 			}
 			if (jsonObject.getString("bf_sp31").equals("0") || jsonObject.getString("bf_sp31").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp31") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp31") + ",";
 			}
 			if (jsonObject.getString("bf_sp32").equals("0") || jsonObject.getString("bf_sp32").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp32") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp32") + ",";
 			}
 			if (jsonObject.getString("bf_sp40").equals("0") || jsonObject.getString("bf_sp40").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp40") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp40") + ",";
 			}
 			if (jsonObject.getString("bf_sp41").equals("0") || jsonObject.getString("bf_sp41").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp41") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp41") + ",";
 			}
 			if (jsonObject.getString("bf_sp42").equals("0") || jsonObject.getString("bf_sp42").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp42") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp42") + ",";
 			}
 			if (jsonObject.getString("bf_sp50").equals("") || jsonObject.getString("bf_sp50").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp50") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp50") + ",";
 			}
 			if (jsonObject.getString("bf_sp51").equals("0") || jsonObject.getString("bf_sp51").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp51") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp51") + ",";
 			}
 			if (jsonObject.getString("bf_sp52").equals("0") || jsonObject.getString("bf_sp52").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp52") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp52") + ",";
 			}
 			if (jsonObject.getString("bf_sp93").equals("0") || jsonObject.getString("bf_sp93").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp93") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp93") + ",";
 			}
 			if (jsonObject.getString("bf_sp00").equals("0") || jsonObject.getString("bf_sp00").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp00") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp00") + ",";
 			}
 			if (jsonObject.getString("bf_sp11").equals("0") || jsonObject.getString("bf_sp11").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp11") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp11") + ",";
 			}
 			if (jsonObject.getString("bf_sp22").equals("0") || jsonObject.getString("bf_sp22").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp22") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp22") + ",";
 			}
 			if (jsonObject.getString("bf_sp33").equals("0") || jsonObject.getString("bf_sp33").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp33") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp33") + ",";
 			}
 			if (jsonObject.getString("bf_sp91").equals("0") || jsonObject.getString("bf_sp91").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp91") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp91") + ",";
 			}
 			if (jsonObject.getString("bf_sp01").equals("0") || jsonObject.getString("bf_sp01").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp01") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp01") + ",";
 			}
 			if (jsonObject.getString("bf_sp02").equals("0") || jsonObject.getString("bf_sp02").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp02") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp02") + ",";
 			}			
 			if (jsonObject.getString("bf_sp12").equals("0") || jsonObject.getString("bf_sp12").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp12") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp12") + ",";
 			}			
 			if (jsonObject.getString("bf_sp03").equals("0") || jsonObject.getString("bf_sp03").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp03") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp03") + ",";
 			}			
 			if (jsonObject.getString("bf_sp13").equals("0") || jsonObject.getString("bf_sp13").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp13") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp13") + ",";
 			}			
 			if (jsonObject.getString("bf_sp23").equals("0") || jsonObject.getString("bf_sp23").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp23") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp23") + ",";
 			}			
 			if (jsonObject.getString("bf_sp04").equals("0") || jsonObject.getString("bf_sp04").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp04") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp04") + ",";
 			}			
 			if (jsonObject.getString("bf_sp14").equals("0") || jsonObject.getString("bf_sp14").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp14") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp14") + ",";
 			}			
 			if (jsonObject.getString("bf_sp24").equals("0") || jsonObject.getString("bf_sp24").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp24") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp24") + ",";
 			}			
 			if (jsonObject.getString("bf_sp05").equals("0") || jsonObject.getString("bf_sp05").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp05") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp05") + ",";
 			}			
 			if (jsonObject.getString("bf_sp15").equals("0") || jsonObject.getString("bf_sp15").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp15") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp15") + ",";
 			}			
 			if (jsonObject.getString("bf_sp25").equals("0") || jsonObject.getString("bf_sp25").equals("")) {
-				cbfdg += "0000" + ",";
+				cbfdgRatios += "0000" + ",";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp25") + ",";
+				cbfdgRatios += jsonObject.getString("bf_sp25") + ",";
 			}			
 			if (jsonObject.getString("bf_sp90").equals("0") || jsonObject.getString("bf_sp90").equals("")) {
-				cbfdg += "0000";
+				cbfdgRatios += "0000";
 			}else {
-				cbfdg += jsonObject.getString("bf_sp90");
+				cbfdgRatios += jsonObject.getString("bf_sp90");
 			}			
 			
 			
 			//猜比分多关
 			if (jsonObject.getString("bf_sp10").equals("0") || jsonObject.getString("bf_sp10").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp10") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp10") + ",";
 			}
 			if (jsonObject.getString("bf_sp20").equals("0") || jsonObject.getString("bf_sp20").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp20") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp20") + ",";
 			}
 			if (jsonObject.getString("bf_sp21").equals("0") || jsonObject.getString("bf_sp21").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp21") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp21") + ",";
 			}
 			if (jsonObject.getString("bf_sp30").equals("0") || jsonObject.getString("bf_sp30").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp30") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp30") + ",";
 			}
 			if (jsonObject.getString("bf_sp31").equals("0") || jsonObject.getString("bf_sp31").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp31") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp31") + ",";
 			}
 			if (jsonObject.getString("bf_sp32").equals("0") || jsonObject.getString("bf_sp32").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp32") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp32") + ",";
 			}
 			if (jsonObject.getString("bf_sp40").equals("0") || jsonObject.getString("bf_sp40").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp40") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp40") + ",";
 			}
 			if (jsonObject.getString("bf_sp41").equals("0") || jsonObject.getString("bf_sp41").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp41") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp41") + ",";
 			}
 			if (jsonObject.getString("bf_sp42").equals("0") || jsonObject.getString("bf_sp42").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp42") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp42") + ",";
 			}
 			if (jsonObject.getString("bf_sp50").equals("0") || jsonObject.getString("bf_sp50").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp50") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp50") + ",";
 			}
 			if (jsonObject.getString("bf_sp51").equals("0") || jsonObject.getString("bf_sp51").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp51") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp51") + ",";
 			}
 			if (jsonObject.getString("bf_sp52").equals("0") || jsonObject.getString("bf_sp52").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp52") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp52") + ",";
 			}
 			if (jsonObject.getString("bf_sp93").equals("0") || jsonObject.getString("bf_sp93").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp93") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp93") + ",";
 			}
 			if (jsonObject.getString("bf_sp00").equals("0") || jsonObject.getString("bf_sp00").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp00") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp00") + ",";
 			}
 			if (jsonObject.getString("bf_sp11").equals("0") || jsonObject.getString("bf_sp11").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp11") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp11") + ",";
 			}
 			if (jsonObject.getString("bf_sp22").equals("0") || jsonObject.getString("bf_sp22").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp22") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp22") + ",";
 			}
 			if (jsonObject.getString("bf_sp33").equals("0") || jsonObject.getString("bf_sp33").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp33") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp33") + ",";
 			}
 			if (jsonObject.getString("bf_sp91").equals("0") || jsonObject.getString("bf_sp91").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp91") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp91") + ",";
 			}
 			if (jsonObject.getString("bf_sp01").equals("0") || jsonObject.getString("bf_sp01").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp01") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp01") + ",";
 			}
 			if (jsonObject.getString("bf_sp02").equals("0") || jsonObject.getString("bf_sp02").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp02") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp02") + ",";
 			}			
 			if (jsonObject.getString("bf_sp12").equals("0") || jsonObject.getString("bf_sp12").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp12") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp12") + ",";
 			}			
 			if (jsonObject.getString("bf_sp03").equals("0") || jsonObject.getString("bf_sp03").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp03") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp03") + ",";
 			}			
 			if (jsonObject.getString("bf_sp13").equals("0") || jsonObject.getString("bf_sp13").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp13") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp13") + ",";
 			}			
 			if (jsonObject.getString("bf_sp23").equals("0") || jsonObject.getString("bf_sp23").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp23") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp23") + ",";
 			}			
 			if (jsonObject.getString("bf_sp04").equals("0") || jsonObject.getString("bf_sp04").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp04") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp04") + ",";
 			}			
 			if (jsonObject.getString("bf_sp14").equals("0") || jsonObject.getString("bf_sp14").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp14") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp14") + ",";
 			}			
 			if (jsonObject.getString("bf_sp24").equals("0") || jsonObject.getString("bf_sp24").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp24") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp24") + ",";
 			}			
 			if (jsonObject.getString("bf_sp05").equals("0") || jsonObject.getString("bf_sp05").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp05") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp05") + ",";
 			}			
 			if (jsonObject.getString("bf_sp15").equals("0") || jsonObject.getString("bf_sp15").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp15") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp15") + ",";
 			}			
 			if (jsonObject.getString("bf_sp25").equals("0") || jsonObject.getString("bf_sp25").equals("")) {
-				cbfduog += "0000" + ",";
+				cbfduogRatios += "0000" + ",";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp25") + ",";
+				cbfduogRatios += jsonObject.getString("bf_sp25") + ",";
 			}			
 			if (jsonObject.getString("bf_sp90").equals("0") || jsonObject.getString("bf_sp90").equals("")) {
-				cbfduog += "0000";
+				cbfduogRatios += "0000";
 			}else {
-				cbfduog += jsonObject.getString("bf_sp90");
+				cbfduogRatios += jsonObject.getString("bf_sp90");
+			}
+			//判断是否支持某个玩法
+						
+			//让球胜平负 
+			Integer rfspfdgBegin = 141104001; //调整后的时间
+			if(rfspfdgBegin <= Integer.parseInt(match.getBoutIndex()) && "1".equals(jsonObject.getString("rqspf_dg")))
+			{
+				rfspfdg = "SGRFSPF";
+				rfspfdgRatios = rfspfduogRatios;
+			}
+			else
+			{
+				rfspfdgRatios = "-1";
+			}
+			if("1".equals(jsonObject.getString("rqspf_gd")))
+			{
+				rfspfduog = "MGRFSPF";
+			}
+			else
+			{
+				rfspfduogRatios = "-1";
+			}
+			//胜平负
+			if("1".equals(jsonObject.getString("spf_dg")))
+			{
+				spfdg = "SGSPF";
+				spfdgRatios = spfduogRatios;
+			}
+			else
+			{
+				spfdgRatios = "-1";
 			}
 			
+			if("1".equals(jsonObject.getString("spf_gd")))
+			{
+				spfdg = "MGSPF";
+			}
+			else
+			{
+				spfduogRatios = "-1";
+			}
+			//总进球
+			if("1".equals(jsonObject.getString("jqs_dg")))
+			{
+				jqsdg = "SGJQS";
+				jqsdgRatios = jqsduogRatios;
+			}
+			else
+			{
+				jqsdgRatios = "-1";
+			}
+			
+			if("1".equals(jsonObject.getString("jqs_gd")))
+			{
+				jqsduog = "MGJQS";
+			}
+			else
+			{
+				jqsduogRatios = "-1";
+			}
+			//半全场胜平负
+			if("1".equals(jsonObject.getString("bqc_dg")))
+			{
+				bqcdg = "SGBCQ";
+				bqcdgRatios = bqcduogRatios;
+			}
+			else
+			{
+				bqcdgRatios = "-1";
+			}
+			
+			if("1".equals(jsonObject.getString("bqc_gd")))
+			{
+				bqcduog = "MGBCQ";
+			}
+			else
+			{
+				bqcduogRatios = "-1";
+			}
+			
+			//比分
+			if("1".equals(jsonObject.getString("bf_dg")))
+			{
+				cbfdg = "SGBF";
+				cbfdgRatios = cbfduogRatios;
+			}
+			else
+			{
+				cbfdgRatios = "-1";
+			}
+			
+			if("1".equals(jsonObject.getString("bf_gd")))
+			{
+				cbfduog = "MGBF";
+			}
+			else
+			{
+				cbfduogRatios = "-1";
+			}
+			
+			String playTypes = rfspfdg + "|" + rfspfduog + "|" + spfdg + "|" + spfduog + "|" + jqsdg + "|" + jqsduog + "|" + cbfdg + "|" + cbfduog + "|" + bqcdg + "|" + bqcduog;
+			match.setPlayTypes(playTypes);
 			//足球格式：让球胜平负单关;让球胜平负多关| 胜平负单关;胜平负多关 | 进球数单关;进球数多关 | 猜比分单关;猜比分多关 | 半全场单关;半全场多关 (胜平负单关内部以英文逗号","隔开)
-			currentRatios = rfspfdg+";"+rfspfduog+"|"+spfdg + ";" + spfduog + "|" + jqsdg + ";" + jqsduog + "|" + cbfdg + ";" + cbfduog + "|" + bqcdg + ";" + bqcduog; 
+			currentRatios = rfspfdgRatios+";"+rfspfduogRatios+"|"+spfdgRatios + ";" + spfduogRatios + "|" + jqsdgRatios + ";" + jqsduogRatios + "|" + cbfdgRatios + ";" + cbfduogRatios + "|" + bqcdgRatios + ";" + bqcduogRatios;
+
 			match.setCurrentRatios(currentRatios);
 			
 			match.setSaleDate(Calendar.getInstance());
@@ -990,7 +1092,7 @@ public class DyjJCZQDuiZhen implements ApplicationListener{
     			}
     			else{
     				c2.set(matchtime.get(Calendar.YEAR), matchtime.get(Calendar.MONTH),
-    						matchtime.get(Calendar.DAY_OF_MONTH)-1, 22,40);
+    						matchtime.get(Calendar.DAY_OF_MONTH)-1, 23,40);
     				stopTime=matchtime2.compareTo(c2)>0?c2:matchtime2;
     			}
     			return stopTime;
@@ -1022,6 +1124,6 @@ public class DyjJCZQDuiZhen implements ApplicationListener{
  		String a = "6.56";
  		Float f = Float.parseFloat(a);
  		System.out.println(f/2);
-		
+		System.out.println(1/(1/1.65+1/1.75));
 	}
 }

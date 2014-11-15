@@ -29,6 +29,11 @@ public class FriendlyLink extends BaseObject
   private String url;
   
   private Integer sort;
+  
+  /*
+   * 0-网站首页  1-网站资讯首页  2-网站开奖首页 
+   */
+  private Integer type;
 
   public Long getId()
   {
@@ -62,4 +67,14 @@ public class FriendlyLink extends BaseObject
   public void setSort(Integer sort) {
     this.sort = sort;
   }
+
+public Integer getType()
+{
+	return type;
+}
+
+public void setType(Integer type)
+{
+	this.type = type;
+}
 }

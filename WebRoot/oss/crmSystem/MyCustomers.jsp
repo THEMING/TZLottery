@@ -7,6 +7,7 @@
 <script src="../skin/01/js/jquery-1.3.2.js" type=text/javascript></script>
 <script src="../skin/01/js/My97DatePicker/WdatePicker.js" type=text/javascript></script>
 <script src="../../util/overlay.jsp" type=text/javascript></script>
+<script charset="utf-8" src="/kindeditor/kindeditor.js"></script>
 <style type="text/css">
 	.wrap{margin:0 auto;}
  </style>
@@ -17,6 +18,32 @@
             opacity:0.5; -moz-opacity:0.5;  
         }  
 </style>  
+<script>
+        var editor;
+        KindEditor.ready(function(K) {
+                editor = K.create('#emailContent');
+        });
+	</script>
+	<script>
+	KE.show({
+			id : 'emailContent',
+			//cssPath : './index.css',
+			imageUploadJson : '/upload.aspx',
+			fileManagerJson : '../../jsp/file_manager_json.jsp',
+			allowFileManager : true,
+			allowUpload : true,
+			afterCreate : function(id) {
+				KE.event.ctrl(document, 13, function() {
+					KE.sync(id);
+					document.forms['example'].submit();
+				});
+				KE.event.ctrl(KE.g[id].iframeDoc, 13, function() {
+					KE.sync(id);
+					document.forms['example'].submit();
+				});
+			}
+		});
+	</script>
 <script>
 function showMask(){  
     $("#mask").css("height",$(document).height());  
@@ -82,7 +109,7 @@ function jumpPage1() {
 		
 		for(var i=0;i<aa.length;i++){
 			if(status==1&&$("#phoneNum_"+aa[i].value).val()!=""){//短信
-				if(parseInt($("#smsAccept_"+aa[i].value).val())>parseInt(canSmsNum)){
+				if(parseInt($("#smsAccept_"+aa[i].value).val())>=parseInt(canSmsNum)){
 					cantSmsMsg += "["+$("#nickName_"+aa[i].value).val()+"]";
 					continue;
 				}
@@ -97,7 +124,7 @@ function jumpPage1() {
 					nickNames += ","+"["+$("#nickName_"+aa[i].value).val()+"]";
 				}
 			}else if(status==2&&$("#email_"+aa[i].value).val()!=""){//邮件
-				if(parseInt($("#emailAccept_"+aa[i].value).val())>parseInt(canEmailNum)){
+				if(parseInt($("#emailAccept_"+aa[i].value).val())>=parseInt(canEmailNum)){
 					cantEmailMsg += "["+$("#nickName_"+aa[i].value).val()+"]";
 					continue;
 				}
@@ -291,6 +318,7 @@ function jumpPage1() {
 				alert(a.msg);
 				hideSms();
 				hideEmail();
+				$("#queryForm").submit();
 			}})
 		
 	}
@@ -325,7 +353,7 @@ function jumpPage1() {
 <body>
 <div id="mask" class="mask"></div>  
  <div class="tab">
-<s:form  action="CRMManage.htm" method="post">
+<s:form id="queryForm" action="CRMManage.htm" method="post">
 <s:hidden name="action" id="action" value="index"/>
 
 <input type="hidden" name="canSmsNum" id="canSmsNum" value="${canSmsNum}">
@@ -333,7 +361,7 @@ function jumpPage1() {
 
 
 <table width="60%">
-<caption class="redbold">我的客户</caption>
+<caption class="redbold">我的4客户</caption>
   <tr>
     <td  height="25" ><div align="center">
           查询条件:<select name="f_serch" id="f_serch">
@@ -407,7 +435,6 @@ function jumpPage1() {
     <td height="25"><div align="center">余额</div></td>
     <td height="25"><div align="center">充值金额</div></td>
     <td height="25"><div align="center">购彩总额</div></td>
-    <td height="25"><div align="center">操作</div></td>
     <td height="25"><div align="center">注册时间</div></td>
     <%--<td height="25"><div align="center">最后登陆时间</div></td>
     --%>
@@ -415,82 +442,116 @@ function jumpPage1() {
     <td height="25"><div align="center">今天已发邮件数</div></td>
     <td height="25"><div align="center">操作</div></td>
   </tr>
-  	<s:iterator id="rs" value="customerPage.result" status="st">
+  <s:iterator value="customerListMap" status="s" id="rs">
+			<tr>
+			<td>${rs[0]}</td>
+			<td>${rs[1]}</td>
+			<td>${rs[2]}</td>
+			<td>${rs[3]}</td>
+			<td>${rs[4]}</td>
+			<td>${rs[5]}</td>
+			<td>${rs[6]}</td>
+			<td>${rs[7]}</td>
+			<td>${rs[8]}</td>
+			<td>${rs[9]}</td>
+			<td>${rs[10]}</td>
+			<td>1</td>
+			</tr>
+		</s:iterator>
+  	<%--<s:iterator id="rs" value="customerListMap" status="s">
 	  <tr>
-	  <td><input name="cusId" type="checkbox" id="cusId_${rs.id}" value="${rs.id}"/></td>
-      <td height="25" >${rs.nickName}<input type="hidden" id="nickName_${rs.id}" value="${rs.nickName}"></td>
-      <td height="25" >${rs.realName}</td>
-      <%--<td height="25" ><s:if test="#rs.credentNo!=''">
+	  <td><input name="cusId" type="checkbox" id="cusId_${rs[0]}" value="${rs[0]}"/></td>
+      <td height="25" >${rs[1]}<input type="hidden" id="nickName_${rs[0]}" value="${rs[1]}"></td>
+      <td height="25" >${rs[2]}</td>
+      <td height="25" ><s:if test="#rs.credentNo!=''">
 				<s:property value="#rs.credentNo.substring(0,12)"/>******
 				</s:if></td>
-      <td height="25" >${rs.credentType}</td>--%>
-      <td height="25" ><s:if test="#rs.email!=''">
-				****<s:property value="#rs.email.substring(4)"/>
-				</s:if><input type="hidden" id="email_${rs.id}" value="${rs.email}"></td>
-      <td height="25" ><s:if test="#rs.mobileNo!=''">
-				<s:property value="#rs.mobileNo.substring(0,7)"/>****
-				</s:if><input type="hidden" id="phoneNum_${rs.id}" value="${rs.mobileNo}"></td>
+      <td height="25" >${rs.credentType}</td>
+      <td height="25" ><s:if test="#rs[3]!=''">
+				****<s:property value="#rs[3].substring(4)"/>
+				</s:if><input type="hidden" id="email_${rs[0]}" value="${rs[3]}"></td>
+      <td height="25" ><s:if test="#rs[4]!=''">
+				<s:property value="#rs[4].substring(0,7)"/>****
+				</s:if><input type="hidden" id="phoneNum_${rs[0]}" value="${rs[4]}"></td>
       <td height="25" >
-      <s:if test="#rs.wallet.status==0">正常</s:if>
+      <s:if test="#rs[5]==0">正常</s:if>
       <s:else>冻结</s:else>
       </td>
       <td>
-      ${rs.wallet.balance }
+      ${rs[6] }
       </td>
       <td>
-      ${rs.bankName }
+      ${rs[7] }
       </td>
       <td>
-      ${rs.bankNumber }
+      ${rs[8] }
       </td>
-      <td height="25" ><a href="/oss/customer/manageCustomer.aspx?action=view&customerId=${rs.id }">资</a>|<a href="/oss/customer/manageFinanialQuery.aspx?customerId=${rs.id }">账</a></td>
-      <td height="25" ><s:date name="#rs.registerTime" format="yyyy-MM-dd HH:mm"/></td>
-       <%--<td height="25" ><s:date name="#rs.lastLoginTime" format="yyyy-MM-dd HH:mm"/></td>
-       --%>
-       <td height="25" ><s:if test="#rs.smsAccept!=null">
-				<s:property value="#rs.smsAccept.substring(today-1,today)"/>
+      <td height="25" ><s:date name="#rs[9]" format="yyyy-MM-dd HH:mm"/></td>
+       <td height="25" ><s:date name="#rs.lastLoginTime" format="yyyy-MM-dd HH:mm"/></td>
+       
+       <td height="25" ><s:if test="#rs[10]!=null">
+				<s:property value="#rs[10].substring(today-1,today)"/>
 				</s:if><s:else>0</s:else>
-				<input type="hidden" id="smsAccept_${rs.id}" value="<s:if test="#rs.smsAccept!=null">
-				<s:property value="#rs.smsAccept.substring(today-1,today)"/>
+				<input type="hidden" id="sms_accept_${rs[0]}" value="<s:if test="#rs[10]!=null">
+				<s:property value="#rs[10].substring(today-1,today)"/>
 				</s:if><s:else>0</s:else>" >
 				</td>
-	   <td height="25" ><s:if test="#rs.emailAccept!=null">
-				<s:property value="#rs.emailAccept.substring(today-1,today)"/>
+	   <td height="25" ><s:if test="#rs[11]!=null">
+				<s:property value="#rs[11].substring(today-1,today)"/>
 				</s:if><s:else>0</s:else>
-				<input type="hidden" id="emailAccept_${rs.id}" value="<s:if test="#rs.emailAccept!=null">
-				<s:property value="#rs.emailAccept.substring(today-1,today)"/>
+				<input type="hidden" id="email_accept_${rs[0]}" value="<s:if test="#rs[11]!=null">
+				<s:property value="#rs[11].substring(today-1,today)"/>
 				</s:if><s:else>0</s:else>" >
 				</td>
        <td height="25" >
-       <a href="javascript:sendMany(1,${rs.id })">发短信</a>
-       <a href="javascript:sendMany(2,${rs.id })">发邮件</a></td>
+       <a href="javascript:sendMany(1,${rs[0] })">发短信</a>
+       <a href="javascript:sendMany(2,${rs[0] })">发邮件</a></td>
       </tr>
     </s:iterator>
-</table>
-
+--%></table>
+<table border="0" width="100%" align="center">
+		<tr>
+		<td>业务员</td>
+			<td>累计佣金</td>
+			<td>其客户总购彩金额</td>
+			<td>其客户总充值金额</td>
+			<td>发送邮件数</td>
+			<td>发送短信数</td>
+		</tr>
+		<s:iterator value="thePerformanceLi" status="s" id="rs">
+			<tr>
+			<td>${rs[0]}</td>
+			<td>${rs[1]}</td>
+			<td>${rs[2]}</td>
+			<td>${rs[3]}</td>
+			<td>${rs[4]}</td>
+			<td>${rs[5]}</td>
+			</tr>
+		</s:iterator>
+	</table>
 <table width="90%" border="0" align="center">
 	<tr><td>
 		<div>
 	<input type="hidden" name="pageNo" id="pageNo" value="1" />
-	每页${customerPage.pageSize}条 共${customerPage.totalCount}条记录 第${customerPage.pageNo}/${customerPage.totalPages}页   
-	<s:if test="customerPage.pageNo==1">
+	每页${pageSize}条 共条记录 第${pageNo}/页   
+	<s:if test="#pageNo==1">
 		<span class="disabled">首页</span> 
 		<span class="disabled">前一页</span>
 	</s:if>
 	<s:else>
 		<a href="javascript:jumpPage(1)" class="cr_link">首页</a>
-		<a href="javascript:jumpPage(${customerPage.pageNo-1})" class="cr_link">前一页</a>
+		<a href="javascript:jumpPage(${pageNo}-1)" class="cr_link">前一页</a>
 	</s:else>
 	
-	<s:if test="customerPage.pageNo>=customerPage.totalPages">
+	<s:if test="#pageNo>=0">
 		<span class="disabled">后一页</span> 
 		<span class="disabled">末页</span>
 	</s:if>
 	<s:else>
-		<a href="javascript:jumpPage(${customerPage.pageNo+1})" class="cr_link">后一页</a>
-		<a href="javascript:jumpPage(${customerPage.totalPages})" class="cr_link">末页</a>
+		<a href="javascript:jumpPage(${pageNo}+1)" class="cr_link">后一页</a>
+		<a href="javascript:jumpPage(11)" class="cr_link">末页</a>
 	</s:else>
-	转 第<input type="text" name="pageNum" style="width: 30px" id="pageNum" value="${customerPage.pageNo}" />页  
+	转 第<input type="text" name="pageNum" style="width: 30px" id="pageNum" value="${pageNo}" />页  
 	<input type="button" value="跳转" onclick="jumpPage1();"/>
 	</div>
 	</td>
@@ -558,7 +619,7 @@ function jumpPage1() {
 		<br>
 		&nbsp;&nbsp;标题：<input type="text" id="emailTitle" name="emailTitle" readonly="readonly">
 		<br>
-		&nbsp;&nbsp;内容：<textarea id="emailContent" name="emailContent" cols="80" rows="10" readonly="readonly"></textarea>
+		&nbsp;&nbsp;内容：<textarea style="width:500px" id="emailContent" name="emailContent" cols="80" rows="10" readonly="readonly"></textarea>
 		<br>
 		<div style="width:100px;margin-left:-25px;position:absolute;left:50%;">
 		<input type="button" onclick="checkFrom(2)" value="提交" ><input type="button" onclick="closee(2)" value="关闭" >

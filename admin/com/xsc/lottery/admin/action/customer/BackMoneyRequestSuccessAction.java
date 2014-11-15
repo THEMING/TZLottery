@@ -9,7 +9,6 @@ import org.springside.modules.orm.hibernate.Page;
 
 import com.xsc.lottery.admin.action.AdminBaseAction;
 import com.xsc.lottery.entity.business.BackMoneyRequest;
-import com.xsc.lottery.entity.business.PayOutRequest;
 import com.xsc.lottery.entity.enumerate.BackMoneyStatus;
 import com.xsc.lottery.entity.enumerate.Bank;
 import com.xsc.lottery.service.business.CustomerService;
@@ -59,6 +58,8 @@ public class BackMoneyRequestSuccessAction extends AdminBaseAction
     private int totalPages;
     
     private String message;
+    
+    private String memo;
 
     public String index()
     {
@@ -90,20 +91,45 @@ public class BackMoneyRequestSuccessAction extends AdminBaseAction
 			return index();
 		}
 		*/
-        bmr.setUser(this.getCurAdminUser());
-        bmr.setSendTime(Calendar.getInstance());
-        bmr.setStatus(BackMoneyStatus.已取消);
-        customerService.updateBackMoneyRequestBackMoney(bmr);
+        if(bmr == null)
+        {
+        	message ="编号为{"+bmid+"}提款申请不存在,请刷新重试";
+        }
+        if(BackMoneyStatus.二级审核 != bmr.getStatus())
+        {
+        	message = "编号为{"+bmid+"}提款申请状态为"+bmr.getStatus()+",您没有审核权限";
+        }
+        else
+        {
+        	bmr.setUser(this.getCurAdminUser());
+            bmr.setSendTime(Calendar.getInstance());
+            bmr.setStatus(BackMoneyStatus.已取消);
+            bmr.setMemo(memo);
+            customerService.updateBackMoneyRequestBackMoney(bmr);
+            message = "编号为{"+bmid+"}提款申请取消成功";
+        }
         return index();
     }
 
     public String option()
     {
         BackMoneyRequest bmr = customerService.findBackMoneyRequest(bmid);
-        bmr.setUser(this.getCurAdminUser());
-        bmr.setSendTime(Calendar.getInstance());
-        bmr.setStatus(BackMoneyStatus.已成功);
-        customerService.updateBackMoneyRequestMoney(bmr);
+        if(bmr == null)
+        {
+        	message ="编号为{"+bmid+"}提款申请不存在,请刷新重试";
+        }
+        if(BackMoneyStatus.二级审核 != bmr.getStatus())
+        {
+        	message = "编号为{"+bmid+"}提款申请状态为"+bmr.getStatus()+",您没有审核权限";
+        }
+        else
+        {
+           bmr.setUser(this.getCurAdminUser());
+           bmr.setSendTime(Calendar.getInstance());
+           bmr.setStatus(BackMoneyStatus.已成功);
+           customerService.updateBackMoneyRequestMoney(bmr);
+           message = "编号为{"+bmid+"}提款申请处理成功";
+        }
         return index();
     }
 
@@ -258,6 +284,16 @@ public class BackMoneyRequestSuccessAction extends AdminBaseAction
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public String getMemo()
+	{
+		return memo;
+	}
+
+	public void setMemo(String memo)
+	{
+		this.memo = memo;
 	}
 
 }
