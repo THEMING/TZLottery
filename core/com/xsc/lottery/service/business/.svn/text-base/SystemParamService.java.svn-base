@@ -1,0 +1,14 @@
+package com.xsc.lottery.service.business;
+
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import com.xsc.lottery.entity.business.SystemParam;
+import com.xsc.lottery.service.LotteryBaseService;
+
+public interface SystemParamService extends LotteryBaseService<SystemParam>
+{
+	
+	@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
+    public SystemParam findByName(String name);
+
+}

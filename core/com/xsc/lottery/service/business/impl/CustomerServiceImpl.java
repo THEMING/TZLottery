@@ -3,6 +3,7 @@ package com.xsc.lottery.service.business.impl;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,16 +38,19 @@ import com.xsc.lottery.entity.admin.AdminUser;
 import com.xsc.lottery.entity.business.BackMoneyRequest;
 import com.xsc.lottery.entity.business.Customer;
 import com.xsc.lottery.entity.business.CustomerCommission;
+import com.xsc.lottery.entity.business.EmailLog;
 import com.xsc.lottery.entity.business.NewlyWinPrize;
 import com.xsc.lottery.entity.business.PaymentRequest;
 import com.xsc.lottery.entity.business.SystemParam;
 import com.xsc.lottery.entity.business.Wallet;
 import com.xsc.lottery.entity.business.WalletLog;
+import com.xsc.lottery.entity.business.EmailLog.EmailState;
 import com.xsc.lottery.entity.business.SmsLog.SmsLogState;
 import com.xsc.lottery.entity.business.SmsLog.SmsLogType;
 import com.xsc.lottery.entity.enumerate.BackMoneyStatus;
 import com.xsc.lottery.entity.enumerate.Bank;
 import com.xsc.lottery.entity.enumerate.BusinessType;
+import com.xsc.lottery.entity.enumerate.CustomerStatus;
 import com.xsc.lottery.entity.enumerate.CustomerType;
 import com.xsc.lottery.entity.enumerate.MoneyChannel;
 import com.xsc.lottery.entity.enumerate.OrderStatus;
@@ -55,6 +59,7 @@ import com.xsc.lottery.entity.enumerate.WalletLogType;
 import com.xsc.lottery.java.common.SystemWarningNotify;
 import com.xsc.lottery.service.business.CpsReportService;
 import com.xsc.lottery.service.business.CustomerService;
+import com.xsc.lottery.service.business.EmailLogService;
 import com.xsc.lottery.service.business.LotteryOrderService;
 import com.xsc.lottery.service.business.SmsLogService;
 import com.xsc.lottery.service.business.SysParamService;
@@ -65,6 +70,7 @@ import com.xsc.lottery.util.DateUtil;
 import com.xsc.lottery.util.MD5;
 import com.xsc.lottery.util.MapUtil;
 import com.xsc.lottery.util.SmsUtil;
+import com.xsc.lottery.util.TemplateUtil;
 
 @Service("customerService")
 @Transactional
@@ -86,6 +92,8 @@ public class CustomerServiceImpl implements CustomerService
     public MessageTaskExcutor messageTaskExcutor;
     @Autowired
     private ActivityListener activityListener;
+    @Autowired
+    private EmailLogService emailLogService;
     @Autowired
     public void setSessionFactory(
             @Qualifier("sessionFactory") SessionFactory sessionfactory)
@@ -334,6 +342,20 @@ public class CustomerServiceImpl implements CustomerService
             addWalletLog(entity.getCustomer().getWallet().getId(), walletLog1);
         }
         backMoneyRequestDao.save(entity);
+        
+        if(entity.getCustomer().getEmail()==null||"".equals(entity.getCustomer().getEmail())){
+        	return;
+        }
+        
+        EmailLog el = new EmailLog();
+		el.setContent(TemplateUtil.getBackMoneyRequestContent(entity.getId()));
+		el.setEmail(entity.getCustomer().getEmail());
+		el.setTitle("我们已经收到您的提款申请,正在处理");
+		el.setUsername(entity.getCustomer().getNickName());
+		el.setSendUserName("一彩票");
+		el.setState(EmailState.NOTSEND);
+		el.setSendTime(new Date());
+		emailLogService.saveOrUpdate(el);
     }
 
     /**
@@ -370,6 +392,29 @@ public class CustomerServiceImpl implements CustomerService
 		
 		int i = query.executeUpdate();
 	}
+    
+    public List<Object[]> getBillCustomer(Map map){
+    	
+    	StringBuffer hql = new StringBuffer("select bc.id" +
+    			" ,case when boo.sumOutAmount is null then 0 else boo.sumOutAmount end" +
+    			" ,case when boo.sumWinMoney  is null then 0 else boo.sumWinMoney  end" +
+    			",bc.nick_name,bc.email,bc.real_name" +
+    			" from business_customer bc join business_wallet_log bwl on bc.wallet_id=bwl.wallet_id " +
+    			" left join " +
+    			" (select bc.id id,sum(bo.out_amount) sumOutAmount,sum(bo.win_money) sumWinMoney from business_customer bc,business_order bo" +
+    			" where bc.id=bo.customer_id and bo.success_time>:stime and bo.success_time<:etime and (bo.status="+OrderStatus.出票成功.ordinal()+" or bo.status="+OrderStatus.部分出票成功.ordinal()+") GROUP BY bc.id) boo on bc.id=boo.id" +
+    			" where " +
+    			" bwl.time>:stime and bwl.time<:etime  and bc.email !=\"\"" +
+    			" GROUP BY bc.id");
+    	SQLQuery query = customerDao.getSession().createSQLQuery(hql.toString());
+    	if(MapUtil.checkKey(map, "stime")){
+    		query.setCalendar("stime", (Calendar)MapUtils.getObject(map,"stime"));
+    	}
+    	if(MapUtil.checkKey(map, "etime")){
+    		query.setCalendar("etime", (Calendar)MapUtils.getObject(map,"etime"));
+    	}
+    	return query.list();
+    }
     
     public void clearCustomerEmailAndSmsAcceptNum(Map map){
     	StringBuffer hql = new StringBuffer("update business_customer set email_accept='0000000000000000000000000000000',sms_accept='0000000000000000000000000000000'");
@@ -561,8 +606,11 @@ public class CustomerServiceImpl implements CustomerService
             String f_serchName, UserType type,Boolean isApply,Integer isPass,Map queryMap)
     {
     	StringBuffer hql = new StringBuffer("");//bwll.in_money,boo.out_amount
-    	
-		hql.append("select bc.id,bc.nick_name,bc.real_name,bc.email,bc.mobile_no,bc.status,case when bwll.balance is null then 0 else bwll.balance end,case when bwll.in_money is null then 0 else bwll.in_money end,case when boo.out_amount is null then 0 else boo.out_amount end,bc.register_time,bc.sms_accept,bc.email_accept,bc.last_login_time" +
+    	//此处查询的字段顺序不能改，新增只能从尾部增加
+		hql.append("select bc.id,bc.nick_name,bc.real_name,bc.email,bc.mobile_no,bc.status,case when bwll.balance is null then 0 else bwll.balance end" +
+				",case when bwll.in_money is null then 0 else bwll.in_money end" +
+				",case when boo.out_amount is null then 0 else boo.out_amount end,bc.register_time" +
+				",bc.sms_accept,bc.email_accept,bc.last_login_time" +
 				" from business_customer bc " +
 				
 				" left join (select bcc.id,sum(bwl.in_money) as in_money,bw.balance,bw.status from business_customer bcc, business_wallet bw , business_wallet_log bwl where bcc.wallet_id = bw.id and bwl.wallet_id = bw.id and (bwl.type = "+WalletLogType.直接充值.ordinal()+" or bwl.type = "+WalletLogType.账户充值.ordinal()+") ");
@@ -636,7 +684,15 @@ public class CustomerServiceImpl implements CustomerService
         if(MapUtil.checkKey(queryMap, "adminUser")){
         	hql.append(" and bc.admin_user_id ="+((AdminUser)MapUtils.getObject(queryMap, "adminUser")).getId());
         }
-        
+        if(MapUtil.checkKey(queryMap, "status")){
+        	hql.append(" and bc.status ="+MapUtils.getString(queryMap, "status"));
+        }
+        if(MapUtil.checkKey(queryMap, "someHavntAcceptWakeUp")){
+        	hql.append(" and (bc.wake_up_email_num =0 or bc.wake_up_email_num is null)");
+        }
+        if(MapUtil.checkKey(queryMap, "regSource")){
+        	hql.append(" and bc.reg_source ="+MapUtils.getString(queryMap, "regSource"));
+        }
         if(MapUtil.checkKey(queryMap, "superior")){
         	hql.append(" and bc.superior_id ="+((Customer)MapUtils.getObject(queryMap, "superior")).getId());
         }
@@ -666,6 +722,10 @@ public class CustomerServiceImpl implements CustomerService
         }
         
         hql.append(" order by bc.id desc");
+        
+        if(MapUtil.checkKey(queryMap, "someHavntAcceptWakeUp")){
+        	System.out.println("====================发送邮件查用户sql============================="+hql.toString());
+        }
         
         SQLQuery query = customerDao.getSession().createSQLQuery(hql.toString());
         

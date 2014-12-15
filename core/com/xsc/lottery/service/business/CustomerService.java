@@ -97,6 +97,8 @@ public interface CustomerService extends LotteryBaseService<Customer>{
             String f_serch, Calendar f_starTime, Calendar f_endTime,
             String f_serchName, UserType type,Boolean isApply,Integer isPass,Map queryMap);
     
+    public List<Object[]> getBillCustomer(Map map);
+    
 	/**
 	 * 提款请求
 	 * **/

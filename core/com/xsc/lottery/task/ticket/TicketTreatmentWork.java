@@ -332,6 +332,9 @@ public abstract class TicketTreatmentWork implements ApplicationListener
     {
         try {
             orderService.finishTicketBusiness(order, returnTickets);
+            if(order!=null&&order.getStatus()!=null&&(OrderStatus.出票失败.equals(order.getStatus())||OrderStatus.出票成功.equals(order.getStatus())||OrderStatus.部分出票成功.equals(order.getStatus()))){
+            	orderService.sendOrderDetailEmail(order);
+            }
         }
         catch (Exception e) {
             if (e instanceof HibernateOptimisticLockingFailureException

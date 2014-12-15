@@ -1,6 +1,7 @@
 package com.xsc.lottery.admin.action;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
 import java.util.Random;
 
@@ -14,9 +15,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.xsc.lottery.entity.business.Customer;
+import com.xsc.lottery.entity.business.EmailLog;
+import com.xsc.lottery.entity.business.EmailLog.EmailState;
 import com.xsc.lottery.entity.business.SmsLog.SmsLogState;
 import com.xsc.lottery.entity.business.SmsLog.SmsLogType;
 import com.xsc.lottery.service.business.CustomerService;
+import com.xsc.lottery.service.business.EmailLogService;
 import com.xsc.lottery.service.business.SmsLogService;
 import com.xsc.lottery.util.Configuration;
 import com.xsc.lottery.util.SmsUtil;
@@ -39,6 +43,8 @@ public class API extends LotteryBaseAction {
 	
 	@Autowired
 	private SmsLogService smsLogService;
+	@Autowired
+    public EmailLogService emailLogService;
 	
 	/**
 	 *  发送手机验证码
@@ -195,6 +201,61 @@ public class API extends LotteryBaseAction {
 			e.printStackTrace();
 		}
 	   return null;
+    }
+    
+    public String sendEmail(){
+    	String nickname = ServletActionContext.getRequest().getParameter("nickname");
+		String content = ServletActionContext.getRequest().getParameter("content");
+		String title = ServletActionContext.getRequest().getParameter("title");
+		
+		
+		
+		String code = "_0000";
+    	String message = "成功";
+    	if(isVerifyIp())
+    	{
+    		if(StringUtils.isEmpty(nickname)||StringUtils.isEmpty(content)||StringUtils.isEmpty(title))
+    		{
+    			code = "_0009";
+    	    	message = "参数为空";
+    		}
+    		else
+    		{
+    			Customer customer = customerService.getCustomerOrName(nickname);
+    			
+    			if(customer==null){
+    				code = "_0001";
+        	    	message = "用户不存在";
+    			}else if(customer.getEmail()==null||"".equals(customer.getEmail())){
+    				code = "_0002";
+        	    	message = "用户未绑定邮箱";
+    			}else{
+        			EmailLog el = new EmailLog();
+        			el.setContent(content);
+        			el.setEmail(customer.getEmail());
+        			el.setTitle(title);
+        			el.setUsername("["+customer.getNickName()+"]");
+        			el.setSendUserName("一彩票");
+        			el.setState(EmailState.NOTSEND);
+        			el.setSendTime(new Date());
+        			emailLogService.saveOrUpdate(el);
+    			}
+    		}
+    	}
+    	else
+    	{
+    		code = "_9999";
+			message = "无访问权限";
+    	}
+    	try {
+		    JSONObject obj = new JSONObject();   
+			obj.put("code", code);
+			obj.put("message", message);
+			ServletActionContext.getResponse().getWriter().print(obj);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return null;
     }
     
     /**

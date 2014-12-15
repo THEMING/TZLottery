@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/WebRoot/oss/active
 svn://192.168.0.69
 
@@ -25,40 +25,6 @@ pengfangliang
 
 
 06230561-3236-44f2-a481-3c5b5774a9d0
-
-active_list.jsp
-file
-
-
-
-
-2014-09-16T03:29:12.754000Z
-70db4ace79894e8330de8b96ceca0c82
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2692
 
 active_detail_list.jsp
 file
@@ -96,17 +62,18 @@ pengfangliang
 
 active_edit.jsp
 file
+3379
 
 
 
-
-2014-09-16T03:29:12.761000Z
-23e927743e276fc74bb81e82b7fcc8c0
-2014-09-01T13:00:28.334948Z
-2463
+2014-11-06T02:45:10.690000Z
+1272864068d4e8740983a2c4853157fe
+2014-11-05T07:32:05.811487Z
+3379
 pengfangliang
 
 
+svn:special svn:externals svn:needs-lock
 
 
 
@@ -125,6 +92,39 @@ pengfangliang
 
 
 
+6800
+
+active_list.jsp
+file
+3379
 
-3002
+
+
+2014-11-06T02:45:23.603000Z
+c43cb6be0147d6cd6169cf24151bd9df
+2014-11-05T07:32:05.811487Z
+3379
+pengfangliang
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3030
 

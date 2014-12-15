@@ -46,7 +46,7 @@ public class CpsCheckAction extends AdminBaseAction
         page.setPageSize(pageSize);
         page.setAutoCount(true);
         page = customerService.getLotteryCustomerPage(page, null, null,
-        		null, null, null, null, null, null,true,0);
+        		null, null, null, null, null, null,true,0,null);
         return "list";
     }
 

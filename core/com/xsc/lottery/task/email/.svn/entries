@@ -1,14 +1,14 @@
 10
 
 dir
-2839
+3189
 svn://192.168.0.69/bs/trunk/TZLottery/core/com/xsc/lottery/task/email
 svn://192.168.0.69
 
 
 
-2014-09-01T13:00:28.334948Z
-2463
+2014-10-17T07:33:58.982183Z
+3031
 pengfangliang
 
 
@@ -32,13 +32,14 @@ file
 
 
 
-2014-09-16T03:29:19.591000Z
-e80097648c0dac0badd6b12d9adf993d
-2014-09-01T13:00:28.334948Z
-2463
+2014-10-24T03:17:42.445000Z
+9d57535dc5bf55727bd5cfcbdd056057
+2014-10-17T07:33:58.982183Z
+3031
 pengfangliang
 
 
+svn:special svn:externals svn:needs-lock
 
 
 
@@ -57,6 +58,39 @@ pengfangliang
 
 
 
+8036
+
+EmailTaskExcutor.java
+file
+3687
 
-8091
+
+
+2014-12-08T01:39:57.954000Z
+a2edb1cb7dd4a464af42a51910477e4e
+2014-12-08T02:40:07.801405Z
+3687
+guanjianming
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4447
 

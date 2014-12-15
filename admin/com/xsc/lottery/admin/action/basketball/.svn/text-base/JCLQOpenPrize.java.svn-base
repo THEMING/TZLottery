@@ -122,6 +122,11 @@ public class JCLQOpenPrize extends AdminBaseAction {
 							for(int m=0; m<allMatch.length; m++)
 							{
 								String matchNo = allMatch[m].split("=")[0];
+								//混合过关
+								if(matchNo.indexOf(">") != -1)
+								{
+									matchNo = matchNo.split(">")[1];
+								}
 								stringSet.add(matchNo);
 							}
 						}
@@ -411,20 +416,20 @@ public class JCLQOpenPrize extends AdminBaseAction {
 		
 		if(match.getWholeScore() == null)		//没有比分
 			return false;
-		
+		/*
 		String szPlayType = match.getPlayTypes();	//允许的玩法
 		boolean bAllowSGSF = szPlayType.indexOf(JCLQTypes.typeToEn(JCLQTypes.单关胜负)) >= 0;
-		if(bAllowSGSF && (match.getSpSf() == null || match.getSfResult() == null))
+		if(bAllowSGSF && (match.getSfResult() == null))
 			return false;
 		
 		boolean bAllowSGRFSF = szPlayType.indexOf(JCLQTypes.typeToEn(JCLQTypes.单关让分胜负)) >= 0;
-		if(bAllowSGRFSF && (match.getSpRangfenSf() == null || match.getRfsfResult() == null))
+		if(bAllowSGRFSF && (match.getRfsfResult() == null))
 			return false;
 		
 		boolean bAllowSGDXF = szPlayType.indexOf(JCLQTypes.typeToEn(JCLQTypes.单关大小分)) >= 0;
-		if(bAllowSGDXF && (match.getSpDxf() == null || match.getDxfResult() == null))
+		if(bAllowSGDXF && (match.getDxfResult() == null))
 			return false;
-
+		*/
 		return true;
 	}
 	public String getOp_matchNo() {

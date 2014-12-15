@@ -201,6 +201,11 @@ public class Customer extends BaseObject
     private RegChannel regChannel;
     
     /**
+     * 收到唤醒邮件的数目
+     */
+    private Integer wakeUpEmailNum = 0;
+    
+    /**
      * 用户被业务员发送邮件的次数 
      * 数据格式初始为31个0，对应每个月的31天
      * 当业务员发送了推销邮件 当天对应的位置加一 每个月一号清空*/
@@ -212,7 +217,17 @@ public class Customer extends BaseObject
      * 当业务员发送了推销短信 当天对应的位置加一 每个月一号清空*/
     private String smsAccept="0000000000000000000000000000000";//"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0";
     
-    public String getEmailAccept()
+    public Integer getWakeUpEmailNum()
+	{
+		return wakeUpEmailNum;
+	}
+
+	public void setWakeUpEmailNum(Integer wakeUpEmailNum)
+	{
+		this.wakeUpEmailNum = wakeUpEmailNum;
+	}
+
+	public String getEmailAccept()
 	{
 		return emailAccept;
 	}

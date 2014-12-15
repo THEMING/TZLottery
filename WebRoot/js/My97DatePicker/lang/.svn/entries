@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/WebRoot/js/My97DatePicker/lang
 svn://192.168.0.69
 
@@ -26,14 +26,14 @@ pengfangliang
 
 06230561-3236-44f2-a481-3c5b5774a9d0
 
-zh-tw.js
+en.js
 file
 
 
 
 
-2014-09-16T03:28:56.028000Z
-a4c09728c9524193c5b8f48aee304076
+2014-09-16T03:28:56.037000Z
+572900ed3f7553d0ebbc3067cfa8f57a
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -58,7 +58,7 @@ pengfangliang
 
 
 
-382
+415
 
 zh-cn.js
 file
@@ -94,14 +94,14 @@ pengfangliang
 
 385
 
-en.js
+zh-tw.js
 file
 
 
 
 
-2014-09-16T03:28:56.037000Z
-572900ed3f7553d0ebbc3067cfa8f57a
+2014-09-16T03:28:56.028000Z
+a4c09728c9524193c5b8f48aee304076
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -126,5 +126,5 @@ pengfangliang
 
 
 
-415
+382
 

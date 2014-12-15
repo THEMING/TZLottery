@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/activity/com/xsc/lottery/service/active
 svn://192.168.0.69
 
@@ -26,22 +26,20 @@ pengfangliang
 
 06230561-3236-44f2-a481-3c5b5774a9d0
 
-impl
-dir
-
 ActivityService.java
 file
+3189
 
 
 
-
-2014-09-16T03:29:22.539000Z
-b75f3f79cb5b94ce4c08e77e2bba8e3c
-2014-09-01T13:00:28.334948Z
-2463
+2014-10-24T03:30:41.175000Z
+b45c124ad92e4aaaaf4782b922be8aef
+2014-10-16T02:46:10.408771Z
+2988
 pengfangliang
 
 
+svn:special svn:externals svn:needs-lock
 
 
 
@@ -60,6 +58,8 @@ pengfangliang
 
 
 
-
-1350
+1551
+
+impl
+dir
 

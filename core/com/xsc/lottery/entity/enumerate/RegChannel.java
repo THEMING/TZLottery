@@ -8,5 +8,5 @@ package com.xsc.lottery.entity.enumerate;
  * @version 1.0, 2014-9-19
  */
 public enum RegChannel {
-	拉手,腾讯QQ,开心,电信
+	拉手,腾讯QQ,开心,电信,手机
 }

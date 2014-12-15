@@ -11,10 +11,8 @@
 function subm(cmd,strId) {
     $("#bmid").val(strId);
     $("#action").val(cmd);
-    $("#memo").val($("#message").val());
-    alert($("#code").val());
-    $("#codes").val($("#code").val());
-    alert($("#codes").val());
+    $("#memo").val($("#message_"+strId).val());
+    //$("#codes").val($("#code").val());
 	$("form").submit();
 }
 
@@ -79,6 +77,7 @@ function dosub()
 </head>
 <body>
  <div class="tab">
+ <span style="color:red;font-size:18px">${message}</span>
 <s:form  action="manageWithdrawMonney" method="post" >
 <s:hidden name="action" id="action" value="index"></s:hidden>
 <s:hidden name="bmid" id="bmid"/>
@@ -130,6 +129,7 @@ function dosub()
 <table >
   <tr><!--（成功，失败）-->
   	<td height="25"><div align="center"><input type="button" value="全选" onclick="doSelectAll();" id="selectall"></input></div></td>
+    <td height="25"><div align="center">编号</div></td>
     <td height="25"><div align="center">提款时间</div></td>
     <td height="25"><div align="center">用户名</div></td>
     <td height="25"><div align="center">姓名</div></td>
@@ -139,9 +139,11 @@ function dosub()
     <td height="25"><div align="center">提款金额</div></td>
     <td height="25"><div align="center">状态</div></td>
     <td height="25"><div align="center">操作人</div></td>
-    <td height="25"><div align="center">操作时间</div></td>
+    <td height="25"><div align="center">审核时间</div></td>
     <td height="25" ><div align="center">城市名</div></td>
+     <!-- 
     <td height="25" ><div align="center">城市代号</div></td>
+     -->
     <td height="25" ><div align="center">失败原因</div></td>
     <td height="25" ><div align="center">操作</div></td>
   </tr>
@@ -149,6 +151,7 @@ function dosub()
 	  <tr>
 	  <input type="hidden" value="${rs.id }" id="myhidden_<s:property value='#st.index'/>"></input>
 	  <td><input type="checkbox" name="mycheckbox" id="mycheckbox_<s:property value='#st.index'/>"></input></td>
+	  <td height="25" >${rs.id}</td>
       <td height="25" ><s:date name="#rs.applyTime" format="yyyy-MM-dd HH:mm"/></td>
       <td height="25" ><a href="manageCustomer.aspx?action=view&customerId=${rs.customer.id }"  target="blank">${rs.customer.nickName}</a></td>
       <td height="25" >${rs.realName}</td>
@@ -158,8 +161,9 @@ function dosub()
       <td height="25" ><strong class="red">￥${rs.money}</strong></td>
       <td height="25" id="stat_<s:property value='#st.index'/>">${rs.status}</td>
       <td height="25" >${rs.user.adminName}</td>
-      <td height="25" ><s:date name="#rs.sendTime" format="yyyy-MM-dd HH:mm:ss"/></td>
+      <td height="25" ><s:date name="#rs.sendTime" format="yyyy-MM-dd HH:mm"/></td>
       <td height="25" >${rs.customer.city}</td>
+      <%--
       <td height="25" >
 	      <s:if test="#rs.code.length() > 0">
 	      	${rs.code }
@@ -168,9 +172,10 @@ function dosub()
 		  	<input type="text" id="code"></input>
 		  </s:else>
 	  </td>
+	   --%>
       <td height="25" >
       	<c:if test="${rs.status=='待审核'}">
-      		<input type="text" id="message" value="${rs.memo }"></input>
+      		<input type="text" id="message_${rs.id}" value="${rs.memo }"></input>
         </c:if>
         ${rs.memo }
       </td>

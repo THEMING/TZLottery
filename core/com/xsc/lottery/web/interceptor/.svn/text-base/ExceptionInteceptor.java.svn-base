@@ -14,6 +14,7 @@ public class ExceptionInteceptor extends AbstractInterceptor
             return invocation.invoke();
         }
         catch (Exception e) {
+        	e.printStackTrace();
             return ActionSupport.ERROR;
         }
     }

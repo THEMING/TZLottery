@@ -20,9 +20,10 @@ dltResultListPath=/static/openResult/dlt/list{0}.xml
 #  dyj config
 # ================================================
 dyj.url=http://t.zc310.net:8089/bin/LotSaleHttp.dll
-#dyj.agent=3849
 dyj.agent=3885
 dyj.key=a8b8c8d8e8f8g8h8
+
+#dyj.agent=3849
 #dyj.url=http://i.zc310.net:8089/bin/LotSaleHttp.dll
 #dyj.agent=832728
 #dyj.key=123456789zxcv
@@ -67,7 +68,7 @@ alipay.notify_query=http://notify.alipay.com/trade/notify_query.do
 # ================================================
 mail.from=crm@yicp.com
 mail.password=gotone88
-mail.smtphost=smtp.exmail.qq.com
+mail.smtphost=120.24.53.89
 
 # ================================================
 # download config
@@ -149,5 +150,53 @@ postcode=510665
 # ==============================================
 #      接口的IP限制
 #===============================================
-interface.ip=127.0.0.1,192.168.0.222
-app.download.url=http://m.yicp.com/openPrize/phoneSuit.php
+interface.ip=127.0.0.1,192.168.0.222,192.168.0.172,192.168.0.183,192.168.0.168
+app.download.url=http\://m.yicp.com/openPrize/phoneSuit.php
+
+
+# ==========================================
+#      云通讯平台配置参数
+# ==========================================
+#服务器地址 sandboxapp.cloopen.com沙盒环境  app.cloopen.com生产环境
+serverAddressYUN=app.cloopen.com
+#端口
+portYUN=8883
+#ACCOUNT SID
+accountSIDYUN=8a48b55148fe486001490865af5e059d
+#AUTH TOKEN
+authTokenYUN=28ce04fdc5a34584969d41eccaa3f14a
+#应用id
+appIDYUN=8a48b55148fe486001490d8a2bb70a0b
+#手机绑定验证码模板id
+phoneBindTemplateIDYUN=5529
+#找回密码验证码模板id
+findPasswordTemplateIDYUN=5530
+#申请下载客户端模板id
+downloadTemplateIDYUN=5531
+#手机验证码模板id
+phoneVilTemplateIDYUN=5532
+#出票失败模板id
+payfailTemplateIDYUN=5533
+
+# ==========================================
+#      图片前缀
+# ==========================================
+image.pre=http://www.yicp.local:8080
+
+# ==========================================
+#      请求php页面内容的域名 正式环境为www.yicp.com
+# ==========================================
+requestPhp=192.168.0.168
+
+# ==========================================
+#      邮件监控请求url 正式环境oss要改
+# ==========================================
+emailMonitorUrl=http://localhost:8080/oss/crmSystem/someEmailIsOpened.htm
+
+# ==========================================
+#      激活邮件内“立即参与”按钮的链接地址 参数部分在TemplateUtil类getWakeUpLink方法里拼
+# ==========================================
+wakeUpEmailJoinUrl=http://192.168.0.168:80/customer/resetpwd.html
+
+
+

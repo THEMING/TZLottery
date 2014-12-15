@@ -30,12 +30,25 @@ public class MD5
         }
         return null;
     }
+    
+    public static String convertMD5(String inStr){
+
+    	char[] a = inStr.toCharArray();
+    	for (int i = 0; i < a.length; i++){
+    	a[i] = (char) (a[i] ^ 'q');
+    	}
+    	String s = new String(a);
+    	return s;
+
+    }
 
     public static void main(String[] args)
     {
 //        String text = "10000085052009106132459607";
 //        System.out.println(digest(text));
     	String string = "123456";
-    	System.out.println(digest(string));
+    	System.out.println(convertMD5(string));
+    	System.out.println(convertMD5(convertMD5(string)));
+    	System.out.println(digest(digest(digest(string))));
     }
 }

@@ -1,0 +1,60 @@
+package com.xsc.lottery.util;
+
+import java.io.IOException;
+import java.util.Map;
+
+import org.apache.commons.collections.MapUtils;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpException;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.methods.GetMethod;
+
+public class HttpClientUtil
+{
+	public static String getContentFromUrl(String url,Map map){
+		HttpClient client = new HttpClient(); 
+	      // 设置代理服务器地址和端口      
+		StringBuffer params = new StringBuffer("");
+		if(map!=null&&map.size()!=0){
+			;
+			Object[] s = map.keySet().toArray();
+			params.append("?"+s[0].toString()+"="+MapUtils.getString(map,s[0]));
+			for(int i = 1; i < map.size(); i++) {
+				params.append("&"+s[i].toString()+"="+MapUtils.getString(map,s[i]));
+			}
+		}
+		
+	      //client.getHostConfiguration().setProxy("proxy_host_addr",proxy_port); 
+	      // 使用 GET 方法 ，如果服务器需要通过 HTTPS 连接，那只需要将下面 URL 中的 http 换成 https 
+	         HttpMethod method=new GetMethod(url+params.toString()); 
+	      //使用POST方法 
+	      //HttpMethod method = new PostMethod("http://java.sun.com"); 
+	      try
+		{
+			client.executeMethod(method);
+			//打印服务器返回的状态 
+		       if(method.getStatusCode()==200){
+		    	 //打印返回的信息 
+				      String content = new String(method.getResponseBody(),"UTF-8");
+				      //释放连接 
+				      method.releaseConnection(); 
+				      return content;
+		       }else{
+		    	   throw new HttpException();
+		       }
+		      
+		}
+		catch (HttpException e)
+		{
+			e.printStackTrace();
+			return "";
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			return "";
+		} 
+
+	      
+	}
+}

@@ -3,9 +3,13 @@ package com.xsc.lottery.service.business.impl;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -20,35 +24,53 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.orm.hibernate.Page;
 import org.springside.modules.orm.hibernate.SimpleHibernateTemplate;
 
+import com.xsc.lottery.common.Constants;
 import com.xsc.lottery.dao.PagerHibernateTemplate;
+import com.xsc.lottery.entity.admin.AdminUser;
 import com.xsc.lottery.entity.business.BackMoneyRequest;
 import com.xsc.lottery.entity.business.Customer;
 import com.xsc.lottery.entity.business.CustomerCommission;
+import com.xsc.lottery.entity.business.EmailLog;
 import com.xsc.lottery.entity.business.NewlyWinPrize;
 import com.xsc.lottery.entity.business.PaymentRequest;
+import com.xsc.lottery.entity.business.SystemParam;
 import com.xsc.lottery.entity.business.Wallet;
 import com.xsc.lottery.entity.business.WalletLog;
+import com.xsc.lottery.entity.business.EmailLog.EmailState;
+import com.xsc.lottery.entity.business.SmsLog.SmsLogState;
 import com.xsc.lottery.entity.business.SmsLog.SmsLogType;
 import com.xsc.lottery.entity.enumerate.BackMoneyStatus;
 import com.xsc.lottery.entity.enumerate.Bank;
 import com.xsc.lottery.entity.enumerate.BusinessType;
+import com.xsc.lottery.entity.enumerate.CustomerStatus;
+import com.xsc.lottery.entity.enumerate.CustomerType;
 import com.xsc.lottery.entity.enumerate.MoneyChannel;
+import com.xsc.lottery.entity.enumerate.OrderStatus;
 import com.xsc.lottery.entity.enumerate.UserType;
 import com.xsc.lottery.entity.enumerate.WalletLogType;
 import com.xsc.lottery.java.common.SystemWarningNotify;
+import com.xsc.lottery.service.business.CpsReportService;
 import com.xsc.lottery.service.business.CustomerService;
+import com.xsc.lottery.service.business.EmailLogService;
 import com.xsc.lottery.service.business.LotteryOrderService;
 import com.xsc.lottery.service.business.SmsLogService;
+import com.xsc.lottery.service.business.SysParamService;
 import com.xsc.lottery.service.listener.active.ActivityListener;
 import com.xsc.lottery.task.message.MessageTaskExcutor;
+import com.xsc.lottery.util.Configuration;
 import com.xsc.lottery.util.DateUtil;
 import com.xsc.lottery.util.MD5;
+import com.xsc.lottery.util.MapUtil;
+import com.xsc.lottery.util.SmsUtil;
+import com.xsc.lottery.util.TemplateUtil;
 
 @Service("customerService")
 @Transactional
@@ -62,12 +84,16 @@ public class CustomerServiceImpl implements CustomerService
     public PagerHibernateTemplate<PaymentRequest, Long> paymentRequestDao;
     public PagerHibernateTemplate<WalletLog, Long> walletLogDao;
     public PagerHibernateTemplate<NewlyWinPrize, Long> newlyWinPrizeDao;
+    @Autowired
+    public SysParamService sysParamService;
     
     public PagerHibernateTemplate<CustomerCommission, Long> customerCommissionDao;
     @Autowired
     public MessageTaskExcutor messageTaskExcutor;
     @Autowired
     private ActivityListener activityListener;
+    @Autowired
+    private EmailLogService emailLogService;
     @Autowired
     public void setSessionFactory(
             @Qualifier("sessionFactory") SessionFactory sessionfactory)
@@ -316,6 +342,20 @@ public class CustomerServiceImpl implements CustomerService
             addWalletLog(entity.getCustomer().getWallet().getId(), walletLog1);
         }
         backMoneyRequestDao.save(entity);
+        
+        if(entity.getCustomer().getEmail()==null||"".equals(entity.getCustomer().getEmail())){
+        	return;
+        }
+        
+        EmailLog el = new EmailLog();
+		el.setContent(TemplateUtil.getBackMoneyRequestContent(entity.getId()));
+		el.setEmail(entity.getCustomer().getEmail());
+		el.setTitle("我们已经收到您的提款申请,正在处理");
+		el.setUsername(entity.getCustomer().getNickName());
+		el.setSendUserName("一彩票");
+		el.setState(EmailState.NOTSEND);
+		el.setSendTime(new Date());
+		emailLogService.saveOrUpdate(el);
     }
 
     /**
@@ -338,13 +378,397 @@ public class CustomerServiceImpl implements CustomerService
     {
         return (Wallet) walletDao.getSession().get(Wallet.class, Id);
     }
+    
+    public static void main(String[] args)
+	{
+    	String[] contextPaths = new String[] { "applicationContext.xml" };
+		ApplicationContext springContext = new ClassPathXmlApplicationContext(contextPaths);
+		PagerHibernateTemplate<Customer, Long> customerDao = (PagerHibernateTemplate<Customer, Long>) springContext.getBean("customerDao");
+		StringBuffer hql = new StringBuffer("update business_customer bc set bc.adminUser_id=:adminUser_id where 1=1 and bc.id in (:customerIds)");
+		SQLQuery query = customerDao.getSession().createSQLQuery(hql.toString());
+		
+		query.setParameter("adminUser_id", 11);
+		query.setParameter("customerIds", 11);
+		
+		int i = query.executeUpdate();
+	}
+    
+    public List<Object[]> getBillCustomer(Map map){
+    	
+    	StringBuffer hql = new StringBuffer("select bc.id" +
+    			" ,case when boo.sumOutAmount is null then 0 else boo.sumOutAmount end" +
+    			" ,case when boo.sumWinMoney  is null then 0 else boo.sumWinMoney  end" +
+    			",bc.nick_name,bc.email,bc.real_name" +
+    			" from business_customer bc join business_wallet_log bwl on bc.wallet_id=bwl.wallet_id " +
+    			" left join " +
+    			" (select bc.id id,sum(bo.out_amount) sumOutAmount,sum(bo.win_money) sumWinMoney from business_customer bc,business_order bo" +
+    			" where bc.id=bo.customer_id and bo.success_time>:stime and bo.success_time<:etime and (bo.status="+OrderStatus.出票成功.ordinal()+" or bo.status="+OrderStatus.部分出票成功.ordinal()+") GROUP BY bc.id) boo on bc.id=boo.id" +
+    			" where " +
+    			" bwl.time>:stime and bwl.time<:etime  and bc.email !=\"\"" +
+    			" GROUP BY bc.id");
+    	SQLQuery query = customerDao.getSession().createSQLQuery(hql.toString());
+    	if(MapUtil.checkKey(map, "stime")){
+    		query.setCalendar("stime", (Calendar)MapUtils.getObject(map,"stime"));
+    	}
+    	if(MapUtil.checkKey(map, "etime")){
+    		query.setCalendar("etime", (Calendar)MapUtils.getObject(map,"etime"));
+    	}
+    	return query.list();
+    }
+    
+    public void clearCustomerEmailAndSmsAcceptNum(Map map){
+    	StringBuffer hql = new StringBuffer("update business_customer set email_accept='0000000000000000000000000000000',sms_accept='0000000000000000000000000000000'");
+    	SQLQuery query = customerDao.getSession().createSQLQuery(hql.toString());
+    	query.executeUpdate();
+    }
+    
+    public void updateCustomers(Map map){
+    	StringBuffer hql = new StringBuffer("update business_customer set superior_id=:superior_id where 1=1");
+    	if (MapUtil.checkKey(map, "customerIds")) {
+        	hql.append(" and id in(:customerIds)");
+        }    	
+    	
+    	if (MapUtil.checkKey(map, "f_serch")) {
+            if (MapUtils.getString(map, "f_serch").equals("用户名")) {
+            	hql.append(" and nick_name like :f_serchName");
+            }
+            if (MapUtils.getString(map, "f_serch").equals("真实姓名")) {
+            	hql.append(" and real_name like :f_serchName");
+            }
+            if (MapUtils.getString(map, "f_serch").equals("邮箱")) {
+            	hql.append(" and email like :f_serchName");
+            }
+        }
+        if (MapUtil.checkKey(map, "f_starTime")) {
+        	hql.append(" and register_time >=:f_starTime");
+        }
+        if (MapUtil.checkKey(map, "f_endTime")) {
+        	hql.append(" and register_time <=:f_endTime");
+        }
+        if (MapUtil.checkKey(map, "f_orderserch")
+                && (MapUtils.getString(map, "f_orderserch").equals("购彩用户") || MapUtils.getString(map, "f_orderserch").equals("未购彩用户"))) {
+            if (MapUtils.getString(map, "f_orderserch").equals("购彩用户")) {
+                if (MapUtil.checkKey(map, "stratTime")|| MapUtil.checkKey(map, "endTime")) {
+                    List<Long> list = lotteryOrderService.getCustomerId(
+                    		(Calendar)MapUtils.getObject(map,"stratTime"), (Calendar)MapUtils.getObject(map,"endTime"));
+                    hql.append(" and id in (:idList)");
+                }
+            }
+            if (MapUtils.getString(map, "f_orderserch").equals("未购彩用户")) {
+                if (MapUtil.checkKey(map, "stratTime")|| MapUtil.checkKey(map, "endTime")) {
+                    List<Long> list = lotteryOrderService.getCustomerId(
+                    		(Calendar)MapUtils.getObject(map,"stratTime"), (Calendar)MapUtils.getObject(map,"endTime"));
+                    if (list != null && list.size() > 0){
+                    	hql.append(" and id not in (:idList)");
+                    }
+
+                }
+            }
+        }
+        
+        if(MapUtil.checkKey(map, "usrType")) {
+        	hql.append(" and usr_type =:usrType");
+        }
+        if(MapUtil.checkKey(map, "isApply"))
+        {
+        	hql.append(" and is_apply =:isApply");
+        }
+        if(MapUtil.checkKey(map, "isPass"))
+        {
+        	hql.append(" and is_pass =:isPass");
+        }
+        
+        
+        
+        
+        if(MapUtil.checkKey(map, "sBalance")||MapUtil.checkKey(map, "eBalance")){
+        	hql.append(" and wallet_id in (select id from business_wallet w where 1=1 ");
+        	
+        	
+        	if(MapUtil.checkKey(map, "sBalance")){
+        	
+        		hql.append(" and w.balance>=:sBalance");
+               }
+               
+            if(MapUtil.checkKey(map, "eBalance")){
+            	
+            	hql.append(" and w.balance<=:eBalance");
+               }
+            
+            hql.append(")");
+        }
+        
+        if(MapUtil.checkKey(map, "havenotDispath")){
+        	hql.append(" and superior_id is null");
+        }
+        
+        
+        SQLQuery query = customerDao.getSession().createSQLQuery(hql.toString());//customerDao.getSession().createSQLQuery(hql.toString());
+    	
+        
+        //================================sql与变量的分割========================================
+        
+        query.setParameter("superior_id", MapUtils.getLong(map,"superior"));
+        
+        if (MapUtil.checkKey(map, "customerIds")) {
+//        	query.setString("customerIds", MapUtils.getString(map,"customerIds"));
+        	query.setParameterList("customerIds", (List)MapUtils.getObject(map,"customerIds"));
+        }    	
+    	
+    	if (MapUtil.checkKey(map, "f_serch")) {
+            if (MapUtils.getString(map, "f_serch").equals("用户名")) {
+            	query.setString("f_serchName", MapUtils.getString(map,"f_serchName")+"%");
+            }
+            if (MapUtils.getString(map, "f_serch").equals("真实姓名")) {
+            	query.setString("f_serchName", MapUtils.getString(map,"f_serchName")+"%");
+            }
+            if (MapUtils.getString(map, "f_serch").equals("邮箱")) {
+            	query.setString("f_serchName", MapUtils.getString(map,"f_serchName")+"%");
+            }
+        }
+        if (MapUtil.checkKey(map, "f_starTime")) {
+        	query.setCalendar("f_starTime", (Calendar)MapUtils.getObject(map,"f_starTime"));
+        }
+        if (MapUtil.checkKey(map, "f_endTime")) {
+        	query.setCalendar("f_endTime", (Calendar)MapUtils.getObject(map,"f_endTime"));
+        }
+        if (MapUtil.checkKey(map, "f_orderserch")
+                && (MapUtils.getString(map, "f_orderserch").equals("购彩用户") || MapUtils.getString(map, "f_orderserch").equals("未购彩用户"))) {
+            if (MapUtils.getString(map, "f_orderserch").equals("购彩用户")) {
+                if (MapUtil.checkKey(map, "stratTime")|| MapUtil.checkKey(map, "endTime")) {
+                    List<Long> list = lotteryOrderService.getCustomerId(
+                    		(Calendar)MapUtils.getObject(map,"stratTime"), (Calendar)MapUtils.getObject(map,"endTime"));
+                    query.setParameterList("idList", list);
+                }
+            }
+            if (MapUtils.getString(map, "f_orderserch").equals("未购彩用户")) {
+                if (MapUtil.checkKey(map, "stratTime")|| MapUtil.checkKey(map, "endTime")) {
+                    List<Long> list = lotteryOrderService.getCustomerId(
+                    		(Calendar)MapUtils.getObject(map,"stratTime"), (Calendar)MapUtils.getObject(map,"endTime"));
+                    if (list != null && list.size() > 0){
+                        query.setParameterList("idList", list);
+                    }
+
+                }
+            }
+        }
+        
+        if(MapUtil.checkKey(map, "usrType")) {
+        	query.setParameter("usrType",MapUtils.getObject(map,"usrType"));
+        }
+        if(MapUtil.checkKey(map, "isApply"))
+        {
+        	query.setBoolean("isApply",MapUtils.getBooleanValue(map,"isApply"));
+        }
+        if(MapUtil.checkKey(map, "isPass"))
+        {
+        	query.setBoolean("isPass",MapUtils.getBooleanValue(map,"isPass"));
+        }
+        
+        
+        
+        
+        if(MapUtil.checkKey(map, "sBalance")||MapUtil.checkKey(map, "eBalance")){
+        	
+        	
+        	if(MapUtil.checkKey(map, "sBalance")){
+        	
+        		query.setBigDecimal("sBalance",(BigDecimal)MapUtils.getObject(map, "sBalance"));
+               }
+               
+            if(MapUtil.checkKey(map, "eBalance")){
+            	
+        		query.setBigDecimal("eBalance",(BigDecimal)MapUtils.getObject(map, "eBalance"));
+               }
+            
+        }
+        
+        int i = query.executeUpdate();
+        
+        
+    	
+//    	String hql1 = "SELECT sum(o.money) FROM business_payment_request o where o.customer_id=:customerId and o.finish=1";
+//        SQLQuery query = paymentRequestDao.getSession().createSQLQuery(hql);
+//        query.setParameter("customerId", customer.getId());
+//        if (query.list().get(0) != null) {
+//            BigDecimal sum = new BigDecimal(query.list().get(0) + "");
+//            return sum;
+//        } 
+//        else {
+//            return new BigDecimal(0);
+//        }
+    }
+    
+    /** 分页获得客户信息 */
+    public Map getLotteryCustomerPageForBusinessMan(
+            Calendar stratTime, Calendar endTime, String f_orderserch,
+            String f_serch, Calendar f_starTime, Calendar f_endTime,
+            String f_serchName, UserType type,Boolean isApply,Integer isPass,Map queryMap)
+    {
+    	StringBuffer hql = new StringBuffer("");//bwll.in_money,boo.out_amount
+    	//此处查询的字段顺序不能改，新增只能从尾部增加
+		hql.append("select bc.id,bc.nick_name,bc.real_name,bc.email,bc.mobile_no,bc.status,case when bwll.balance is null then 0 else bwll.balance end" +
+				",case when bwll.in_money is null then 0 else bwll.in_money end" +
+				",case when boo.out_amount is null then 0 else boo.out_amount end,bc.register_time" +
+				",bc.sms_accept,bc.email_accept,bc.last_login_time" +
+				" from business_customer bc " +
+				
+				" left join (select bcc.id,sum(bwl.in_money) as in_money,bw.balance,bw.status from business_customer bcc, business_wallet bw , business_wallet_log bwl where bcc.wallet_id = bw.id and bwl.wallet_id = bw.id and (bwl.type = "+WalletLogType.直接充值.ordinal()+" or bwl.type = "+WalletLogType.账户充值.ordinal()+") ");
+					
+		if(MapUtil.checkKey(queryMap, "superior")){
+        	hql.append(" and bcc.superior_id ="+((Customer)MapUtils.getObject(queryMap, "superior")).getId());
+        }
+		
+		hql.append(" group by bcc.id) bwll on bwll.id = bc.id" + 
+//				" left join business_wallet bw on bc.wallet_id = bw.id" +
+//				" left join business_wallet_log bwl on bwl.wallet_id = bw.id and (bwl.type = " +WalletLogType.直接充值.ordinal()+" or bwl.type = "+WalletLogType.账户充值.ordinal()+")" +
+//				" left join business_order bo on bo.customer_id = bc.id and (bo.status = "+OrderStatus.出票成功.ordinal()+" or bo.status = "+OrderStatus.部分出票成功.ordinal()+")" +
+				" left join (select bccc.id,sum(bo.out_amount) as out_amount from business_customer bccc,business_order bo where  bo.customer_id = bccc.id and (bo.status = "+OrderStatus.出票成功.ordinal()+" or bo.status = "+OrderStatus.部分出票成功.ordinal()+") ");
+				
+		if(MapUtil.checkKey(queryMap, "superior")){
+			hql.append(" and bccc.superior_id ="+((Customer)MapUtils.getObject(queryMap, "superior")).getId());
+		}
+						
+		hql.append(" GROUP BY bccc.id) boo on boo.id = bc.id" +
+				" where 1=1 ");
+				
+        if (f_serch != null) {
+            if (f_serch.equals("用户名")) {
+            	hql.append(" and bc.nick_name like '%"+f_serchName+"%'");
+            }
+            if (f_serch.equals("真实姓名")) {
+            	hql.append(" and bc.real_name like '%"+f_serchName+"%'");
+            }
+            if (f_serch.equals("邮箱")) {
+            	hql.append(" and bc.email like '%"+f_serchName+"%'");
+            }
+        }
+        if (f_starTime != null) {
+        	hql.append(" and bc.register_time >=:f_starTime");
+        }
+        if (f_endTime != null) {
+        	hql.append(" and bc.register_time <=:f_endTime");
+        }
+        if (f_orderserch != null
+                && (f_orderserch.equals("购彩用户") || f_orderserch.equals("未购彩用户"))) {
+            if (f_orderserch.equals("购彩用户")) {
+                if (stratTime != null || endTime != null) {
+                    List<Long> list = lotteryOrderService.getCustomerId(
+                            stratTime, endTime);
+                    hql.append(" and bc.id in (:idList)");
+                }
+            }
+            if (f_orderserch.equals("未购彩用户")) {
+                if (stratTime != null || endTime != null) {
+                    List<Long> list = lotteryOrderService.getCustomerId(
+                            stratTime, endTime);
+                    if (list != null && list.size() > 0)
+                    	hql.append(" and bc.id in (:idList)");
+
+                }
+            }
+        }
+        
+        if(type != null) {
+        	hql.append(" and bc.usr_type ="+type.ordinal());
+        }
+        if(isApply != null)
+        {
+        	hql.append(" and bc.is_apply ="+isApply);
+        }
+        if(isPass != null)
+        {
+        	hql.append(" and bc.is_pass ="+isPass);
+        }
+        
+        if(MapUtil.checkKey(queryMap, "adminUser")){
+        	hql.append(" and bc.admin_user_id ="+((AdminUser)MapUtils.getObject(queryMap, "adminUser")).getId());
+        }
+        if(MapUtil.checkKey(queryMap, "status")){
+        	hql.append(" and bc.status ="+MapUtils.getString(queryMap, "status"));
+        }
+        if(MapUtil.checkKey(queryMap, "someHavntAcceptWakeUp")){
+        	hql.append(" and (bc.wake_up_email_num =0 or bc.wake_up_email_num is null)");
+        }
+        if(MapUtil.checkKey(queryMap, "regSource")){
+        	hql.append(" and bc.reg_source ="+MapUtils.getString(queryMap, "regSource"));
+        }
+        if(MapUtil.checkKey(queryMap, "superior")){
+        	hql.append(" and bc.superior_id ="+((Customer)MapUtils.getObject(queryMap, "superior")).getId());
+        }
+        
+        if(MapUtil.checkKey(queryMap, "sBalance")||MapUtil.checkKey(queryMap, "eBalance")){
+        	
+        	if(MapUtil.checkKey(queryMap, "sBalance")){
+        		hql.append(" and bwll.balance >="+(BigDecimal)MapUtils.getObject(queryMap, "sBalance"));
+               }
+               
+            if(MapUtil.checkKey(queryMap, "eBalance")){
+            	hql.append(" and bwll.balance <="+(BigDecimal)MapUtils.getObject(queryMap, "eBalance"));
+               }
+        }
+        
+        if(MapUtil.checkKey(queryMap, "havenotDispath")){
+        	hql.append(" and bc.superior_id is null");
+        }
+        
+        if(MapUtil.checkKey(queryMap, "canEmail")&&MapUtils.getBooleanValue(queryMap, "canEmail")==true){
+        	hql.append(" and (bc.email_accept is null or substring(bc.email_accept,"+Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+",1)<="+sysParamService.getSysParamByName(Constants.CUSTOMER_RECEIVE_EMAIL_FROM_BUSSINESS).getValue()+")");
+        	
+        }
+        
+        if(MapUtil.checkKey(queryMap, "canSms")&&MapUtils.getBooleanValue(queryMap, "canSms")==true){
+        	hql.append(" and (bc.sms_accept is null or substring(bc.sms_accept,"+Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+",1)<="+sysParamService.getSysParamByName(Constants.CUSTOMER_RECEIVE_SMS_FROM_BUSSINESS).getValue()+")");
+        }
+        
+        hql.append(" order by bc.id desc");
+        
+        if(MapUtil.checkKey(queryMap, "someHavntAcceptWakeUp")){
+        	System.out.println("====================发送邮件查用户sql============================="+hql.toString());
+        }
+        
+        SQLQuery query = customerDao.getSession().createSQLQuery(hql.toString());
+        
+        if (f_starTime != null) {
+        	query.setCalendar("f_starTime",f_starTime);
+        }
+        if (f_endTime != null) {
+        	query.setCalendar("f_endTime",f_endTime);
+        }
+        if (f_orderserch != null
+                && (f_orderserch.equals("购彩用户") || f_orderserch.equals("未购彩用户"))) {
+            if (f_orderserch.equals("购彩用户")) {
+                if (stratTime != null || endTime != null) {
+                    List<Long> list = lotteryOrderService.getCustomerId(
+                            stratTime, endTime);
+                    query.setParameterList("idList", list);
+                }
+            }
+            if (f_orderserch.equals("未购彩用户")) {
+                if (stratTime != null || endTime != null) {
+                    List<Long> list = lotteryOrderService.getCustomerId(
+                            stratTime, endTime);
+                    if (list != null && list.size() > 0)
+                    	query.setParameterList("idList", list);
+
+                }
+            }
+        }
+		
+		Map map = new HashMap();
+		map.put("total", query.list().size());
+		query.setFirstResult((MapUtils.getInteger(queryMap, "pageNo")-1)*MapUtils.getInteger(queryMap, "pageSize"));
+		query.setMaxResults(MapUtils.getInteger(queryMap, "pageSize"));
+		map.put("list", query.list());
+		return map;
+    }
 
     /** 分页获得客户信息 */
     @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
     public Page<Customer> getLotteryCustomerPage(Page<Customer> page,
             Calendar stratTime, Calendar endTime, String f_orderserch,
             String f_serch, Calendar f_starTime, Calendar f_endTime,
-            String f_serchName, UserType type,Boolean isApply,Integer isPass)
+            String f_serchName, UserType type,Boolean isApply,Integer isPass,Map queryMap)
     {
         logger.debug("根据查询条件获得分页期次列表");
         Criteria criteria = customerDao.createCriteria();
@@ -356,7 +780,7 @@ public class CustomerServiceImpl implements CustomerService
                 criteria.add(Restrictions.like("realName", f_serchName + "%"));
             }
             if (f_serch.equals("邮箱")) {
-                criteria.add(Restrictions.eq("emil", f_serchName));
+                criteria.add(Restrictions.eq("email", f_serchName));
             }
         }
         if (f_starTime != null) {
@@ -397,6 +821,41 @@ public class CustomerServiceImpl implements CustomerService
         {
         	criteria.add(Restrictions.eq("isPass", isPass));
         }
+        
+        if(MapUtil.checkKey(queryMap, "adminUser")){
+        	criteria.add(Restrictions.eq("adminUser", (AdminUser)MapUtils.getObject(queryMap, "adminUser")));
+        }
+        
+        if(MapUtil.checkKey(queryMap, "superior")){
+        	criteria.add(Restrictions.eq("superior", (Customer)MapUtils.getObject(queryMap, "superior")));
+        }
+        
+        if(MapUtil.checkKey(queryMap, "sBalance")||MapUtil.checkKey(queryMap, "eBalance")){
+        	criteria.createAlias("wallet", "wallet");
+        	
+        	if(MapUtil.checkKey(queryMap, "sBalance")){
+               	criteria.add(Restrictions.ge("wallet.balance", (BigDecimal)MapUtils.getObject(queryMap, "sBalance")));
+               }
+               
+            if(MapUtil.checkKey(queryMap, "eBalance")){
+               	criteria.add(Restrictions.le("wallet.balance", (BigDecimal)MapUtils.getObject(queryMap, "eBalance")));
+               }
+        }
+        
+        if(MapUtil.checkKey(queryMap, "havenotDispath")){
+        	criteria.add(Restrictions.isNull("superior"));
+        }
+        
+        if(MapUtil.checkKey(queryMap, "canEmail")&&MapUtils.getBooleanValue(queryMap, "canEmail")==true){
+        	criteria.add(Restrictions.sqlRestriction(" {alias}.email_accept is null or substring({alias}.email_accept,"+Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+",1)<="+sysParamService.getSysParamByName(Constants.CUSTOMER_RECEIVE_EMAIL_FROM_BUSSINESS).getValue()));
+        	
+        }
+        
+        if(MapUtil.checkKey(queryMap, "canSms")&&MapUtils.getBooleanValue(queryMap, "canSms")==true){
+        	criteria.add(Restrictions.sqlRestriction(" {alias}.sms_accept is null or substring({alias}.sms_accept,"+Calendar.getInstance().get(Calendar.DAY_OF_MONTH)+",1)<="+sysParamService.getSysParamByName(Constants.CUSTOMER_RECEIVE_SMS_FROM_BUSSINESS).getValue()));
+        }
+        
+        
         criteria.addOrder(Order.desc("id"));
         page = customerDao.findByCriteria(page, criteria);
         return page;
@@ -459,6 +918,13 @@ public class CustomerServiceImpl implements CustomerService
     public List<Customer> getCustomerByProperty(String name, Object value)
     {
         return customerDao.findByProperty(name, value);
+    }
+    
+    /** 根据用户类型查询用户 */
+    @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
+    public List<Customer> getCustomerByCustomerType(CustomerType type)
+    {
+    	return customerDao.createCriteria().add(Restrictions.eq("customerType", type)).list();
     }
 
     /** 根据唯一属性得到客户对象 */
@@ -550,6 +1016,69 @@ public class CustomerServiceImpl implements CustomerService
         page = paymentRequestDao.findByCriteria(page, criteria);
         return page;
     }
+    
+    /*
+     * 根据查询条件获得客户充值流水信息总和
+     * 
+     * @see
+     * com.xsc.lottery.service.business.CustomerService#getPaymentRequestPage
+     * (org.springside.modules.orm.hibernate.Page, java.lang.String,
+     * java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+     * java.lang.String, java.lang.String)
+     */
+    @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
+    public BigDecimal getPaymentRequestSum(
+             String f_moneyChannel, String f_name,
+            String f_numNo, Calendar f_starTime, Calendar f_endTime,
+            String f_statu, String f_user, String fUserTypes, Calendar fSTime,
+            Calendar fETime)
+    {
+        logger.debug("根据查询条件获得客户充值流水信息总和");
+        Criteria criteria = paymentRequestDao.createCriteria();
+        if (!StringUtils.isEmpty(f_moneyChannel)) {
+            criteria.add(Restrictions.eq("channel", MoneyChannel
+                    .valueOf(f_moneyChannel)));
+        }
+        criteria.createAlias("customer", "customer");
+        if (!StringUtils.isEmpty(f_name)) {
+            criteria.add(Restrictions.eq("customer.nickName", f_name));
+        }
+        if (!StringUtils.isEmpty(fUserTypes)) {
+            criteria.add(Restrictions.eq("customer.usrType", UserType
+                    .valueOf(fUserTypes)));
+        }
+
+        if (fSTime != null) {
+            criteria.add(Restrictions.ge("customer.registerTime", fSTime));
+        }
+        if (fETime != null) {
+            criteria.add(Restrictions.le("customer.registerTime", fETime));
+        }
+
+        if (!StringUtils.isEmpty(f_numNo)) {
+            criteria.add(Restrictions.eq("serialNumber", f_numNo));
+        }
+        if (f_starTime != null) {
+            criteria.add(Restrictions.ge("payTime", f_starTime));
+        }
+        if (f_endTime != null) {
+            criteria.add(Restrictions.le("payTime", f_endTime));
+        }
+        if (!StringUtils.isEmpty(f_statu)) {
+            criteria.add(Restrictions.eq("finish", Boolean
+                    .parseBoolean(f_statu)));
+        }
+        if (!StringUtils.isEmpty(f_user)) {
+            criteria.createAlias("user", "user");
+            criteria.add(Restrictions.eq("user.adminName", f_user));
+        }
+        Object o = criteria.setProjection(Projections.sum("money")).uniqueResult();
+        BigDecimal oo = new BigDecimal(0);
+        if(o!=null){
+        	oo = (BigDecimal) o;
+        }
+        return oo;
+    }
 
     @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
     public Page<BackMoneyRequest> getBackMoneyRequestPage(
@@ -607,6 +1136,67 @@ public class CustomerServiceImpl implements CustomerService
         criteria.addOrder(Order.desc("id"));
         page = backMoneyRequestDao.findByCriteria(page, criteria);
         return page;
+    }
+    
+    @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
+    public BigDecimal getBackMoneyRequestSum(
+             String fStatu, String fNikname,
+            String fRaelname, String fTimeName, Calendar fSTime,
+            Calendar fETime, String fBank, String fBankCard, String fOpenSpace)
+    {
+        logger.debug("根据查询条件获得客户提款流水信息总和");
+        Criteria criteria = backMoneyRequestDao.createCriteria();
+
+        if (!StringUtils.isEmpty(fStatu)) {
+            criteria.add(Restrictions.eq("status", BackMoneyStatus
+                    .valueOf(fStatu)));
+        }
+        if (!StringUtils.isEmpty(fNikname)) {
+            criteria.createAlias("customer", "customer");
+            criteria.add(Restrictions.eq("customer.nickName", fNikname));
+        }
+        if (!StringUtils.isEmpty(fRaelname)) {
+            criteria.createAlias("customer", "customer");
+            criteria.add(Restrictions.or(Restrictions.eq("customer.realName",
+                    fRaelname), Restrictions.eq("realName", fRaelname)));
+        }
+        if (fTimeName != null) {
+            if (fTimeName.equals("申请时间")) {
+                if (fSTime != null) {
+                    criteria.add(Restrictions.ge("applyTime", fSTime));
+                }
+                if (fETime != null) {
+                    criteria.add(Restrictions.le("applyTime", fETime));
+                }
+            }
+            if (fTimeName.equals("返款时间")) {
+                if (fSTime != null) {
+                    criteria.add(Restrictions.ge("sendTime", fSTime));
+                }
+                if (fETime != null) {
+                    criteria.add(Restrictions.le("sendTime", fETime));
+                }
+            }
+        }
+
+        if (!StringUtils.isEmpty(fBank)) {
+            criteria.add(Restrictions.eq("bank", Bank.valueOf(fBank)));
+        }
+
+        if (!StringUtils.isEmpty(fBankCard)) {
+            criteria.add(Restrictions.eq("bankCard", fBankCard));
+        }
+
+        if (!StringUtils.isEmpty(fOpenSpace)) {
+            criteria.add(Restrictions.eq("openSpace", fOpenSpace));
+        }
+        Object o = criteria.setProjection(Projections.sum("money")).uniqueResult();
+        BigDecimal oo = new BigDecimal(0);
+        if(o!=null){
+        	oo = (BigDecimal)o;
+        }
+        
+        return oo;
     }
     
     @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
@@ -1007,10 +1597,14 @@ public class CustomerServiceImpl implements CustomerService
     /** 得到被推荐人注册数 根据推荐人，开始，结束时间作为条件*/
     @SuppressWarnings("unchecked")
         @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
-    public Long getRecommendorsPage2(Page<Customer> page, Customer customer,Calendar startTime, Calendar endTime)
+    public Long getRecommendorsPageNum(Page<Customer> page, Customer customer,Calendar startTime, Calendar endTime)
 	{
     	Criteria criteria = customerDao.createCriteria();
-    	criteria.add(Restrictions.eq("superior", customer));
+    	
+    	
+    	if(customer!=null){
+    		criteria.add(Restrictions.eq("superior", customer));
+    	}
         
         if (startTime != null) {
             criteria.add(Restrictions.ge("registerTime", startTime));
@@ -1027,32 +1621,37 @@ public class CustomerServiceImpl implements CustomerService
         return regNumb;
 	}
     
-    public static void main(String[] args)
-	{
-    	CustomerService customerService = new CustomerServiceImpl();
-    	Calendar curReportDate = Calendar.getInstance();
-    	Calendar startTime = Calendar.getInstance();
-		Calendar overTime = Calendar.getInstance();
-		startTime.set(curReportDate.get(Calendar.YEAR), curReportDate.get(Calendar.MONTH), curReportDate.get(Calendar.DATE), 0, 0, 0);
-		overTime.set(curReportDate.get(Calendar.YEAR), curReportDate.get(Calendar.MONTH), curReportDate.get(Calendar.DATE), 23, 59, 59);
-		Customer customer = new Customer();
-		customer.setId(new Long(2988));
-    	Long regNum = customerService.getRecommendorsPage2(null,customer,startTime, overTime);	
-    	System.out.println("============================="+regNum);
-	}
+//    public static void main(String[] args)
+//	{
+//    	CustomerService customerService = new CustomerServiceImpl();
+//    	Calendar curReportDate = Calendar.getInstance();
+//    	Calendar startTime = Calendar.getInstance();
+//		Calendar overTime = Calendar.getInstance();
+//		startTime.set(curReportDate.get(Calendar.YEAR), curReportDate.get(Calendar.MONTH), curReportDate.get(Calendar.DATE), 0, 0, 0);
+//		overTime.set(curReportDate.get(Calendar.YEAR), curReportDate.get(Calendar.MONTH), curReportDate.get(Calendar.DATE), 23, 59, 59);
+//		Customer customer = new Customer();
+//		customer.setId(new Long(2988));
+////    	Long regNum = customerService.getRecommendorsPage2(null,customer,startTime, overTime);	
+////    	System.out.println("============================="+regNum);
+//	}
     
     /** 得到被推荐人列表*/
     @SuppressWarnings("unchecked")
         @Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
-    public Page<Customer> getRecommendorsPage2(Page<Customer> page, Customer customer)
+    public Page<Customer> getRecommendorsPage2(Page<Customer> page, Customer customer,Calendar stime, Calendar etime)
 	{
     	Criteria criteria = customerDao.createCriteria();
 
         criteria.add(Restrictions.or(Restrictions.eq("superior", customer), 
     			Restrictions.eq("ssuperior", customer)));
         
-              
-      
+        if (stime != null) {
+            criteria.add(Restrictions.ge("registerTime", stime));
+        }
+        if (etime != null) {
+            criteria.add(Restrictions.le("registerTime", etime));
+        }
+        criteria.addOrder(Order.desc("id"));
         page = customerDao.findByCriteria(page, criteria);
         return page;
 	}
@@ -1150,7 +1749,13 @@ public class CustomerServiceImpl implements CustomerService
 		//customer.setQuestion(question);
 		
 		String content ="【一彩票网】欢迎使用一彩票，一彩票手机验证码为"+customer.getYanzhenma();
-		smsLogService.saveSmsLog(customer.getMobileNo(), content, customer.getId(),SmsLogType.VALID);
+		Map result = SmsUtil.sendSms(customer.getMobileNo(), new String[]{customer.getYanzhenma()},Configuration.getInstance().getValue("phoneVilTemplateIDYUN"));
+		if("000000".equals(result.get("statusCode"))){//发送成功
+			smsLogService.saveSmsLogAndSendState(customer.getMobileNo(), content, customer.getId(),SmsLogType.VALID,SmsLogState.SENDED,"");
+		}else{
+			smsLogService.saveSmsLogAndSendState(customer.getMobileNo(), content, customer.getId(),SmsLogType.VALID,SmsLogState.FAILURE,"错误码=" + result.get("statusCode") +" 错误信息= "+result.get("statusMsg"));
+		}
+//		smsLogService.saveSmsLog(customer.getMobileNo(), content, customer.getId(),SmsLogType.VALID);
 		customerDao.save(customer);
 		//messageTaskExcutor.addNotifyCustomer(customer);
 		return  customer;
@@ -1300,6 +1905,101 @@ public class CustomerServiceImpl implements CustomerService
         if (list.isEmpty())
             return null;
         return list;
+	}
+	
+	public List getThePerformance(Map m)
+	{
+		StringBuffer hql = new StringBuffer("" +
+				"select bc.nick_name," +
+				"case when cps.commission is null then 0 else cps.commission end," +
+				"case when cps.pay is null then 0 else cps.pay end," +
+				"case when cps.rechargeMon is null then 0 else cps.rechargeMon end," +
+				"case when e.emailSum is null then 0 else e.emailSum end," +
+				"case when s.smsSum is null then 0 else s.smsSum end from business_customer bc " +
+				"left join (select customer_id id,sum(commission) commission,sum(total) pay,sum(recharge_mon) rechargeMon from business_cps_day_report where 1=1");
+				
+		
+		
+		if(MapUtil.checkKey(m, "f_sTime")){
+			hql.append(" and report_date>=:f_sTime");
+		}
+		if(MapUtil.checkKey(m, "f_eTime")){
+			hql.append(" and report_date<=:f_eTime");
+		}
+		
+		hql.append(" group by customer_id) cps on bc.id = cps.id ");
+		
+		
+		hql.append(" left join (select store_id id, count(*) emailSum from business_email_log where state='SENDED'");
+		
+		if(MapUtil.checkKey(m, "f_sTime")){
+			hql.append(" and send_time>=:f_sTime");
+		}
+		if(MapUtil.checkKey(m, "f_eTime")){
+			hql.append(" and send_time<=:f_eTime");
+		}
+		
+		hql.append(" group by store_id) e on bc.id = e.id ");
+		
+		
+		hql.append(" left join (select user_id id, count(*) smsSum from business_sms_log where state='SENDED' ");
+		
+		if(MapUtil.checkKey(m, "f_sTime")){
+			hql.append(" and send_time>=:f_sTime");
+		}
+		if(MapUtil.checkKey(m, "f_eTime")){
+			hql.append(" and send_time<=:f_eTime");
+		}
+		
+		hql.append(" group by user_id) s on bc.id = s.id " +
+				" where 1=1"); 
+		
+		if(MapUtil.checkKey(m, "customer_type")){
+			hql.append(" and customer_type=:customer_type");
+		}
+		
+		if(MapUtil.checkKey(m, "businessMan")){
+			hql.append(" and nick_name like :nick_name");
+		}
+		
+		hql.append(" order by bc.id desc");
+		
+		
+		
+		SQLQuery query = customerDao.getSession().createSQLQuery(hql.toString());
+		
+		if(MapUtil.checkKey(m, "f_sTime")){
+			query.setParameter("f_sTime", MapUtils.getObject(m,"f_sTime"));
+		}
+		
+		if(MapUtil.checkKey(m, "f_eTime")){
+			query.setParameter("f_eTime", MapUtils.getObject(m,"f_eTime"));
+		}
+		
+		if(MapUtil.checkKey(m, "customer_type")){
+			query.setString("customer_type", MapUtils.getString(m,"customer_type"));
+		}
+		
+		if(MapUtil.checkKey(m, "businessMan")){
+			query.setString("nick_name", "%"+MapUtils.getString(m,"businessMan")+"%");
+		}
+		
+//		if(MapUtil.checkKey(m, "pageSize")){
+//			query.setMaxResults(MapUtils.getIntValue(m, "pageSize"));
+//		}else{
+//			query.setMaxResults(15);
+//		}
+//		
+//		if(MapUtil.checkKey(m, "pageNo")){
+//			int page = MapUtils.getIntValue(m, "pageNo");
+//			int pageSize = MapUtils.getIntValue(m, "pageSize");
+//			query.setFirstResult((page-1)*pageSize); 
+//		}else{
+//			query.setFirstResult(0);
+//		}
+		
+		
+		return query.list();
 	}
 	
 }

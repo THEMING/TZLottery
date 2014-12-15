@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+3189
 svn://192.168.0.69/bs/trunk/TZLottery/core/com/xsc/lottery/create/xml
 svn://192.168.0.69
 
@@ -25,40 +25,6 @@ pengfangliang
 
 
 06230561-3236-44f2-a481-3c5b5774a9d0
-
-BuildDataFactory.java
-file
-
-
-
-
-2014-09-16T03:29:19.749000Z
-e99dd956601abddd61dab4ad830f0b58
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2488
 
 BaseBuildData.java
 file
@@ -94,8 +60,39 @@ pengfangliang
 
 1077
 
-bean
-dir
+BuildDataFactory.java
+file
+
+
+
+
+2014-09-16T03:29:19.749000Z
+e99dd956601abddd61dab4ad830f0b58
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2488
 
 SuperLottoBuildData.java
 file
@@ -130,4 +127,7 @@ pengfangliang
 
 
 4427
+
+bean
+dir
 

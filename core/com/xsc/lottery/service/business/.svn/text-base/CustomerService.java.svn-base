@@ -3,6 +3,7 @@ package com.xsc.lottery.service.business;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import com.xsc.lottery.entity.business.PaymentRequest;
 import com.xsc.lottery.entity.business.Wallet;
 import com.xsc.lottery.entity.business.WalletLog;
 import com.xsc.lottery.entity.enumerate.BusinessType;
+import com.xsc.lottery.entity.enumerate.CustomerType;
 import com.xsc.lottery.entity.enumerate.UserType;
 import com.xsc.lottery.service.LotteryBaseService;
 
@@ -38,6 +40,9 @@ public interface CustomerService extends LotteryBaseService<Customer>{
 
 	/**根据openId得到客户数据*/
 	public Customer getCustomerByOpenId(String openId);
+	
+	/**每月重置客户接受过的来自业务员的邮件和短信的数目*/
+	public void clearCustomerEmailAndSmsAcceptNum(Map map);
 
 	/**分页获得客户流水金额信息*/
 	public Page<WalletLog> getWalletLogPage(Page<WalletLog> page, int inORout, Calendar beginTime,
@@ -53,6 +58,16 @@ public interface CustomerService extends LotteryBaseService<Customer>{
 	public void savePaymentRequest(PaymentRequest entity);
 	
 	/**
+	 * 用hql批量更新客户
+	 */
+	public void updateCustomers(Map map);
+	
+	/**
+	 * 根据用户类型查询用户  
+	 *  */
+	public List<Customer> getCustomerByCustomerType(CustomerType type);
+	
+	/**
 	 * 分页获得客户充值流水信息
 	 */
 	public Page<PaymentRequest> getPaymentRequestPage(Page<PaymentRequest> page,String f_moneyChannel,String f_name,String f_numNo,Calendar f_starTime,Calendar f_endTime,String f_statu,String f_user, String fUserTypes, Calendar fSTime, Calendar fETime);
@@ -62,6 +77,13 @@ public interface CustomerService extends LotteryBaseService<Customer>{
 	 */
 	public Page<BackMoneyRequest> getBackMoneyRequestPage(Page<BackMoneyRequest> page,String fStatu,String fTimeName, String fNikname, String fRaelname, Calendar fSTime, Calendar fETime, String fBank, String fBankCard, String fOpenSpace);
 
+	/*根据条件获取总金额*/
+	public BigDecimal getPaymentRequestSum(
+            String f_moneyChannel, String f_name,
+           String f_numNo, Calendar f_starTime, Calendar f_endTime,
+           String f_statu, String f_user, String fUserTypes, Calendar fSTime,
+           Calendar fETime);
+	
 	/**
 	 * 获得符合条件的客户提款信息
 	 */
@@ -70,6 +92,13 @@ public interface CustomerService extends LotteryBaseService<Customer>{
             String fRaelname, String fTimeName, Calendar fSTime,
             Calendar fETime, String fBank, String fBankCard, String fOpenSpace);
 	
+    public Map getLotteryCustomerPageForBusinessMan(
+            Calendar stratTime, Calendar endTime, String f_orderserch,
+            String f_serch, Calendar f_starTime, Calendar f_endTime,
+            String f_serchName, UserType type,Boolean isApply,Integer isPass,Map queryMap);
+    
+    public List<Object[]> getBillCustomer(Map map);
+    
 	/**
 	 * 提款请求
 	 * **/
@@ -79,6 +108,12 @@ public interface CustomerService extends LotteryBaseService<Customer>{
 	 * 冻结/解冻
 	 */
 	public void updateWallet(Wallet wallet);
+	
+	/*根据条件获取提款总金额*/
+	public BigDecimal getBackMoneyRequestSum(
+             String fStatu, String fNikname,
+            String fRaelname, String fTimeName, Calendar fSTime,
+            Calendar fETime, String fBank, String fBankCard, String fOpenSpace);
 	
 	/**
 	 * 提款请求
@@ -95,7 +130,7 @@ public interface CustomerService extends LotteryBaseService<Customer>{
 	/**分页获得客户信息*/
 	public Page<Customer> getLotteryCustomerPage(Page<Customer> page, Calendar stratTime,
 			Calendar endTime, String f_orderserch, String f_serch, Calendar f_starTime, Calendar f_endTime,
-			String f_serchName, UserType type,Boolean isApply,Integer isPass);
+			String f_serchName, UserType type,Boolean isApply,Integer isPass,Map queryMap);
 	
 	public List<PaymentRequest> getPaymentRequestList(
 			Customer customer, Calendar fStime, Calendar fEtime);
@@ -182,11 +217,11 @@ public interface CustomerService extends LotteryBaseService<Customer>{
     		String recommendName, Calendar startTime, Calendar endTime);
 	
 	@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
-	public Page<Customer> getRecommendorsPage2(Page<Customer> page,Customer customer);
+	public Page<Customer> getRecommendorsPage2(Page<Customer> page,Customer customer, Calendar startTime, Calendar endTime);
 	
 	/** 根据推荐人，开始结束时间 查出被推荐人注册数 */
 	@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = true)
-	public Long getRecommendorsPage2(Page<Customer> page,Customer customer, Calendar startTime, Calendar endTime);
+	public Long getRecommendorsPageNum(Page<Customer> page,Customer customer, Calendar startTime, Calendar endTime);
 
 	@Transactional(propagation = Propagation.NOT_SUPPORTED, readOnly = false)
 	public CustomerCommission saveCommssion(CustomerCommission entity);
@@ -223,5 +258,7 @@ public interface CustomerService extends LotteryBaseService<Customer>{
 	 * @return
 	 */
 	public List<Customer> getCpsCustomerList();
+	
+	public List getThePerformance(Map m);
 	
 }

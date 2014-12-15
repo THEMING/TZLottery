@@ -60,6 +60,6 @@ public interface CpsReportService extends LotteryBaseService<CpsDayReport>
 	public  void calculate(Calendar stime,Calendar etime, Boolean isPay,List<Customer> customerList);
 	
 	/** 获取提成情况 */
-	public Map getCommissionPage(Page<CpsDayReport> page,String stime,String etime,Customer customer);
+	public Map getCommissionPage(Page<CpsDayReport> page,String stime,String etime,Customer customer,String isPay);
 	
 }

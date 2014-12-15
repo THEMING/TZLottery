@@ -1,15 +1,15 @@
 10
 
 dir
-2839
+3189
 svn://192.168.0.69/bs/trunk/TZLottery/core/com/xsc/lottery/entity/admin
 svn://192.168.0.69
 
 
 
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
+2014-09-29T03:23:51.379083Z
+2848
+guanjianming
 
 
 
@@ -25,40 +25,6 @@ pengfangliang
 
 
 06230561-3236-44f2-a481-3c5b5774a9d0
-
-AdminRoleFunction.java
-file
-
-
-
-
-2014-09-16T03:29:20.249000Z
-7dda085191268c2800b6fc93f1d10421
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1355
 
 AdminChannel.java
 file
@@ -94,40 +60,6 @@ pengfangliang
 
 3628
 
-AdminPermissions.java
-file
-
-
-
-
-2014-09-16T03:29:20.258000Z
-b22c55aaa0f5738196a5720cd824ed83
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1579
-
 AdminChannelMode.java
 file
 
@@ -162,9 +94,179 @@ pengfangliang
 
 1405
 
+AdminClass.java
+file
+
+
+
+
+2014-09-16T03:29:20.285000Z
+27bd669787dd86e061413e8fe4086b45
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7656
+
+AdminPermissions.java
+file
+
+
+
+
+2014-09-16T03:29:20.258000Z
+b22c55aaa0f5738196a5720cd824ed83
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1579
+
+AdminRole.java
+file
+
+
+
+
+2014-09-16T03:29:20.276000Z
+87c9cabf63b7e0f052e667bf594694d9
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1304
+
+AdminRoleFunction.java
+file
+
+
+
+
+2014-09-16T03:29:20.249000Z
+7dda085191268c2800b6fc93f1d10421
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1355
+
+AdminSyslogs.java
+file
+
+
+
+
+2014-09-16T03:29:20.281000Z
+64fadb8a24c37e343b0560e7518812ab
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1455
+
 AdminUser.java
 file
-2848
+
 
 
 
@@ -229,106 +331,4 @@ pengfangliang
 
 
 1550
-
-AdminRole.java
-file
-
-
-
-
-2014-09-16T03:29:20.276000Z
-87c9cabf63b7e0f052e667bf594694d9
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1304
-
-AdminSyslogs.java
-file
-
-
-
-
-2014-09-16T03:29:20.281000Z
-64fadb8a24c37e343b0560e7518812ab
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1455
-
-AdminClass.java
-file
-
-
-
-
-2014-09-16T03:29:20.285000Z
-27bd669787dd86e061413e8fe4086b45
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-7656
 

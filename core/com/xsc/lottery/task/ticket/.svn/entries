@@ -1,14 +1,14 @@
 10
 
 dir
-2839
+3189
 svn://192.168.0.69/bs/trunk/TZLottery/core/com/xsc/lottery/task/ticket
 svn://192.168.0.69
 
 
 
-2014-09-16T02:27:40.311035Z
-2647
+2014-10-23T10:24:40.615350Z
+3189
 pengfangliang
 
 
@@ -25,40 +25,6 @@ pengfangliang
 
 
 06230561-3236-44f2-a481-3c5b5774a9d0
-
-TicketCheckBucket.java
-file
-
-
-
-
-2014-09-16T03:29:19.529000Z
-46424377c25f0cb72486619a321ae47c
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1299
 
 TicketBusinessFactory.java
 file
@@ -94,16 +60,16 @@ pengfangliang
 
 1060
 
-TicketTreatmentWork.java
+TicketCheckBucket.java
 file
 
 
 
 
-2014-09-16T03:29:19.539000Z
-035a7386d30b3004aa681517dd036280
-2014-09-16T02:27:40.311035Z
-2647
+2014-09-16T03:29:19.529000Z
+46424377c25f0cb72486619a321ae47c
+2014-09-01T13:00:28.334948Z
+2463
 pengfangliang
 
 
@@ -126,5 +92,39 @@ pengfangliang
 
 
 
-24989
+1299
+
+TicketTreatmentWork.java
+file
+3604
+
+
+
+2014-11-21T07:14:49.514000Z
+1b44dafc397c46445fa7f97418178bca
+2014-11-21T07:31:28.147930Z
+3604
+guanjianming
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+25525
 

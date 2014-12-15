@@ -1,14 +1,14 @@
 10
 
 dir
-2839
+3189
 svn://192.168.0.69/bs/trunk/TZLottery/core/com/xsc/lottery/task/jczq
 svn://192.168.0.69
 
 
 
-2014-09-01T13:00:28.334948Z
-2463
+2014-10-16T07:38:51.046725Z
+3008
 pengfangliang
 
 
@@ -32,13 +32,14 @@ file
 
 
 
-2014-09-16T03:29:19.612000Z
-fd01632f812bd33e4b782bb2870f357c
-2014-09-01T13:00:28.334948Z
-2463
+2014-10-24T03:17:42.485000Z
+dd5b7c0e0002d63b28b7180b5d862573
+2014-10-16T07:38:51.046725Z
+3008
 pengfangliang
 
 
+svn:special svn:externals svn:needs-lock
 
 
 
@@ -57,6 +58,5 @@ pengfangliang
 
 
 
-
-5466
+5585
 

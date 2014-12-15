@@ -18,7 +18,7 @@
         });
 	</script>
 	<script>
-		KE.show({
+	KE.show({
 			id : 'editor_id',
 			//cssPath : './index.css',
 			imageUploadJson : '/upload.aspx',
@@ -40,6 +40,12 @@
 	<script>
 		function oncheck(obj){
 			$(obj).val($(obj).attr("checked"));
+			
+			if(obj.id=="isPublic"&&$(obj).attr("checked")==false){
+				$("#partnerTr").show();
+			}else if(obj.id=="isPublic"&&$(obj).attr("checked")==true){
+				$("#partnerTr").hide();
+			}
 		}
 		
 		function checkForm()
@@ -97,15 +103,58 @@
 				msg += "新闻内容不能为空！\n";
 			}
 			
+			
+			
 			if(!flag)
 			{
 				alert(msg);
 			}
 			else
 			{
+				if($("#needLittlePicture").attr("checked")){
+					var imgHead = article_content.indexOf('<img');
+					if(imgHead==-1){
+						msg += "新闻内容没有包含图片！\n";
+						alert(msg);return;
+					}
+					var imgTail = article_content.indexOf('/>',imgHead);
+					var resStr = article_content.substr(imgHead,imgTail-imgHead+2);
+					$("#littlePictureCode").val(resStr);
+				}
+				
+				if($("#isPublic").attr("checked")==false){
+					var partnerIds = $('input[name="partnerId"]:checked').val([]);
+					var partnerIdss = "";
+					if(partnerIds.length>0){
+						partnerIdss = $("#partnerId_"+partnerIds[0].value).val();
+					}
+					
+					for(var i=1;i<partnerIds.length;i++){
+						partnerIdss += ","+$("#partnerId_"+partnerIds[i].value).val();
+					}
+					
+					$("#partnerIdss").val(partnerIdss);
+				}
+				
 			   $("#editor_id").val(article_content);
 			   $("#article_form").submit();
 			}
+		}
+		
+		function doSelectAll()
+		{
+			str = $("#selectall").val();
+			if(str == '全选')
+			{
+				$("#selectall").val("取消");
+				$("[name=partnerId]:checkbox").attr("checked",true);
+			}
+			if(str == '取消')
+			{
+				$("#selectall").val("全选");
+				$("[name=partnerId]:checkbox").attr("checked",false);
+			}
+
 		}
 		
 	</script>
@@ -116,6 +165,7 @@
     <div >
     	<form action="/oss/article/manageArticle.htm?action=save" method="post" id="article_form" name="article_form">
     	<input type="hidden" value="${article.id}" name="article.id">
+    	<input type="hidden" id="littlePictureCode" name="littlePictureCode">
 	    <table width="75%" cellpadding="5" cellspacing="5"> 
 	    <tr>
 	    	<td align="center" width="12%">文章类别<font color="red" style="padding-left: 5px;">*</font></td>
@@ -129,7 +179,56 @@
 	    </tr>
 	    <tr>
 	    	<td align="center">是否置 顶</td> 
-	    	<td><input type="checkbox" <s:if test="article.top">checked</s:if>	name="top" onchange="oncheck(this)" /></td>
+	    	<td><input type="checkbox" <s:if test="article.top">checked</s:if> value=<s:if test="article.top">true</s:if><s:else>false</s:else> name="top" onchange="oncheck(this)" /></td>
+	    </tr>
+	    <tr>
+	    	<td align="center">是否添加缩略图</td> 
+	    	<td><input type="checkbox" id="needLittlePicture"	name="needLittlePicture"  onchange="oncheck(this)" /></td>
+	    </tr>
+	    <tr>
+	    	<td align="center">是否公开</td> 
+	    	<td><input type="checkbox" id="isPublic" name="isPublic" value=<s:if test="article.isPublic">true</s:if><s:else>false</s:else> onchange="oncheck(this)" <s:if test="article.isPublic">checked</s:if> />
+	    		<input hidden="" id="partnerIdss" name="partnerIdss">
+	    	</td>
+	    </tr>
+	    <tr id="partnerTr" <s:if test="article.isPublic">hidden</s:if> >
+	    	<td colspan="2">
+	    		<div style="width:670px;" class="tab">
+	    			<table>
+	    			<tr>
+	    				<td colspan="2" align="center">
+	    					<font color="red">请选择关联的代理商</font>
+	    				</td>
+	    			</tr>
+	    				<tr>
+	    				<td><div align="center"><input type="button" value="全选" onclick="doSelectAll();" id="selectall"></input></div></td>
+	    					<td>
+	    						代理商名称
+	    					</td>
+	    				</tr>
+	    			</table>
+	    		</div>
+	    		<div style="width:670px;height: 100px;overflow-y:scroll;" class="tab">
+	    			<table>
+	    				<s:iterator id="rs" value="partnerList">
+				  			<tr>
+				  			<td>
+				  			<s:if test="mapPartnerSelected[#rs.id]>0">
+					  			<input name="partnerId" type="checkbox" checked="checked" id="partnerId_${rs.id}" value="${rs.id}"/>
+			                 </s:if>
+			                 <s:else>
+			                 <input name="partnerId" type="checkbox" id="partnerId_${rs.id}" value="${rs.id}"/>
+			                 </s:else>
+				  			</td>
+				  				<td align="center">${rs.nickName}</td>
+				  			</tr>
+				  		</s:iterator>
+				  		
+				  		
+				  		
+	    			</table>
+	    		</div>
+	    	</td>
 	    </tr>
 	    <tr>
 	    	<td align="center" width="8%">新闻标题<font color="red" style="padding-left: 5px;">*</font></td> 

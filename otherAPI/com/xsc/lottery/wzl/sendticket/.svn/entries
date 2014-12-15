@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/otherAPI/com/xsc/lottery/wzl/sendticket
 svn://192.168.0.69
 
@@ -28,17 +28,18 @@ pengfangliang
 
 JclqBingoCheck.java
 file
+3245
 
 
 
-
-2014-09-16T03:29:21.998000Z
-bebf1808727aa47fe9e225f53fcac1f1
-2014-09-01T13:00:28.334948Z
-2463
+2014-11-10T08:59:54.614000Z
+d94b159a22095fd696b5327b5c6ab66c
+2014-10-30T08:18:14.005273Z
+3245
 pengfangliang
 
 
+svn:special svn:externals svn:needs-lock
 
 
 
@@ -57,8 +58,7 @@ pengfangliang
 
 
 
-
-18184
+18716
 
 WzlTicketTreatmentWork.java
 file

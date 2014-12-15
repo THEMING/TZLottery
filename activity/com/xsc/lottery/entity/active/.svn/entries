@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/activity/com/xsc/lottery/entity/active
 svn://192.168.0.69
 
@@ -25,6 +25,40 @@ pengfangliang
 
 
 06230561-3236-44f2-a481-3c5b5774a9d0
+
+Activity.java
+file
+3376
+
+
+
+2014-11-10T08:49:04.285000Z
+49d56a572d74ea7a24ece4bc975491d9
+2014-11-05T04:31:18.332334Z
+3376
+pengfangliang
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5084
 
 ActivityDetail.java
 file
@@ -60,53 +94,20 @@ pengfangliang
 
 3287
 
-ActivityStatus.java
-file
-
-
-
-
-2014-09-16T03:29:22.635000Z
-4a2c93deae63fb5e6db05ff145ee2483
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-120
-
 ActivityDetailType.java
 file
+3189
 
 
 
-
-2014-09-16T03:29:22.640000Z
-3c974431f649122cea5a899711ed9752
-2014-09-01T13:00:28.334948Z
-2463
+2014-10-24T03:29:54.287000Z
+4f8e39ea32a65fcbb8254124a48f2fa5
+2014-10-16T02:46:10.408771Z
+2988
 pengfangliang
 
 
+svn:special svn:externals svn:needs-lock
 
 
 
@@ -125,8 +126,7 @@ pengfangliang
 
 
 
-
-156
+187
 
 ActivityOrderType.java
 file
@@ -162,14 +162,14 @@ pengfangliang
 
 126
 
-Activity.java
+ActivityStatus.java
 file
 
 
 
 
-2014-09-16T03:29:22.648000Z
-1873e6f0c362b065a4627fd665f4211a
+2014-09-16T03:29:22.635000Z
+4a2c93deae63fb5e6db05ff145ee2483
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -194,39 +194,20 @@ pengfangliang
 
 
 
-3158
+120
 
 ActivityType.java
 file
+3189
 
 
 
 
-2014-09-16T03:29:22.653000Z
-51fa1ef89df19a4ba5278543aea6d6c4
-2014-09-01T13:00:28.334948Z
-2463
+652a7447871eb25676b6a67229c4ad5c
+2014-10-16T02:46:10.408771Z
+2988
 pengfangliang
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-320
+svn:special svn:externals svn:needs-lock
 

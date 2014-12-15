@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/admin/com/xsc/lottery/admin/action/basketball
 svn://192.168.0.69
 
@@ -62,17 +62,18 @@ pengfangliang
 
 JCLQOpenPrize.java
 file
+3246
 
 
 
-
-2014-09-16T03:29:17.963000Z
-49cbb9d5ea8677ef9521df6df6905a62
-2014-09-01T13:00:28.334948Z
-2463
+2014-11-10T08:52:29.802000Z
+9b5782339e25464936f8cc606d7660c0
+2014-10-30T08:19:16.174999Z
+3246
 pengfangliang
 
 
+svn:special svn:externals svn:needs-lock
 
 
 
@@ -91,6 +92,5 @@ pengfangliang
 
 
 
-
-16285
+16331
 

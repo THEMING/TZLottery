@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/partner/com/xsc/lottery/service/partner
 svn://192.168.0.69
 
@@ -25,9 +25,6 @@ pengfangliang
 
 
 06230561-3236-44f2-a481-3c5b5774a9d0
-
-impl
-dir
 
 PartnerService.java
 file
@@ -62,4 +59,7 @@ pengfangliang
 
 
 692
+
+impl
+dir
 

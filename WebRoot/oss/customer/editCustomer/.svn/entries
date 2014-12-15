@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/WebRoot/oss/customer/editCustomer
 svn://192.168.0.69
 
@@ -26,14 +26,14 @@ pengfangliang
 
 06230561-3236-44f2-a481-3c5b5774a9d0
 
-editName.jsp
+editBank.jsp
 file
 
 
 
 
-2014-09-16T03:29:09.815000Z
-6e60122ed1935def76a3eb9db5a15516
+2014-09-16T03:29:09.831000Z
+0d34777b3354e916b23b2da1f7899ae0
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -58,7 +58,7 @@ pengfangliang
 
 
 
-894
+3043
 
 editCredentNo.jsp
 file
@@ -94,40 +94,6 @@ pengfangliang
 
 897
 
-editPassword.jsp
-file
-
-
-
-
-2014-09-16T03:29:09.823000Z
-5691e5380d15ef3edfafe2e1debf3731
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1233
-
 editEmail.jsp
 file
 
@@ -162,14 +128,14 @@ pengfangliang
 
 823
 
-editBank.jsp
+editName.jsp
 file
 
 
 
 
-2014-09-16T03:29:09.831000Z
-0d34777b3354e916b23b2da1f7899ae0
+2014-09-16T03:29:09.815000Z
+6e60122ed1935def76a3eb9db5a15516
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -194,5 +160,39 @@ pengfangliang
 
 
 
-3043
+894
+
+editPassword.jsp
+file
+
+
+
+
+2014-09-16T03:29:09.823000Z
+5691e5380d15ef3edfafe2e1debf3731
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1233
 

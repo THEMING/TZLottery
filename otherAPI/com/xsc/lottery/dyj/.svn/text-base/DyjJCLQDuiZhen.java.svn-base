@@ -216,18 +216,20 @@ public class DyjJCLQDuiZhen implements ApplicationListener {
 				match.setWholeScore(wholeScore);
 				match.setHalfScore(halfScore);
 				rangfen = jsonObject.getString("fu_rfsf_num");
-				if (Integer.parseInt(wholeScore.split(":")[0])
-						+ Double.parseDouble(rangfen) > Integer
-						.parseInt(wholeScore.split(":")[1])) {
-					rangfensaiguo = "3";
+				if(rangfen!=null && !"".equals(rangfen))
+				{
+					if (Integer.parseInt(wholeScore.split(":")[0])
+							+ Double.parseDouble(rangfen) > Integer
+							.parseInt(wholeScore.split(":")[1])) {
+						rangfensaiguo = "3";
+					}
+					if (Integer.parseInt(wholeScore.split(":")[0])
+							+ Double.parseDouble(rangfen) < Integer
+							.parseInt(wholeScore.split(":")[1])) {
+						rangfensaiguo = "0";
+					}
+					match.setRfsfResult(rangfensaiguo);
 				}
-				if (Integer.parseInt(wholeScore.split(":")[0])
-						+ Double.parseDouble(rangfen) < Integer
-						.parseInt(wholeScore.split(":")[1])) {
-					rangfensaiguo = "0";
-				}
-				match.setRfsfResult(rangfensaiguo);
-
 				if (Integer.parseInt(wholeScore.split(":")[0]) > Integer
 						.parseInt(wholeScore.split(":")[1])) {
 					quanchangsaiguo = "3";
@@ -240,13 +242,16 @@ public class DyjJCLQDuiZhen implements ApplicationListener {
 				match.setSfResult(quanchangsaiguo);
 				Integer totalScore = Integer.parseInt(wholeScore.split(":")[0])
 						+ Integer.parseInt(wholeScore.split(":")[1]);
-				if (totalScore > Double.parseDouble(jsonObject
-						.getString("fu_dxf_num"))) {
-					match.setDxfResult("3");
-				}
-				if (totalScore < Double.parseDouble(jsonObject
-						.getString("fu_dxf_num"))) {
-					match.setDxfResult("0");
+				if(jsonObject.getString("fu_dxf_num")!=null && !"".equals(jsonObject.getString("fu_dxf_num")))
+				{
+					if (totalScore > Double.parseDouble(jsonObject
+							.getString("fu_dxf_num"))) {
+						match.setDxfResult("3");
+					}
+					if (totalScore < Double.parseDouble(jsonObject
+							.getString("fu_dxf_num"))) {
+						match.setDxfResult("0");
+					}
 				}
 			}
 
@@ -462,9 +467,7 @@ public class DyjJCLQDuiZhen implements ApplicationListener {
 			match.setPlayTypes(playTypes);
 			// 篮球格式：胜负单关;胜负多关| 让分胜负单关;让分胜负多关 | 胜分差单关;胜分差多关 | 大小分单关;大小分多关
 			// (胜负单关内部以英文逗号","隔开)
-			currentRatios = sfdgRatios + ";" + sfggRatios + "|" + rfsfdgRatios
-					+ ";" + rfsfggRatios + "|" + sfcdgRatios + ";"
-					+ sfcggRatios + "|" + dxfdgRatios + ";" + dxfggRatios;
+	        currentRatios = sfdgRatios + ";" + sfggRatios + "|" + rfsfdgRatios+ ";" + rfsfggRatios + "|" + sfcdgRatios + ";"+ sfcggRatios + "|" + dxfdgRatios + ";" + dxfggRatios;
 			match.setCurrentRatios(currentRatios);
 
 			match.setSaleDate(Calendar.getInstance());
@@ -609,7 +612,7 @@ public class DyjJCLQDuiZhen implements ApplicationListener {
 			} else {
 				c2.set(matchtime.get(Calendar.YEAR), matchtime
 						.get(Calendar.MONTH), matchtime
-						.get(Calendar.DAY_OF_MONTH) - 1, 22, 40);
+						.get(Calendar.DAY_OF_MONTH) - 1, 23, 40);
 				stopTime = matchtime2.compareTo(c2) > 0 ? c2 : matchtime2;
 			}
 			return stopTime;

@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/Test/com/xsc/lottery/javatest/service
 svn://192.168.0.69
 
@@ -25,6 +25,74 @@ pengfangliang
 
 
 06230561-3236-44f2-a481-3c5b5774a9d0
+
+BetServiceTest.java
+file
+
+
+
+
+2014-09-16T03:28:46.031000Z
+bea38ca9e86265036446ffd0caf6fefa
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4058
+
+CPSServiceImplTest2.java
+file
+2968
+
+
+
+2014-10-14T04:09:57.655000Z
+c22fa72c72ab5f50dfb677829c75580d
+2014-10-15T09:53:12.172930Z
+2968
+guanjianming
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4866
 
 CacheTest.java
 file
@@ -94,40 +162,6 @@ pengfangliang
 
 3021
 
-TermTaskJunitTest.java
-file
-
-
-
-
-2014-09-16T03:28:46.003000Z
-c11fab868f84f51b6170206953fc4e25
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2192
-
 LotteryTermTest.java
 file
 
@@ -161,74 +195,6 @@ pengfangliang
 
 
 786
-
-TermTaskTest.java
-file
-
-
-
-
-2014-09-16T03:28:46.021000Z
-66a2ccf900d75dd914cc798c21eb9e3c
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-8077
-
-BetServiceTest.java
-file
-
-
-
-
-2014-09-16T03:28:46.031000Z
-bea38ca9e86265036446ffd0caf6fefa
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-4058
 
 MatchArrangeServiceTest.java
 file
@@ -331,4 +297,72 @@ pengfangliang
 
 
 660
+
+TermTaskJunitTest.java
+file
+
+
+
+
+2014-09-16T03:28:46.003000Z
+c11fab868f84f51b6170206953fc4e25
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2192
+
+TermTaskTest.java
+file
+
+
+
+
+2014-09-16T03:28:46.021000Z
+66a2ccf900d75dd914cc798c21eb9e3c
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8077
 

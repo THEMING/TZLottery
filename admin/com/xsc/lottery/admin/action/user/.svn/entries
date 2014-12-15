@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/admin/com/xsc/lottery/admin/action/user
 svn://192.168.0.69
 
@@ -25,40 +25,6 @@ pengfangliang
 
 
 06230561-3236-44f2-a481-3c5b5774a9d0
-
-AdminLoginAction.java
-file
-
-
-
-
-2014-09-16T03:29:18.177000Z
-37df698b93b6421c90365ccec9bd608f
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-5353
 
 AdminChannelAceion.java
 file
@@ -128,14 +94,14 @@ pengfangliang
 
 5221
 
-AdminUserAction.java
+AdminLoginAction.java
 file
 
 
 
 
-2014-09-16T03:29:18.192000Z
-e0b593bcd01ca4a946889003601061be
+2014-09-16T03:29:18.177000Z
+37df698b93b6421c90365ccec9bd608f
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -160,7 +126,7 @@ pengfangliang
 
 
 
-5529
+5353
 
 AdminRoleAction.java
 file
@@ -195,4 +161,38 @@ pengfangliang
 
 
 6538
+
+AdminUserAction.java
+file
+
+
+
+
+2014-09-16T03:29:18.192000Z
+e0b593bcd01ca4a946889003601061be
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5529
 

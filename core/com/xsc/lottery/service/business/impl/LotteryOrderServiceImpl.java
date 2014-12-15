@@ -50,6 +50,8 @@ import com.xsc.lottery.entity.business.Chase;
 import com.xsc.lottery.entity.business.ChaseItem;
 import com.xsc.lottery.entity.business.Community;
 import com.xsc.lottery.entity.business.Customer;
+import com.xsc.lottery.entity.business.EmailLog;
+import com.xsc.lottery.entity.business.EmailLog.EmailState;
 import com.xsc.lottery.entity.business.LotteryTerm;
 import com.xsc.lottery.entity.business.MatchArrange;
 import com.xsc.lottery.entity.business.NewlyWinPrize;
@@ -84,6 +86,7 @@ import com.xsc.lottery.service.business.AdminMobileService;
 import com.xsc.lottery.service.business.ChaseService;
 import com.xsc.lottery.service.business.CommunityService;
 import com.xsc.lottery.service.business.CustomerService;
+import com.xsc.lottery.service.business.EmailLogService;
 import com.xsc.lottery.service.business.LotteryOrderService;
 import com.xsc.lottery.service.business.LotteryTermService;
 import com.xsc.lottery.service.business.SmsLogService;
@@ -120,6 +123,8 @@ public class LotteryOrderServiceImpl implements LotteryOrderService
     private Calendar xtTime = Calendar.getInstance();
     @Autowired
     public CustomerService customerService;
+    @Autowired
+    public EmailLogService emailLogService;
     @Autowired
 	private SmsLogService smsLogService;
     @Autowired
@@ -574,14 +579,15 @@ public class LotteryOrderServiceImpl implements LotteryOrderService
     		return;
     	}
     	String mes = TemplateUtil.getOrderDetailEmailContent(order);
-		try
-		{
-			EmailUtil.sendEmail(order.getCustomer().getEmail(), "您的购彩订单"+order.getNumberNo()+order.getStatus().name(), mes);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+    	EmailLog el = new EmailLog();
+		el.setContent(mes);
+		el.setEmail(order.getCustomer().getEmail());
+		el.setTitle("您的购彩订单"+order.getNumberNo()+order.getStatus().name());
+		el.setUsername("["+order.getCustomer().getNickName()+"]");
+		el.setSendUserName("一彩票");
+		el.setState(EmailState.NOTSEND);
+		el.setSendTime(new Date());
+		emailLogService.saveOrUpdate(el);
     }
     
     public void sendWinEmail(Order order){
@@ -607,7 +613,6 @@ public class LotteryOrderServiceImpl implements LotteryOrderService
             order.setOutAmount(order.getAmount());
             order.setSuccessTime(Calendar.getInstance());
 			setNtalkerLogFinish(order);
-			sendOrderDetailEmail(order);
 			
         }
         else {
@@ -621,12 +626,10 @@ public class LotteryOrderServiceImpl implements LotteryOrderService
                 order.setSuccessTime(Calendar.getInstance());
                 BigDecimal outAmount = order.getAmount().subtract(returnMoney);
                 order.setOutAmount(outAmount);
-                sendOrderDetailEmail(order);
             } 
             else {
                 order.setStatus(OrderStatus.出票失败);
                 order.setOrderResult(OrderResult.作废);
-                sendOrderDetailEmail(order);
             }
             // 以下为退款
             if (order.getCommunity() == null) {
@@ -648,6 +651,9 @@ public class LotteryOrderServiceImpl implements LotteryOrderService
             }
         }
         orderDao.save(order);
+//        if(order!=null&&order.getStatus()!=null&&(OrderStatus.出票失败.equals(order.getStatus())||OrderStatus.出票成功.equals(order.getStatus())||OrderStatus.部分出票成功.equals(order.getStatus()))){
+//        	sendOrderDetailEmail(order);
+//        }
         
         if((order.getStatus()== OrderStatus.出票失败)||(order.getStatus()==OrderStatus.部分出票成功))
         {

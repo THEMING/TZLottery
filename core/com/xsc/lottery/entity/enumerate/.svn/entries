@@ -1,15 +1,15 @@
 10
 
 dir
-2839
+3189
 svn://192.168.0.69/bs/trunk/TZLottery/core/com/xsc/lottery/entity/enumerate
 svn://192.168.0.69
 
 
 
-2014-09-22T10:13:17.992382Z
-2746
-pengfangliang
+2014-10-21T06:40:24.615912Z
+3122
+guanjianming
 
 
 
@@ -26,82 +26,14 @@ pengfangliang
 
 06230561-3236-44f2-a481-3c5b5774a9d0
 
-CustomerStatus.java
+ArticleType.java
 file
 
 
 
 
-2014-09-23T06:36:33.146748Z
-a5a9e104bcfd2bab587d92ae4e25a35c
-2014-09-22T10:13:17.992382Z
-2746
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-217
-
-RegChannel.java
-file
-
-
-
-
-2014-09-23T06:36:33.169251Z
-6d9fd24bb9752d94939e9826cee58419
-2014-09-22T10:13:17.992382Z
-2746
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-213
-
-Bank.java
-file
-
-
-
-
-2014-09-16T03:29:20.086000Z
-c30617cff82314f50c4fee730b7212be
+2014-09-16T03:29:20.129000Z
+f8655e139b67f404e321406ef231b22b
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -126,41 +58,7 @@ pengfangliang
 
 
 
-2275
-
-TermStatus.java
-file
-
-
-
-
-2014-09-16T03:29:20.081000Z
-70880e7369cca6ed5b3a38215f86c6db
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-196
+851
 
 BackMoneyStatus.java
 file
@@ -196,14 +94,14 @@ pengfangliang
 
 165
 
-OrderStatus.java
+Bank.java
 file
 
 
 
 
-2014-09-16T03:29:20.111000Z
-3b58ff8007659ec4a50cad28742374af
+2014-09-16T03:29:20.086000Z
+c30617cff82314f50c4fee730b7212be
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -228,50 +126,16 @@ pengfangliang
 
 
 
-153
+2275
 
-MoneyChannel.java
-file
-2850
-
-
-
-2014-09-28T07:09:30.154589Z
-27481ffd2b1f2a7a9819c2f6b6c77552
-2014-09-29T03:24:57.957391Z
-2850
-guanjianming
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-183
-
-SerialType.java
+BusinessType.java
 file
 
 
 
 
-2014-09-16T03:29:20.124000Z
-b4d39e6776217e34ffc5632d5a13c1b1
+2014-09-16T03:29:20.180000Z
+0332dd7b2afa2b6dccf79657c1494179
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -296,16 +160,16 @@ pengfangliang
 
 
 
-120
+1855
 
-ArticleType.java
+ChaseItermStatus.java
 file
 
 
 
 
-2014-09-16T03:29:20.129000Z
-f8655e139b67f404e321406ef231b22b
+2014-09-16T03:29:20.159000Z
+0773e97e0beeb12da9a888daaed26533
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -330,7 +194,41 @@ pengfangliang
 
 
 
-851
+151
+
+ChaseStatus.java
+file
+
+
+
+
+2014-09-16T03:29:20.146000Z
+ed5bf8f9b05992d9df34d434d27753bc
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+132
 
 CommunityType.java
 file
@@ -400,16 +298,16 @@ pengfangliang
 
 205
 
-TicketStatus.java
+CustomerStatus.java
 file
 
 
 
 
-2014-09-16T03:29:20.155000Z
-0a4438b6de29cfce81add85db508f548
-2014-09-01T13:00:28.334948Z
-2463
+2014-09-23T06:36:33.146748Z
+a5a9e104bcfd2bab587d92ae4e25a35c
+2014-09-22T10:13:17.992382Z
+2746
 pengfangliang
 
 
@@ -432,19 +330,20 @@ pengfangliang
 
 
 
-150
+217
 
-ChaseItermStatus.java
+CustomerType.java
 file
+3364
 
 
 
+2014-11-03T06:20:19.929000Z
+8194e2d080c89725c42f433ed25c0e72
+2014-11-04T10:15:14.007898Z
+3364
+guanjianming
 
-2014-09-16T03:29:20.159000Z
-0773e97e0beeb12da9a888daaed26533
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
 
 
 
@@ -465,280 +364,7 @@ pengfangliang
 
 
 
-
-151
-
-WalletLogType.java
-file
-
-
-
-
-2014-09-16T03:29:20.172000Z
-fa2d39eaa0df80475a00a51109efc334
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1361
-
-SoftwareType.java
-file
-
-
-
-
-2014-09-16T03:29:20.167000Z
-2399ec851dd25cf8f7a7f0560b76fa50
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-174
-
-Sex.java
-file
-
-
-
-
-2014-09-16T03:29:20.056000Z
-c415b126794123f3f9dc50b02f6de10e
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-85
-
-LotteryType.java
-file
-
-
-
-
-2014-09-16T03:29:20.060000Z
-94b25cca8a9408ceabf74fbe44c8e117
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-3275
-
-PlayType.java
-file
-
-
-
-
-2014-09-16T03:29:20.067000Z
-695258ec0ddba17e2866eefd29d5ba94
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2098
-
-PlayStatus.java
-file
-
-
-
-
-2014-09-16T03:29:20.072000Z
-9639694dee972c3606276b139f52eda3
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-100
-
-OrderResult.java
-file
-
-
-
-
-2014-09-16T03:29:20.077000Z
-771b9d1cb67d033bdcb7f35c1c437273
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-350
-
-Restrictedstatus.java
-file
-
-
-
-
-2014-09-16T03:29:20.090000Z
-f9c6b5e98735e8c588e3615ec10d89bd
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-107
+235
 
 JCLQTypes.java
 file
@@ -774,14 +400,14 @@ pengfangliang
 
 2007
 
-RaceStatus.java
+LotteryType.java
 file
 
 
 
 
-2014-09-16T03:29:20.103000Z
-7c7ffa9499d08e89627683f57b9a2bc4
+2014-09-16T03:29:20.060000Z
+94b25cca8a9408ceabf74fbe44c8e117
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -806,19 +432,19 @@ pengfangliang
 
 
 
-175
+3275
 
-SendTicketPlat.java
+MoneyChannel.java
 file
 
 
 
 
-2014-09-16T03:29:20.099000Z
-f734de819ddf146a2851d93805e2f9d4
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
+2014-09-28T07:09:30.154589Z
+27481ffd2b1f2a7a9819c2f6b6c77552
+2014-09-29T03:24:57.957391Z
+2850
+guanjianming
 
 
 
@@ -840,16 +466,16 @@ pengfangliang
 
 
 
-194
+183
 
-UserType.java
+OrderResult.java
 file
 
 
 
 
-2014-09-16T03:29:20.116000Z
-4bca21d12d3698a4f1accb8b84641e82
+2014-09-16T03:29:20.077000Z
+771b9d1cb67d033bdcb7f35c1c437273
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -874,16 +500,16 @@ pengfangliang
 
 
 
-182
+350
 
-PloyType.java
+OrderStatus.java
 file
 
 
 
 
-2014-09-16T03:29:20.133000Z
-31dc0f29bbc46f5203eb901c453804b5
+2014-09-16T03:29:20.111000Z
+3b58ff8007659ec4a50cad28742374af
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -908,143 +534,7 @@ pengfangliang
 
 
 
-656
-
-SecretType.java
-file
-
-
-
-
-2014-09-16T03:29:20.150000Z
-862d5ddecaa35dce25e4c3d30ce22507
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-716
-
-ChaseStatus.java
-file
-
-
-
-
-2014-09-16T03:29:20.146000Z
-ed5bf8f9b05992d9df34d434d27753bc
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-132
-
-TicketSPStatus.java
-file
-
-
-
-
-2014-09-16T03:29:20.163000Z
-5d8cf1c7819c8cb82c4d32389a2432c1
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-111
-
-BusinessType.java
-file
-
-
-
-
-2014-09-16T03:29:20.180000Z
-0332dd7b2afa2b6dccf79657c1494179
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1855
+153
 
 PayStatus.java
 file
@@ -1080,6 +570,176 @@ pengfangliang
 
 111
 
+PlayStatus.java
+file
+
+
+
+
+2014-09-16T03:29:20.072000Z
+9639694dee972c3606276b139f52eda3
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+100
+
+PlayType.java
+file
+
+
+
+
+2014-09-16T03:29:20.067000Z
+695258ec0ddba17e2866eefd29d5ba94
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2098
+
+PloyType.java
+file
+
+
+
+
+2014-09-16T03:29:20.133000Z
+31dc0f29bbc46f5203eb901c453804b5
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+656
+
+RaceStatus.java
+file
+
+
+
+
+2014-09-16T03:29:20.103000Z
+7c7ffa9499d08e89627683f57b9a2bc4
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+175
+
+RegChannel.java
+file
+3520
+
+
+
+2014-11-19T12:54:13.379000Z
+8be430f5a7a518c528625c8a1e195198
+2014-11-14T14:10:44.921646Z
+3520
+pengfangliang
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+220
+
 RegSource.java
 file
 
@@ -1113,4 +773,412 @@ pengfangliang
 
 
 241
+
+Restrictedstatus.java
+file
+
+
+
+
+2014-09-16T03:29:20.090000Z
+f9c6b5e98735e8c588e3615ec10d89bd
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+107
+
+SecretType.java
+file
+
+
+
+
+2014-09-16T03:29:20.150000Z
+862d5ddecaa35dce25e4c3d30ce22507
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+716
+
+SendTemplateType.java
+file
+3227
+
+
+
+2014-10-22T02:54:40.028000Z
+f6455d9252895477386758d6814b653b
+2014-10-28T10:48:55.760248Z
+3227
+guanjianming
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+105
+
+SendTicketPlat.java
+file
+
+
+
+
+2014-09-16T03:29:20.099000Z
+f734de819ddf146a2851d93805e2f9d4
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+194
+
+SerialType.java
+file
+
+
+
+
+2014-09-16T03:29:20.124000Z
+b4d39e6776217e34ffc5632d5a13c1b1
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+120
+
+Sex.java
+file
+
+
+
+
+2014-09-16T03:29:20.056000Z
+c415b126794123f3f9dc50b02f6de10e
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+85
+
+SoftwareType.java
+file
+
+
+
+
+2014-09-16T03:29:20.167000Z
+2399ec851dd25cf8f7a7f0560b76fa50
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+174
+
+TermStatus.java
+file
+
+
+
+
+2014-09-16T03:29:20.081000Z
+70880e7369cca6ed5b3a38215f86c6db
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+196
+
+TicketSPStatus.java
+file
+
+
+
+
+2014-09-16T03:29:20.163000Z
+5d8cf1c7819c8cb82c4d32389a2432c1
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+111
+
+TicketStatus.java
+file
+
+
+
+
+2014-09-16T03:29:20.155000Z
+0a4438b6de29cfce81add85db508f548
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+150
+
+UserType.java
+file
+
+
+
+
+2014-09-16T03:29:20.116000Z
+4bca21d12d3698a4f1accb8b84641e82
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+182
+
+WalletLogType.java
+file
+
+
+
+
+2014-09-16T03:29:20.172000Z
+fa2d39eaa0df80475a00a51109efc334
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1361
 

@@ -1,15 +1,15 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/admin
 svn://192.168.0.69
 
 
 
-2014-09-28T07:08:20.705362Z
-2833
-pengfangliang
+2014-10-13T09:51:36.354883Z
+2916
+guanjianming
 
 
 
@@ -28,17 +28,18 @@ pengfangliang
 
 admin-struts.xml
 file
-2846
+3569
 
 
 
-2014-09-28T10:52:20.223165Z
-f1e2aa1369eca4921b5e3daa3150e9da
-2014-09-29T03:20:52.551915Z
-2846
+2014-11-17T06:31:49.123000Z
+6ddc17d2fd33a7ab037912df758d8616
+2014-11-19T11:58:28.258396Z
+3569
 guanjianming
 
 
+svn:special svn:externals svn:needs-lock
 
 
 
@@ -57,8 +58,7 @@ guanjianming
 
 
 
-
-19323
+20782
 
 com
 dir

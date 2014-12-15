@@ -1,6 +1,8 @@
 package com.xsc.lottery.admin.action;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.Map;
 import java.util.Random;
 
 import org.apache.commons.lang.StringUtils;
@@ -13,10 +15,15 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.xsc.lottery.entity.business.Customer;
+import com.xsc.lottery.entity.business.EmailLog;
+import com.xsc.lottery.entity.business.EmailLog.EmailState;
+import com.xsc.lottery.entity.business.SmsLog.SmsLogState;
 import com.xsc.lottery.entity.business.SmsLog.SmsLogType;
 import com.xsc.lottery.service.business.CustomerService;
+import com.xsc.lottery.service.business.EmailLogService;
 import com.xsc.lottery.service.business.SmsLogService;
 import com.xsc.lottery.util.Configuration;
+import com.xsc.lottery.util.SmsUtil;
 import com.xsc.lottery.web.action.LotteryBaseAction;
 
 @Scope("prototype")
@@ -36,6 +43,8 @@ public class API extends LotteryBaseAction {
 	
 	@Autowired
 	private SmsLogService smsLogService;
+	@Autowired
+    public EmailLogService emailLogService;
 	
 	/**
 	 *  发送手机验证码
@@ -84,7 +93,13 @@ public class API extends LotteryBaseAction {
         		    		int checkCode= random.nextInt(100000)+100000;
         		    		customer.setYanzhenma(String.valueOf(checkCode));
         		    		String content ="【一彩票网】手机绑定验证码："+customer.getYanzhenma()+"，请勿将验证码告知他人。";
-        		    		smsLogService.saveSmsLog(mobileNo, content, customer.getId(),SmsLogType.VALID);
+//        		    		smsLogService.saveSmsLog(mobileNo, content, customer.getId(),SmsLogType.VALID);
+        		    		Map result = SmsUtil.sendSms(mobileNo, new String[]{customer.getYanzhenma()},Configuration.getInstance().getValue("phoneBindTemplateIDYUN"));
+        		    		if("000000".equals(result.get("statusCode"))){//发送成功
+        		    			smsLogService.saveSmsLogAndSendState(mobileNo, content, customer.getId(),SmsLogType.VALID,SmsLogState.SENDED,"");
+        		    		}else{
+        		    			smsLogService.saveSmsLogAndSendState(mobileNo, content, customer.getId(),SmsLogType.VALID,SmsLogState.FAILURE,"错误码=" + result.get("statusCode") +" 错误信息= "+result.get("statusMsg"));
+        		    		}
         		    		customerService.update(customer);
         		    	}
         		    	else
@@ -99,7 +114,13 @@ public class API extends LotteryBaseAction {
     		    		int checkCode= random.nextInt(100000)+100000;
     		    		customer.setYanzhenma(String.valueOf(checkCode));
     		    		String content ="【一彩票网】找回密码的验证码："+customer.getYanzhenma()+"，请勿将验证码告知他人。如果您没有申请找回密码，请忽略此消息。";
-    		    		smsLogService.saveSmsLog(mobileNo, content, customer.getId(),SmsLogType.VALID);
+    		    		Map result = SmsUtil.sendSms(mobileNo, new String[]{customer.getYanzhenma()},Configuration.getInstance().getValue("findPasswordTemplateIDYUN"));
+    		    		if("000000".equals(result.get("statusCode"))){//发送成功
+    		    			smsLogService.saveSmsLogAndSendState(mobileNo, content, customer.getId(),SmsLogType.VALID,SmsLogState.SENDED,"");
+    		    		}else{
+    		    			smsLogService.saveSmsLogAndSendState(mobileNo, content, customer.getId(),SmsLogType.VALID,SmsLogState.FAILURE,"错误码=" + result.get("statusCode") +" 错误信息= "+result.get("statusMsg"));
+    		    		}
+//    		    		smsLogService.saveSmsLog(mobileNo, content, customer.getId(),SmsLogType.VALID);
     		    		customerService.update(customer);
         			}
         			else
@@ -182,6 +203,61 @@ public class API extends LotteryBaseAction {
 	   return null;
     }
     
+    public String sendEmail(){
+    	String nickname = ServletActionContext.getRequest().getParameter("nickname");
+		String content = ServletActionContext.getRequest().getParameter("content");
+		String title = ServletActionContext.getRequest().getParameter("title");
+		
+		
+		
+		String code = "_0000";
+    	String message = "成功";
+    	if(isVerifyIp())
+    	{
+    		if(StringUtils.isEmpty(nickname)||StringUtils.isEmpty(content)||StringUtils.isEmpty(title))
+    		{
+    			code = "_0009";
+    	    	message = "参数为空";
+    		}
+    		else
+    		{
+    			Customer customer = customerService.getCustomerOrName(nickname);
+    			
+    			if(customer==null){
+    				code = "_0001";
+        	    	message = "用户不存在";
+    			}else if(customer.getEmail()==null||"".equals(customer.getEmail())){
+    				code = "_0002";
+        	    	message = "用户未绑定邮箱";
+    			}else{
+        			EmailLog el = new EmailLog();
+        			el.setContent(content);
+        			el.setEmail(customer.getEmail());
+        			el.setTitle(title);
+        			el.setUsername("["+customer.getNickName()+"]");
+        			el.setSendUserName("一彩票");
+        			el.setState(EmailState.NOTSEND);
+        			el.setSendTime(new Date());
+        			emailLogService.saveOrUpdate(el);
+    			}
+    		}
+    	}
+    	else
+    	{
+    		code = "_9999";
+			message = "无访问权限";
+    	}
+    	try {
+		    JSONObject obj = new JSONObject();   
+			obj.put("code", code);
+			obj.put("message", message);
+			ServletActionContext.getResponse().getWriter().print(obj);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return null;
+    }
+    
     /**
      * 发送App下载短信
      * @return
@@ -201,6 +277,12 @@ public class API extends LotteryBaseAction {
     			code = "_0009";
     	    	message = "参数为空";
     		}
+//    		Map result = SmsUtil.sendSms(mobileNo, new String[]{APP_DOWNLOAD_RUL},Configuration.getInstance().getValue("downloadTemplateIDYUN"));
+//    		if("000000".equals(result.get("statusCode"))){//发送成功
+//    			smsLogService.saveSmsLogAndSendState(mobileNo, content, null,SmsLogType.COMMON,SmsLogState.SENDED,"");
+//    		}else{
+//    			smsLogService.saveSmsLogAndSendState(mobileNo, content, null,SmsLogType.COMMON,SmsLogState.FAILURE,"错误码=" + result.get("statusCode") +" 错误信息= "+result.get("statusMsg"));
+//    		}
     		smsLogService.saveSmsLog(mobileNo, content, null, SmsLogType.COMMON);
     		//SDKClient.getClient().sendSMS(new String[]{mobileNo}, content, 5);
     	}

@@ -1,18 +1,18 @@
 10
 
 dir
-2839
+2928
 svn://192.168.0.69/bs/trunk/TZLottery/WebRoot/partner
 svn://192.168.0.69
 
 
 
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
+2014-10-13T11:59:33.912778Z
+2928
+guanjianming
 
 
-
+svn:special svn:externals svn:needs-lock
 
 
 
@@ -25,18 +25,32 @@ pengfangliang
 
 
 06230561-3236-44f2-a481-3c5b5774a9d0
+
+
+
+
+
+
+0
+empty
 
-query.jsp
+agent
+dir
+
+crmSystem
+dir
+
+head.jsp
 file
 
 
 
 
-2014-09-16T03:29:13.076000Z
-3e4836081b48ee076aadd3f40113f845
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
+2014-10-13T11:08:07.034000Z
+14ec97885b616c50ecaac9ca497ee009
+2014-10-13T11:59:33.912778Z
+2928
+guanjianming
 
 
 
@@ -58,43 +72,123 @@ pengfangliang
 
 
 
-5416
+2928
+
+index.htm
+file
+
+
+
+
+2014-09-16T03:29:13.087000Z
+d41d8cd98f00b204e9800998ecf8427e
+2014-10-13T11:59:33.912778Z
+2928
+guanjianming
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0
+
+left.jsp
+file
+3398
+
+
+
+2014-11-04T11:46:49.878000Z
+57670d878cc2f2169d364fdbf5f4cb06
+2014-11-06T02:45:14.274864Z
+3398
+guanjianming
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2025
 
 login.jsp
 file
+3397
 
 
 
 
-2014-09-16T03:29:13.079000Z
-69440988462959d4f261cb482b710106
-2014-09-01T13:00:28.334948Z
-2463
+58552ee18304942553026758a5fce580
+2014-10-14T07:31:48.736607Z
+2948
 pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2949
 
 manage.jsp
+file
+3398
+
+
+
+2014-11-04T11:47:35.046000Z
+9e2aa7c2ec3be672b4859338a457ad2e
+2014-11-06T02:45:14.274864Z
+3398
+guanjianming
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1495
+
+manage2.jsp
 file
 
 
@@ -102,9 +196,9 @@ file
 
 2014-09-16T03:29:13.081000Z
 577e36ff9df31fa922ddec7836f6837b
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
+2014-10-13T11:59:33.912778Z
+2928
+guanjianming
 
 
 
@@ -136,9 +230,9 @@ file
 
 2014-09-16T03:29:13.084000Z
 e5fbaff8a28291f2a960d0513a62ea27
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
+2014-10-13T11:59:33.912778Z
+2928
+guanjianming
 
 
 
@@ -162,17 +256,17 @@ pengfangliang
 
 2532
 
-index.htm
+query.jsp
 file
 
 
 
 
-2014-09-16T03:29:13.087000Z
-d41d8cd98f00b204e9800998ecf8427e
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
+2014-09-16T03:29:13.076000Z
+3e4836081b48ee076aadd3f40113f845
+2014-10-13T11:59:33.912778Z
+2928
+guanjianming
 
 
 
@@ -194,5 +288,5 @@ pengfangliang
 
 
 
-0
+5416
 

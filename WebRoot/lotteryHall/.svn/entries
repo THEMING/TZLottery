@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/WebRoot/lotteryHall
 svn://192.168.0.69
 
@@ -60,13 +60,10 @@ pengfangliang
 
 32935
 
-images
-dir
-
 css
 dir
 
-js
+images
 dir
 
 index.htm
@@ -102,4 +99,7 @@ pengfangliang
 
 
 0
+
+js
+dir
 

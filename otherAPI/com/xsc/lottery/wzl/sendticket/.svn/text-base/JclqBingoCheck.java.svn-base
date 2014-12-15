@@ -33,8 +33,8 @@ public class JclqBingoCheck
     		//让分和大小分都保存在ticket special中。
     		String szAllRangFen = szSpecial;
     		String totalScore = matchArrange.getWholeScore();
-    		float fAwayScore = Float.parseFloat(totalScore.split(":")[0]);
-    		float fHomeScore = Float.parseFloat(totalScore.split(":")[1]);
+    		float fHomeScore = Float.parseFloat(totalScore.split(":")[0]);
+    		float fAwayScore = Float.parseFloat(totalScore.split(":")[1]);
     		if(playtype.equals(PlayType.SF))
     		{
 	    		if(fAwayScore > fHomeScore)
@@ -140,8 +140,9 @@ public class JclqBingoCheck
         	}
         	boolean special = Boolean.valueOf(result.split("\\|")[0]);
         	String specificRes = result.split("\\|")[1];
-        	String ratio = result.split("\\|")[2];
+        	//String ratio = result.split("\\|")[2]; 单关已改为固定奖
         	//todo
+        	/*
         	if(m > 1)	//多关
         	{
         		String exResult = CalculateTicketResult(matchNo, ticket.getTicketSpecial(), playType, i);
@@ -155,6 +156,10 @@ public class JclqBingoCheck
             		if(!exResult.equals(""))	specificRes = exResult;
         		}
         	}
+        	*/
+        	//单关过关都固定奖
+        	String exResult = CalculateTicketResult(matchNo, ticket.getTicketSpecial(), playType, i);
+    		if(!exResult.equals(""))	specificRes = exResult;
     		if (true == special)  // 该场比赛作废
     		{
     			String[] betResults = matchBets[i].split("=")[1].split("/");
@@ -171,6 +176,7 @@ public class JclqBingoCheck
     				if (betResults[j].equals(specificRes))
     				{
     					WinDesc newWinMatch = new WinDesc(matchNo);
+    					/*
     					if ( 1==m && 1==n) // 单串过关
     					{
     						if(ticket.getContent().split("\\|")[0].equals("SFC"))
@@ -189,6 +195,11 @@ public class JclqBingoCheck
     						String personalRatio = szRatio.split("\\|")[i].split("/")[j];
     						newWinMatch.ratioList.add(personalRatio);  // ratio 来自ticket，即为个人即时赔率
     					}
+    					*/
+    					//单关和过关都改为固定奖
+    					String szRatio = ticket.getRatio();
+						String personalRatio = szRatio.split("\\|")[i].split("/")[j];
+						newWinMatch.ratioList.add(personalRatio);  // ratio 来自ticket，即为个人即时赔率
             			winList.add(newWinMatch);
             			break;
     				}

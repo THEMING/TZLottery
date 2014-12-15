@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/activity/com/xsc/lottery/admin/action/active
 svn://192.168.0.69
 
@@ -28,17 +28,18 @@ pengfangliang
 
 ActivitiesAction.java
 file
+3380
 
 
 
-
-2014-09-16T03:29:22.584000Z
-2175fb5940ee3916c881333569929cf0
-2014-09-01T13:00:28.334948Z
-2463
+2014-11-10T08:48:44.028000Z
+624dd8238ca73b00b4467570cc132dc5
+2014-11-05T07:33:03.400782Z
+3380
 pengfangliang
 
 
+svn:special svn:externals svn:needs-lock
 
 
 
@@ -57,8 +58,7 @@ pengfangliang
 
 
 
-
-6430
+11107
 
 ActivityDetailAction.java
 file

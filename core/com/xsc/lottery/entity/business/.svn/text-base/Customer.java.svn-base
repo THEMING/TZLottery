@@ -18,11 +18,14 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Index;
 
 import com.xsc.lottery.entity.BaseObject;
+import com.xsc.lottery.entity.admin.AdminUser;
 import com.xsc.lottery.entity.enumerate.Bank;
 import com.xsc.lottery.entity.enumerate.CredentType;
 import com.xsc.lottery.entity.enumerate.CustomerStatus;
+import com.xsc.lottery.entity.enumerate.CustomerType;
 import com.xsc.lottery.entity.enumerate.RegChannel;
 import com.xsc.lottery.entity.enumerate.RegSource;
 import com.xsc.lottery.entity.enumerate.UserType;
@@ -37,12 +40,21 @@ public class Customer extends BaseObject
     @Id
     @GeneratedValue
     private Long id;
+    
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "customerType")
+    @Index(name = "customerTypeIndex")
+    private CustomerType customerType;
 
     @Column(nullable = false, unique = true)
     private String nickName;
 
     @Column(nullable = false)
     private String password;
+    
+    @ManyToOne
+    @JoinColumn(name = "adminUser_id")
+    private AdminUser adminUser;
 
     @Column
     private String realName;
@@ -151,7 +163,7 @@ public class Customer extends BaseObject
     /**
      * 推广渠道
      */
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "channel_id",nullable = true)
     private SpreadChannel channel;
     
@@ -188,7 +200,74 @@ public class Customer extends BaseObject
     @Enumerated(EnumType.ORDINAL)
     private RegChannel regChannel;
     
-    public Integer getIsPass() {
+    /**
+     * 收到唤醒邮件的数目
+     */
+    private Integer wakeUpEmailNum = 0;
+    
+    /**
+     * 用户被业务员发送邮件的次数 
+     * 数据格式初始为31个0，对应每个月的31天
+     * 当业务员发送了推销邮件 当天对应的位置加一 每个月一号清空*/
+    private String emailAccept="0000000000000000000000000000000";
+    
+    /**
+     * 用户被业务员发送短信的次数 
+     * 数据格式初始为31个0，对应每个月的31天
+     * 当业务员发送了推销短信 当天对应的位置加一 每个月一号清空*/
+    private String smsAccept="0000000000000000000000000000000";//"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0";
+    
+    public Integer getWakeUpEmailNum()
+	{
+		return wakeUpEmailNum;
+	}
+
+	public void setWakeUpEmailNum(Integer wakeUpEmailNum)
+	{
+		this.wakeUpEmailNum = wakeUpEmailNum;
+	}
+
+	public String getEmailAccept()
+	{
+		return emailAccept;
+	}
+
+	public void setEmailAccept(String emailAccept)
+	{
+		this.emailAccept = emailAccept;
+	}
+
+	public String getSmsAccept()
+	{
+		return smsAccept;
+	}
+
+	public void setSmsAccept(String smsAccept)
+	{
+		this.smsAccept = smsAccept;
+	}
+
+	public AdminUser getAdminUser()
+	{
+		return adminUser;
+	}
+
+	public void setAdminUser(AdminUser adminUser)
+	{
+		this.adminUser = adminUser;
+	}
+
+	public CustomerType getCustomerType()
+	{
+		return customerType;
+	}
+
+	public void setCustomerType(CustomerType customerType)
+	{
+		this.customerType = customerType;
+	}
+
+	public Integer getIsPass() {
 		return isPass;
 	}
 

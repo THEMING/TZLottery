@@ -78,4 +78,14 @@ public interface Constants
      * 限制业务员每天给每个客户发送的短信数
      */
     public final static String CUSTOMER_RECEIVE_SMS_FROM_BUSSINESS = "customer_receive_sms_from_bussiness";
+    
+    /*
+     * 每天发送激活邮件的数量
+     */
+    public final static String WAKE_UP_EMAIL_NUM = "wake_up_email_num";
+
+    /*
+     * 每次循环发送激活邮件的数量
+     */
+	public static final String WAKE_UP_EMAIL_PER_SEND_NUM = "wake_up_email_per_send_num";
 }

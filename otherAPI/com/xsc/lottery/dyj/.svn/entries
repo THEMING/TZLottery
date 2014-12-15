@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/otherAPI/com/xsc/lottery/dyj
 svn://192.168.0.69
 
@@ -26,53 +26,20 @@ pengfangliang
 
 06230561-3236-44f2-a481-3c5b5774a9d0
 
-DyjJCZQDuiZhen.java
-file
-
-
-
-
-2014-09-16T03:29:21.441000Z
-34db7a8635dbcf9b5f9ce899f91fbbc1
-2014-09-09T09:37:47.145771Z
-2531
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-39963
-
 DyjJCLQDuiZhen.java
 file
+3261
 
 
 
-
-2014-09-16T03:29:21.445000Z
-84a1c17fa158f5940af4ef0536376896
-2014-09-05T09:50:36.597535Z
-2523
+2014-11-10T08:57:04.888000Z
+5c305715d9f76ecd1d9ddc836781ad49
+2014-10-31T09:03:47.875299Z
+3261
 pengfangliang
 
 
+svn:special svn:externals svn:needs-lock
 
 
 
@@ -91,8 +58,41 @@ pengfangliang
 
 
 
+22169
+
+DyjJCZQDuiZhen.java
+file
+3371
 
-21986
+
+
+2014-11-10T08:57:08.074000Z
+9ba4d06fd97d4f219e2c15522d56d0e1
+2014-11-05T02:50:23.002066Z
+3371
+pengfangliang
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+43556
 
 sendticket
 dir

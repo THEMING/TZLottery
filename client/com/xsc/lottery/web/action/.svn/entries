@@ -1,15 +1,15 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/client/com/xsc/lottery/web/action
 svn://192.168.0.69
 
 
 
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
+2014-10-13T11:03:26.101200Z
+2921
+guanjianming
 
 
 
@@ -60,14 +60,14 @@ pengfangliang
 
 367
 
-LotteryHallAction.java
+BetLotteryAction.java
 file
 
 
 
 
-2014-09-16T03:29:22.802000Z
-c5cf4b7c7c4606f3fadbbbe7828319ef
+2014-09-16T03:29:23.067000Z
+402823617df5cb242b579a123bd51c86
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -92,245 +92,7 @@ pengfangliang
 
 
 
-5929
-
-GroupBuyIndexAction.java
-file
-
-
-
-
-2014-09-16T03:29:22.814000Z
-fa997dba95f4acb76d48c5801f503c02
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-8869
-
-lotteryInfoIndexAction.java
-file
-
-
-
-
-2014-09-16T03:29:22.818000Z
-adc151fdc20da423fe4982fee3fc4bdd
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-3687
-
-IndexAction.java
-file
-
-
-
-
-2014-09-16T03:29:22.827000Z
-d21e65aaddeecdca8873018eba76e5dd
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-9568
-
-FileDownloadAction.java
-file
-
-
-
-
-2014-09-16T03:29:22.823000Z
-4bcf2b2058725f5ac24c8f3b0c2e8ffe
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2602
-
-RuanJian.java
-file
-
-
-
-
-2014-09-16T03:29:22.832000Z
-a81ab5043c80d88b79700d917d7b3086
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1121
-
-DrawingsAction.java
-file
-
-
-
-
-2014-09-16T03:29:22.836000Z
-b832008d1af8d18aac0329898920f491
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-23055
-
-HelpCenterIndexAction.java
-file
-
-
-
-
-2014-09-16T03:29:22.841000Z
-4e77853aaedd8d4c516b9fc4a8d62f59
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-570
+25844
 
 ChartAction1.java
 file
@@ -366,14 +128,14 @@ pengfangliang
 
 18213
 
-SoftwareIndexAction.java
+ChartIndexAction.java
 file
 
 
 
 
-2014-09-16T03:29:22.845000Z
-0564058e564efdf0234943bb3476c82c
+2014-09-16T03:29:23.004000Z
+a164f728a2383a3c1968b12e5f78d021
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -398,16 +160,7 @@ pengfangliang
 
 
 
-4880
-
-customer
-dir
-
-football
-dir
-
-basketball
-dir
+557
 
 CustomerIndexAction.java
 file
@@ -443,14 +196,14 @@ pengfangliang
 
 1887
 
-ChartIndexAction.java
+DataDetailAction.java
 file
 
 
 
 
-2014-09-16T03:29:23.004000Z
-a164f728a2383a3c1968b12e5f78d021
+2014-09-16T03:29:23.062000Z
+29f2efc215595c53aab929ee4e0e1c3a
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -475,16 +228,16 @@ pengfangliang
 
 
 
-557
+47280
 
-suosui.java
+DrawingsAction.java
 file
 
 
 
 
-2014-09-16T03:29:23.013000Z
-fcb94397cb1f1bc02e9e6119db53f1c0
+2014-09-16T03:29:22.836000Z
+b832008d1af8d18aac0329898920f491
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -509,16 +262,16 @@ pengfangliang
 
 
 
-5086
+23055
 
-LotteryIndexAction.java
+FileDownloadAction.java
 file
 
 
 
 
-2014-09-16T03:29:23.023000Z
-31e4727e27734323767063652159e7bb
+2014-09-16T03:29:22.823000Z
+4bcf2b2058725f5ac24c8f3b0c2e8ffe
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -543,16 +296,16 @@ pengfangliang
 
 
 
-7063
+2602
 
-LotteryTermAction.java
+GroupBuyIndexAction.java
 file
 
 
 
 
-2014-09-16T03:29:23.018000Z
-8bc80060f3bd04a0dc8f6cd30cf4d085
+2014-09-16T03:29:22.814000Z
+fa997dba95f4acb76d48c5801f503c02
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -577,10 +330,75 @@ pengfangliang
 
 
 
-27893
+8869
 
-json
-dir
+HelpCenterIndexAction.java
+file
+
+
+
+
+2014-09-16T03:29:22.841000Z
+4e77853aaedd8d4c516b9fc4a8d62f59
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+570
+
+IndexAction.java
+file
+
+
+
+
+2014-09-16T03:29:22.827000Z
+d21e65aaddeecdca8873018eba76e5dd
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+9568
 
 LotteryClientBaseAction.java
 file
@@ -616,14 +434,14 @@ pengfangliang
 
 1281
 
-DataDetailAction.java
+LotteryHallAction.java
 file
 
 
 
 
-2014-09-16T03:29:23.062000Z
-29f2efc215595c53aab929ee4e0e1c3a
+2014-09-16T03:29:22.802000Z
+c5cf4b7c7c4606f3fadbbbe7828319ef
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -648,16 +466,16 @@ pengfangliang
 
 
 
-47280
+5929
 
-BetLotteryAction.java
+LotteryIndexAction.java
 file
 
 
 
 
-2014-09-16T03:29:23.067000Z
-402823617df5cb242b579a123bd51c86
+2014-09-16T03:29:23.023000Z
+31e4727e27734323767063652159e7bb
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -682,7 +500,75 @@ pengfangliang
 
 
 
-25844
+7063
+
+LotteryPlanActin.java
+file
+
+
+
+
+2014-09-16T03:29:23.076000Z
+5f598c9fa860900178ca4ab77a1683d3
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1482
+
+LotteryTermAction.java
+file
+
+
+
+
+2014-09-16T03:29:23.018000Z
+8bc80060f3bd04a0dc8f6cd30cf4d085
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+27893
 
 PrizeInfoIndexAction.java
 file
@@ -718,14 +604,14 @@ pengfangliang
 
 1206
 
-LotteryPlanActin.java
+RuanJian.java
 file
 
 
 
 
-2014-09-16T03:29:23.076000Z
-5f598c9fa860900178ca4ab77a1683d3
+2014-09-16T03:29:22.832000Z
+a81ab5043c80d88b79700d917d7b3086
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -750,5 +636,119 @@ pengfangliang
 
 
 
-1482
+1121
+
+SoftwareIndexAction.java
+file
+
+
+
+
+2014-09-16T03:29:22.845000Z
+0564058e564efdf0234943bb3476c82c
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4880
+
+basketball
+dir
+
+customer
+dir
+
+football
+dir
+
+json
+dir
+
+lotteryInfoIndexAction.java
+file
+
+
+
+
+2014-09-16T03:29:22.818000Z
+adc151fdc20da423fe4982fee3fc4bdd
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3687
+
+suosui.java
+file
+
+
+
+
+2014-09-16T03:29:23.013000Z
+fcb94397cb1f1bc02e9e6119db53f1c0
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5086
 

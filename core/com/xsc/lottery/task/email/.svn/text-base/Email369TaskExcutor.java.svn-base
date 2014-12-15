@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEvent;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +20,7 @@ import com.xsc.lottery.util.DateUtil;
 import com.xsc.lottery.util.EmailUtil;
 
 @Component
-public class Email369TaskExcutor implements ApplicationListener
+public class Email369TaskExcutor// implements ApplicationListener
 {
     @Autowired
     public LotteryOrderService orderService;

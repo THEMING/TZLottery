@@ -1,0 +1,60 @@
+package com.xsc.lottery.service.business.impl;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springside.modules.orm.hibernate.SimpleHibernateTemplate;
+
+import com.xsc.lottery.common.Constants;
+import com.xsc.lottery.entity.business.SystemParam;
+import com.xsc.lottery.service.business.SystemParamService;
+@Service("systemParamService")
+@Transactional
+public class SystemParamServiceImpl implements SystemParamService
+{
+
+	public SimpleHibernateTemplate<SystemParam, Long> systemParamDao;
+	@Autowired
+	public void setSessionFactory(@Qualifier("sessionFactory")
+	SessionFactory sessionfactory)
+	{
+		this.systemParamDao = new SimpleHibernateTemplate<SystemParam, Long>(sessionfactory, SystemParam.class);
+	}
+	
+	public SystemParam findById(Long id)
+	{
+		return null;
+	}
+
+	public SystemParam load(Long id)
+	{
+		return null;
+	}
+
+	public SystemParam save(SystemParam entity)
+	{
+		return null;
+	}
+
+	public SystemParam update(SystemParam entity)
+	{
+		return null;
+	}
+
+	public void delete(SystemParam entity)
+	{
+	}
+
+	public SystemParam findByName(String name)
+	{
+		SystemParam systemParam = (SystemParam) systemParamDao.createCriteria().add(Restrictions.eq("name", name)).list().get(0);
+		if(systemParam!=null){
+			return systemParam;
+		}
+		return null;
+	}
+
+}

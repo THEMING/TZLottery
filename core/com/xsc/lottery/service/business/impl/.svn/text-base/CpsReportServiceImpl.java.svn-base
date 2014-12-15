@@ -14,6 +14,7 @@ import java.util.Map;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
@@ -27,12 +28,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springside.modules.orm.hibernate.Page;
 import org.springside.modules.orm.hibernate.SimpleHibernateTemplate;
 
+import com.xsc.lottery.common.Constants;
 import com.xsc.lottery.dao.PagerHibernateTemplate;
 import com.xsc.lottery.entity.business.CpsDayReport;
 import com.xsc.lottery.entity.business.Customer;
-import com.xsc.lottery.entity.business.SmsLog;
 import com.xsc.lottery.entity.business.SystemParam;
-import com.xsc.lottery.entity.business.WalletLog;
 import com.xsc.lottery.service.business.CpsReportService;
 import com.xsc.lottery.service.business.CustomerService;
 import com.xsc.lottery.service.business.LotteryOrderService;
@@ -97,7 +97,7 @@ public class CpsReportServiceImpl implements CpsReportService
 	}
 
 	/** 获取提成情况 */
-	public Map getCommissionPage(Page<CpsDayReport> page, String stime, String etime, Customer customer)
+	public Map getCommissionPage(Page<CpsDayReport> page, String stime, String etime, Customer customer,String isPay)
 	{
 		Map m = new HashMap();
 
@@ -112,10 +112,21 @@ public class CpsReportServiceImpl implements CpsReportService
 		{
 			list.add(Restrictions.le("reportDate", etime));
 		}
+		if (isPay != null && !"".equals(isPay))
+		{
+			list.add(Restrictions.le("isPay", Boolean.parseBoolean(isPay)));
+		}
+		
 		Criterion[] c = new Criterion[list.size()];
 		list.toArray(c);
-
-		page = cpsReportDaoo.findByCriteria(page, c);
+		
+		Criteria criteria2 = cpsReportDaoo.createCriteria();
+		for (Criterion cc : c)
+		{
+			criteria2.add(cc);
+		}
+		criteria2.addOrder(Order.desc("id"));
+		page = cpsReportDaoo.findByCriteria(page, criteria2);
 		m.put("page", page);
 
 		Criteria criteria = cpsReportDaoo.createCriteria();
@@ -174,7 +185,7 @@ public class CpsReportServiceImpl implements CpsReportService
 	public void doCpsDayReport() throws ParseException
 	{
 		// 从系统参数表中查询出上次统计的日期
-		SystemParam systemParam = systemParamDao.get(1l);
+		SystemParam systemParam = (SystemParam) systemParamDao.createCriteria().add(Restrictions.eq("name", Constants.CPS_LAST_DATE)).list().get(0);
 		String lastDateStr = systemParam.getValue();
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar curDate = Calendar.getInstance();
@@ -199,15 +210,15 @@ public class CpsReportServiceImpl implements CpsReportService
 					overTime.set(curReportDate.get(Calendar.YEAR), curReportDate.get(Calendar.MONTH),
 							curReportDate.get(Calendar.DATE), 23, 59, 59);
 					// 总消费额
-					BigDecimal total = lotteryOrderService.getSumMoneyByCustomer(startTime, overTime, customer);
+					BigDecimal total = lotteryOrderService.getSumMoneyByCustomer(startTime, overTime, customer,null);
 					// 佣金
 					BigDecimal commission = total.multiply(customer.getSuperRatio());
 
 					// 总注册数
-					Long regNum = customerService.getRecommendorsPage2(null, customer, startTime, overTime);
+					Long regNum = customerService.getRecommendorsPageNum(null, customer, startTime, overTime);
 
 					// 消费人数
-					Long payNum = lotteryOrderService.getSumPayByCustomer(startTime, overTime, customer);
+					Long payNum = lotteryOrderService.getSumPayByCustomer(startTime, overTime, customer,null);
 
 					// 充值人数
 					Long rechargeNum = walletLogService.getRechargeNum(startTime, overTime, customer);
@@ -334,6 +345,7 @@ public class CpsReportServiceImpl implements CpsReportService
 			for (CpsDayReport cpsDayReport : list)
 			{
 				cpsDayReport.setIsPay(true);
+				cpsDayReport.setPayTime(Calendar.getInstance());
 				update(cpsDayReport);
 				sumMoney = sumMoney.add(cpsDayReport.getCommission());
 			}

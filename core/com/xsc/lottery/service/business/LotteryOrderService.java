@@ -41,6 +41,9 @@ public interface LotteryOrderService extends LotteryBaseService<Order>
     /** 根据彩期合买截止 */
     public List<Order> stopTogegerSale(LotteryTerm term);
     
+    /** 单独把发邮件作为一个事务处理*/
+    public void sendOrderDetailEmail(Order order);
+    
     /** 根据比赛合买截止 */
     public List<Order> stopTogegerSale(MatchArrange match);
 

@@ -1,15 +1,15 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/client/com/xsc/lottery/web
 svn://192.168.0.69
 
 
 
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
+2014-10-13T11:03:26.101200Z
+2921
+guanjianming
 
 
 
@@ -26,12 +26,12 @@ pengfangliang
 
 06230561-3236-44f2-a481-3c5b5774a9d0
 
-validate
-dir
-
 action
 dir
 
 interceptor
+dir
+
+validate
 dir
 

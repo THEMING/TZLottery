@@ -92,7 +92,7 @@ public class CustomerAction extends AdminBaseAction
         page.setPageSize(pageSize);
         page.setAutoCount(true);
         page = customerService.getLotteryCustomerPage(page, f_sTime, f_eTime,
-                f_orderserch, f_serch, f_starTime, f_endTime, f_serchName, userType,null,null);
+                f_orderserch, f_serch, f_starTime, f_endTime, f_serchName, userType,null,null,null);
         return "list";
     }
 

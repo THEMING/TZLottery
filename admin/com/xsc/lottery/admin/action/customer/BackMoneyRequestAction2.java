@@ -2,6 +2,7 @@ package com.xsc.lottery.admin.action.customer;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -11,12 +12,16 @@ import org.springside.modules.orm.hibernate.Page;
 import com.xsc.lottery.admin.action.AdminBaseAction;
 import com.xsc.lottery.entity.business.BackMoneyRequest;
 import com.xsc.lottery.entity.business.Customer;
+import com.xsc.lottery.entity.business.EmailLog;
 import com.xsc.lottery.entity.business.PayOutRequest;
+import com.xsc.lottery.entity.business.EmailLog.EmailState;
 import com.xsc.lottery.entity.enumerate.BackMoneyStatus;
 import com.xsc.lottery.entity.enumerate.Bank;
 import com.xsc.lottery.service.business.CustomerService;
+import com.xsc.lottery.service.business.EmailLogService;
 import com.xsc.lottery.service.business.PayOutRequestService;
 import com.xsc.lottery.util.MathUtil;
+import com.xsc.lottery.util.TemplateUtil;
 
 @SuppressWarnings("serial")
 @Scope("prototype")
@@ -28,6 +33,9 @@ public class BackMoneyRequestAction2 extends AdminBaseAction
     
     @Autowired
     private PayOutRequestService payOutRequestService;
+    
+    @Autowired
+    private EmailLogService emailLogService;
 
     private Page<BackMoneyRequest> page;
 
@@ -127,6 +135,20 @@ public class BackMoneyRequestAction2 extends AdminBaseAction
             bmr.setMemo(memo);
             customerService.updateBackMoneyRequestBackMoney(bmr);
             message = "编号为{"+bmid+"}提款申请取消成功";
+            
+          //提款成功发邮件通知
+            Customer customer = bmr.getCustomer();
+         	if(customer!=null&&customer.getEmail()!=null&&!"".equals(customer.getEmail())){
+         		EmailLog el = new EmailLog();
+        		el.setContent(TemplateUtil.getBackMoneyRequestContentSuccessOrFail(bmid,bmr.getStatus().ordinal()+"","失败原因是"+bmr.getMemo()));
+        		el.setEmail(customer.getEmail());
+        		el.setTitle("您的提款申请审核不通过");
+        		el.setUsername(customer.getNickName());
+        		el.setSendUserName("一彩票");
+        		el.setState(EmailState.NOTSEND);
+        		el.setSendTime(new Date());
+        		emailLogService.saveOrUpdate(el);
+         	}
         }
         return index();
     }

@@ -32,7 +32,7 @@ public class SmsTaskExcutor implements ApplicationListener
 	{
 		 if (event instanceof ContextRefreshedEvent && !start) {
 	            logger.info("一彩票短信服务启动...");
-//	            CommonScheduledThreadPoolExecutor.getInstance().execute(createSmsSendTask());
+	            CommonScheduledThreadPoolExecutor.getInstance().execute(createSmsSendTask());
 	            start = true;
 	        }
 	}
@@ -53,7 +53,7 @@ public class SmsTaskExcutor implements ApplicationListener
 	                	{
 	                		for (SmsLog smsLog : smsLogList)
 	                		{
-	                             int result = SDKClient.getClient().sendSMS(new String[]{smsLog.getMobile()}, smsLog.getContent(), 5);
+	                             int result = SDKClient.getClient().sendSMS(new String[]{smsLog.getMobile()}, smsLog.getContent(), 3);
 	                             if(result == 0)
 	                             {
 	                             	smsLog.setState(SmsLogState.SENDED);

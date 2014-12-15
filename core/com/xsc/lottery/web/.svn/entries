@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+3189
 svn://192.168.0.69/bs/trunk/TZLottery/core/com/xsc/lottery/web
 svn://192.168.0.69
 
@@ -26,15 +26,15 @@ pengfangliang
 
 06230561-3236-44f2-a481-3c5b5774a9d0
 
-converter
-dir
-
-security
-dir
-
 action
 dir
 
+converter
+dir
+
 interceptor
+dir
+
+security
 dir
 

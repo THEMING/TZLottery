@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/WebRoot/js
 svn://192.168.0.69
 
@@ -25,40 +25,6 @@ pengfangliang
 
 
 06230561-3236-44f2-a481-3c5b5774a9d0
-
-lablebanner.js
-file
-
-
-
-
-2014-09-16T03:28:55.978000Z
-66b83f33064bef210aa0fdcaa67fdb04
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-349
 
 FAX-picscroll.js
 file
@@ -94,255 +60,20 @@ pengfangliang
 
 2906
 
-login.js
-file
-
-
-
-
-2014-09-16T03:28:55.984000Z
-d296e37174b77fd541fcca44d36506eb
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-613
-
-qq_Login.js
-file
-
-
-
-
-2014-09-16T03:28:55.987000Z
-e182dee1c512d9e8d9a810bb3e18b28f
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2939
-
-thickbox.js
-file
-
-
-
-
-2014-09-16T03:28:55.991000Z
-995db13f82cb03c7201b47acfc49f188
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-12224
-
-util.js
-file
-
-
-
-
-2014-09-16T03:28:55.993000Z
-a2acaeb7bb789b1f2a3d7f5695704eff
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-741
-
-scrolltop.js
-file
-
-
-
-
-2014-09-16T03:28:55.996000Z
-11875ef3a4b153d539ffd21768c06a61
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-699
-
-jquery.ui.core.js
-file
-
-
-
-
-2014-09-16T03:28:55.999000Z
-189cd62c716f904d0e27c9728084c84f
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-8247
-
-jquery.effects.core.js
-file
-
-
-
-
-2014-09-16T03:28:56.003000Z
-d6341a8bc8ea654fb21d6a7f1ab2b1d8
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-23339
+Jquery
+dir
 
 My97DatePicker
 dir
 
-jquery.bgiframe-2.1.2.js
+ToolTip.js
 file
 
 
 
 
-2014-09-16T03:28:56.273000Z
-e048a77b314095a4cb774cdac380eb8c
+2014-09-16T03:28:56.530000Z
+c2e60a81c4823ac6d74391ff5bdafc5c
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -367,75 +98,7 @@ pengfangliang
 
 
 
-1724
-
-jquery.ui.dialog.js
-file
-
-
-
-
-2014-09-16T03:28:56.277000Z
-fa2d52ae401f1b33df0f1e30cd7bf532
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-21839
-
-validate.js
-file
-
-
-
-
-2014-09-16T03:28:56.280000Z
-3d0492b9c958662ccd9b9aef9b5b00a6
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-10097
+5685
 
 ZJ-user.js
 file
@@ -471,48 +134,17 @@ pengfangliang
 
 1061
 
-jquery.min.js
-file
-
-
-
-
-2014-09-16T03:28:56.287000Z
-10092eee563dec2dca82b77d2cf5a1ae
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-72174
+ad
+dir
 
-lottery.js
+clip.js
 file
 
 
 
 
-2014-09-16T03:28:56.295000Z
-7c12cc66041b836fecf88428616c1878
+2014-09-16T03:28:56.526000Z
+6ed983dfadd5f2baecaad0584cefa6c6
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -537,16 +169,16 @@ pengfangliang
 
 
 
-93124
+2653
 
-jquery.ui.draggable.js
+excanvas-compressed.js
 file
 
 
 
 
-2014-09-16T03:28:56.291000Z
-0dd1a41a6286b67d420da09cb0c80454
+2014-09-16T03:28:56.370000Z
+4df688df53eb2d0c1bedcdca73fff165
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -571,7 +203,41 @@ pengfangliang
 
 
 
-30978
+9464
+
+ie6.js
+file
+
+
+
+
+2014-09-16T03:28:56.397000Z
+10d158ee24daba594562211f153acf36
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7975
 
 jquery-1.4.4.min.js
 file
@@ -607,43 +273,6 @@ pengfangliang
 
 78770
 
-Jquery
-dir
-
-jquery.ui.button.js
-file
-
-
-
-
-2014-09-16T03:28:56.337000Z
-9e102425f920b0adb9d8a0c58f3dee3d
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-11309
-
 jquery.ajaxfileupload.js
 file
 
@@ -678,14 +307,14 @@ pengfangliang
 
 5813
 
-ui_custom.js
+jquery.bgiframe-2.1.2.js
 file
 
 
 
 
-2014-09-16T03:28:56.344000Z
-0165549bc62e4a51e8d76fde6d517a11
+2014-09-16T03:28:56.273000Z
+e048a77b314095a4cb774cdac380eb8c
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -710,112 +339,7 @@ pengfangliang
 
 
 
-8399
-
-ad
-dir
-
-jquery.ui.resizable.js
-file
-
-
-
-
-2014-09-16T03:28:56.374000Z
-d6b550958d2a2686dc3407b4b5e57994
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-27787
-
-jquery.jqchart.js
-file
-
-
-
-
-2014-09-16T03:28:56.367000Z
-7d0f9522f61be233ba27eb456fd17263
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-20735
-
-excanvas-compressed.js
-file
-
-
-
-
-2014-09-16T03:28:56.370000Z
-4df688df53eb2d0c1bedcdca73fff165
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-9464
+1724
 
 jquery.countdown-zh-CN.js
 file
@@ -885,14 +409,14 @@ pengfangliang
 
 8756
 
-lrtk.js
+jquery.effects.core.js
 file
 
 
 
 
-2014-09-16T03:28:56.387000Z
-0a3ac2cff461df157e965cc4866c8c8a
+2014-09-16T03:28:56.003000Z
+d6341a8bc8ea654fb21d6a7f1ab2b1d8
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -917,16 +441,16 @@ pengfangliang
 
 
 
-437
+23339
 
-softpageslides.js
+jquery.jqchart.js
 file
 
 
 
 
-2014-09-16T03:28:56.384000Z
-0c2e5d956223c97c74191ad352fa9180
+2014-09-16T03:28:56.367000Z
+7d0f9522f61be233ba27eb456fd17263
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -951,16 +475,16 @@ pengfangliang
 
 
 
-4849
+20735
 
-jquery.ui.widget.js
+jquery.min.js
 file
 
 
 
 
-2014-09-16T03:28:56.391000Z
-c150db5fa5a64fb6be9889f568ddc7ef
+2014-09-16T03:28:56.287000Z
+10092eee563dec2dca82b77d2cf5a1ae
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -985,7 +509,143 @@ pengfangliang
 
 
 
-7014
+72174
+
+jquery.ui.button.js
+file
+
+
+
+
+2014-09-16T03:28:56.337000Z
+9e102425f920b0adb9d8a0c58f3dee3d
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+11309
+
+jquery.ui.core.js
+file
+
+
+
+
+2014-09-16T03:28:55.999000Z
+189cd62c716f904d0e27c9728084c84f
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8247
+
+jquery.ui.dialog.js
+file
+
+
+
+
+2014-09-16T03:28:56.277000Z
+fa2d52ae401f1b33df0f1e30cd7bf532
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+21839
+
+jquery.ui.draggable.js
+file
+
+
+
+
+2014-09-16T03:28:56.291000Z
+0dd1a41a6286b67d420da09cb0c80454
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+30978
 
 jquery.ui.mouse.js
 file
@@ -1021,14 +681,14 @@ pengfangliang
 
 4294
 
-ie6.js
+jquery.ui.position.js
 file
 
 
 
 
-2014-09-16T03:28:56.397000Z
-10d158ee24daba594562211f153acf36
+2014-09-16T03:28:56.533000Z
+bc7e0d8a6f64a03565abc5537c5db9da
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -1053,7 +713,282 @@ pengfangliang
 
 
 
-7975
+7347
+
+jquery.ui.resizable.js
+file
+
+
+
+
+2014-09-16T03:28:56.374000Z
+d6b550958d2a2686dc3407b4b5e57994
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+27787
+
+jquery.ui.widget.js
+file
+
+
+
+
+2014-09-16T03:28:56.391000Z
+c150db5fa5a64fb6be9889f568ddc7ef
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7014
+
+lablebanner.js
+file
+
+
+
+
+2014-09-16T03:28:55.978000Z
+66b83f33064bef210aa0fdcaa67fdb04
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+349
+
+login.js
+file
+
+
+
+
+2014-09-16T03:28:55.984000Z
+d296e37174b77fd541fcca44d36506eb
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+613
+
+lottery
+dir
+
+lottery.js
+file
+
+
+
+
+2014-09-16T03:28:56.295000Z
+7c12cc66041b836fecf88428616c1878
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+93124
+
+lrtk.js
+file
+
+
+
+
+2014-09-16T03:28:56.387000Z
+0a3ac2cff461df157e965cc4866c8c8a
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+437
+
+qq_Login.js
+file
+
+
+
+
+2014-09-16T03:28:55.987000Z
+e182dee1c512d9e8d9a810bb3e18b28f
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2939
+
+scrolltop.js
+file
+
+
+
+
+2014-09-16T03:28:55.996000Z
+11875ef3a4b153d539ffd21768c06a61
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+699
 
 slides.min.jquery.js
 file
@@ -1089,17 +1024,14 @@ pengfangliang
 
 15000
 
-lottery
-dir
-
-clip.js
+softpageslides.js
 file
 
 
 
 
-2014-09-16T03:28:56.526000Z
-6ed983dfadd5f2baecaad0584cefa6c6
+2014-09-16T03:28:56.384000Z
+0c2e5d956223c97c74191ad352fa9180
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -1124,16 +1056,16 @@ pengfangliang
 
 
 
-2653
+4849
 
-ToolTip.js
+thickbox.js
 file
 
 
 
 
-2014-09-16T03:28:56.530000Z
-c2e60a81c4823ac6d74391ff5bdafc5c
+2014-09-16T03:28:55.991000Z
+995db13f82cb03c7201b47acfc49f188
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -1158,16 +1090,16 @@ pengfangliang
 
 
 
-5685
+12224
 
-jquery.ui.position.js
+ui_custom.js
 file
 
 
 
 
-2014-09-16T03:28:56.533000Z
-bc7e0d8a6f64a03565abc5537c5db9da
+2014-09-16T03:28:56.344000Z
+0165549bc62e4a51e8d76fde6d517a11
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -1192,8 +1124,76 @@ pengfangliang
 
 
 
-7347
+8399
 
 util
 dir
+
+util.js
+file
+
+
+
+
+2014-09-16T03:28:55.993000Z
+a2acaeb7bb789b1f2a3d7f5695704eff
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+741
+
+validate.js
+file
+
+
+
+
+2014-09-16T03:28:56.280000Z
+3d0492b9c958662ccd9b9aef9b5b00a6
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+10097
 

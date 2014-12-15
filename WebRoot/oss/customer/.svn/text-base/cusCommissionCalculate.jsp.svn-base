@@ -11,12 +11,12 @@
 <script src="../skin/01/js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 <script>
 	function jumpPage(pageNo) {
-		$("#pageNo").val(pageNo);
-		$("form").submit();
+		$("#pageNoo").val(pageNo);
+		$("#formQuery").submit();
 	}
 	function jumpPage1() {
-		$("#pageNo").val($("#pageNum").val());
-		$("form").submit();
+		$("#pageNoo").val($("#pageNum").val());
+		$("#formQuery").submit();
 	}
 	function queryCommission()
 	{
@@ -29,6 +29,7 @@
 <div class="tab">
 	<form action="/oss/customer/queryCusCommission.htm" method="post" id="formQuery">
 		<input type="hidden" name="nickName" id="nname" />
+		<input type="hidden" name="pageNo" id="pageNoo" />
 	</form>
 	<form action="/oss/customer/calculateCusCommission.htm" method="post">
 	<br/>
@@ -92,5 +93,6 @@
 	</tr>
 	</table>
 	</form>
+	
 </div>
 </body>

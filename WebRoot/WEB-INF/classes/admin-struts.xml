@@ -58,6 +58,17 @@
 		
 	</package>
 	
+	<package name="system_Param" extends="adminstruts-default" namespace="/oss/system">
+		<action name="systemParamManager" class="systemParamManager">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="list">systemParamManager.jsp</result>
+			<result name="addParam">add_param.jsp</result>
+		</action>
+		<action name="ourPerformance" class="ourPerformance">
+			<result>OurPerformance.jsp</result>
+		</action>
+	</package>
+	
 	<!-- 期次管理 -->
 	<package name="admin_term" extends="adminstruts-default" namespace="/oss/term">
 		<action name="updateTerm" class="Admin.updateTerm">
@@ -126,26 +137,6 @@
 			<result>supplierPayLogManager.jsp</result>
 			<result name="supplier">supplierLog.jsp</result>
 			<result name="order">orderLog.jsp</result>
-		</action>
-	</package>
-	<!-- 代理系统  -->
-	<package name="admin_agent" extends="adminstruts-default" namespace="/oss/agent">
-		<action name="agentInfo" class="Agent.manager" method="getAgentInfo">
-			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
-			<result name="info">agentInfo.jsp</result>
-		</action>
-		<action name="tikuanChaxun" class="Agent.manager" method="tikuanChaxun">
-			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
-			<result name="tikuanChaxun">tikuanChaxun.jsp</result>
-		</action>
-		<action name="yongjinChongzhiChaxun" class="Agent.manager" method="yongjinChongzhiChaxun">
-			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
-			<result name="yongjinChongzhiChaxun">yongjinChongzhiChaxun.jsp</result>
-		</action>
-		<action name="agentManager" class="Agent.manager">
-			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
-			<result name="info">agentInfo.jsp</result>
-			<result name="list">commissionQuery.jsp</result>
 		</action>
 	</package>
 	
@@ -301,7 +292,10 @@
 		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
 			<result name="queryFinished">smsLogmanager.jsp</result>
 		</action>
-		
+		<action name="userImport" class="customer.import">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>customer_import.jsp</result>
+		</action>
 		
 	</package>
 	
@@ -350,6 +344,42 @@
 		</action>
 	</package>
 	
+	<!-- 图片管理 -->
+	<package name="admin_picture" extends="adminstruts-default" namespace="/oss/picture">
+		<action name="pictureManage" class="Admin.ArticleManagement" >
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+		<param name="pictureReuqest">true</param>
+			<result>pictureManage.jsp</result>
+			<result name="edit">picture_edit.jsp</result>
+		</action>
+	</package>
+	
+	<!-- CRM系统 -->
+	<package name="admin_system" extends="adminstruts-default" namespace="/oss/crmSystem">
+		
+		<action name="someEmailIsOpened" class="Admin.CRMSystemAdmin" method="someEmailIsOpened" >
+		</action>
+		
+		<action name="CRMManageAdmin" class="Admin.CRMSystemAdmin" >
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>dispatchCustomer.jsp</result>
+			<result name="template">templateManager.jsp</result>
+		</action>
+		
+		<action name="emailManager" class="Admin.CRMSystemAdmin" method="getAllEmail">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>emailManager.jsp</result>
+		</action>
+		<action name="templateManager" class="Admin.CRMSystemAdmin" method="templateManager">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="template">templateManager.jsp</result>
+		</action>
+		<action name="thePerformance" class="Admin.CRMSystemAdmin" method="getThePerformance">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result>ThePerformance.jsp</result>
+		</action>
+	</package>
+	
 	<package name="admin_article" extends="adminstruts-default" namespace="/oss/article">
 		<action name="manageCategory" class="Admin.CategoryManagement">
 		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
@@ -368,6 +398,12 @@
 			<result name="list">inLinkManage.jsp</result>
 			<result name="edit">inLink_edit.jsp</result>
 			<result>inLinkManage.jsp</result>
+		</action>
+		<action name="manageFriendlyLink" class="Admin.FriendlyLinkManagement">
+		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="list">friendlyLinkManage.jsp</result>
+			<result name="edit">friendlyLink_edit.jsp</result>
+			<result>friendlyLinkManage.jsp</result>
 		</action>
 		<action name="insertArticle" class="Admin.ArticleManagement">
 		<interceptor-ref name="adminStackInteceptor"></interceptor-ref>

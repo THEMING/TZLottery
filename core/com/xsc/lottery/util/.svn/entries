@@ -1,14 +1,14 @@
 10
 
 dir
-2839
+3450
 svn://192.168.0.69/bs/trunk/TZLottery/core/com/xsc/lottery/util
 svn://192.168.0.69
 
 
 
-2014-09-16T02:26:43.231773Z
-2645
+2014-11-10T08:48:17.826301Z
+3450
 pengfangliang
 
 
@@ -26,14 +26,14 @@ pengfangliang
 
 06230561-3236-44f2-a481-3c5b5774a9d0
 
-FileUtils.java
+Base64.java
 file
 
 
 
 
-2014-09-16T03:29:20.703000Z
-ac4c0939ecd5738088ffda944b4e6d0d
+2014-11-19T12:57:21.368000Z
+9a68bb09f1a3da10dc4ce3e7c873f914
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -58,16 +58,16 @@ pengfangliang
 
 
 
-3085
+7145
 
-SignatureHelper.java
+Betvalidate.java
 file
 
 
 
 
-2014-09-16T03:29:20.707000Z
-41f019b9c8945cbbb9a53f467e82ea7d
+2014-09-16T03:29:20.778000Z
+29b0d74137b6b3f999452b0a2cf1d6b8
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -92,16 +92,16 @@ pengfangliang
 
 
 
-8884
+1334
 
-LotteryTypeUtil.java
+CalendarUtil.java
 file
 
 
 
 
-2014-09-16T03:29:20.711000Z
-9de3ccd6782a03872b491dd58ae93ad4
+2014-11-19T12:57:28.173000Z
+52e0eb05e63d84913d7beb5babe32830
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -126,75 +126,7 @@ pengfangliang
 
 
 
-4130
-
-JexcelApi.java
-file
-
-
-
-
-2014-09-16T03:29:20.719000Z
-243da245a68ebfea346a295fd5cd4b86
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-7064
-
-StringUtil.java
-file
-
-
-
-
-2014-09-16T03:29:20.715000Z
-ec6301b07aa8d9ceb4697d9f89d7f234
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-7518
+2672
 
 Configuration.java
 file
@@ -229,40 +161,6 @@ pengfangliang
 
 
 865
-
-CalendarUtil.java
-file
-
-
-
-
-2014-09-16T03:29:20.723000Z
-52e0eb05e63d84913d7beb5babe32830
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2672
 
 ContentUtil.java
 file
@@ -332,14 +230,34 @@ pengfangliang
 
 13974
 
-SDKClient.java
+EmailUtil.java
+file
+3508
+
+
+
+
+f47b8d88df00fae14e318136e24a298e
+2014-11-13T13:56:47.526007Z
+3498
+pengfangliang
+
+
+svn:special svn:externals svn:needs-lock
+
+
+EmailUtil.java.r3450
+EmailUtil.java.r3508
+EmailUtil.java.mine
+
+FetchlDataUtil.java
 file
 
 
 
 
-2014-09-16T03:29:20.761000Z
-63af2a0f5fe310373a8e28971f3d8861
+2014-09-16T03:29:20.798000Z
+16abce7ef6f11c6f2b32ad8e3277938b
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -364,19 +282,16 @@ pengfangliang
 
 
 
-837
+3027
 
-jemil
-dir
-
-ZLibUtils.java
+FileUtils.java
 file
 
 
 
 
-2014-09-16T03:29:20.766000Z
-55ba78cdd8cc8dad369f11a82a3aba2f
+2014-09-16T03:29:20.703000Z
+ac4c0939ecd5738088ffda944b4e6d0d
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -401,16 +316,50 @@ pengfangliang
 
 
 
-3780
+3085
 
-Md5Util.java
+HttpClientUtil.java
+file
+3569
+
+
+delete
+2014-11-18T04:28:49.464000Z
+efee1db1ff90d30b3e06bb8873dfc94a
+2014-11-19T11:58:28.258396Z
+3569
+guanjianming
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1830
+
+JexcelApi.java
 file
 
 
 
 
-2014-09-16T03:29:20.770000Z
-26c80908a30a98c99e8756d49338851f
+2014-09-16T03:29:20.719000Z
+243da245a68ebfea346a295fd5cd4b86
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -435,16 +384,16 @@ pengfangliang
 
 
 
-13437
+7064
 
-Betvalidate.java
+LotteryTypeUtil.java
 file
 
 
 
 
-2014-09-16T03:29:20.778000Z
-29b0d74137b6b3f999452b0a2cf1d6b8
+2014-09-16T03:29:20.711000Z
+9de3ccd6782a03872b491dd58ae93ad4
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -469,41 +418,7 @@ pengfangliang
 
 
 
-1334
-
-Base64.java
-file
-
-
-
-
-2014-09-16T03:29:20.774000Z
-9a68bb09f1a3da10dc4ce3e7c873f914
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-7145
+4130
 
 MD5.java
 file
@@ -539,51 +454,17 @@ pengfangliang
 
 1222
 
-EmailUtil.java
+MapUtil.java
 file
+3570
 
 
 
-
-2014-09-16T03:29:20.786000Z
-71c7c53d0a221c63c3e516bb70189552
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2398
-
-NetWorkUtil.java
-file
-
-
-
-
-2014-09-16T03:29:20.790000Z
-582202f9c89f7ab47c609b04ad4c3c57
-2014-09-16T02:26:43.231773Z
-2645
-pengfangliang
+2014-11-19T12:09:47.379000Z
+e0003d25e1566eda813a1df27e5e50c3
+2014-11-19T12:36:27.118338Z
+3570
+guanjianming
 
 
 
@@ -605,7 +486,7 @@ pengfangliang
 
 
 
-8582
+786
 
 MathUtil.java
 file
@@ -641,14 +522,14 @@ pengfangliang
 
 5535
 
-FetchlDataUtil.java
+Md5Util.java
 file
 
 
 
 
-2014-09-16T03:29:20.798000Z
-16abce7ef6f11c6f2b32ad8e3277938b
+2014-09-16T03:29:20.770000Z
+26c80908a30a98c99e8756d49338851f
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -673,5 +554,314 @@ pengfangliang
 
 
 
-3027
+13437
+
+MessageLoger.java
+file
+3499
+
+
+
+2014-11-19T12:58:03.471000Z
+835bb422984a11dd974c5c584913953c
+2014-11-13T13:57:25.659605Z
+3499
+pengfangliang
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1247
+
+NetWorkUtil.java
+file
+3588
+
+
+
+2014-11-20T05:06:26.906000Z
+ff7e19576c49cf66acd911b7d5c2ba83
+2014-11-20T06:35:30.803104Z
+3588
+guanjianming
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+10365
+
+SDKClient.java
+file
+
+
+
+
+2014-09-16T03:29:20.761000Z
+63af2a0f5fe310373a8e28971f3d8861
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+837
+
+SignatureHelper.java
+file
+
+
+
+
+2014-09-16T03:29:20.707000Z
+41f019b9c8945cbbb9a53f467e82ea7d
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8884
+
+SmsUtil.java
+file
+
+
+
+
+2014-10-15T09:32:32.379000Z
+3515ac8bc9aab0daf473b1e9fd215791
+2014-10-15T09:53:12.172930Z
+2968
+guanjianming
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1102
+
+StringHelper.java
+file
+3500
+
+
+
+2014-11-19T12:58:10.078000Z
+54efe43e3876dac0c7440e890025410a
+2014-11-13T13:57:43.905125Z
+3500
+pengfangliang
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+10239
+
+StringUtil.java
+file
+
+
+
+
+2014-09-16T03:29:20.715000Z
+ec6301b07aa8d9ceb4697d9f89d7f234
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7518
+
+TemplateUtil.java
+file
+3682
+
+
+
+2014-12-05T08:51:23.596000Z
+39cede842db98518b7606e10faf42a98
+2014-12-05T09:13:50.694650Z
+3682
+guanjianming
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+11924
+
+ZLibUtils.java
+file
+
+
+
+
+2014-09-16T03:29:20.766000Z
+55ba78cdd8cc8dad369f11a82a3aba2f
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3780
+
+jemil
+dir
 

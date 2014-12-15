@@ -24,6 +24,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.xsc.lottery.admin.action.AdminBaseAction;
+import com.xsc.lottery.util.Configuration;
   
 @SuppressWarnings("serial")
 @Scope("prototype")
@@ -134,7 +135,7 @@ public class UploadImageAction extends AdminBaseAction{
         
             JSONObject obj = new JSONObject();    
             obj.put("error", 0);    
-            obj.put("url", saveUrl);    
+            obj.put("url", Configuration.getInstance().getValue("image.pre")+saveUrl);    
             System.out.println(saveUrl);  
            out.print(obj.toJSONString());    
               

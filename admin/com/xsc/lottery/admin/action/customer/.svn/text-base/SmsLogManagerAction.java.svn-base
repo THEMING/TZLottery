@@ -1,8 +1,9 @@
 package com.xsc.lottery.admin.action.customer;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.apache.commons.lang.enums.EnumUtils;
 import org.apache.struts2.ServletActionContext;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springside.modules.orm.hibernate.Page;
 
 import com.xsc.lottery.admin.action.AdminBaseAction;
-import com.xsc.lottery.entity.business.Customer;
 import com.xsc.lottery.entity.business.SmsLog;
 import com.xsc.lottery.entity.business.SmsLog.SmsLogState;
-import com.xsc.lottery.entity.business.SmsLog.SmsLogType;
 import com.xsc.lottery.entity.business.SmsLog.SmsSendState;
-import com.xsc.lottery.entity.enumerate.LotteryType;
 import com.xsc.lottery.service.business.SmsLogService;
 
 @SuppressWarnings("serial")
@@ -37,6 +35,18 @@ public class SmsLogManagerAction extends AdminBaseAction
     private String content;
     private SmsLogState[] smsLogStateList = SmsLogState.values();
     private SmsLogState smsLogState;
+
+	private String sender = "";
+
+	public String getSender()
+	{
+		return sender;
+	}
+
+	public void setSender(String sender)
+	{
+		this.sender = sender;
+	}
 
 	public SmsLogState getSmsLogState() {
 		return smsLogState;
@@ -122,7 +132,9 @@ public class SmsLogManagerAction extends AdminBaseAction
 		smsLogPage.setPageNo(pageNo);
 		smsLogPage.setPageSize(pageSize);
 		smsLogPage.setAutoCount(true);
-		smsLogPage = smsLogService.getSmsLogPage(smsLogPage, mobile,smsLogState,null);
+		Map m = new HashMap();
+		m.put("sender",sender );
+		smsLogPage = smsLogService.getSmsLogPage(smsLogPage, mobile,smsLogState,null,m);
 		return "queryFinished";
 	}
 	
@@ -133,7 +145,9 @@ public class SmsLogManagerAction extends AdminBaseAction
 		smsLogPage.setPageNo(pageNo);
 		smsLogPage.setPageSize(pageSize);
 		smsLogPage.setAutoCount(true);
-		smsLogPage = smsLogService.getSmsLogPage(smsLogPage, mobile,smsLogState,null);
+		Map m = new HashMap();
+		m.put("sender",sender );
+		smsLogPage = smsLogService.getSmsLogPage(smsLogPage, mobile,smsLogState,null,m);
 		return "queryFinished";
 	}
 	

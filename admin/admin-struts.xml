@@ -357,6 +357,9 @@
 	<!-- CRM系统 -->
 	<package name="admin_system" extends="adminstruts-default" namespace="/oss/crmSystem">
 		
+		<action name="someEmailIsOpened" class="Admin.CRMSystemAdmin" method="someEmailIsOpened" >
+		</action>
+		
 		<action name="CRMManageAdmin" class="Admin.CRMSystemAdmin" >
 			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
 			<result>dispatchCustomer.jsp</result>

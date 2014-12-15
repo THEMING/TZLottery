@@ -131,6 +131,59 @@ public class NetWorkUtil
 
         jsEngine.eval(parsejs);
     }
+    
+    /**
+     * URL访问网络资源
+     */
+    static public String getHttpUrl(String urlString, String param,
+            String charCode,String paramCharCode)
+    {
+        charCode = StringUtils.isBlank(charCode) ? "UTF-8" : charCode;
+        URL url = null;
+        HttpURLConnection con = null;
+        BufferedReader in = null;
+        StringBuffer result = new StringBuffer();
+        try {
+            url = new URL(urlString);
+            con = (HttpURLConnection) url.openConnection();
+            con.setUseCaches(false);
+            con.setDoOutput(true);
+            con.setConnectTimeout(180000);
+            con.setRequestMethod("POST");
+            byte[] b = param.getBytes(StringUtils.isBlank(paramCharCode) ? "UTF-8" : paramCharCode);
+            con.getOutputStream().write(b, 0, b.length);
+            con.getOutputStream().flush();
+            con.getOutputStream().close();
+            in = new BufferedReader(new InputStreamReader(con.getInputStream(),
+                    charCode));
+            while (true) {
+                String line = in.readLine();
+                if (line == null) {
+                    break;
+                } else {
+                    result.append(line);
+                }
+            }
+        }
+        catch (IOException e) {
+        	logger.info("errorurl");
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+                if (con != null) {
+                    con.disconnect();
+                }
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return result.toString();
+    }
 
     /**
      * URL访问网络资源

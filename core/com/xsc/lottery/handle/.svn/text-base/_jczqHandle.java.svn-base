@@ -9,6 +9,7 @@ import org.dom4j.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.xsc.lottery.common.Constants;
 import com.xsc.lottery.entity.business.LotteryTerm;
 import com.xsc.lottery.entity.business.Order;
 import com.xsc.lottery.entity.business.PlanItem;
@@ -18,6 +19,7 @@ import com.xsc.lottery.entity.business.WinDescribeTicket;
 import com.xsc.lottery.entity.enumerate.LotteryType;
 import com.xsc.lottery.entity.enumerate.PlayType;
 import com.xsc.lottery.handle.xml._jczqXmlBean;
+import com.xsc.lottery.service.business.SysParamService;
 import com.xsc.lottery.util.DateUtil;
 import com.xsc.lottery.wzl.bean.LotteryIDType;
 
@@ -26,6 +28,9 @@ public class _jczqHandle extends BaseLotteryHandle
 {
     @Autowired
     private _jczqXmlBean xmlBean;
+    
+    @Autowired
+    private SysParamService sysParamService;
 	
     @Override
 	public LotteryTerm fetchPrizeLevel(LotteryTerm term) throws Exception 
@@ -80,23 +85,59 @@ public class _jczqHandle extends BaseLotteryHandle
 	@Override
 	protected List<Ticket> unpackTicket(Order order, PlanItem item)
 	{
+		Integer maxMultple = Integer.parseInt(sysParamService.getSysParamByName(Constants.MAX_TICKET_MULTIPLE).getValue());
 		List<Ticket> ticketList = new ArrayList<Ticket>();
-		Ticket ticket = new Ticket();
-
-		ticket.setCount(item.getBetCount());
-		ticket.setMoney(item.getOneMoney().multiply(
-				new BigDecimal(item.getBetCount())).multiply(
-				BigDecimal.valueOf(order.getMultiple())));
-		ticket.setMultiple(order.getMultiple());
-		ticket.setItem(item);
-		ticket.setOrder(order);
-		ticket.setSendTicketTime(Calendar.getInstance());
-		ticket.setTermNo(order.getTerm().getTermNo());
-		ticket.setType(order.getType());
-		ticket.setContent(item.getContent());
-		ticket.setPlayType(item.getPlayType());
-		ticket.setType(order.getType());
-		ticketList.add(ticket);
+		if(order.getMultiple()>maxMultple)
+		{
+			//按照倍数拆的票数
+			int tmpNum = (order.getMultiple()/maxMultple)+1;
+			//拆出的票最后一张的倍数
+			int lastNum = order.getMultiple()%maxMultple;
+			for (int i = 0; i < tmpNum; i++)
+			{
+				Ticket ticket = new Ticket();
+				if(i<tmpNum-1)
+				{
+					ticket.setCount(item.getBetCount());
+					ticket.setMoney(item.getOneMoney().multiply(new BigDecimal(item.getBetCount())).multiply(BigDecimal.valueOf(maxMultple)));
+					ticket.setMultiple(maxMultple);
+				}
+				else
+				{
+					ticket.setCount(item.getBetCount());
+					ticket.setMoney(item.getOneMoney().multiply(new BigDecimal(item.getBetCount())).multiply(BigDecimal.valueOf(lastNum)));
+					ticket.setMultiple(lastNum);
+				}
+				
+				ticket.setItem(item);
+				ticket.setOrder(order);
+				ticket.setSendTicketTime(Calendar.getInstance());
+				ticket.setTermNo(order.getTerm().getTermNo());
+				ticket.setType(order.getType());
+				ticket.setContent(item.getContent());
+				ticket.setPlayType(item.getPlayType());
+				ticket.setType(order.getType());
+				ticketList.add(ticket);
+			}
+		}
+		else
+		{
+			Ticket ticket = new Ticket();
+			ticket.setCount(item.getBetCount());
+			ticket.setMoney(item.getOneMoney().multiply(
+					new BigDecimal(item.getBetCount())).multiply(
+					BigDecimal.valueOf(order.getMultiple())));
+			ticket.setMultiple(order.getMultiple());
+			ticket.setItem(item);
+			ticket.setOrder(order);
+			ticket.setSendTicketTime(Calendar.getInstance());
+			ticket.setTermNo(order.getTerm().getTermNo());
+			ticket.setType(order.getType());
+			ticket.setContent(item.getContent());
+			ticket.setPlayType(item.getPlayType());
+			ticket.setType(order.getType());
+			ticketList.add(ticket);
+		}
 		return ticketList;
 	}
 	

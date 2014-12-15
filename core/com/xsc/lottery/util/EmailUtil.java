@@ -2,12 +2,13 @@ package com.xsc.lottery.util;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
 import javax.mail.BodyPart;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -17,10 +18,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
-
-import com.xsc.lottery.entity.business.Customer;
-import com.xsc.lottery.entity.business.Order;
-import com.xsc.lottery.entity.enumerate.OrderStatus;
 
 public class EmailUtil
 {
@@ -44,11 +41,7 @@ public class EmailUtil
         
         //设置自定义发件人昵称  
         String nickName="";  
-        try {  
-        	nickName=javax.mail.internet.MimeUtility.encodeText("一彩票网");  
-        } catch (UnsupportedEncodingException e) {  
-            e.printStackTrace();  
-        }   
+        nickName=javax.mail.internet.MimeUtility.encodeText("一彩票网");  
 
         InternetAddress fromAddress = new InternetAddress(user,nickName);
         message.setFrom(fromAddress);
@@ -113,38 +106,55 @@ public class EmailUtil
 
     public static void main(String[] args) throws Exception
     {
-    	try
-		{
-//    		EmailUtil.sendEmail();
-    		EmailUtil.sendEmail("gjm@yicp.com", "hi","test" );
-//			String mes = TemplateUtil.makeSMSTemplateContent("","","", "test4.ftl");
-//			System.out.println(mes);http://192.168.0.168/actinfo/news_1089.html
-//			EmailUtil.sendEmail("649917837@qq.com", "hi", mes);
-//			Order o = new Order();
-//			o.setNumberNo("1111123");
-//			Customer c = new Customer();
-//			c.setRealName("mingming");
-//			o.setCustomer(c);109862466@qq.com
-//			String mes = TemplateUtil.getPaySuccessEmailContent(o);
-//			System.out.println(mes);
-//			EmailUtil.sendEmail("13802528513@163.com", "您的购彩订单11234455出票成功", mes);
-			
-			
-			
-//			Order o = new Order();
-//			o.setStatus(OrderStatus.出票成功);
-//			Customer c = new Customer();
-//			c.setId(new Long(1603));
-//			c.setRealName("ming");
-//			o.setCustomer(c);
-//			o.setId(new Long(2010));
-//			String mes = TemplateUtil.getOrderDetailEmailContent(o);
-//			System.out.println(mes);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
+    	sendEmail("306081148@qq.com","hi","hihi");
+    	
+//    	String code = "3782";
+//    	String sign = "CP22d359#5f56!174Mc_5cde2CS";
+//    	String baseCode = new String(Base64.encode(code.getBytes()));
+//    	sign = MD5.digest(code+sign);
+//    	System.out.println(baseCode+"=="+sign);
+//    	
+//    	return;
+//    	try
+//		{
+////    		EmailUtil.sendEmail();
+//    		
+//    		
+////    		EmailUtil.sendEmail("gjm@yicp.com", "hi","test<iframe src=\"http://localhost:8080/oss/crmSystem/CRMManageAdmin.htm?action=someEmailIsOpened&emailId=52\" style=\"width:1200px; height:800px\"></iframe>" );
+////			String mes = TemplateUtil.makeSMSTemplateContent("","","", "test4.ftl");
+////			System.out.println(mes);http://192.168.0.168/actinfo/news_1089.html
+//    		Map m = new HashMap();
+//    		m.put("withdrawid", 111);
+//    		m.put("sign", MD5.digest(111+""+TemplateUtil.privateKey));
+//    		
+////    		String aa = HttpClientUtil.getContentFromUrl(TemplateUtil.BACK_MONEY_REQUEST_CONTENT_URL ,m);
+////			EmailUtil.sendEmail("306081148@qq.com", "hi", aa);
+//			System.out.println(11);
+////			Order o = new Order();
+////			o.setNumberNo("1111123");
+////			Customer c = new Customer();
+////			c.setRealName("mingming");
+////			o.setCustomer(c);109862466@qq.com
+////			String mes = TemplateUtil.getPaySuccessEmailContent(o);
+////			System.out.println(mes);
+////			EmailUtil.sendEmail("13802528513@163.com", "您的购彩订单11234455出票成功", mes);
+//			
+//			
+//			
+////			Order o = new Order();
+////			o.setStatus(OrderStatus.出票成功);
+////			Customer c = new Customer();
+////			c.setId(new Long(1603));
+////			c.setRealName("ming");
+////			o.setCustomer(c);
+////			o.setId(new Long(2010));
+////			String mes = TemplateUtil.getOrderDetailEmailContent(o);
+////			System.out.println(mes);
+//		}
+//		catch (Exception e)
+//		{734495655ab806449420e34685027747
+//			e.printStackTrace();
+//		}
 //    	String code = "975560";
 //    	String sign = "CP22d359#5f56!174Mc_5cde2CS";
 //    	String baseCode = new String(Base64.encode(code.getBytes()));

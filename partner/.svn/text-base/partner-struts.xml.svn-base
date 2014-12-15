@@ -7,18 +7,21 @@
 			<interceptor name="partnerLoginInteceptor"
 				class="com.xsc.lottery.interceptor.partner.PartnerLoginInterceptor">
 			</interceptor>
+			<!-- <interceptor name="partnerLoginInteceptor" class="com.xsc.lottery.web.interceptor.LoginInteceptor"></interceptor> -->
 			<interceptor-stack name="partnerStackInteceptor">
 				<interceptor-ref name="LotteryCompleteStack"/>
 				<interceptor-ref name="partnerLoginInteceptor"/>
 			</interceptor-stack>
 		</interceptors>
 		<global-results>
-			<result name="login">login.jsp</result>
+			<result name="login">/partner/login.jsp</result>
 		</global-results>
 	</package>
 	<package name="partner" extends="partnerstruts-default" namespace="/partner">
 		<action name="index" class="partnerLoginAct">
 			<result>manage.jsp</result>
+			<result name="left">left.jsp</result>
+			<result name="head">head.jsp</result>
 		</action>
 		<action name="login" class="partnerLoginAct">
 			<result type="redirect">/partner</result>
@@ -28,5 +31,103 @@
 			<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
 			<result>query.jsp</result>
 		</action>
+		
+		
+		<!-- <action name="agentInfo" class="Agent.manager" method="getAgentInfo">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="info">agentInfo.jsp</result>
+		</action>
+		<action name="customerRela" class="Agent.manager" method="customerRela">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="list">customerRela.jsp</result>
+		</action>
+		<action name="tikuanChaxun" class="Agent.manager" method="tikuanChaxun">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="tikuanChaxun">tikuanChaxun.jsp</result>
+		</action>
+		<action name="yongjinChongzhiChaxun" class="Agent.manager" method="yongjinChongzhiChaxun">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="yongjinChongzhiChaxun">yongjinChongzhiChaxun.jsp</result>
+		</action>
+		<action name="agentManager" class="Agent.manager">
+			<interceptor-ref name="adminStackInteceptor"></interceptor-ref>
+			<result name="info">agentInfo.jsp</result>
+			<result name="list">commissionQuery.jsp</result>
+		</action> -->
 	</package>
+	
+	<!-- CRM系统 -->
+	<package name="CRM_system" extends="partnerstruts-default" namespace="/partner/crmSystem">
+		<action name="CRMManage" class="Admin.CRMSystem" >
+			<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result>MyCustomers.jsp</result>
+		</action>
+		
+		<action name="myPerformance" class="Admin.CRMSystem" method="getMyPerformance">
+			<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result>MyPerformance.jsp</result>
+		</action>
+		<action name="mySendSms" class="Admin.CRMSystem" method="getMySendSms">
+			<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result>MySendSms.jsp</result>
+		</action>
+		<action name="mySendEmail" class="Admin.CRMSystem" method="getMySendEmail">
+			<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result>MySendEmail.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 代理系统  -->
+	<package name="admin_agent" extends="partnerstruts-default" namespace="/partner/agent">
+		<action name="agentInfo" class="Agent.manager" method="getAgentInfo">
+		<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result name="info">agentInfo.jsp</result>
+		</action>
+		<action name="customerRela" class="Agent.manager" method="customerRela">
+		<!-- <interceptor-ref name="partnerStackInteceptor"></interceptor-ref> -->
+			<result name="list">customerRela.jsp</result>
+		</action>
+		<action name="tikuanChaxun" class="Agent.manager" method="tikuanChaxun">
+		<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result name="tikuanChaxun">tikuanChaxun.jsp</result>
+		</action>
+		<action name="yongjinChongzhiChaxun" class="Agent.manager" method="yongjinChongzhiChaxun">
+		<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result name="yongjinChongzhiChaxun">yongjinChongzhiChaxun.jsp</result>
+		</action>
+		<action name="agentManager" class="Agent.manager">
+		<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result name="info">agentInfo.jsp</result>
+			<result name="list">commissionQuery.jsp</result>
+		</action>
+		<action name="register" class="Agent.manager" method="getRegisters">
+		<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result name="list">myRegisters.jsp</result>
+		</action>
+		<action name="recharge" class="Agent.manager" method="getRecharges">
+		<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result name="list">theRecharges.jsp</result>
+		</action>
+		<action name="payment" class="Agent.manager" method="getPayments">
+		<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result name="list">thePayments.jsp</result>
+		</action>
+		<action name="yongjin" class="Agent.manager" method="getYongjins">
+		<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result name="list">yongjinChaxun.jsp</result>
+		</action>
+		<action name="cpsExtension" class="Agent.manager" method="getActivities">
+		<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result name="list">cpsExtension.jsp</result>
+		</action>
+		<action name="H5" class="Agent.manager" method="getH5">
+		<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result name="list">H5Extension.jsp</result>
+		</action>
+		<action name="cpaExtension" class="Agent.manager" method="getActivities">
+		<interceptor-ref name="partnerStackInteceptor"></interceptor-ref>
+			<result name="list">cpaExtension.jsp</result>
+		</action>
+	</package>
+	
 </struts>

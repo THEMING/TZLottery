@@ -1,15 +1,15 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/client/com/xsc/lottery/web/action/customer
 svn://192.168.0.69
 
 
 
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
+2014-10-13T11:03:26.101200Z
+2921
+guanjianming
 
 
 
@@ -25,74 +25,6 @@ pengfangliang
 
 
 06230561-3236-44f2-a481-3c5b5774a9d0
-
-CustomerLotteryAction.java
-file
-
-
-
-
-2014-09-16T03:29:22.866000Z
-c13ef1d9c7b761796a11a7aaca893e86
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-32085
-
-RegisterAction.java
-file
-
-
-
-
-2014-09-16T03:29:22.871000Z
-f1157b8081642aabf99c0c9b977e4c7c
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-15666
 
 CustomerChaseAction.java
 file
@@ -127,6 +59,40 @@ pengfangliang
 
 
 4701
+
+CustomerChaseItemSaleAction.java
+file
+
+
+
+
+2014-09-16T03:29:22.901000Z
+32d86a1396b7933a959504a4ca164870
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3622
 
 CustomerFinancialAction.java
 file
@@ -196,14 +162,14 @@ pengfangliang
 
 3383
 
-CustomerTogetherSaleAction.java
+CustomerLotteryAction.java
 file
 
 
 
 
-2014-09-16T03:29:22.891000Z
-5a99de9410d559c52773937cfb9f978e
+2014-09-16T03:29:22.866000Z
+c13ef1d9c7b761796a11a7aaca893e86
 2014-09-01T13:00:28.334948Z
 2463
 pengfangliang
@@ -228,143 +194,7 @@ pengfangliang
 
 
 
-9850
-
-LoginAction.java
-file
-
-
-
-
-2014-09-16T03:29:22.896000Z
-897121ccc64845acc190f1fb5ee13fd3
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-16867
-
-CustomerChaseItemSaleAction.java
-file
-
-
-
-
-2014-09-16T03:29:22.901000Z
-32d86a1396b7933a959504a4ca164870
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-3622
-
-CustomerRecommendAction.java
-file
-
-
-
-
-2014-09-16T03:29:22.906000Z
-1c9313679f28e9165d5c342b18b6a926
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-5722
-
-SoftwareRegisterAction.java
-file
-
-
-
-
-2014-09-16T03:29:22.911000Z
-1178c6bef7018e18f4ca3a325e6d7203
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-4040
+32085
 
 CustomerMaterialAction.java
 file
@@ -400,6 +230,74 @@ pengfangliang
 
 10013
 
+CustomerRecommendAction.java
+file
+
+
+
+
+2014-10-13T10:48:13.648000Z
+7ce8410cbfd26ee084bdef44b0e4be31
+2014-10-13T11:03:26.101200Z
+2921
+guanjianming
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5742
+
+CustomerTogetherSaleAction.java
+file
+
+
+
+
+2014-09-16T03:29:22.891000Z
+5a99de9410d559c52773937cfb9f978e
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+9850
+
 CustomerZhongJiangAction.java
 file
 
@@ -433,4 +331,106 @@ pengfangliang
 
 
 3436
+
+LoginAction.java
+file
+
+
+
+
+2014-09-16T03:29:22.896000Z
+897121ccc64845acc190f1fb5ee13fd3
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+16867
+
+RegisterAction.java
+file
+
+
+
+
+2014-09-16T03:29:22.871000Z
+f1157b8081642aabf99c0c9b977e4c7c
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+15666
+
+SoftwareRegisterAction.java
+file
+
+
+
+
+2014-09-16T03:29:22.911000Z
+1178c6bef7018e18f4ca3a325e6d7203
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4040
 

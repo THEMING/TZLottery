@@ -33,8 +33,9 @@
 		</global-results>
 	</package>
 	<include file="client-strust.xml"></include>
-	<!--<include file="admin-struts.xml"></include>
 	<include file="partner-struts.xml"></include>
+	<!--<include file="admin-struts.xml"></include>
+	
 	<include file="otherApi-strust.xml"></include>-->
 	<include file="active-struts.xml"></include>
 	<include file="admin-struts.xml"></include>

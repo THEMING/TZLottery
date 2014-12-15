@@ -7,12 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.xsc.lottery.entity.BaseObject;
+import com.xsc.lottery.entity.partner.Partner;
 
 /**
  * <pre>
@@ -199,7 +202,7 @@ public class SmsLog extends BaseObject
 	 */
 	public static enum SmsSendType
 	{
-		EMAY("亿美短信接口"), SH81666("上海81666短信接口"), ZGYD10086("中国移动短信接口"), CSAP("彩搜短信接口");
+		EMAY("亿美短信接口"), SH81666("上海81666短信接口"), ZGYD10086("中国移动短信接口"), CSAP("彩搜短信接口"),YUN("云通讯平台");
 
 		private String text;
 
@@ -265,10 +268,12 @@ public class SmsLog extends BaseObject
 	private SmsLogType type;
 
 	/*
-	 * 发送人
+	 * 发送人 匹配的是Customer的id
 	 */
 	@Column(length = 20)
 	private String userId;
+	
+	private String sendUserName;
 
 	/*
 	 * 发送人优先级
@@ -305,6 +310,31 @@ public class SmsLog extends BaseObject
 	 * 备注
 	 */
 	private String mark;
+	
+	/*接受短信的客户*/
+	@ManyToOne
+	@JoinColumn(name = "customerObjId")
+	private Customer customer;
+
+	public String getSendUserName()
+	{
+		return sendUserName;
+	}
+
+	public void setSendUserName(String sendUserName)
+	{
+		this.sendUserName = sendUserName;
+	}
+
+	public Customer getCustomer()
+	{
+		return customer;
+	}
+
+	public void setCustomer(Customer customer)
+	{
+		this.customer = customer;
+	}
 
 	public String getContent()
 	{

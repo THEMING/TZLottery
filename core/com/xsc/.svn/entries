@@ -1,14 +1,14 @@
 10
 
 dir
-2839
+3189
 svn://192.168.0.69/bs/trunk/TZLottery/core/com/xsc
 svn://192.168.0.69
 
 
 
-2014-09-22T10:13:17.992382Z
-2746
+2014-10-23T10:24:40.615350Z
+3189
 pengfangliang
 
 
@@ -26,9 +26,9 @@ pengfangliang
 
 06230561-3236-44f2-a481-3c5b5774a9d0
 
-lottery
+datasource
 dir
 
-datasource
+lottery
 dir
 

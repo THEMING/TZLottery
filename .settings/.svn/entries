@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/.settings
 svn://192.168.0.69
 
@@ -25,40 +25,6 @@ pengfangliang
 
 
 06230561-3236-44f2-a481-3c5b5774a9d0
-
-org.eclipse.jdt.core.prefs
-file
-
-
-
-
-2014-09-16T03:29:22.708000Z
-cd038ff648396c34fe399d434c9fe03f
-2014-09-01T13:00:28.334948Z
-2463
-pengfangliang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-330
 
 com.genuitec.eclipse.j2eedt.core.prefs
 file
@@ -127,4 +93,38 @@ pengfangliang
 
 
 423
+
+org.eclipse.jdt.core.prefs
+file
+
+
+
+
+2014-09-16T03:29:22.708000Z
+cd038ff648396c34fe399d434c9fe03f
+2014-09-01T13:00:28.334948Z
+2463
+pengfangliang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+330
 

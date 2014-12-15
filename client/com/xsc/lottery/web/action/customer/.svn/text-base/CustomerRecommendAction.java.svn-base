@@ -95,7 +95,7 @@ public class CustomerRecommendAction extends LotteryClientBaseAction
         page2.setPageNo(pageNo2);
         page2.setPageSize(pageSize2);
         page2.setAutoCount(true);
-        page2 = customerService.getRecommendorsPage2(page2, customer);
+        page2 = customerService.getRecommendorsPage2(page2, customer,null,null);
         
        
         //calculateCurrentPageDetail();
@@ -217,7 +217,7 @@ public class CustomerRecommendAction extends LotteryClientBaseAction
         page2.setPageNo(pageNo);
         page2.setPageSize(pageSize);
         page2.setAutoCount(true);
-        page2 = customerService.getRecommendorsPage2(page2, customer);
+        page2 = customerService.getRecommendorsPage2(page2, customer,null,null);
         
       
     	return SUCCESS;

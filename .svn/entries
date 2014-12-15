@@ -1,14 +1,14 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery
 svn://192.168.0.69
 
 
 
-2014-09-28T07:08:20.705362Z
-2833
+2014-10-13T11:54:50.963057Z
+2927
 pengfangliang
 
 
@@ -25,9 +25,6 @@ pengfangliang
 
 
 06230561-3236-44f2-a481-3c5b5774a9d0
-
-Test
-dir
 
 .classpath
 file
@@ -62,9 +59,6 @@ pengfangliang
 
 
 7982
-
-WebRoot
-dir
 
 .mymetadata
 file
@@ -134,7 +128,22 @@ pengfangliang
 
 1415
 
+.settings
+dir
+
+Test
+dir
+
+WebRoot
+dir
+
+activity
+dir
+
 admin
+dir
+
+client
 dir
 
 core
@@ -144,14 +153,5 @@ otherAPI
 dir
 
 partner
-dir
-
-activity
-dir
-
-.settings
-dir
-
-client
 dir
 

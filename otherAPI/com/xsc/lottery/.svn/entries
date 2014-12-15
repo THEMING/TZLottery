@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/otherAPI/com/xsc/lottery
 svn://192.168.0.69
 
@@ -29,33 +29,33 @@ pengfangliang
 alipay
 dir
 
-ntalker
-dir
-
-tenpay
-dir
-
-kuaiqian
-dir
-
-yinlian
+alllife
 dir
 
 dyj
 dir
 
+kuaiqian
+dir
+
+ntalker
+dir
+
 payaction
 dir
 
-alllife
+shxg
 dir
 
-shxg
+tenpay
 dir
 
 wzl
 dir
 
 yeepay
+dir
+
+yinlian
 dir
 

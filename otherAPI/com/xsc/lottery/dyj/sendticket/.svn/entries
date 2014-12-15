@@ -1,7 +1,7 @@
 10
 
 dir
-2839
+2927
 svn://192.168.0.69/bs/trunk/TZLottery/otherAPI/com/xsc/lottery/dyj/sendticket
 svn://192.168.0.69
 
@@ -28,37 +28,18 @@ pengfangliang
 
 DyjTicketTreatmentWork.java
 file
+3184
 
 
 
 
-2014-09-16T03:29:21.460000Z
-fc57c4f500dad4773fba512413527b38
-2014-09-16T02:27:23.838058Z
-2646
+27861463c743ca84d8cad81b1587c376
+2014-10-23T07:31:15.109174Z
+3184
 pengfangliang
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-32161
+svn:special svn:externals svn:needs-lock
 
 bingocheck
 dir

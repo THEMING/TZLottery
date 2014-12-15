@@ -216,19 +216,27 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 		if (tickets.size() < 1) {
 			return;
 		}
-
+		
 		Map<String, Ticket> ticketMap = new HashMap<String, Ticket>();
 		Ticket lastTicket = tickets.get(tickets.size() - 1);
 		StringBuilder sendParam = new StringBuilder();
 		sendParam.append("LotID=").append(typeToDYJType(lastTicket.getType()))
 				.append("_");
 		sendParam.append("OrderIDs=");
+		int failnum = 0; //记录失败票数
 		for (int i = 0; i < tickets.size() - 1; i++) {
 			Ticket ticket = tickets.get(i);
+			//如果票已经标记失败  就不用再查询
+			if(ticket.getStatus().equals(TicketStatus.出票失败))
+			{
+				failnum ++;	
+				continue;
+			}
 			sendParam.append(ticket.getOtherOrderID() + ",");
 			ticketMap.put(ticket.getOtherOrderID(), ticket);
 		}
-
+		//如果失败的票数等于总票数  那么直接返回不用做票查询
+		if((tickets.size() == 1 && lastTicket.getStatus() == TicketStatus.出票失败) || tickets.size() == failnum) return; 
 		sendParam.append(lastTicket.getOtherOrderID());
 		ticketMap.put(lastTicket.getOtherOrderID(), lastTicket);
 
@@ -360,7 +368,9 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 					xValue = new String(ZLibUtils.decompress(base64.decodeBuffer(xValue)));
 					logger.info("竞彩篮球第三方订单号"+ticket.getOtherOrderID()+"赔率为："+xValue);
 					String ratio = null;
+					String special = null;
 					String spfs[] = xValue.split("\\|");
+					String oneSpecial = "";
 					String oneRatio = "";
 					String options[] = spfs[1].split("\\,");
 					if(ticket.getPlayType() == PlayType.SF)
@@ -391,13 +401,13 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 						for (int i = 0; i < options.length; i++) {
 							String temp[] = options[i].split("\\=");
 							String option[] = temp[1].split("\\/");
+							String rangfen = temp[1].split("\\_")[0];//选项的让分存储在哪？如何显示给用户
+							logger.info(temp[0]+"让分："+rangfen);
+							oneSpecial += rangfen;
 							for (int j = 0; j < option.length; j++) {
 								String tempStr = option[j];
-								String rangfen = tempStr.split("\\_")[0];//选项的让分存储在哪？如何显示给用户
-								logger.info(temp[0]+"让分："+rangfen);
 								if(j<(option.length-1))
 								{
-									
 									oneRatio += tempStr.substring(tempStr.indexOf("(")+1, tempStr.indexOf(")"))+"/";
 								}
 								else
@@ -407,6 +417,7 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 							}
 							if(i<(options.length-1))
 							{
+								oneSpecial += "|";
 								oneRatio += "|";
 							}
 						}
@@ -416,13 +427,13 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 						for (int i = 0; i < options.length; i++) {
 							String temp[] = options[i].split("\\=");
 							String option[] = temp[1].split("\\/");
+							String zongfen = temp[1].split("\\_")[0];//选项的预设总分存储在哪？如何显示给用户
+							logger.info(temp[0]+"预设总分："+zongfen);
+							oneSpecial += zongfen;
 							for (int j = 0; j < option.length; j++) {
 								String tempStr = option[j];
-								String zongfen = tempStr.split("\\_")[0];//选项的预设总分存储在哪？如何显示给用户
-								logger.info(temp[0]+"预设总分："+zongfen);
 								if(j<(option.length-1))
 								{
-									
 									oneRatio += tempStr.substring(tempStr.indexOf("(")+1, tempStr.indexOf(")"))+"/";
 								}
 								else
@@ -432,6 +443,7 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 							}
 							if(i<(options.length-1))
 							{
+								oneSpecial += "|";
 								oneRatio += "|";
 							}
 						}
@@ -465,18 +477,20 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 							String gameTypes = options[i].split("\\>")[0];
 							String temp[] = options[i].split("\\=");
 							String option[] = temp[1].split("\\/");
+							if("RFSF".equals(gameTypes))
+							{
+								String rangfen = temp[1].split("\\_")[0];//选项的让分存储在哪？如何显示给用户
+								logger.info(temp[0]+"让分："+rangfen);
+								oneSpecial += rangfen;
+							}
+							else if("DXF".equals(gameTypes))
+							{
+								String zongfen = temp[1].split("\\_")[0];//选项的预设总分存储在哪？如何显示给用户
+								logger.info(temp[0]+"预设总分："+zongfen);
+								oneSpecial += zongfen;
+							}
 							for (int j = 0; j < option.length; j++) {
 								String tempStr = option[j];
-								if("RFSF".equals(gameTypes))
-								{
-									String rangfen = tempStr.split("\\_")[0];//选项的让分存储在哪？如何显示给用户
-									logger.info(temp[0]+"让分："+rangfen);
-								}
-								else if("DXF".equals(gameTypes))
-								{
-									String zongfen = tempStr.split("\\_")[0];//选项的预设总分存储在哪？如何显示给用户
-									logger.info(temp[0]+"预设总分："+zongfen);
-								}
 								if(j<(option.length-1))
 								{
 									
@@ -489,13 +503,18 @@ public class DyjTicketTreatmentWork extends TicketTreatmentWork {
 							}
 							if(i<(options.length-1))
 							{
+								oneSpecial += "|";
 								oneRatio += "|";
 							}
 						}
 					}
 					ratio = oneRatio;
+					special = oneSpecial;
 					if (ratio != null && !ratio.equals("")) {
 						ticket.setRatio(ratio);
+					}
+					if (special != null && !special.equals("")) {
+						ticket.setTicketSpecial(special);
 					}
 				} else {
 					logger.info("三方票号为 " + ticket.getOtherOrderID()
